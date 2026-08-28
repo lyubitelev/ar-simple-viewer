@@ -2,12 +2,13 @@ using System.Text.Json.Serialization;
 using BackgroundSupportApi.Models;
 using BackgroundSupportApi.Services;
 using Microsoft.Extensions.Hosting.WindowsServices;
-using Microsoft.Extensions.Options;
 
 namespace BackgroundSupportApi
 {
     public class Program
     {
+        private const string LeadFormsCorsPolicy = "LeadForms";
+
         public static void Main(string[] args)
         {
             WebApplicationBuilder builder;
@@ -25,6 +26,26 @@ namespace BackgroundSupportApi
             else
                 builder = WebApplication.CreateBuilder(args);
             builder.Services.Configure<AppSettings>(builder.Configuration.GetSection(nameof(AppSettings)));
+
+            var allowedOrigins = builder.Configuration
+                .GetSection($"{nameof(AppSettings)}:{nameof(AppSettings.AllowedCorsUrls)}")
+                .Get<string[]>() ?? Array.Empty<string>();
+
+            // Allowlist задаётся конфигурацией окружения (appsettings.{Environment}.json или
+            // AppSettings__AllowedCorsUrls__N). Пустой список — ошибка конфигурации, а не повод
+            // открывать CORS всем.
+            if (allowedOrigins.Length == 0)
+                throw new InvalidOperationException(
+                    "AppSettings:AllowedCorsUrls is empty. Configure the site origins allowed to post leads.");
+
+            // Заявка приходит с origin статического сайта, поэтому CORS обязателен.
+            // Credentials не включаем: запрос их не несёт.
+            builder.Services.AddCors(options =>
+                options.AddPolicy(LeadFormsCorsPolicy, policy =>
+                    policy.WithOrigins(allowedOrigins)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()));
+
             // SubjectType приходит с фронтенда строкой, чтобы не хардкодить числовые значения в браузере.
             builder.Services.AddControllers()
                 .AddJsonOptions(options =>
@@ -37,20 +58,8 @@ namespace BackgroundSupportApi
                 builder.Host.UseWindowsService();
 
             var app = builder.Build();
-            var appSettings = app.Services.GetService<IOptions<AppSettings>>()?.Value;
-            var allowedOrigins = appSettings?.AllowedCorsUrls ?? Array.Empty<string>();
 
-            // Allowlist задаётся конфигурацией окружения (appsettings.{Environment}.json или
-            // AppSettings__AllowedCorsUrls__N). Пустой список — ошибка конфигурации, а не повод
-            // открывать CORS всем.
-            if (allowedOrigins.Length == 0)
-                throw new InvalidOperationException(
-                    "AppSettings:AllowedCorsUrls is empty. Configure the site origins allowed to post leads.");
-
-            app.UseCors(x =>
-                x.WithOrigins(allowedOrigins)
-                    .AllowAnyHeader()
-                    .AllowAnyMethod());
+            app.UseCors(LeadFormsCorsPolicy);
 
             if (app.Environment.IsDevelopment())
             {
