@@ -2,6 +2,7 @@ import { createPlaneMarker, createPlaceButton } from "./createPlaneMarker";
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { handleXRHitTest } from "../common/xr/hitTest";
+import { resolveRoomId, saveRoomLayout, loadRoomLayout } from "./roomStorage.js";
 
 import {
   AmbientLight,
@@ -32,7 +33,10 @@ export function createScene(renderer, sceneModels, loader = null, selectModel = 
   var intersectedObject;
   var isTransforming = false;
 
-  let calibrationStep = 0; 
+  // Сохранённый layout принадлежит конкретной комнате, а не origin'у в целом.
+  const roomId = resolveRoomId();
+
+  let calibrationStep = 0;
   let roomOriginMatrix = new Matrix4();
   let pointAMatrix = new Matrix4();
   let pointBMatrix = new Matrix4();
@@ -92,15 +96,20 @@ export function createScene(renderer, sceneModels, loader = null, selectModel = 
            matrix: localMatrix.toArray()
         });
      });
-     localStorage.setItem("ar_room_save", JSON.stringify(savedModels));
-     alert("Комната сохранена! Мебель появится на этих же местах при следующем запуске.");
+     try {
+        saveRoomLayout(roomId, savedModels);
+     } catch(e) {
+        console.error("Не удалось сохранить комнату", e);
+        alert("Не удалось сохранить комнату: локальное хранилище недоступно.");
+        return;
+     }
+     alert("Комната сохранена! Мебель появится на этих же местах при следующем запуске этой комнаты.");
   }
 
   async function loadSavedRoom() {
-     let saved = localStorage.getItem("ar_room_save");
-     if(!saved) return;
+     const savedModels = loadRoomLayout(roomId);
+     if(savedModels.length === 0) return;
      try {
-        let savedModels = JSON.parse(saved);
         for(let data of savedModels) {
             let modelAlias = data.alias;
             let mData = window.modelsList ? window.modelsList.find(m => m.alias === modelAlias) : null;
@@ -531,5 +540,5 @@ export function createScene(renderer, sceneModels, loader = null, selectModel = 
 
   renderer.setAnimationLoop(renderLoop);
 
-  return { scene, onSelect, setModels, nextPlace, onRemove, Scale, Rotate, startTransform, stopTransform, unselect, Place, Move, startCalibration, saveRoom }
+  return { scene, roomId, onSelect, setModels, nextPlace, onRemove, Scale, Rotate, startTransform, stopTransform, unselect, Place, Move, startCalibration, saveRoom }
 }
