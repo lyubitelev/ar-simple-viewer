@@ -256,7 +256,45 @@ async function readModelBlob(response) {
 }
 
 /**
- * Загрузка с кэшем: fetch -> cache -> blob URL -> init(). Сбой сети и не-2xx ответ
+ * Кэш — только оптимизация. Прежние версии клали в `models-cache` любой ответ с телом,
+ * поэтому у существующего пользователя там может лежать 404/500. Такой entry нужно
+ * отбросить и всё равно сходить в сеть, а не залипать на нём навсегда.
+ */
+async function readCachedModel() {
+    if (cachedModels.indexOf(android) < 0)
+        return null;
+
+    let response;
+
+    try {
+        response = await newCache.match(android);
+    }
+    catch (err) {
+        console.warn('Не удалось прочитать модель из кэша.', err);
+        return null;
+    }
+
+    if (!response)
+        return null;
+
+    if (response.ok && response.body)
+        return response;
+
+    console.warn(`Кэшированный ответ непригоден (HTTP ${response.status}), перезагружаем модель из сети.`);
+
+    try {
+        await newCache.delete(android);
+    }
+    catch (err) {
+        // Удаление — best effort: его сбой не должен отменять попытку загрузки из сети.
+        console.warn('Не удалось удалить непригодный ответ из кэша.', err);
+    }
+
+    return null;
+}
+
+/**
+ * Загрузка с кэшем: cache -> fetch -> cache -> blob URL -> init(). Сбой сети и не-2xx ответ
  * не должны выглядеть как успешная загрузка и не должны оставлять вечный лоадер.
  */
 async function cacheModel() {
@@ -265,7 +303,7 @@ async function cacheModel() {
     let glbBlob;
 
     try {
-        let response = cachedModels.indexOf(android) >= 0 ? await newCache.match(android) : null;
+        let response = await readCachedModel();
 
         if (!response) {
             response = await fetch(android);
