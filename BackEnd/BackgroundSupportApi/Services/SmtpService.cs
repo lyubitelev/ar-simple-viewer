@@ -13,10 +13,12 @@ namespace BackgroundSupportApi.Services
     public class SmtpService : ISmtpService
     {
         private readonly AppSettings _appSettings;
+        private readonly ILogger<SmtpService> _logger;
 
-        public SmtpService(IOptions<AppSettings> options)
+        public SmtpService(IOptions<AppSettings> options, ILogger<SmtpService> logger)
         {
             _appSettings = options.Value;
+            _logger = logger;
         }
 
         public async Task<SmtpResponseInfo> SendMessageAsync(MessageDto messageDto, CancellationToken cancellationToken)
@@ -48,6 +50,9 @@ namespace BackgroundSupportApi.Services
             }
             catch (Exception ex)
             {
+                // Тема заявки безопасна для лога, контактные данные клиента туда не пишем.
+                _logger.LogError(ex, "Не удалось отправить заявку. Тема: {Subject}", messageDto.Subject);
+
                 return new SmtpResponseInfo
                 {
                     Success = false,

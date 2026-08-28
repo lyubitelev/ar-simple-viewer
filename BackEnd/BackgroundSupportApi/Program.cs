@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using BackgroundSupportApi.Models;
 using BackgroundSupportApi.Services;
 using Microsoft.Extensions.Hosting.WindowsServices;
@@ -21,7 +22,10 @@ namespace BackgroundSupportApi
                 });
             builder = WebApplication.CreateBuilder(args);
             builder.Services.Configure<AppSettings>(builder.Configuration.GetSection(nameof(AppSettings)));
-            builder.Services.AddControllers();
+            // SubjectType приходит с фронтенда строкой, чтобы не хардкодить числовые значения в браузере.
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
             builder.Services.AddScoped<ISmtpService, SmtpService>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

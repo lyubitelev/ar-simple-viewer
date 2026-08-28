@@ -2,160 +2,202 @@ import sessionUtils from "../common/utils/sessionUtils.js";
 import smtpUtils from "../common/utils/smtpUtils.js";
 
 const key = 'localId';
+
+// index.bandle.js подключают и старый index.html, и новый index2.html.
+// Разметка страниц отличается, поэтому каждый блок инициализируется только при наличии своих узлов.
 window.onload = async () => {
+    await initDemoPreview();
+    initContactForms();
+};
+
+function findPreviewFrame() {
+    const wideScreen = window.innerWidth > 767;
+    const preview = document.querySelector(wideScreen ? '.ar-preview.demo-ifr' : '.ar-preview.demo-ifr2');
+
+    // Старый index.html не использует класс ar-preview: там превью адресуется по id.
+    return preview ?? document.getElementById('demo-ifr2');
+}
+
+async function initDemoPreview() {
+    const previewFrame = findPreviewFrame();
+    if (!previewFrame)
+        return;
+
     try {
         await sessionUtils.init();
         const storage = JSON.parse(localStorage.getItem(key));
-        const modelsInfo = storage.mainCollection.data;
-        const randomIndex = Math.floor(Math.random() * modelsInfo.length);
-        const defaultModel = modelsInfo[randomIndex];
-        var els = document.getElementsByClassName('ar-preview');
+        const modelsInfo = storage?.mainCollection?.data ?? [];
 
-        if (window.innerWidth > 767) {
-            for (let i = 0; i < els.length; i++) {
-                if (els[i].classList.contains('demo-ifr')) {
-                    els[i].setAttribute('src', `./viewer.html?id=${defaultModel.id}`);
-                    break;
-                }
-            }
-        } else {
-            for (let i = 0; i < els.length; i++) {
-                if (els[i].classList.contains('demo-ifr2')) {
-                    els[i].setAttribute('src', `./viewer.html?id=${defaultModel.id}`);
-                    break;
-                }
-            }
-        }
+        if (modelsInfo.length === 0)
+            return;
+
+        const defaultModel = modelsInfo[Math.floor(Math.random() * modelsInfo.length)];
+        previewFrame.setAttribute('src', `./viewer.html?id=${defaultModel.id}`);
     }
     catch (err) {
         console.error(err);
     }
+}
 
-    // Функции валидации и отправки формы
-    function validateContactForm(nameInput, contactInput, consentCheckbox, submitButtons, consentContainer) {
-        function validateInput(input) {
-            let errorMessage = input.nextElementSibling;
-            if (!errorMessage || !errorMessage.classList.contains("error-message")) {
-                errorMessage = document.createElement("div");
-                errorMessage.classList.add("error-message");
-                input.parentNode.appendChild(errorMessage);
-            }
+/**
+ * Возвращает описание формы, только если все её обязательные узлы есть на странице.
+ */
+function readContactForm(elementIds) {
+    const nameInput = document.getElementById(elementIds.name);
+    const contactInput = document.getElementById(elementIds.contact);
+    const consentCheckbox = document.getElementById(elementIds.consent);
+    const submitButtons = document.querySelectorAll(elementIds.submitSelector);
 
-            if (input.value.trim() === "") {
-                errorMessage.textContent = "Это поле обязательно для заполнения";
-                input.classList.add("is-invalid");
-                return false;
-            } else {
-                errorMessage.textContent = "";
-                input.classList.remove("is-invalid");
-                return true;
-            }
-        }
+    if (!nameInput || !contactInput || !consentCheckbox || submitButtons.length === 0)
+        return null;
 
-        function validateContact(input) {
-            let errorMessage = input.nextElementSibling;
-            if (!errorMessage || !errorMessage.classList.contains("error-message")) {
-                errorMessage = document.createElement("div");
-                errorMessage.classList.add("error-message");
-                input.parentNode.appendChild(errorMessage);
-            }
+    const consentContainer = consentCheckbox.closest(elementIds.consentContainerSelector);
+    if (!consentContainer)
+        return null;
 
-            const value = input.value.trim();
-            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            const phonePattern = /^(\+7|8)?[\s-]?\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
+    return {
+        nameInput,
+        contactInput,
+        consentCheckbox,
+        consentContainer,
+        submitButtons,
+        // Тариф выбирается только в модальной форме.
+        tariffSelect: elementIds.tariff ? document.getElementById(elementIds.tariff) : null
+    };
+}
 
-            if (!emailPattern.test(value) && !phonePattern.test(value)) {
-                errorMessage.textContent = "Введите корректный телефон или email";
-                input.classList.add("is-invalid");
-                return false;
-            } else {
-                errorMessage.textContent = "";
-                input.classList.remove("is-invalid");
-                return true;
-            }
-        }
+function initContactForms() {
+    const forms = [
+        readContactForm({
+            name: "formGroupExampleInput",
+            contact: "formGroupExampleInput2",
+            consent: "flexCheckChecked2",
+            consentContainerSelector: ".all-form-check",
+            submitSelector: ".empty-send-btn"
+        }),
+        readContactForm({
+            name: "modal-formGroupExampleInput",
+            contact: "modal-formGroupExampleInput2",
+            consent: "modal-flexCheckChecked2",
+            tariff: "modal-formGroupExampleInput3",
+            consentContainerSelector: ".modal-form-check",
+            submitSelector: ".modal-btn"
+        })
+    ];
 
-        function validateCheckbox(checkbox) {
-            let errorMessage = consentContainer.nextElementSibling;
+    forms.filter(form => form !== null).forEach(bindContactForm);
+}
 
-            if (errorMessage && errorMessage.classList.contains("error-message")) {
-                errorMessage.remove();
-            }
+function ensureErrorMessage(input) {
+    let errorMessage = input.nextElementSibling;
+    if (!errorMessage || !errorMessage.classList.contains("error-message")) {
+        errorMessage = document.createElement("div");
+        errorMessage.classList.add("error-message");
+        input.parentNode.appendChild(errorMessage);
+    }
+    return errorMessage;
+}
 
-            if (!checkbox.checked) {
-                errorMessage = document.createElement("div");
-                errorMessage.classList.add("error-message", "alert", "alert-danger", "mt-3");
-                errorMessage.textContent = "Вы должны дать согласие на обработку персональных данных";
-                consentContainer.parentNode.insertBefore(errorMessage, consentContainer.nextSibling);
-                return false;
-            }
-            return true;
-        }
+function validateInput(input) {
+    const errorMessage = ensureErrorMessage(input);
 
-        function validateForm(event) {
-            event.preventDefault();
-            const isNameValid = validateInput(nameInput);
-            const isContactValid = validateContact(contactInput);
-            const isConsentGiven = validateCheckbox(consentCheckbox);
-            const consentTarif = document.getElementById("modal-formGroupExampleInput3");
-
-
-            if (isNameValid && isContactValid && isConsentGiven) {
-                smtpUtils.send({
-                    name: nameInput.value,
-                    contact: contactInput.value,
-                    agreement: consentCheckbox.checked,
-                    tarif: consentTarif.value
-                }, 'Заявка с главной страницы')
-                .then(() => {
-                    // Создаём Bootstrap-стильное уведомление
-                    let successMessage = document.createElement("div");
-                    successMessage.classList.add("alert", "alert-success", "mt-3");
-                    successMessage.textContent = "Ваше сообщение успешно отправлено!";
-            
-                    // Вставляем сообщение после контейнера формы
-                    consentContainer.parentNode.insertBefore(successMessage, consentContainer.nextSibling);
-            
-                    // Удаляем сообщение через 3 секунды
-                    setTimeout(() => {
-                        successMessage.remove();
-                    }, 3000);
-            
-                    // Очищаем поля формы
-                    nameInput.value = "";
-                    contactInput.value = "";
-                    nameInput.classList.remove("is-invalid");
-                    contactInput.classList.remove("is-invalid");
-            
-                    // Удаляем сообщения об ошибках
-                    document.querySelectorAll(".error-message").forEach(error => error.remove());
-                })
-                .catch(() => {
-                    console.error("Ошибка при отправке сообщения.");
-                });
-            }
-            
-
-        }
-
-        submitButtons.forEach(button => {
-            button.addEventListener("click", validateForm);
-        });
+    if (input.value.trim() === "") {
+        errorMessage.textContent = "Это поле обязательно для заполнения";
+        input.classList.add("is-invalid");
+        return false;
     }
 
-    const nameInput = document.getElementById("formGroupExampleInput");
-    const contactInput = document.getElementById("formGroupExampleInput2");
-    const consentCheckbox = document.getElementById("flexCheckChecked2");
-    const consentContainer = consentCheckbox.closest(".all-form-check");
-    const submitButtons = document.querySelectorAll(".empty-send-btn");
+    errorMessage.textContent = "";
+    input.classList.remove("is-invalid");
+    return true;
+}
 
-    const nameInput2 = document.getElementById("modal-formGroupExampleInput");
-    const contactInput2 = document.getElementById("modal-formGroupExampleInput2");
-    const consentCheckbox2 = document.getElementById("modal-flexCheckChecked2");
-    const consentTarif = document.getElementById("modal-formGroupExampleInput3");
-    const consentContainer2 = consentCheckbox2.closest(".modal-form-check");
-    const submitButtons2 = document.querySelectorAll(".modal-btn");
+function validateContact(input) {
+    const errorMessage = ensureErrorMessage(input);
 
-    validateContactForm(nameInput, contactInput, consentCheckbox, submitButtons, consentContainer);
-    validateContactForm(nameInput2, contactInput2, consentCheckbox2, submitButtons2, consentContainer2);
-};
+    const value = input.value.trim();
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const phonePattern = /^(\+7|8)?[\s-]?\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
+
+    if (!emailPattern.test(value) && !phonePattern.test(value)) {
+        errorMessage.textContent = "Введите корректный телефон или email";
+        input.classList.add("is-invalid");
+        return false;
+    }
+
+    errorMessage.textContent = "";
+    input.classList.remove("is-invalid");
+    return true;
+}
+
+function validateCheckbox(checkbox, consentContainer) {
+    let errorMessage = consentContainer.nextElementSibling;
+
+    if (errorMessage && errorMessage.classList.contains("error-message")) {
+        errorMessage.remove();
+    }
+
+    if (!checkbox.checked) {
+        errorMessage = document.createElement("div");
+        errorMessage.classList.add("error-message", "alert", "alert-danger", "mt-3");
+        errorMessage.textContent = "Вы должны дать согласие на обработку персональных данных";
+        consentContainer.parentNode.insertBefore(errorMessage, consentContainer.nextSibling);
+        return false;
+    }
+
+    return true;
+}
+
+function showFormMessage(consentContainer, text, alertClass) {
+    const message = document.createElement("div");
+    message.classList.add("alert", alertClass, "mt-3");
+    message.textContent = text;
+    consentContainer.parentNode.insertBefore(message, consentContainer.nextSibling);
+
+    setTimeout(() => {
+        message.remove();
+    }, 3000);
+}
+
+function bindContactForm(form) {
+    async function submitForm(event) {
+        event.preventDefault();
+
+        const isNameValid = validateInput(form.nameInput);
+        const isContactValid = validateContact(form.contactInput);
+        const isConsentGiven = validateCheckbox(form.consentCheckbox, form.consentContainer);
+
+        if (!isNameValid || !isContactValid || !isConsentGiven)
+            return;
+
+        try {
+            // Успех показываем только после подтверждённой отправки на нашем backend.
+            await smtpUtils.send({
+                subject: smtpUtils.SUBJECT.landingLead,
+                name: form.nameInput.value,
+                contact: form.contactInput.value,
+                tariff: form.tariffSelect?.value || null
+            });
+        }
+        catch (err) {
+            console.error("Не удалось отправить заявку.", err);
+            showFormMessage(form.consentContainer, "Не удалось отправить заявку. Попробуйте ещё раз позже.", "alert-danger");
+            return;
+        }
+
+        showFormMessage(form.consentContainer, "Ваше сообщение успешно отправлено!", "alert-success");
+
+        form.nameInput.value = "";
+        form.contactInput.value = "";
+        form.nameInput.classList.remove("is-invalid");
+        form.contactInput.classList.remove("is-invalid");
+
+        form.consentContainer.parentNode
+            .querySelectorAll(".error-message")
+            .forEach(error => error.remove());
+    }
+
+    form.submitButtons.forEach(button => {
+        button.addEventListener("click", submitForm);
+    });
+}

@@ -6,9 +6,8 @@ const dialogInput2Id = "dialog-input2";
 const successTimeOut = 1500;
 const dialogContainer = document.getElementById('dialog-container');
 const dialogTitle = document.getElementById('dialog-title');
-const openDialogButton = document.getElementById('open-dialog');
 const dialogText = document.getElementById('dialog-text');
-const openDialogButton2 = document.getElementById('open-dialog2');
+const openDialogButtons = document.querySelectorAll('.open-dialog');
 const closeDialogButton = document.getElementById('close-dialog');
 const cancelDialogButton = document.getElementById('cancel-dialog');
 const confirmDialogButton = document.getElementById('confirm-dialog');
@@ -16,19 +15,26 @@ const confirmDialogButton2 = document.getElementById('confirm-dialog2');
 const dialogInput = document.getElementById(dialogInputId);
 const dialogInput2 = document.getElementById(dialogInput2Id);
 
-function openDialog(x) {
-    switch (x.srcElement.id) {
-        case "open-dialog2":
-            dialogTitle.innerHTML = "Тариф Pro";
-            dialogText.innerHTML = "Тариф Pro - включает Lite и позволяет задействовать всю мощь XR технологии. <br> Из преимуществ: <br> - ежемесечно бесплатно выдается 10 жетонов на создание 3D моделей. Если модели не создаются то жетоны сгорают. Если моделей больше 10 в мес. оплата по тарифу Lite за модель. <br> - скидка не более 15% на просмотры относительно тарифа Lite. <br> - кастомизация с XR - персональный подход в создании виртуального мира!";
-            break;
-        case "open-dialog":
-            dialogTitle.innerHTML = "Тариф Lite";
-            dialogText.innerHTML = "Тариф Lite - предлагает решение проверенное временем за меньшие деньги. <br> Из преимуществ: <br> - менее затратное изготовление 3D моделей, одна модель - один платеж от 3 000<sup>₽</sup> в зависимости от сложности. <br> - последущая оплата за клик т.е за фактическое взаимодействие пользователя с моделью (от 7<sup>₽</sup> за клик). <br> - импорт / экспорт моделей в систему, позволяет использовать готовые модели. <br> - конфигуратор 3D просмотра. <br> - статистика по просмотрам моделей. <br> - высокая скорость загрузки моделей."
-            break;
-    }
+const emailForm2 = 'email-form2';
+const emailForm = 'email-form'
 
-    dialogTitle.value = x.srcElement.id;
+// Описания тарифов: docs/product/pricing-policy.md
+const tariffDescriptions = {
+    "Start": "Тариф Start — бесплатный старт. <br> Из возможностей: <br> - 3D-просмотрщик и AR «в вашем пространстве»; <br> - публичная ссылка, QR-код и embed на сайт; <br> - свои 3D-модели и базовая настройка сцены; <br> - до 500 оплачиваемых просмотров в месяц.",
+    "AR Commerce": "Тариф AR Commerce — 990 ₽ в месяц. <br> Включает всё из Start, а также: <br> - полную настройку вьюера и сцены; <br> - до 10 000 оплачиваемых просмотров в месяц; <br> - стандартную поддержку.",
+    "Business": "Тариф Business — 2 990 ₽ в месяц. <br> Включает всё из AR Commerce, а также: <br> - до 50 000 оплачиваемых просмотров в месяц; <br> - white-label и уменьшенный брендинг платформы; <br> - приоритетную поддержку.",
+    "Enterprise": "Тариф Enterprise — стоимость рассчитывается индивидуально. <br> Обсуждаем: <br> - очень высокий трафик и выделенный SLA; <br> - API-доступ и массовые операции с каталогом; <br> - интеграцию PIM / ERP / CRM; <br> - свои домены и приватное развёртывание."
+};
+
+let selectedTariff = null;
+
+function openDialog(event) {
+    const tariff = event.currentTarget.dataset.tariff;
+
+    selectedTariff = tariff ?? null;
+    dialogTitle.innerHTML = tariff ? `Тариф ${tariff}` : "Заявка";
+    dialogText.innerHTML = tariffDescriptions[tariff] ?? "";
+
     dialogContainer.classList.remove('hidden');
 }
 
@@ -36,49 +42,51 @@ function closeDialog() {
     dialogContainer.classList.add('hidden');
 }
 
-openDialogButton.addEventListener('click', x => openDialog(x));
-openDialogButton2.addEventListener('click', x => openDialog(x));
+openDialogButtons.forEach(button => button.addEventListener('click', openDialog));
 closeDialogButton.addEventListener('click', closeDialog);
 cancelDialogButton.addEventListener('click', closeDialog);
 
 confirmDialogButton2.addEventListener('click', () => {
     const form = document.getElementById(emailForm2);
     const textareaValue = form.querySelector('textarea').value;
-    trySend(dialogInput2.value, emailForm2, textareaValue);
+    return trySend(dialogInput2.value, emailForm2, textareaValue);
 });
 
-const emailForm2 = 'email-form2';
-const emailForm = 'email-form'
-confirmDialogButton.addEventListener('click', () => {
-    trySend(dialogInput.value, emailForm);
-});
+confirmDialogButton.addEventListener('click', () => trySend(dialogInput.value, emailForm));
 
-function trySend(userInput, formId, value = null) {
-    if (userInput && validateEmail(userInput)) {
-        messages.forEach(x => x?.remove());
-        messages = [];
-        let subj;
-        if (formId === emailForm && dialogTitle.value === "open-dialog")
-            subj = 0;
-        if (formId === emailForm && dialogTitle.value === "open-dialog2")
-            subj = 1;
-        if (formId === emailForm2)
-            subj = 2;
-
-        smtpUtils.send(userInput, subj, value)
-        .then(_ => _)
-        .catch(error => {
-            throw error;
-        });
-
-        createEmailMsg(formId, 'В ближайшее время наш менеджер с Вами свяжется.', successTimeOut);
-        setTimeout(() => {
-            closeDialog();
-        }, successTimeOut);
-    }
-    else {
+async function trySend(userInput, formId, value = null) {
+    if (!userInput || !validateEmail(userInput)) {
         createEmailMsg(formId, 'Ошибка: "Адрес эл. почты" введен неверно', 3500, true);
+        return;
     }
+
+    messages.forEach(x => x?.remove());
+    messages = [];
+
+    try {
+        // Успех показываем только после подтверждённой отправки на нашем backend.
+        await smtpUtils.send(formId === emailForm2
+            ? {
+                subject: smtpUtils.SUBJECT.callBack,
+                contact: userInput,
+                otherText: value
+            }
+            : {
+                subject: smtpUtils.SUBJECT.landingLead,
+                contact: userInput,
+                tariff: selectedTariff
+            });
+    }
+    catch (err) {
+        console.error('Не удалось отправить заявку.', err);
+        createEmailMsg(formId, 'Не удалось отправить заявку. Попробуйте ещё раз позже.', 3500, true);
+        return;
+    }
+
+    createEmailMsg(formId, 'В ближайшее время наш менеджер с Вами свяжется.', successTimeOut);
+    setTimeout(() => {
+        closeDialog();
+    }, successTimeOut);
 }
 
 function createEmailMsg(formId, msg, timeOut, isError = false) {
@@ -101,6 +109,6 @@ function createEmailMsg(formId, msg, timeOut, isError = false) {
 
 function validateEmail(email) {
     return email.match(
-        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
 };

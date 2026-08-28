@@ -227,7 +227,7 @@ window.clearSearchResult = () => {
   drawCardsByModels();
 }
 
-window.sendEmail = () => {
+window.sendEmail = async () => {
   const emailInput = document.getElementById('email-input');
   const value = emailInput.value;
 
@@ -243,7 +243,19 @@ window.sendEmail = () => {
     return;
   }
 
-  smtpUtils.send(value, 'Заявка с демо страницы AR');
+  try {
+    // Успех показываем только после подтверждённой отправки на нашем backend.
+    await smtpUtils.send({
+      subject: smtpUtils.SUBJECT.demoLead,
+      contact: value
+    });
+  }
+  catch (err) {
+    console.error('Не удалось отправить заявку.', err);
+    createEmailMsg('Не удалось отправить заявку. Попробуйте ещё раз позже.', ['alert-danger']);
+    return;
+  }
+
   createEmailMsg('В ближайшее время наш менеджер с Вами свяжется.', ['alert-primary']);
   emailInput.classList.remove('is-invalid');
 }
