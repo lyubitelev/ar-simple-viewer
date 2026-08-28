@@ -18,6 +18,9 @@ const SUBJECT = {
  * @throws {Error} если backend вернул не 2xx или сообщил об ошибке отправки
  */
 async function send(lead) {
+    if (!conf.supportApiUrl)
+        throw new Error('Адрес сервиса заявок не настроен для этого окружения.');
+
     const response = await fetch(`${conf.supportApiUrl}/api/Smtp/SendMessage`, {
         method: 'POST',
         headers: {
