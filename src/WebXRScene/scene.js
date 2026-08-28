@@ -2,7 +2,7 @@ import { createPlaneMarker, createPlaceButton } from "./createPlaneMarker";
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { handleXRHitTest } from "../common/xr/hitTest";
-import { resolveRoomId, saveRoomLayout, loadRoomLayout } from "./roomStorage.js";
+import { getActiveRoomId, saveRoomLayout, loadRoomLayout } from "./roomStorage.js";
 
 import {
   AmbientLight,
@@ -32,9 +32,6 @@ export function createScene(renderer, sceneModels, loader = null, selectModel = 
 
   var intersectedObject;
   var isTransforming = false;
-
-  // Сохранённый layout принадлежит конкретной комнате, а не origin'у в целом.
-  const roomId = resolveRoomId();
 
   let calibrationStep = 0;
   let roomOriginMatrix = new Matrix4();
@@ -85,6 +82,12 @@ export function createScene(renderer, sceneModels, loader = null, selectModel = 
          alert("Сначала завершите калибровку!");
          return;
      }
+     // Комнату выбирают явно, иначе непонятно, какой layout перезаписывается.
+     const roomId = getActiveRoomId();
+     if(!roomId) {
+         alert("Сначала выберите или создайте комнату.");
+         return;
+     }
      let savedModels = [];
      installedModels.forEach(item => {
         let model = item.model;
@@ -107,7 +110,8 @@ export function createScene(renderer, sceneModels, loader = null, selectModel = 
   }
 
   async function loadSavedRoom() {
-     const savedModels = loadRoomLayout(roomId);
+     // Без явно выбранной комнаты ничего не подставляем.
+     const savedModels = loadRoomLayout(getActiveRoomId());
      if(savedModels.length === 0) return;
      try {
         for(let data of savedModels) {
@@ -540,5 +544,5 @@ export function createScene(renderer, sceneModels, loader = null, selectModel = 
 
   renderer.setAnimationLoop(renderLoop);
 
-  return { scene, roomId, onSelect, setModels, nextPlace, onRemove, Scale, Rotate, startTransform, stopTransform, unselect, Place, Move, startCalibration, saveRoom }
+  return { scene, onSelect, setModels, nextPlace, onRemove, Scale, Rotate, startTransform, stopTransform, unselect, Place, Move, startCalibration, saveRoom }
 }

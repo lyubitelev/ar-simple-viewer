@@ -56,6 +56,17 @@
             добавлять и удалять модели в пространстве, используя кнопки в правой части экрана
         </div>
 
+        <div id="roomPanel" class="room-panel">
+            <b>Комната</b>
+            <div class="room-panel__hint">
+                Расстановка сохраняется отдельно для каждой комнаты. Выберите комнату, в которой находитесь,
+                или создайте новую — иначе сохранение будет недоступно.
+            </div>
+            <div id="roomActive" class="room-panel__active">Комната не выбрана</div>
+            <div id="roomList" class="room-panel__list"></div>
+            <button id="roomCreate" type="button" class="room-panel__button">Новая комната</button>
+        </div>
+
         
 
 
@@ -67,6 +78,7 @@
 
     <div id="ar-main" class="ar-main hidden">
         <span class="log" id="log"></span>
+        <div id="roomBadge" class="room-badge hidden"></div>
         <div id="toolbar" class="toolbar ">
             <div id="toolbarSlider" class="toolbar__model-slider hidden">
                 <div class="slider-container">
