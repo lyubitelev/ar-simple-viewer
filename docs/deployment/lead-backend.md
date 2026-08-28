@@ -55,6 +55,12 @@ Content-Type: application/json
 переменные окружения службы. DNS, TLS и reverse proxy (пункты 1–2) он не трогает —
 это внешний контур.
 
+Деплой повторяемый: если служба уже зарегистрирована, скрипт снимает её через
+`ManageService.ps1 -action 2` и создаёт заново на свежем published exe. `ManageService.ps1`
+с `-action` выполняет ровно одно действие и возвращает exit code (`0` — успех, `1` — ошибка),
+поэтому неудачная регистрация или удаление останавливает деплой, а не оставляет службу без
+переменных окружения. Без `-action` скрипт по-прежнему показывает интерактивное меню.
+
 ## Проверено локально
 
 CORS-контракт снят с реального запуска приложения (`ASPNETCORE_ENVIRONMENT=Production`,
@@ -77,6 +83,9 @@ Kestrel на loopback), а не только со сборки:
 - `titan-auto-barnaul.ru` — NXDOMAIN на 8.8.8.8 и 1.1.1.1 (прежний адрес из `main`);
 - `api` / `backend` / `support.art-vision-tech.ru` — NXDOMAIN;
 - `art-vision-tech.ru:5000` не отвечает; сам домен отдаёт только статику из бакета;
+- `www` / `lead.art-vision-tech.ru` — тоже NXDOMAIN;
+- `https://art-vision-tech.ru` отвечает Object Storage (`X-Amz-Request-Id`, preflight
+  разрешает только `GET`), то есть за доменом стоит бакет, а не BackgroundSupportApi;
 - в репозитории нет ни reverse proxy, ни TLS-конфигурации, ни описанного сервера-цели.
 
 Пока такого адреса нет, любое непустое значение `supportApiUrl` было бы выдумкой:

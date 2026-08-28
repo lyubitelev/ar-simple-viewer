@@ -1,10 +1,14 @@
-<#
+﻿<#
 .SYNOPSIS
     Публикует BackgroundSupportApi и регистрирует его Windows-службой.
 
 .DESCRIPTION
     Закрывает механическую часть деплоя lead backend: publish, переменные окружения
     и регистрация службы через существующий ManageService.ps1.
+
+    Скрипт повторяемый: если служба уже зарегистрирована, она снимается и создаётся
+    заново на свежем published exe. Любая ошибка регистрации/удаления прекращает деплой
+    с ненулевым кодом, а не оставляет службу в неизвестном состоянии.
 
     Скрипт НЕ настраивает DNS, TLS и reverse proxy — это внешняя часть деплоя.
     Kestrel слушает plain HTTP и не должен выставляться в интернет напрямую.
@@ -61,9 +65,27 @@ if (-not (Test-Path $exePath)) {
     exit 1
 }
 
-& (Join-Path $PSScriptRoot "ManageService.ps1") -exePath $exePath -serviceName $ServiceName -displayName $DisplayName -action 1
+# ManageService.ps1 с -action выполняет ровно одно действие и возвращает exit code,
+# поэтому каждый вызов проверяется отдельно.
+$manageServicePath = Join-Path $PSScriptRoot "ManageService.ps1"
 
-if (-not (Test-Path $serviceRegistryPath)) {
+# Повторный деплой: существующая служба держит старый exe, поэтому сначала снимаем её.
+if (Get-Service -Name $ServiceName -ErrorAction SilentlyContinue) {
+    Write-Host "Служба $ServiceName уже зарегистрирована — удаляем перед повторной регистрацией."
+    & $manageServicePath -serviceName $ServiceName -action 2
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "Не удалось удалить службу $ServiceName (код $LASTEXITCODE)."
+        exit $LASTEXITCODE
+    }
+}
+
+& $manageServicePath -exePath $exePath -serviceName $ServiceName -displayName $DisplayName -action 1
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Регистрация службы $ServiceName не удалась (код $LASTEXITCODE)."
+    exit $LASTEXITCODE
+}
+
+if (-not (Get-Service -Name $ServiceName -ErrorAction SilentlyContinue) -or -not (Test-Path $serviceRegistryPath)) {
     Write-Host "Служба $ServiceName не зарегистрирована, переменные окружения не заданы."
     exit 1
 }
