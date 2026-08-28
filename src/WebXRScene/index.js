@@ -8,7 +8,7 @@ import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.j
 import osDetector from "../common/osDetector"
 import modelUtils from "../common/utils/modelUtils.js"
 import roomStorage from "./roomStorage.js"
-import conf from "../config/config.js"
+import storagePaths from "../common/utils/storagePaths.js"
 
 
 var mode = "work";
@@ -132,11 +132,11 @@ async function fetchModels() {
     window.modelsList = modelsList; // Expose for scene.js
     typesList = responce.types;
     for (let i = 0; i < modelsList.length; i++) {
-      modelsList[i].glb = modelsList[i].glb.replace('models', `${conf.awsEndPoint}/avt-models`);
-      modelsList[i].preview = modelsList[i].preview.replace('models', `${conf.awsEndPoint}/avt-models`);
+      modelsList[i].glb = modelsList[i].glb.replace('models', storagePaths.getModelsBaseUrl());
+      modelsList[i].preview = modelsList[i].preview.replace('models', storagePaths.getModelsBaseUrl());
     }
     for (let i = 0; i < typesList.length; i++) {
-      typesList[i].preview = typesList[i].preview.replace('models', `${conf.awsEndPoint}/avt-models`);
+      typesList[i].preview = typesList[i].preview.replace('models', storagePaths.getModelsBaseUrl());
     }
   } catch (err) {
     console.error('Ошибка загрузки моделей:', err);

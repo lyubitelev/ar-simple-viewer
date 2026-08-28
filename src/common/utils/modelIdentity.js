@@ -1,4 +1,5 @@
 import conf from "../../config/config.js"
+import storagePaths from "./storagePaths.js"
 
 const localMainDataKey = 'localId';
 
@@ -70,10 +71,10 @@ export async function resolveModel(id, mainDataId) {
         const armessage = base64ToJson(localModel.armessage);
 
         if (armessage?.src)
-            armessage['src'] = armessage['src'].replace('models', `${conf.awsEndPoint}/avt-models`);
+            armessage['src'] = armessage['src'].replace('models', storagePaths.getModelsBaseUrl());
 
         if (armessage?.['ios-src'])
-            armessage['ios-src'] = armessage['ios-src'].replace('models', `${conf.awsEndPoint}/avt-models`);
+            armessage['ios-src'] = armessage['ios-src'].replace('models', storagePaths.getModelsBaseUrl());
 
         return {
             folderId,

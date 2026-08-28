@@ -118,6 +118,44 @@ const onProgress = (event) => {
 mv.addEventListener('progress', onProgress);
 mv.setAttribute("src", android);
 
+// Единый lifecycle индикатора загрузки: и прямая загрузка через GLTFLoader,
+// и путь с кэшем (fetch -> cache -> blob URL) показывают один и тот же бокс.
+let progressBox = null;
+
+function showProgress() {
+    if (progressBox)
+        return progressBox;
+
+    progressBox = document.createElement('div');
+    progressBox.className = 'viewer-progress';
+    progressBox.innerText = 'Загрузка модели…';
+    document.body.appendChild(progressBox);
+
+    return progressBox;
+}
+
+function updateProgress(loaded, total) {
+    // Размер известен не всегда, поэтому без Content-Length показываем честные мегабайты.
+    showProgress().innerText = total
+        ? `Загрузка модели: ${Math.round(loaded / total * 100)}%`
+        : `Загрузка модели: ${(loaded / (1024 * 1024)).toFixed(1)} МБ`;
+}
+
+function hideProgress() {
+    progressBox?.remove();
+    progressBox = null;
+}
+
+/**
+ * Единственная точка обработки сбоя загрузки модели: гасит прогресс и показывает
+ * честную ошибку, которая через showModelLoadError гасит и старый спиннер страницы.
+ */
+function failModelLoad(err) {
+    console.error('Не удалось загрузить модель.', err);
+    hideProgress();
+    modelIdentity.showModelLoadError();
+}
+
 let cachedModels = [];
 if ('caches' in window && message?.cacheModels == true) {
     newCache = await caches.open('models-cache');
@@ -191,32 +229,69 @@ window.backOnClick = () => {
 
 }
 
-function UpdateAndroidScr(response) {
-    response.arrayBuffer()
-        .then((data) => {
-            const glbBlob = new Blob([data], { type: 'model/glb-binary' });
-            android = window.URL.createObjectURL(glbBlob);
-            init();
-        });
+/**
+ * Читает тело ответа потоком: сетевое скачивание — самая долгая часть загрузки,
+ * и пользователь должен видеть её прогресс, а не пустой спиннер.
+ */
+async function readModelBlob(response) {
+    const total = Number(response.headers.get('Content-Length')) || 0;
+    const reader = response.body.getReader();
+    const chunks = [];
+    let loaded = 0;
+
+    updateProgress(loaded, total);
+
+    while (true) {
+        const { done, value } = await reader.read();
+
+        if (done)
+            break;
+
+        chunks.push(value);
+        loaded += value.length;
+        updateProgress(loaded, total);
+    }
+
+    return new Blob(chunks, { type: 'model/glb-binary' });
 }
 
-function cacheModel() {
-    if (cachedModels.indexOf(android) >= 0) {
-        newCache.match(android).then((response) => {
-            console.log(response);
-            UpdateAndroidScr(response);
-        })
+/**
+ * Загрузка с кэшем: fetch -> cache -> blob URL -> init(). Сбой сети и не-2xx ответ
+ * не должны выглядеть как успешная загрузка и не должны оставлять вечный лоадер.
+ */
+async function cacheModel() {
+    showProgress();
 
-    } else
-        fetch(android)
-            .then((response) => {
-                if (response.body) {
-                    newCache.put(android, response.clone());
-                    UpdateAndroidScr(response);
-                } else {
-                    throw Error('Unable to Download Model');
-                }
-            });
+    let glbBlob;
+
+    try {
+        let response = cachedModels.indexOf(android) >= 0 ? await newCache.match(android) : null;
+
+        if (!response) {
+            response = await fetch(android);
+
+            // fetch резолвится и на 403/404/500 — это не успешная загрузка.
+            if (!response.ok)
+                throw new Error(`Модель недоступна: HTTP ${response.status}`);
+
+            if (!response.body)
+                throw new Error('Модель недоступна: пустой ответ.');
+
+            newCache.put(android, response.clone())
+                .catch((err) => console.warn('Не удалось сохранить модель в кэше.', err));
+        }
+
+        glbBlob = await readModelBlob(response);
+    }
+    catch (err) {
+        // Дальше по цепочке ошибку обрабатывать некому: сеть/кэш — это её граница.
+        failModelLoad(err);
+        return;
+    }
+
+    // Ошибки самой сцены остаются на GLTFLoader.onError, чтобы cleanup был в одном месте.
+    android = window.URL.createObjectURL(glbBlob);
+    init();
 }
 
 function tween(inout) { // in - true, out - false
@@ -318,26 +393,18 @@ function init() {
 
     // Модель едет по сети десятки секунд, поэтому нужен видимый прогресс.
     // Без onError сбой загрузки не гасил лоадер: спиннер крутился бы вечно.
-    const progressBox = document.createElement('div');
-    progressBox.className = 'viewer-progress';
-    document.body.appendChild(progressBox);
+    showProgress();
 
     gltfLoader.load(android, async (gltf) => {
-        progressBox.remove();
+        hideProgress();
         scene.add(gltf.scene);
         console.log(gltf.scene);
         model = gltf.scene;
         setUpAnimation(model);
         window.loaderHide();
     }, (event) => {
-        progressBox.innerText = event.total
-            ? `Загрузка модели: ${Math.round(event.loaded / event.total * 100)}%`
-            : `Загрузка модели: ${(event.loaded / (1024 * 1024)).toFixed(1)} МБ`;
-    }, (err) => {
-        console.error('Не удалось загрузить модель.', err);
-        progressBox.remove();
-        modelIdentity.showModelLoadError();
-    })
+        updateProgress(event.loaded, event.total);
+    }, failModelLoad)
 
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);

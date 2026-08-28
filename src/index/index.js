@@ -1,6 +1,6 @@
 import sessionUtils from "../common/utils/sessionUtils.js";
 import smtpUtils from "../common/utils/smtpUtils.js";
-import conf from "../config/config.js";
+import storagePaths from "../common/utils/storagePaths.js";
 
 const key = 'localId';
 
@@ -14,9 +14,8 @@ window.onload = async () => {
 };
 
 /**
- * Подставляет ролик в макет телефона. В репозитории его нет (video/* в .gitignore),
- * файл лежит в бакете моделей, а адрес собирается из awsEndPoint — той же схемой,
- * что и адреса моделей в modelIdentity/sessionUtils.
+ * Подставляет ролик в макет телефона. Адрес ролика принадлежит storagePaths —
+ * тому же владельцу путей хранилища, что и адреса моделей.
  * Узлы .all-container/.mobile-container есть только в index2.html.
  */
 function initHeroVideo() {
@@ -28,7 +27,7 @@ function initHeroVideo() {
 
     const source = document.createElement('source');
 
-    source.src = `${conf.awsEndPoint}/avt-models/video/promo_video.mp4`;
+    source.src = storagePaths.getPromoVideoUrl();
     source.type = 'video/mp4';
 
     video.innerHTML = '';
