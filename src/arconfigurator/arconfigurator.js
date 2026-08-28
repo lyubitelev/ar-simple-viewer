@@ -6,7 +6,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import modelUtils from "../common/utils/modelUtils.js"
-import conf from "../config/config.js"
+import modelIdentity from "../common/utils/modelIdentity.js"
 
 const urlParams = new URLSearchParams(window.location.search);
 let message = null;
@@ -19,35 +19,19 @@ const name = urlParams.get('alias');
 let attributes = {};
 let sceneParamerters = {};
 
-let mainData = JSON.parse(localStorage.getItem('localId'));
-let searchModel = mainData.mainCollection.data.filter(x => x.id === id)[0];
-const folderId = mainDataId ?? mainData.id;
+// Ссылка на конфигуратор несёт id + mainDataId и должна открываться без локальной сессии создателя.
+const resolved = await modelIdentity.resolveModel(id, mainDataId);
+const folderId = resolved.folderId;
+armessage = resolved.armessage;
+message = resolved.message;
 
-var modelParameters = null;
-try {
-    const modelId = id;
-    const responce = await fetch(`${conf.awsEndPoint}/avt-content/${conf.idsFolder}/${folderId}/${modelId}.json?response-content-type=json`);
-    if (responce.status === 200) {
-        modelParameters = await (responce).json();
-    }
-}
-catch (err) {
-    console.log(err)
-}
+android = armessage?.src ?? android;
+ios = armessage?.['ios-src'] ?? ios;
 
-if (!modelParameters) {
-    armessage = base64ToJson(searchModel.armessage);
-    message = base64ToJson(searchModel.message);
-    armessage['src'] = armessage['src'].replace('models', `${conf.awsEndPoint}/avt-models`);
-    armessage['ios-src'] = armessage['ios-src'].replace('models', `${conf.awsEndPoint}/avt-models`);
+if (!android) {
+    modelIdentity.showModelLoadError();
+    throw new Error(`Модель не найдена: id=${id}, mainDataId=${mainDataId}`);
 }
-else {
-    armessage = base64ToJson(modelParameters.armessage);
-    message = base64ToJson(modelParameters.message);
-}
-
-android = armessage['src'];
-ios = armessage['ios-src'];
 
 document.title = urlParams.get('name');
 
@@ -71,14 +55,6 @@ const backgroundColor = "#d1e9ff",
 const PosX = 0, PosY = 0.5, PosZ = 1.5, TarX = 0, TarY = 0.05, TarZ = 0.1
 
 window.loaderShow();
-
-function base64ToJson(encoded) {
-    if (encoded == 'undefined' || encoded == null || encoded == '')
-        return null;
-
-    var actual = JSON.parse(atob(encoded))
-    return actual;
-}
 
 init();
 
@@ -336,7 +312,7 @@ var generateNewLink = async () => {
 
     var armessage = jsonToBase64(attributes);
     var message = jsonToBase64(sceneParamerters);
-    await modelUtils.updateModel(id, armessage, message);
+    await modelUtils.updateModel(folderId, id, armessage, message);
 
     var baseUrl = window.location.origin;
 

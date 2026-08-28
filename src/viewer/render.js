@@ -7,8 +7,8 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import osDetector from "../common/osDetector"
 import * as TWEEN from "three/addons/libs/tween.module.js";
-import conf from "../config/config.js"
 import modelUtils from "../common/utils/modelUtils.js"
+import modelIdentity from "../common/utils/modelIdentity.js"
 
 const container = document.getElementById('container');
 let mv = document.getElementById("model-viewer");
@@ -29,44 +29,15 @@ const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams?.get('id');
 const mainDataId = urlParams?.get('mainDataId');
 
-let mainData = JSON.parse(localStorage.getItem('localId'));
-let searchModel = mainData.mainCollection.data.filter(x => x.id === id)[0];
-const folderId = mainDataId ?? mainData.id;
-
-var modelParameters = null;
-try {
-    const modelId = id;
-    const responce = await fetch(`${conf.awsEndPoint}/avt-content/${conf.idsFolder}/${folderId}/${modelId}.json?response-content-type=json`);
-    if (responce.status === 200) {
-        modelParameters = await (responce).json();
-    }
-}
-catch (err) {
-    console.log(err)
-}
-
-if (!modelParameters) {
-    armessage = base64ToJson(searchModel.armessage);
-    message = base64ToJson(searchModel.message);
-    armessage['src'] = armessage['src'].replace('models', `${conf.awsEndPoint}/avt-models`);
-    armessage['ios-src'] = armessage['ios-src'].replace('models', `${conf.awsEndPoint}/avt-models`);
-}
-else {
-    armessage = base64ToJson(modelParameters.armessage);
-    message = base64ToJson(modelParameters.message);
-}
+// Публичная ссылка/QR несут id + mainDataId и должны открываться без локальной сессии создателя.
+const resolved = await modelIdentity.resolveModel(id, mainDataId);
+const folderId = resolved.folderId;
+armessage = resolved.armessage;
+message = resolved.message;
 
 console.log(armessage, message);
 
 let signedUrl = null;
-
-function base64ToJson(encoded) {
-    if (encoded == 'undefined' || encoded == null || encoded == '')
-        return null;
-
-    var actual = JSON.parse(atob(encoded))
-    return actual;
-}
 
 var addAttribute = (name, value) => {
     mv.setAttribute(name, value)
@@ -85,6 +56,12 @@ function ApplyARSettings() {
 
 let android = armessage?.src ?? urlParams.get('src');
 let name = armessage?.name ?? urlParams.get('name');
+
+if (!android) {
+    modelIdentity.showModelLoadError();
+    throw new Error(`Модель не найдена: id=${id}, mainDataId=${mainDataId}`);
+}
+
 document.title = name;
 
 if (message?.titleIcon) {
@@ -139,7 +116,7 @@ const onProgress = (event) => {
 };
 
 mv.addEventListener('progress', onProgress);
-mv.setAttribute("src", armessage['src']);
+mv.setAttribute("src", android);
 
 let cachedModels = [];
 if ('caches' in window && message?.cacheModels == true) {
@@ -192,7 +169,9 @@ function jsonToBase64(object) {
 async function openArViewer() {
     var baseUrl = window.location.origin;
     let link = baseUrl + `/viewer.html?id=${id}&mainDataId=${folderId}`;
-    await modelUtils.updateModel(id, jsonToBase64(armessage), jsonToBase64(message));
+
+    if (folderId)
+        await modelUtils.updateModel(folderId, id, jsonToBase64(armessage), jsonToBase64(message));
     if (arWorks) {
         document.getElementById("ar-button").click();
     } else {
