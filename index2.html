@@ -1592,51 +1592,7 @@
             // Добавляем класс loaded, чтобы скрыть лоадер
             document.body.classList.add("loaded");
 
-            const videos = document.querySelectorAll(".video-container video");
-
-            if (window.innerWidth > 767) {
-                for (let i = 0; i < videos.length; i++) {
-                    if (videos[i].parentElement.classList.contains('all-container')) {
-                        awd3(videos[i]);
-                        break;
-                    }
-                }
-            } else {
-                for (let i = 0; i < videos.length; i++) {
-                    if (videos[i].parentElement.classList.contains('mobile-container')) {
-                        awd3(videos[i]);
-                        break;
-                    }
-                }
-            }
-
-            function awd3(video) {
-                let source = video.querySelectorAll("source")
-
-                for (i = 0; i < source.length; i++) {
-                    const type = source[i].getAttribute('type');
-                    const canPlay = video.canPlayType(type);
-
-                    if (canPlay === 'maybe') {
-                        let newSource = document.createElement("source");
-                        newSource.src = type === 'video/webm' ? './video/output2.webm' : './video/output2.mp4';
-                        newSource.type = type;
-                        video.innerHTML = "";
-                        video.appendChild(newSource);
-                        break;
-                    }
-                }
-                video.load();  // Перезагружаем видео с новым источником
-
-                video.addEventListener("click", function () {
-                    if (video.paused) {
-                        video.play();
-                    } else {
-                        video.pause();
-                    }
-
-                });
-            }
+            // Ролик подставляет index.bandle.js: адрес бакета живёт в конфигурации окружения.
         });
 
         document.addEventListener("DOMContentLoaded", function () {

@@ -1,14 +1,47 @@
 import sessionUtils from "../common/utils/sessionUtils.js";
 import smtpUtils from "../common/utils/smtpUtils.js";
+import conf from "../config/config.js";
 
 const key = 'localId';
 
 // index.bandle.js подключают и старый index.html, и новый index2.html.
 // Разметка страниц отличается, поэтому каждый блок инициализируется только при наличии своих узлов.
 window.onload = async () => {
+    // Ролик тяжёлый, поэтому запускается до ожидания сессии и превью.
+    initHeroVideo();
     await initDemoPreview();
     initContactForms();
 };
+
+/**
+ * Подставляет ролик в макет телефона. В репозитории его нет (video/* в .gitignore),
+ * файл лежит в бакете моделей, а адрес собирается из awsEndPoint — той же схемой,
+ * что и адреса моделей в modelIdentity/sessionUtils.
+ * Узлы .all-container/.mobile-container есть только в index2.html.
+ */
+function initHeroVideo() {
+    const containerClass = window.innerWidth > 767 ? 'all-container' : 'mobile-container';
+    const video = document.querySelector(`.video-container.${containerClass} video`);
+
+    if (!video)
+        return;
+
+    const source = document.createElement('source');
+
+    source.src = `${conf.awsEndPoint}/avt-models/video/promo_video.mp4`;
+    source.type = 'video/mp4';
+
+    video.innerHTML = '';
+    video.appendChild(source);
+    video.load();
+
+    video.addEventListener('click', () => {
+        if (video.paused)
+            video.play();
+        else
+            video.pause();
+    });
+}
 
 function findPreviewFrame() {
     const wideScreen = window.innerWidth > 767;

@@ -316,12 +316,27 @@ function init() {
     gltfLoader.setDRACOLoader(dracoLoader)
         .setMeshoptDecoder(MeshoptDecoder);
 
+    // Модель едет по сети десятки секунд, поэтому нужен видимый прогресс.
+    // Без onError сбой загрузки не гасил лоадер: спиннер крутился бы вечно.
+    const progressBox = document.createElement('div');
+    progressBox.className = 'viewer-progress';
+    document.body.appendChild(progressBox);
+
     gltfLoader.load(android, async (gltf) => {
+        progressBox.remove();
         scene.add(gltf.scene);
         console.log(gltf.scene);
         model = gltf.scene;
         setUpAnimation(model);
         window.loaderHide();
+    }, (event) => {
+        progressBox.innerText = event.total
+            ? `Загрузка модели: ${Math.round(event.loaded / event.total * 100)}%`
+            : `Загрузка модели: ${(event.loaded / (1024 * 1024)).toFixed(1)} МБ`;
+    }, (err) => {
+        console.error('Не удалось загрузить модель.', err);
+        progressBox.remove();
+        modelIdentity.showModelLoadError();
     })
 
     renderer = new THREE.WebGLRenderer({ antialias: true });
