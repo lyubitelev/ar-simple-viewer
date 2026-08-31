@@ -4,14 +4,23 @@ import storagePaths from "../common/utils/storagePaths.js";
 
 const key = 'localId';
 
-// index.bandle.js подключают и старый index.html, и новый index2.html.
-// Разметка страниц отличается, поэтому каждый блок инициализируется только при наличии своих узлов.
-window.onload = async () => {
-    // Ролик тяжёлый, поэтому запускается до ожидания сессии и превью.
+let isInitialized = false;
+
+function initPage() {
+    if (isInitialized)
+        return;
+    isInitialized = true;
+
     initHeroVideo();
-    await initDemoPreview();
+    initDemoPreview();
     initContactForms();
-};
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPage);
+} else {
+    initPage();
+}
 
 /**
  * Подставляет ролик в макет телефона. Адрес ролика принадлежит storagePaths —
@@ -19,27 +28,51 @@ window.onload = async () => {
  * Узлы .all-container/.mobile-container есть только в index2.html.
  */
 function initHeroVideo() {
-    const containerClass = window.innerWidth > 767 ? 'all-container' : 'mobile-container';
-    const video = document.querySelector(`.video-container.${containerClass} video`);
+    try {
+        const containerClass = window.innerWidth > 767 ? 'all-container' : 'mobile-container';
+        const video = document.querySelector(`.video-container.${containerClass} video`);
 
-    if (!video)
-        return;
+        if (!video)
+            return;
 
-    const source = document.createElement('source');
+        const source = document.createElement('source');
 
-    source.src = storagePaths.getPromoVideoUrl();
-    source.type = 'video/mp4';
+        source.src = storagePaths.getPromoVideoUrl();
+        source.type = 'video/mp4';
 
-    video.innerHTML = '';
-    video.appendChild(source);
-    video.load();
+        video.innerHTML = '';
+        video.appendChild(source);
+        video.load();
 
-    video.addEventListener('click', () => {
-        if (video.paused)
-            video.play();
-        else
-            video.pause();
-    });
+        const tryPlay = () => {
+            if (!video.paused)
+                return;
+            const playPromise = video.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(() => {
+                    // Browser autoplay restrictions handled silently.
+                });
+            }
+        };
+
+        tryPlay();
+
+        video.addEventListener('loadeddata', tryPlay, { once: true });
+        video.addEventListener('canplay', tryPlay, { once: true });
+
+        video.addEventListener('click', () => {
+            if (video.paused) {
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {});
+                }
+            }
+            else
+                video.pause();
+        });
+    } catch (err) {
+        console.error("Не удалось инициализировать promo video:", err);
+    }
 }
 
 function findPreviewFrame() {
