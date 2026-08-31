@@ -249,3 +249,33 @@ model-viewer[ar-status="session-started"]>#ar-prompt {
   font-family: Roboto Regular, Helvetica Neue, sans-serif;
   font-size: 16px;
 }
+.viewer-progress {
+  /* Спиннер .loader — 130px и отступ 5vh сверху, надпись становится прямо под ним. */
+  position: fixed;
+  top: calc(5vh + 150px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 14px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  text-align: center;
+  font-family: Roboto Regular, Helvetica Neue, sans-serif;
+  font-size: 14px;
+  z-index: 2147483647;
+}
+.viewer-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 80%;
+  padding: 16px 20px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  text-align: center;
+  font-family: Roboto Regular, Helvetica Neue, sans-serif;
+  font-size: 16px;
+  z-index: 100;
+}

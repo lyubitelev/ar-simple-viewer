@@ -11,8 +11,12 @@ dist
 .vs/ar-simple-viewer/config/applicationhost.config
 /.vs/slnx.sqlite-journal
 video/*.mp4
-/BackEnd/BackgroundSupportApi/bin/Debug/net6.0
+/BackEnd/BackgroundSupportApi/bin/
 /BackEnd/.vs
 /BackEnd/BackgroundSupportApi/obj
 /BackEnd/BackgroundSupportApi/appsettings.Development.json
 /BackEnd/BackgroundSupportApi/Scripts/*/
+.hintrc
+video/*.webm
+.vs/*
+https/*

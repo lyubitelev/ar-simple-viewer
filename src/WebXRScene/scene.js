@@ -2,6 +2,7 @@ import { createPlaneMarker, createPlaceButton } from "./createPlaneMarker";
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { handleXRHitTest } from "../common/xr/hitTest";
+import { getActiveRoomId, saveRoomLayout, loadRoomLayout } from "./roomStorage.js";
 
 import {
   AmbientLight,
@@ -31,6 +32,139 @@ export function createScene(renderer, sceneModels, loader = null, selectModel = 
 
   var intersectedObject;
   var isTransforming = false;
+
+  let calibrationStep = 0;
+  let roomOriginMatrix = new Matrix4();
+  let pointAMatrix = new Matrix4();
+  let pointBMatrix = new Matrix4();
+  let roomInverseMatrix = new Matrix4();
+
+  function startCalibration() {
+    calibrationStep = 1;
+    let ui = document.getElementById("calibrationUI");
+    if(ui) {
+      ui.classList.remove("hidden");
+      document.getElementById("calibrationText").innerText = "Шаг 1: Наведите прицел (кружок) на левый угол стены и коснитесь экрана";
+    }
+  }
+
+  function handleCalibrationTap() {
+     if(!planeMarker.visible) return;
+     if(calibrationStep === 1) {
+         pointAMatrix.copy(planeMarker.matrix);
+         calibrationStep = 2;
+         document.getElementById("calibrationText").innerText = "Шаг 2: Теперь наведите на правый угол стены и коснитесь экрана";
+     } else if(calibrationStep === 2) {
+         pointBMatrix.copy(planeMarker.matrix);
+         calibrationStep = 0;
+         document.getElementById("calibrationUI").classList.add("hidden");
+         
+         let posA = new Vector3().setFromMatrixPosition(pointAMatrix);
+         let posB = new Vector3().setFromMatrixPosition(pointBMatrix);
+         
+         let xAxis = new Vector3().subVectors(posB, posA).normalize();
+         let yAxis = new Vector3(0, 1, 0);
+         let zAxis = new Vector3().crossVectors(xAxis, yAxis).normalize();
+         xAxis.crossVectors(yAxis, zAxis).normalize();
+         
+         roomOriginMatrix.makeBasis(xAxis, yAxis, zAxis);
+         roomOriginMatrix.setPosition(posA);
+         roomInverseMatrix.copy(roomOriginMatrix).invert();
+
+         loadSavedRoom();
+         let optionsButtons = document.getElementById("optionsButtons");
+         if(optionsButtons) optionsButtons.classList.remove("hidden");
+     }
+  }
+
+  function saveRoom() {
+     if(calibrationStep > 0) {
+         alert("Сначала завершите калибровку!");
+         return;
+     }
+     // Комнату выбирают явно, иначе непонятно, какой layout перезаписывается.
+     const roomId = getActiveRoomId();
+     if(!roomId) {
+         alert("Сначала выберите или создайте комнату.");
+         return;
+     }
+     let savedModels = [];
+     installedModels.forEach(item => {
+        let model = item.model;
+        let worldMatrix = model.matrix;
+        let localMatrix = new Matrix4().multiplyMatrices(roomInverseMatrix, worldMatrix);
+        
+        savedModels.push({
+           alias: model.userData.alias,
+           matrix: localMatrix.toArray()
+        });
+     });
+     try {
+        saveRoomLayout(roomId, savedModels);
+     } catch(e) {
+        console.error("Не удалось сохранить комнату", e);
+        alert("Не удалось сохранить комнату: локальное хранилище недоступно.");
+        return;
+     }
+     alert("Комната сохранена! Мебель появится на этих же местах при следующем запуске этой комнаты.");
+  }
+
+  async function loadSavedRoom() {
+     // Без явно выбранной комнаты ничего не подставляем.
+     const savedModels = loadRoomLayout(getActiveRoomId());
+     if(savedModels.length === 0) return;
+     try {
+        for(let data of savedModels) {
+            let modelAlias = data.alias;
+            let mData = window.modelsList ? window.modelsList.find(m => m.alias === modelAlias) : null;
+            if(!mData) continue;
+
+            if(!mData.glb_model && window.gltfLoader) {
+               mData.glb_model = await window.gltfLoader.loadAsync(mData.glb);
+            }
+
+            let newModel = mData.glb_model.scene.clone();
+            newModel.userData.alias = modelAlias;
+            newModel.visible = true;
+            newModel.matrixAutoUpdate = false;
+
+            let localMatrix = new Matrix4().fromArray(data.matrix);
+            let worldMatrix = new Matrix4().multiplyMatrices(roomOriginMatrix, localMatrix);
+            
+            newModel.matrix.copy(worldMatrix);
+            scene.add(newModel);
+
+            // Reconstruct bounding boxes
+            const materialboundaryBox = new MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0 });
+            var mesh = getFirstMeshInScene(newModel);
+            const box3 = new Box3().setFromObject(mesh);
+            const boxGeometry = new BoxGeometry(box3.getSize(new Vector3()).x, box3.getSize(new Vector3()).y, box3.getSize(new Vector3()).z);
+            const boundaryBox = new Mesh(boxGeometry, materialboundaryBox);
+            boundaryBox.setRotationFromMatrix(worldMatrix);
+            boundaryBox.position.setFromMatrixPosition(worldMatrix);
+            boundaryBox.name = "modelBox";
+            scene.add(boundaryBox);
+
+            const hightLightBoxGeometry = new BoxGeometry(box3.getSize(new Vector3()).x + 0.01, 0.02, box3.getSize(new Vector3()).z + 0.01);
+            const materialhightLightBox = new MeshBasicMaterial({ color: 0xe6ffe6, transparent: false });
+            const hightLightBox = new Mesh(hightLightBoxGeometry, materialhightLightBox);
+            hightLightBox.setRotationFromMatrix(worldMatrix);
+            hightLightBox.position.setFromMatrixPosition(worldMatrix);
+            hightLightBox.name = "hightLightBox";
+            hightLightBox.visible = false;
+            scene.add(hightLightBox);
+
+            installedModels.push({
+               model: newModel,
+               boundaryBox: boundaryBox,
+               hightLightBox: hightLightBox
+            });
+        }
+        if (changeModelsNumber) changeModelsNumber(installedModels.length);
+     } catch(e) {
+        console.error("Error loading saved room", e);
+     }
+  }
 
   const camera = new PerspectiveCamera(
     70,
@@ -128,6 +262,11 @@ export function createScene(renderer, sceneModels, loader = null, selectModel = 
   function onSelectStart(event) {
     if (isTransforming)
       return;
+
+    if (calibrationStep > 0) {
+      handleCalibrationTap();
+      return;
+    }
 
     try {
       const controller = event.target;
@@ -267,6 +406,7 @@ export function createScene(renderer, sceneModels, loader = null, selectModel = 
         }
 
         currentModel = models[i].glb_model.scene.clone();
+        currentModel.userData.alias = models[i].alias;
 
         currentModel.visible = true;
         currentModel.matrixAutoUpdate = false;
@@ -404,5 +544,5 @@ export function createScene(renderer, sceneModels, loader = null, selectModel = 
 
   renderer.setAnimationLoop(renderLoop);
 
-  return { scene, onSelect, setModels, nextPlace, onRemove, Scale, Rotate, startTransform, stopTransform, unselect, Place, Move }
+  return { scene, onSelect, setModels, nextPlace, onRemove, Scale, Rotate, startTransform, stopTransform, unselect, Place, Move, startCalibration, saveRoom }
 }

@@ -1,0 +1,1648 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>АРТ ВИЖН ТЕХ</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="./index2.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Модальное окно -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel">Заявка на подключение</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mt-c-3 container-fluid">
+                        <div class="modal-container mt-c-4">
+                            <div class="mb-3">
+                                <label for="modal-formGroupExampleInput" class="form-label cus-bold">Имя*</label>
+                                <input type="text" class="form-control gray" id="modal-formGroupExampleInput">
+                            </div>
+                            <div class="mb-3">
+                                <label for="modal-formGroupExampleInput2" class="form-label cus-bold">Телефон или
+                                    email*</label>
+                                <input type="text" class="form-control gray" id="modal-formGroupExampleInput2">
+                            </div>
+                            <div class="mb-3">
+                                <label for="modal-formGroupExampleInput3" class="form-label cus-bold">Тариф</label>
+                                <select class="form-control gray" id="modal-formGroupExampleInput3">
+                                    <option value="" disabled selected>Выберите тариф</option>
+                                    <option value="Start">Start</option>
+                                    <option value="AR Commerce">AR Commerce</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Enterprise">Enterprise</option>
+                                </select>
+                            </div>
+                            <div class="form-check contact-us-form cus-fs-69">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-flexCheckDefault1">
+                                <label class="form-check-label" for="modal-flexCheckDefault1">
+                                    Согласие на получение рассылки рекламных/информационных сообщений и материалов
+                                </label>
+                            </div>
+                            <div class="modal-form-check form-check contact-us-form cus-fs-69">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-flexCheckChecked2"
+                                    checked>
+                                <label class="form-check-label" for="modal-flexCheckChecked2">
+                                    Cогласие на обработку персональных данных
+                                </label>
+                            </div>
+                            <div class="text-center c-mb-40">
+                                <button class="svg-button-contact submit-btn modal-btn">
+                                    <svg class="svg" width="180" height="36" viewBox="0 0 130 36" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g filter="url(#filter0_b_210_33182)">
+                                            <rect width="130" height="36" rx="5" fill="url(#paint0_linear_210_33182)" />
+                                            <rect width="130" height="36" rx="5" fill="url(#paint1_radial_210_33182)"
+                                                fill-opacity="0.2" />
+                                            <rect x="0.5" y="0.5" width="129" height="35" rx="4.5"
+                                                stroke="url(#paint2_radial_210_33182)" />
+                                        </g>
+                                        <defs>
+                                            <filter id="filter0_b_210_33182" x="-20" y="-20" width="170" height="76"
+                                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                <feGaussianBlur in="BackgroundImageFix" stdDeviation="10" />
+                                                <feComposite in2="SourceAlpha" operator="in"
+                                                    result="effect1_backgroundBlur_210_33182" />
+                                                <feBlend mode="normal" in="SourceGraphic"
+                                                    in2="effect1_backgroundBlur_210_33182" result="shape" />
+                                            </filter>
+                                            <linearGradient id="paint0_linear_210_33182" x1="28.2609" y1="-6.16457e-07"
+                                                x2="27.976" y2="35.9999" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#20294D" />
+                                                <stop offset="1" stop-color="#0D101F" />
+                                            </linearGradient>
+                                            <radialGradient id="paint1_radial_210_33182" cx="0" cy="0" r="1"
+                                                gradientUnits="userSpaceOnUse"
+                                                gradientTransform="translate(66.6149 1.90837e-06) rotate(89.4884) scale(23.6259 61.005)">
+                                                <stop stop-color="white" stop-opacity="0.2" />
+                                                <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                            </radialGradient>
+                                            <radialGradient id="paint2_radial_210_33182" cx="0" cy="0" r="1"
+                                                gradientUnits="userSpaceOnUse"
+                                                gradientTransform="translate(60.2899 12.0462) rotate(122.784) scale(97.1829 21.4336)">
+                                                <stop stop-color="white" />
+                                                <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                            </radialGradient>
+                                        </defs>
+                                    </svg>
+
+                                    <div class="ar-icon button-text submit-aling">
+                                        <p>Отправить</p>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loader">Загрузка...</div>
+    <nav class="navbar-color container navbar navbar-expand-md navbar-dark fixed-top">
+        <div class="container-fluid">
+            <div class="gamburger">
+                <a class="navbar-brand" href="#">
+                    <div class="d-flex align-items-center gap-2">
+                        <p class="mb-0 fw-bold" style="font-size: 18px; letter-spacing: 1px;">АРТ ВИЖН ТЕХ</p>
+                        <img loading="lazy" class="brand-logo" src="./img/Group 7.webp" />
+                    </div>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="custom-icon navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+            <div class="collapse collapse-top navbar-collapse" id="navbarCollapse">
+                <ul class="nav-link-list navbar-nav mb-2 mb-md-0 d-flex">
+                    <li class="nav-item me-3">
+                        <a class="nav-link active" href="#">Главная</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link active" href="#about">О продукте</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link active" href="#plans">Тарифы</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link active" href="#contact">Контакты</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex nav-social">
+                    <a href="https://wa.me/+79612244666" target="_blank" class="c-header-message-icon">
+                        <img loading="lazy" class="icon-img" src="./img/Whatsaph_icon.webp" />
+                    </a>
+                    <a href="https://t.me/+79612244666" target="_blank" class="c-header-message-icon">
+                        <img loading="lazy" class="icon-img" src="./img/telegramm.webp" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container tops main header-text">
+        <div class="main-img">
+            <div class="d-none d-md-block">
+                <div class="row">
+                    <div class="col-md-6 hand-img-top">
+                        <div class="container-777">
+                            <img loading="lazy" src="./img/главная-картинка-рука с телефон-моб-версия 2.webp"
+                                alt="Phone in Hand" class="phone">
+                            <div class="video-container all-container">
+                                <video autoplay loop muted playsinline webkit-playsinline>
+                                    <source type="video/webm">
+                                    <source type="video/mp4">
+                                    Ваш браузер не поддерживает видео.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 dynamic-column c-mt-div">
+                        <div class="col-4 col-sm-12">
+                            <p class="text fz-12 mt-5"> AR-ПРИМЕРКА <br>
+                                + 360° ОБЗОР</p>
+                            <h1 class="text fz-23">
+                                Позвольте увидеть
+                                товары в реальном
+                                времени!
+                            </h1>
+                            <p class="text fz-12 c-mt-p">
+                                ПОДАРИТЕ БОЛЬШЕ ИНФОРМАЦИИ <br> ВАШИМ КЛИЕНТАМ ДЛЯ СОВЕРШЕНИЯ <br> ПОКУПКИ ПРИМЕНЯЯ
+                                ПЕРЕДОВЫЕ <br> ТЕХНОЛОГИИ AR И 360° ОБЗОРА, <br> ТЕМ САМЫМ ПОВЫШАЯ ИХ ЛОЯЛЬНОСТЬ <br> И
+                                УВЕЛИЧИВАЯ КОНВЕРСИЮ ПРОДАЖ</p>
+                        </div>
+                        <div class="row row-top">
+                            <div class="col-4 col-md-6">
+                                <button class="svg-button-ar">
+                                    <svg class="svg" width="180" height="36" viewBox="0 0 130 36" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g filter="url(#filter0_b_210_332)">
+                                            <rect width="130" height="36" rx="5" fill="url(#paint0_linear_210_332)" />
+                                            <rect width="130" height="36" rx="5" fill="url(#paint1_radial_210_332)"
+                                                fill-opacity="0.2" />
+                                            <rect x="0.5" y="0.5" width="129" height="35" rx="4.5"
+                                                stroke="url(#paint2_radial_210_332)" />
+                                        </g>
+                                        <defs>
+                                            <filter id="filter0_b_210_332" x="-20" y="-20" width="170" height="76"
+                                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                <feGaussianBlur in="BackgroundImageFix" stdDeviation="10" />
+                                                <feComposite in2="SourceAlpha" operator="in"
+                                                    result="effect1_backgroundBlur_210_332" />
+                                                <feBlend mode="normal" in="SourceGraphic"
+                                                    in2="effect1_backgroundBlur_210_332" result="shape" />
+                                            </filter>
+                                            <linearGradient id="paint0_linear_210_332" x1="28.2609" y1="-6.16457e-07"
+                                                x2="27.976" y2="35.9999" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#20294D" />
+                                                <stop offset="1" stop-color="#0D101F" />
+                                            </linearGradient>
+                                            <radialGradient id="paint1_radial_210_332" cx="0" cy="0" r="1"
+                                                gradientUnits="userSpaceOnUse"
+                                                gradientTransform="translate(66.6149 1.90837e-06) rotate(89.4884) scale(23.6259 61.005)">
+                                                <stop stop-color="white" stop-opacity="0.2" />
+                                                <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                            </radialGradient>
+                                            <radialGradient id="paint2_radial_210_332" cx="0" cy="0" r="1"
+                                                gradientUnits="userSpaceOnUse"
+                                                gradientTransform="translate(60.2899 12.0462) rotate(122.784) scale(97.1829 21.4336)">
+                                                <stop stop-color="white" />
+                                                <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                            </radialGradient>
+                                        </defs>
+                                    </svg>
+                                    <div class="ar-icon button-text">
+                                        <img loading="lazy" src="./img/AR_icon (2).png">
+                                        <p>AR - Демо</p>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="col-4 col-md-6">
+                                <button class="svg-button-xr">
+                                    <svg class="svg" width="180" height="36" viewBox="0 0 130 36" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g filter="url(#filter0_b_1)">
+                                            <rect width="130" height="36" rx="5" fill="url(#paint0_linear_1)" />
+                                            <rect width="130" height="36" rx="5" fill="url(#paint1_radial_1)"
+                                                fill-opacity="0.2" />
+                                            <rect x="0.5" y="0.5" width="129" height="35" rx="4.5"
+                                                stroke="url(#paint2_radial_1)" />
+                                        </g>
+                                        <defs>
+                                            <filter id="filter0_b_1" x="-20" y="-20" width="170" height="76"
+                                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                <feGaussianBlur in="BackgroundImageFix" stdDeviation="10" />
+                                                <feComposite in2="SourceAlpha" operator="in"
+                                                    result="effect1_backgroundBlur_1" />
+                                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_1"
+                                                    result="shape" />
+                                            </filter>
+                                            <linearGradient id="paint0_linear_1" x1="28.2609" y1="0" x2="27.976" y2="36"
+                                                gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#20294D" />
+                                                <stop offset="1" stop-color="#0D101F" />
+                                            </linearGradient>
+                                            <radialGradient id="paint1_radial_1" cx="0" cy="0" r="1"
+                                                gradientUnits="userSpaceOnUse"
+                                                gradientTransform="translate(66.6149 0) rotate(89.4884) scale(23.6259 61.005)">
+                                                <stop stop-color="white" stop-opacity="0.2" />
+                                                <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                            </radialGradient>
+                                            <radialGradient id="paint2_radial_1" cx="0" cy="0" r="1"
+                                                gradientUnits="userSpaceOnUse"
+                                                gradientTransform="translate(60.2899 12.0462) rotate(122.784) scale(97.1829 21.4336)">
+                                                <stop stop-color="white" />
+                                                <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                            </radialGradient>
+                                        </defs>
+                                    </svg>
+                                    <div class="ar-icon button-text">
+                                        <img loading="lazy" src="./img/XR_icon (1).png">
+                                        <p>XR - Демо</p>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-4 col-md-12">
+                            <button class="svg-button-contact wa-contact-us">
+                                <svg class="svg" width="490" height="67" viewBox="0 0 490 67" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g filter="url(#filter0_i_1)">
+                                        <rect y="0.5" width="490" height="66.5" rx="10" fill="url(#paint0_linear_1)" />
+                                        <rect y="0.5" width="490" height="66.5" rx="10" fill="url(#paint1_radial_1)"
+                                            fill-opacity="0.2" />
+                                        <rect x="0.5" y="1" width="489" height="65.5" rx="9.5"
+                                            stroke="url(#paint2_radial_1)" />
+                                    </g>
+                                    <defs>
+                                        <filter id="filter0_i_1" x="0" y="0.5" width="490" height="71.5"
+                                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix"
+                                                result="shape" />
+                                            <feColorMatrix in="SourceAlpha" type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                            <feOffset dy="5" />
+                                            <feGaussianBlur stdDeviation="10" />
+                                            <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+                                            <feColorMatrix type="matrix"
+                                                values="0 0 0 0 0.12549 0 0 0 0 0.160784 0 0 0 0 0.301961 0 0 0 0.25 0" />
+                                            <feBlend mode="normal" in2="shape" result="effect1_innerShadow_1" />
+                                        </filter>
+                                        <linearGradient id="paint0_linear_1" x1="106.522" y1="0.499999" x2="106.264"
+                                            y2="67.0029" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#20294D" />
+                                            <stop offset="1" stop-color="#0D101F" />
+                                        </linearGradient>
+                                        <radialGradient id="paint1_radial_1" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(251.087 0.500004) rotate(88.9563) scale(43.6479 229.913)">
+                                            <stop stop-color="white" stop-opacity="0.2" />
+                                            <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                        </radialGradient>
+                                        <radialGradient id="paint2_radial_1" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(227.246 22.7519) rotate(142.731) scale(249.235 58.19)">
+                                            <stop stop-color="white" />
+                                            <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+                                <div class="ar-icon button-text">
+                                    <img loading="lazy" src="./img/Whatsaph_icon (3).png">
+                                    <p>Связаться</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-md-none">
+                <div class="row row-gap">
+                    <div class="col-12 col-sm-12">
+                        <p class="text fz-12 mt-5"> AR-ПРИМЕРКА <br>
+                            + 360° ОБЗОР</p>
+                        <h1 class="text fz-23">
+                            Позвольте увидеть<br>
+                            товары в реальном<br>
+                            времени!
+                        </h1>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="container-777">
+                            <img loading="lazy" src="./img/Рука-телефон.webp" alt="Phone in Hand" class="phone">
+                            <div class="video-container mobile-container">
+                                <video autoplay loop muted playsinline webkit-playsinline>
+                                    <source type="video/webm">
+                                    <source type="video/mp4">
+                                    Ваш браузер не поддерживает видео.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 phone-buttons">
+                        <div class="row svg-button-top">
+                            <div class="col-6 col-md-6">
+                                <button class="svg-button-ar">
+                                    <svg class="svg" preserveAspectRatio="xMidYMid meet" viewBox="0 0 130 36"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g filter="url(#filter0_b_ar_1)">
+                                            <rect width="130" height="36" rx="5" fill="url(#paint0_linear_ar_1)" />
+                                            <rect width="130" height="36" rx="5" fill="url(#paint1_radial_ar_1)"
+                                                fill-opacity="0.2" />
+                                            <rect x="0.5" y="0.5" width="129" height="35" rx="4.5"
+                                                stroke="url(#paint2_radial_ar_1)" />
+                                        </g>
+                                        <defs>
+                                            <filter id="filter0_b_ar_1" x="-20" y="-20" width="170" height="76"
+                                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                <feGaussianBlur in="BackgroundImageFix" stdDeviation="10" />
+                                                <feComposite in2="SourceAlpha" operator="in"
+                                                    result="effect1_backgroundBlur_ar_1" />
+                                                <feBlend mode="normal" in="SourceGraphic"
+                                                    in2="effect1_backgroundBlur_ar_1" result="shape" />
+                                            </filter>
+                                            <linearGradient id="paint0_linear_ar_1" x1="28.2609" y1="0" x2="27.976"
+                                                y2="36" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#20294D" />
+                                                <stop offset="1" stop-color="#0D101F" />
+                                            </linearGradient>
+                                            <radialGradient id="paint1_radial_ar_1" cx="0" cy="0" r="1"
+                                                gradientUnits="userSpaceOnUse"
+                                                gradientTransform="translate(66.6149 0) rotate(89.4884) scale(23.6259 61.005)">
+                                                <stop stop-color="white" stop-opacity="0.2" />
+                                                <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                            </radialGradient>
+                                            <radialGradient id="paint2_radial_ar_1" cx="0" cy="0" r="1"
+                                                gradientUnits="userSpaceOnUse"
+                                                gradientTransform="translate(60.2899 12.0462) rotate(122.784) scale(97.1829 21.4336)">
+                                                <stop stop-color="white" />
+                                                <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                            </radialGradient>
+                                        </defs>
+                                    </svg>
+                                    <div class="ar-icon button-text">
+                                        <img loading="lazy" src="./img/AR_icon (2).png">
+                                        <p>AR - Демо</p>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="col-6 col-md-6">
+                                <button class="svg-button-xr">
+                                    <svg class="svg" preserveAspectRatio="xMidYMid meet" viewBox="0 0 130 36"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g filter="url(#filter0_b_2)">
+                                            <rect width="130" height="36" rx="5" fill="url(#paint0_linear_2)" />
+                                            <rect width="130" height="36" rx="5" fill="url(#paint1_radial_2)"
+                                                fill-opacity="0.2" />
+                                            <rect x="0.5" y="0.5" width="129" height="35" rx="4.5"
+                                                stroke="url(#paint2_radial_2)" />
+                                        </g>
+                                        <defs>
+                                            <filter id="filter0_b_2" x="-20" y="-20" width="170" height="76"
+                                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                <feGaussianBlur in="BackgroundImageFix" stdDeviation="10" />
+                                                <feComposite in2="SourceAlpha" operator="in"
+                                                    result="effect1_backgroundBlur_2" />
+                                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_2"
+                                                    result="shape" />
+                                            </filter>
+                                            <linearGradient id="paint0_linear_2" x1="28.2609" y1="0" x2="27.976" y2="36"
+                                                gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#20294D" />
+                                                <stop offset="1" stop-color="#0D101F" />
+                                            </linearGradient>
+                                            <radialGradient id="paint1_radial_2" cx="0" cy="0" r="1"
+                                                gradientUnits="userSpaceOnUse"
+                                                gradientTransform="translate(66.6149 0) rotate(89.4884) scale(23.6259 61.005)">
+                                                <stop stop-color="white" stop-opacity="0.2" />
+                                                <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                            </radialGradient>
+                                            <radialGradient id="paint2_radial_2" cx="0" cy="0" r="1"
+                                                gradientUnits="userSpaceOnUse"
+                                                gradientTransform="translate(60.2899 12.0462) rotate(122.784) scale(97.1829 21.4336)">
+                                                <stop stop-color="white" />
+                                                <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                            </radialGradient>
+                                        </defs>
+                                    </svg>
+                                    <div class="ar-icon button-text">
+                                        <img loading="lazy" src="./img/XR_icon (1).png">
+                                        <p>XR - Демо</p>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12 text">
+                            <button class="svg-button-contact wa-contact-us">
+                                <svg class="svg" viewBox="0 0 490 67" preserveAspectRatio="xMidYMid meet" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g filter="url(#filter0_i_129_274)">
+                                        <rect y="0.5" width="490" height="66.5" rx="10"
+                                            fill="url(#paint0_linear_129_274)" />
+                                        <rect y="0.5" width="490" height="66.5" rx="10"
+                                            fill="url(#paint1_radial_129_274)" fill-opacity="0.2" />
+                                        <rect x="0.5" y="1" width="489" height="65.5" rx="9.5"
+                                            stroke="url(#paint2_radial_129_274)" />
+                                    </g>
+                                    <defs>
+                                        <filter id="filter0_i_129_274" x="0" y="0.5" width="490" height="71.5"
+                                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix"
+                                                result="shape" />
+                                            <feColorMatrix in="SourceAlpha" type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                            <feOffset dy="5" />
+                                            <feGaussianBlur stdDeviation="10" />
+                                            <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+                                            <feColorMatrix type="matrix"
+                                                values="0 0 0 0 0.12549 0 0 0 0 0.160784 0 0 0 0 0.301961 0 0 0 0.25 0" />
+                                            <feBlend mode="normal" in2="shape" result="effect1_innerShadow_129_274" />
+                                        </filter>
+                                        <linearGradient id="paint0_linear_129_274" x1="106.522" y1="0.499999"
+                                            x2="106.264" y2="67.0029" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#20294D" />
+                                            <stop offset="1" stop-color="#0D101F" />
+                                        </linearGradient>
+                                        <radialGradient id="paint1_radial_129_274" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(251.087 0.500004) rotate(88.9563) scale(43.6479 229.913)">
+                                            <stop stop-color="white" stop-opacity="0.2" />
+                                            <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                        </radialGradient>
+                                        <radialGradient id="paint2_radial_129_274" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(227.246 22.7519) rotate(142.731) scale(249.235 58.19)">
+                                            <stop stop-color="white" />
+                                            <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+                                <div class="ar-icon button-text">
+                                    <img loading="lazy" src="./img/Whatsaph_icon (3).png">
+                                    <p>Связаться</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img loading="lazy" data-src="image.webm" class="line">
+    </div>
+    <div id="about" class="container container-333">
+        <div class="d-none d-md-block">
+            <div class="row about-row align-items-center flex-nowrap">
+                <div class="col-auto pe-4">
+                    <h1 class="about-h1 mb-0">О продукте</h1>
+                </div>
+                <div class="col-auto pe-4">
+                    <div class="d-flex align-items-center">
+                        <img loading="lazy" class="mr-15 about-icon-size" src="./img/Line 1.webp">
+                        <img loading="lazy" class="about-icon-size" src="./img/Group 7.webp">
+                        <img loading="lazy" class="ml-15 about-icon-size" src="./img/Line 1.webp">
+                    </div>
+                </div>
+                <div class="col">
+                    <p class="about-text mb-0">Наш продукт сочетает многолетний опыт работы с новыми технологиями,
+                        которые делают покупки в интернете более интересными и интерактивными.</p>
+                </div>
+            </div>
+        </div>
+        <div class="d-md-none">
+            <div class="text-center">
+                <h1 class="about-h1">О продукте</h1>
+                <p>Наш многолетний опыт работы с новыми технологиями позволил создать впечатляюший продукт.</p>
+            </div>
+
+        </div>
+    </div>
+    <div class="container container-333">
+        <div class="mb-3">
+            <div class="d-none d-md-block">
+                <div class="desktop-card-container">
+                    <div class="card border-radius-card">
+                        <img loading="lazy" src="./img/Интерактивная-примерка.webp" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Интерактивная примерка</h5>
+                            <p class="card-text">Покупатели могут в реальном времени примерить товары и убедиться, что
+                                они
+                                подходят именно для них.</p>
+                        </div>
+                    </div>
+                    <div class="card border-radius-card">
+                        <img loading="lazy" src="./img/полная-детализация.webp" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Полная детализация</h5>
+                            <p class="card-text">Благодаря 360° обзору, клиенты могут рассмотреть каждую деталь товара,
+                                прежде, чем сделать покупку.</p>
+                        </div>
+                    </div>
+                    <div class="card border-radius-card">
+                        <img loading="lazy" src="./img/Увеличение_конверсии_2.webp" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Увеличение конверсии</h5>
+                            <p class="card-text">Увеличьте уверенность покупателей и снизьте количество возвратов
+                                благодаря
+                                более точному представлению о продукте.</p>
+                        </div>
+                    </div>
+                    <div class="card border-radius-card">
+                        <img loading="lazy" src="./img/простота в использовании_2.webp" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Простота использования</h5>
+                            <p class="card-text">Простота интеграции в ваш веб-сайт или приложение позволяет
+                                моментально повысить его привлекательность для клиентов.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-md-none">
+                <div class="card mb-3 border-none">
+                    <div class="g-0 mobile-card-container">
+                        <div class="col col-6">
+                            <img loading="lazy" src="./img/Интерактивная-примерка.webp" class="img-fluid">
+                        </div>
+                        <div class="col col-6">
+                            <div class="card-body-2">
+                                <h5 class="card-title">Интерактивная примерка</h5>
+                                <p class="card-text">Покупатели могут в реальном времени примерить товары и убедиться,
+                                    что
+                                    они
+                                    подходят именно для них.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3 border-none">
+                    <div class="g-0 mobile-card-container">
+                        <div class="col col-6">
+                            <img loading="lazy" src="./img/полная-детализация.webp" class="img-fluid">
+                        </div>
+                        <div class="col col-6">
+                            <div class="card-body-2">
+                                <h5 class="card-title">Полная детализация</h5>
+                                <p class="card-text">Благодаря 360° обзору, клиенты могут рассмотреть каждую деталь
+                                    товара,
+                                    прежде, чем сделать покупку.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3 border-none">
+                    <div class="g-0 mobile-card-container">
+                        <div class="col col-6">
+                            <img loading="lazy" src="./img/Увеличение_конверсии_2.webp" class="img-fluid">
+                        </div>
+                        <div class="col col-6">
+                            <div class="card-body-2">
+                                <h5 class="card-title">Увеличение конверсии</h5>
+                                <p class="card-text">Увеличьте уверенность покупателей и снизьте количество возвратов
+                                    благодаря
+                                    более точному представлению о продукте.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3 border-none">
+                    <div class="g-0 mobile-card-container">
+                        <div class="col col-6">
+                            <img loading="lazy" src="./img/простота в использовании_2.webp" class="img-fluid">
+                        </div>
+                        <div class="col col-6">
+                            <div class="card-body-2">
+                                <h5 class="card-title">Простота использования</h5>
+                                <p class="card-text">Простота интеграции в ваш веб-сайт или приложение позволяет
+                                    моментально повысить его привлекательность для клиентов.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-c-3">
+        <img loading="lazy" data-src="image.webm" class="line">
+        <div class="d-none d-md-block">
+            <div class="row about-row about-row-start flex-nowrap">
+                <div class="col col-7">
+                    <div class="text-descr-width">
+                        <h1 class="mb-c-5 c-ft-32">Развивайте свой бизнес <br class="d-none-when-1300">
+                            с новыми технологиями <br class="d-none-when-1300">
+                            и вдохновляйтесь <br class="d-none-when-1300">
+                            новыми возможностями!</h1>
+                        <h5 class="fw-500 mb-c-5 c-ft-16">
+                            Внедрите наши передовые инструменты виртуальной примерки <br class="d-none-when-1300">
+                            и 360° обзора на базе XR в свой бизнес.
+                            Позвольте клиентам <br class="d-none-when-1300">
+                            получить новый опыта взаимодействия с Вашим товаром в XR.
+                        </h5>
+                        <h6 class="card-text fw-500 mb-c-5 c-ft-16">
+                            Дополненная реальность - превосходный инструмент, который
+                            могут использовать, как малый бизнес, так самые крупные компании. Ваши кленты могут, не
+                            выходя
+                            из
+                            дома, оценить, нужную ему вещь с помощью мобильного телефона, наведя камеру на комнату, и
+                            увидеть,
+                            как новая мебель уже стоит в вашем доме.
+                        </h6>
+                        <h6 class="card-text fw-500 c-ft-16">
+                            Это не просто интернет-магазин, а целый виртуальный мир, где вы можете показать свой товар
+                            покупателю так, как будто он уже находится в этом мире. Покупатель может не только увидеть и
+                            примерить товар, но и взаимодействовать с ним в виртуальном пространстве. Например,
+                            представьте
+                            себе шоурум, где можно осмотреть и "примерить" товары, как в реальной жизни, но без
+                            ограничений
+                            по месту или количеству товаров. Вы можете создать такое пространство, где покупатели смогут
+                            общаться между
+                            собой и делиться мнениями о продукции.
+                        </h6>
+                        <button class="svg-button-contact send-order-2">
+                            <svg class="svg" width="718" height="50" viewBox="0 0 718 50" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g filter="url(#filter0_d_129_618)">
+                                    <rect width="717.5" height="50" rx="5" fill="url(#paint0_linear_129_618)"
+                                        shape-rendering="crispEdges" />
+                                    <rect width="717.5" height="50" rx="5" fill="url(#paint1_radial_129_618)"
+                                        fill-opacity="0.2" shape-rendering="crispEdges" />
+                                    <rect x="0.5" y="0.5" width="716.5" height="49" rx="4.5"
+                                        stroke="url(#paint2_radial_129_618)" shape-rendering="crispEdges" />
+                                </g>
+                                <defs>
+                                    <filter id="filter0_d_129_618" x="-20" y="-15" width="757.5" height="90"
+                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                        <feColorMatrix in="SourceAlpha" type="matrix"
+                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                        <feOffset dy="5" />
+                                        <feGaussianBlur stdDeviation="10" />
+                                        <feComposite in2="hardAlpha" operator="out" />
+                                        <feColorMatrix type="matrix"
+                                            values="0 0 0 0 0.12549 0 0 0 0 0.160784 0 0 0 0 0.301961 0 0 0 0.25 0" />
+                                        <feBlend mode="normal" in2="BackgroundImageFix"
+                                            result="effect1_dropShadow_129_618" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_129_618"
+                                            result="shape" />
+                                    </filter>
+                                    <linearGradient id="paint0_linear_129_618" x1="155.978" y1="-8.5619e-07"
+                                        x2="155.879" y2="50.0028" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#20294D" />
+                                        <stop offset="1" stop-color="#0D101F" />
+                                    </linearGradient>
+                                    <radialGradient id="paint1_radial_129_618" cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse"
+                                        gradientTransform="translate(367.663 2.65052e-06) rotate(87.9679) scale(32.8331 336.502)">
+                                        <stop stop-color="white" stop-opacity="0.2" />
+                                        <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                    </radialGradient>
+                                    <radialGradient id="paint2_radial_129_618" cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse"
+                                        gradientTransform="translate(332.754 16.7308) rotate(158.658) scale(311.811 51.2081)">
+                                        <stop stop-color="white" />
+                                        <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                    </radialGradient>
+                                </defs>
+                            </svg>
+
+                            <div class="ar-icon button-text">
+                                <p>Оставить заявку</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="demo col-5 col">
+                    <iframe class="demo-ifr ar-preview" frameborder="0" title="" alt="">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+        <div class="d-md-none">
+            <div class="send-order-header" style="margin-bottom: 4%;">
+                <h1 class="text-center mt-2 container-fluid">Развивайте свой бизнес с новыми технологиями и
+                    вдохновляйтесь новыми
+                    возможностями!</h1>
+                <div class="demo2">
+                    <iframe class="demo-ifr2 ar-preview" frameborder="0" title="" alt="">
+                    </iframe>
+                </div>
+                <button class="svg-button-contact mt-4 send-order">
+                    <svg class="svg" width="180" height="36" viewBox="0 0 130 36" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_b_210_3313)">
+                            <rect width="130" height="36" rx="5" fill="url(#paint0_linear_210_3313)" />
+                            <rect width="130" height="36" rx="5" fill="url(#paint1_radial_210_3313)"
+                                fill-opacity="0.2" />
+                            <rect x="0.5" y="0.5" width="129" height="35" rx="4.5"
+                                stroke="url(#paint2_radial_210_3313)" />
+                        </g>
+                        <defs>
+                            <filter id="filter0_b_210_3313" x="-20" y="-20" width="170" height="76"
+                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                <feGaussianBlur in="BackgroundImageFix" stdDeviation="10" />
+                                <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_210_3313" />
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_210_3313"
+                                    result="shape" />
+                            </filter>
+                            <linearGradient id="paint0_linear_210_3313" x1="28.2609" y1="-6.16457e-07" x2="27.976"
+                                y2="35.9999" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#20294D" />
+                                <stop offset="1" stop-color="#0D101F" />
+                            </linearGradient>
+                            <radialGradient id="paint1_radial_210_3313" cx="0" cy="0" r="1"
+                                gradientUnits="userSpaceOnUse"
+                                gradientTransform="translate(66.6149 1.90837e-06) rotate(89.4884) scale(23.6259 61.005)">
+                                <stop stop-color="white" stop-opacity="0.2" />
+                                <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                            </radialGradient>
+                            <radialGradient id="paint2_radial_210_3313" cx="0" cy="0" r="1"
+                                gradientUnits="userSpaceOnUse"
+                                gradientTransform="translate(60.2899 12.0462) rotate(122.784) scale(97.1829 21.4336)">
+                                <stop stop-color="white" />
+                                <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                            </radialGradient>
+                        </defs>
+                    </svg>
+
+                    <div class="ar-icon button-text send-order-title">
+                        <p>Оставить заявку</p>
+                    </div>
+                </button>
+                <img loading="lazy" src="./img/Line 1 (1).webp" class="line mt-4">
+                <h1 class="text-center mt-3">От простого к <br> бесконечности</h1>
+                <p class="mt-2 container-fluid card-text fw-500">
+                    Дополненная реальность - превосходный инструмент, который
+                    могут использовать, как малый бизнес, так самые крупные компании. Ваши кленты могут, не выходя из
+                    дома, оценить, нужную ему вещь с помощью мобильного телефона, наведя камеру на комнату, и увидеть,
+                    как новая мебель уже стоит в вашем доме.
+                </p>
+                <p class="container-fluid card-text fw-500">
+                    Это не просто интернет-магазин, а целый виртуальный мир, где вы можете показать свой товар
+                    покупателю так, как будто он уже находится в этом мире. Покупатель может не только увидеть и
+                    примерить товар, но и взаимодействовать с ним в виртуальном пространстве. Например, представьте себе
+                    шоурум, где можно осмотреть и "примерить" товары, как в реальной жизни, но без ограничений по месту
+                    или количеству товаров. Вы можете создать такое пространство, где покупатели смогут общаться между
+                    собой и делиться мнениями о продукции.
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <div class="container mb-c-2">
+        <img loading="lazy" data-src="image.webm" class="line">
+        <div class="d-none d-md-block">
+            <div class="row arhive-row mt-c-4">
+                <div class="col">
+                    <img loading="lazy" src="./img/Slide.webp" class="c-width-100">
+                    <button class="svg-button-contact svg-button-size go-arhive">
+                        <svg class="svg svg-height-90" width="291" height="70" viewBox="0 0 291 70" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="&#208;&#191;&#208;&#187;&#208;&#176;&#209;&#136;&#208;&#186;&#208;&#176;">
+                                <rect x="0.5" y="0.5" width="290" height="69" rx="7.5" fill="white" />
+                                <rect x="0.5" y="0.5" width="290" height="69" rx="7.5"
+                                    stroke="url(#paint0_diamond_129_625)" />
+                            </g>
+                            <defs>
+                                <radialGradient id="paint0_diamond_129_625" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(145.5 35) rotate(39.1335) scale(156.837 282.406)">
+                                    <stop offset="0.351" stop-opacity="0" />
+                                    <stop offset="1" stop-color="#666666" />
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                        <div class="ar-icon button-text">
+                            <div class="arhive-btn">
+                                <img loading="lazy" src="./img/Frame 9.png">
+                                <p>Перейти в архив</p>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="col col-7 proccess-div">
+                    <h1 class="mb-c-5 c-ft-32">Процесс</h1>
+                    <h5 class="card-text mb-c-5 c-ft-16">
+                        Любым удобным способом оставьте контактные данные. В течении часа с Вами свяжется наш
+                        менеджер.
+                    </h5>
+                    <h5 class="card-text mb-c-5 c-ft-16">
+                        Расскажите все пожелания персональному менеджеру, после чего будет сформирована заявка на
+                        доступ к продукту.
+                    </h5>
+                    <h5 class="card-text mb-c-5 c-ft-16">
+                        Получите доступ к продукту в соответствии с выбранным тарифом.
+                    </h5>
+                    <h5 class="card-text mb-c-5 c-ft-16">
+                        Внедрите наши передовые инструменты виртуальной примерки и 360° обзора на базе XR в свой
+                        бизнес. Позвольте клиентам получить новый опыта взаимодействия с Вашим товаром в XR.
+                    </h5>
+                    <button class="test-now-btn">
+                        <svg class="svg" width="687" height="60" viewBox="0 0 687 60" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="Frame 56">
+                                <path id="Union"
+                                    d="M6.37323 33.4511C3.73646 31.9059 3.73646 28.0942 6.37322 26.549L44.8005 4.02934C47.4671 2.46664 50.823 4.38965 50.823 7.48039V52.5197C50.823 55.6104 47.4671 57.5334 44.8005 55.9707L6.37323 33.4511Z"
+                                    fill="#13151D" />
+                            </g>
+                        </svg>
+                        <div class="c-mt-60 c-le-50">
+                            <p class="c-ft-32">Начни тестировать уже сейчас </p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="d-md-none ">
+            <div class="mt-c-3 container-fluid">
+                <h1 class="text-center">Процесс</h1>
+                <img loading="lazy" src="./img/Архив.webp" class="line mt-4 c-mb-95">
+                <button class="svg-button-contact svg-button-size go-arhive">
+                    <svg class="svg svg-height-90" width="291" height="70" viewBox="0 0 291 70" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g id="&#208;&#191;&#208;&#187;&#208;&#176;&#209;&#136;&#208;&#186;&#208;&#176;">
+                            <rect x="0.5" y="0.5" width="290" height="69" rx="7.5" fill="white" />
+                            <rect x="0.5" y="0.5" width="290" height="69" rx="7.5"
+                                stroke="url(#paint0_diamond_129_6252)" />
+                        </g>
+                        <defs>
+                            <radialGradient id="paint0_diamond_129_6252" cx="0" cy="0" r="1"
+                                gradientUnits="userSpaceOnUse"
+                                gradientTransform="translate(145.5 35) rotate(39.1335) scale(156.837 282.406)">
+                                <stop offset="0.351" stop-opacity="0" />
+                                <stop offset="1" stop-color="#666666" />
+                            </radialGradient>
+                        </defs>
+                    </svg>
+                    <div class="ar-icon button-text">
+                        <div class="arhive-btn">
+                            <img loading="lazy" src="./img/Frame 9.png">
+                            <p>Перейти в архив</p>
+                        </div>
+                    </div>
+                </button>
+                <div class="card-text fw-500 mt-4">
+                    <p>
+                        Любым удобным способом оставьте контактные данные. В течении часа с Вами свяжется наш
+                        менеджер.
+                    </p>
+                    <p>
+                        Расскажите все пожелания персональному менеджеру, после чего будет сформирована заявка на
+                        доступ к продукту.
+                    </p>
+                    <p>
+                        Получите доступ к продукту в соответствии с выбранным тарифом.
+                    </p>
+                    <p>
+                        Внедрите наши передовые инструменты виртуальной примерки и 360° обзора на базе XR в свой
+                        бизнес. Позвольте клиентам получить новый опыта взаимодействия с Вашим товаром в XR.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="container mt-c-4">
+        <img loading="lazy" data-src="image.webm" class="line">
+        <h1 id="plans" class="c-ft-32 mt-c-4 text-center">Тарифы</h1>
+        <div class="mt-c-4 con-price container-fluid">
+            <div class="card border-radius-card-2 tarif-border-radius-card">
+                <div class="card-body">
+                    <h5 class="card-title mb-c-3 mt-3">Start</h5>
+                    <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 c-w-50">
+                    <h5 class="mb-c-3"><span>3D-просмотрщик и AR «в вашем пространстве»</span></h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <h5 class="mb-c-3"><span>Публичная ссылка, QR-код и embed</span></h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <h5 class="mb-c-3"><span>Свои 3D-модели и базовая настройка сцены</span></h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <h5 class="mb-c-3"><span>До 500 оплачиваемых просмотров в месяц</span></h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <h5 class="mb-c-3" style="font-size: 32px;">0 ₽ <br>
+                        <span class="fs-24">в месяц</span>
+                    </h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <br>
+                    <button class="svg-button-contact tarif-btn">
+                        <svg class="svg h-80" width="176" height="50" viewBox="0 0 176 50" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="Button" filter="url(#filter0_d_210_1001)">
+                                <rect x="0.5" width="175" height="50" rx="5" fill="url(#paint0_linear_210_1001)"
+                                    shape-rendering="crispEdges" />
+                                <rect x="0.5" width="175" height="50" rx="5" fill="url(#paint1_radial_210_1001)"
+                                    fill-opacity="0.2" shape-rendering="crispEdges" />
+                                <rect x="1" y="0.5" width="174" height="49" rx="4.5"
+                                    stroke="url(#paint2_radial_210_1001)" shape-rendering="crispEdges" />
+                            </g>
+                            <defs>
+                                <filter id="filter0_d_210_1001" x="-19.5" y="-15" width="215" height="90"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset dy="5" />
+                                    <feGaussianBlur stdDeviation="10" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.12549 0 0 0 0 0.160784 0 0 0 0 0.301961 0 0 0 0.25 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix"
+                                        result="effect1_dropShadow_210_1001" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_210_1001"
+                                        result="shape" />
+                                </filter>
+                                <linearGradient id="paint0_linear_210_1001" x1="38.5435" y1="-8.55945e-07" x2="38.5152"
+                                    y2="62.5" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="white" />
+                                    <stop offset="1" stop-color="#646A81" />
+                                </linearGradient>
+                                <radialGradient id="paint1_radial_210_1001" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(90.1739 2.65052e-06) rotate(89.5042) scale(32.8137 82.1223)">
+                                    <stop stop-color="white" stop-opacity="0.2" />
+                                    <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                </radialGradient>
+                                <radialGradient id="paint2_radial_210_1001" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(81.6594 16.7308) rotate(128.214) scale(161.663 78.2616)">
+                                    <stop stop-color="#0D101F" />
+                                    <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                        <div class="connect-btn" data-bs-toggle="modal" data-bs-target="#contactModal"
+                            data-tariff="Start">
+                            <p>Подключить</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="card border-radius-card-2 tarif-border-radius-card">
+                <div class="card-body">
+                    <h5 class="card-title mb-c-3 mt-3">AR Commerce</h5>
+                    <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 c-w-50">
+                    <h5 class="mb-c-3"><span>Всё из тарифа Start</span></h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <h5 class="mb-c-3"><span>Полная настройка вьюера и сцены</span></h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <h5 class="mb-c-3"><span>До 10 000 оплачиваемых просмотров в месяц</span></h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <h5 class="mb-c-3"><span>Стандартная поддержка</span></h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <h5 class="mb-c-3" style="font-size: 32px;">990 ₽ <br>
+                        <span class="fs-24">в месяц</span>
+                    </h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <br>
+                    <button class="svg-button-contact tarif-btn">
+                        <svg class="svg h-80" width="176" height="50" viewBox="0 0 176 50" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="Button" filter="url(#filter0_d_210_1002)">
+                                <rect x="0.5" width="175" height="50" rx="5" fill="url(#paint0_linear_210_1002)"
+                                    shape-rendering="crispEdges" />
+                                <rect x="0.5" width="175" height="50" rx="5" fill="url(#paint1_radial_210_1002)"
+                                    fill-opacity="0.2" shape-rendering="crispEdges" />
+                                <rect x="1" y="0.5" width="174" height="49" rx="4.5"
+                                    stroke="url(#paint2_radial_210_1002)" shape-rendering="crispEdges" />
+                            </g>
+                            <defs>
+                                <filter id="filter0_d_210_1002" x="-19.5" y="-15" width="215" height="90"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset dy="5" />
+                                    <feGaussianBlur stdDeviation="10" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.12549 0 0 0 0 0.160784 0 0 0 0 0.301961 0 0 0 0.25 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix"
+                                        result="effect1_dropShadow_210_1002" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_210_1002"
+                                        result="shape" />
+                                </filter>
+                                <linearGradient id="paint0_linear_210_1002" x1="38.5435" y1="-8.55945e-07" x2="38.5152"
+                                    y2="62.5" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="white" />
+                                    <stop offset="1" stop-color="#646A81" />
+                                </linearGradient>
+                                <radialGradient id="paint1_radial_210_1002" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(90.1739 2.65052e-06) rotate(89.5042) scale(32.8137 82.1223)">
+                                    <stop stop-color="white" stop-opacity="0.2" />
+                                    <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                </radialGradient>
+                                <radialGradient id="paint2_radial_210_1002" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(81.6594 16.7308) rotate(128.214) scale(161.663 78.2616)">
+                                    <stop stop-color="#0D101F" />
+                                    <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                        <div class="connect-btn" data-bs-toggle="modal" data-bs-target="#contactModal"
+                            data-tariff="AR Commerce">
+                            <p>Подключить</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="card border-radius-card-2 tarif-border-radius-card">
+                <div class="card-body">
+                    <h5 class="card-title mb-c-3 mt-3">Business</h5>
+                    <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 c-w-50">
+                    <h5 class="mb-c-3"><span>Всё из тарифа AR Commerce</span></h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <h5 class="mb-c-3"><span>До 50 000 оплачиваемых просмотров в месяц</span></h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <h5 class="mb-c-3"><span>White-label и уменьшенный брендинг платформы</span></h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <h5 class="mb-c-3"><span>Приоритетная поддержка</span></h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <h5 class="mb-c-3" style="font-size: 32px;">2 990 ₽ <br>
+                        <span class="fs-24">в месяц</span>
+                    </h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <br>
+                    <button class="svg-button-contact tarif-btn">
+                        <svg class="svg h-80" width="176" height="50" viewBox="0 0 176 50" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="Button" filter="url(#filter0_d_210_1003)">
+                                <rect x="0.5" width="175" height="50" rx="5" fill="url(#paint0_linear_210_1003)"
+                                    shape-rendering="crispEdges" />
+                                <rect x="0.5" width="175" height="50" rx="5" fill="url(#paint1_radial_210_1003)"
+                                    fill-opacity="0.2" shape-rendering="crispEdges" />
+                                <rect x="1" y="0.5" width="174" height="49" rx="4.5"
+                                    stroke="url(#paint2_radial_210_1003)" shape-rendering="crispEdges" />
+                            </g>
+                            <defs>
+                                <filter id="filter0_d_210_1003" x="-19.5" y="-15" width="215" height="90"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset dy="5" />
+                                    <feGaussianBlur stdDeviation="10" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.12549 0 0 0 0 0.160784 0 0 0 0 0.301961 0 0 0 0.25 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix"
+                                        result="effect1_dropShadow_210_1003" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_210_1003"
+                                        result="shape" />
+                                </filter>
+                                <linearGradient id="paint0_linear_210_1003" x1="38.5435" y1="-8.55945e-07" x2="38.5152"
+                                    y2="62.5" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="white" />
+                                    <stop offset="1" stop-color="#646A81" />
+                                </linearGradient>
+                                <radialGradient id="paint1_radial_210_1003" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(90.1739 2.65052e-06) rotate(89.5042) scale(32.8137 82.1223)">
+                                    <stop stop-color="white" stop-opacity="0.2" />
+                                    <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                </radialGradient>
+                                <radialGradient id="paint2_radial_210_1003" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(81.6594 16.7308) rotate(128.214) scale(161.663 78.2616)">
+                                    <stop stop-color="#0D101F" />
+                                    <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                        <div class="connect-btn" data-bs-toggle="modal" data-bs-target="#contactModal"
+                            data-tariff="Business">
+                            <p>Подключить</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="card border-radius-card-2 tarif-border-radius-card">
+                <div class="card-body">
+                    <h5 class="card-title mb-c-3 mt-3">Enterprise</h5>
+                    <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 c-w-50">
+                    <h5 class="mb-c-3"><span>Очень высокий трафик и выделенный SLA</span></h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <h5 class="mb-c-3"><span>API-доступ и массовые операции с каталогом</span></h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <h5 class="mb-c-3"><span>Интеграция PIM / ERP / CRM</span></h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <h5 class="mb-c-3"><span>Свои домены и приватное развёртывание</span></h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <h5 class="mb-c-3" style="font-size: 32px;">По запросу <br>
+                        <span class="fs-24">индивидуальный расчёт</span>
+                    </h5>
+                    <img loading="lazy" class="mb-c-3 c-w-50" src="./img/Line 3.webp">
+                    <br>
+                    <button class="svg-button-contact tarif-btn">
+                        <svg class="svg h-80" width="176" height="50" viewBox="0 0 176 50" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="Button" filter="url(#filter0_d_210_1004)">
+                                <rect x="0.5" width="175" height="50" rx="5" fill="url(#paint0_linear_210_1004)"
+                                    shape-rendering="crispEdges" />
+                                <rect x="0.5" width="175" height="50" rx="5" fill="url(#paint1_radial_210_1004)"
+                                    fill-opacity="0.2" shape-rendering="crispEdges" />
+                                <rect x="1" y="0.5" width="174" height="49" rx="4.5"
+                                    stroke="url(#paint2_radial_210_1004)" shape-rendering="crispEdges" />
+                            </g>
+                            <defs>
+                                <filter id="filter0_d_210_1004" x="-19.5" y="-15" width="215" height="90"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset dy="5" />
+                                    <feGaussianBlur stdDeviation="10" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.12549 0 0 0 0 0.160784 0 0 0 0 0.301961 0 0 0 0.25 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix"
+                                        result="effect1_dropShadow_210_1004" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_210_1004"
+                                        result="shape" />
+                                </filter>
+                                <linearGradient id="paint0_linear_210_1004" x1="38.5435" y1="-8.55945e-07" x2="38.5152"
+                                    y2="62.5" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="white" />
+                                    <stop offset="1" stop-color="#646A81" />
+                                </linearGradient>
+                                <radialGradient id="paint1_radial_210_1004" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(90.1739 2.65052e-06) rotate(89.5042) scale(32.8137 82.1223)">
+                                    <stop stop-color="white" stop-opacity="0.2" />
+                                    <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                </radialGradient>
+                                <radialGradient id="paint2_radial_210_1004" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(81.6594 16.7308) rotate(128.214) scale(161.663 78.2616)">
+                                    <stop stop-color="#0D101F" />
+                                    <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                        <div class="connect-btn" data-bs-toggle="modal" data-bs-target="#contactModal"
+                            data-tariff="Enterprise">
+                            <p>Подключить</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mt-c-3 container-fluid">
+            <h5 class="card-text c-ft-16 text-center">Без подписки — оплата по факту: 0,15 ₽ за оплачиваемый
+                3D/AR-просмотр. Помесячный расход ограничен предсказуемым лимитом.</h5>
+        </div>
+    </div>
+    <div class="container mt-c-4">
+        <img loading="lazy" data-src="image.webm" class="line">
+        <h1 id="services" class="c-ft-32 mt-c-4 text-center">3D-модели, конфигуратор и интеграция</h1>
+        <div class="mt-c-4 container-fluid">
+            <h5 class="card-text mb-c-5 c-ft-16">Тариф оплачивает работу платформы. Производство 3D-контента и
+                заказная разработка считаются отдельно.</h5>
+            <h5 class="card-text mb-c-5 c-ft-16">Уже есть готовая 3D-модель — загрузите её и платите только за
+                платформу.</h5>
+            <h5 class="card-text mb-c-5 c-ft-16">Нужно подготовить модель к вебу и AR — оптимизация от 1 000 ₽ за
+                модель.</h5>
+            <h5 class="card-text mb-c-5 c-ft-16">Модели нет — создаём 3D-модель от 3 000 ₽ за модель.</h5>
+            <h5 class="card-text mb-c-5 c-ft-16">Нужны материалы, цвета и варианты — конфигуратор от 15 000 ₽ за
+                проект.</h5>
+            <h5 class="card-text mb-c-5 c-ft-16">Нужна интеграция с сайтом, каталогом, PIM / ERP / CRM или
+                нестандартный XR-сценарий — рассчитываем отдельно.</h5>
+        </div>
+    </div>
+    <div class="container mt-c-3">
+        <img loading="lazy" data-src="image.webm" class="line">
+        <div class="mt-c-3 container-fluid">
+            <h1 id="contact" class="c-ft-32 text-center">Связаться с нами </h1>
+            <div class="contact-us-container mt-c-4">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label cus-bold">Имя*</label>
+                    <input type="text" class="form-control gray" id="formGroupExampleInput">
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label cus-bold">Телефон или email*</label>
+                    <input type="text" class="form-control gray" id="formGroupExampleInput2">
+                </div>
+                <div class="form-check contact-us-form cus-fs-69">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+                    <label class="form-check-label" for="flexCheckDefault1">
+                        Согласие на получение рассылки рекламных/информационных сообщений и материалов
+                    </label>
+                </div>
+                <div class="form-check all-form-check contact-us-form cus-fs-69">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" checked>
+                    <label class="form-check-label" for="flexCheckChecked2">
+                        Cогласие на обработку персональных данных
+                    </label>
+                </div>
+                <div class="text-center c-mb-40">
+                    <div class="d-none d-md-block">
+                        <button class="mb-c-3 svg-button-contact svg-button-send empty-send-btn">
+                            <svg class="svg" width="500" height="50" viewBox="0 0 500 50" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g id="Frame 40" clip-path="url(#clip0_129_535)">
+                                    <g id="Button" filter="url(#filter0_d_129_535)">
+                                        <rect width="500" height="50" rx="5" fill="url(#paint0_linear_129_535)"
+                                            shape-rendering="crispEdges" />
+                                        <rect width="500" height="50" rx="5" fill="url(#paint1_radial_129_535)"
+                                            fill-opacity="0.2" shape-rendering="crispEdges" />
+                                        <rect x="0.5" y="0.5" width="499" height="49" rx="4.5"
+                                            stroke="url(#paint2_radial_129_535)" shape-rendering="crispEdges" />
+                                    </g>
+                                </g>
+                                <defs>
+                                    <filter id="filter0_d_129_535" x="-20" y="-15" width="540" height="90"
+                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                        <feColorMatrix in="SourceAlpha" type="matrix"
+                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                        <feOffset dy="5" />
+                                        <feGaussianBlur stdDeviation="10" />
+                                        <feComposite in2="hardAlpha" operator="out" />
+                                        <feColorMatrix type="matrix"
+                                            values="0 0 0 0 0.12549 0 0 0 0 0.160784 0 0 0 0 0.301961 0 0 0 0.25 0" />
+                                        <feBlend mode="normal" in2="BackgroundImageFix"
+                                            result="effect1_dropShadow_129_535" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_129_535"
+                                            result="shape" />
+                                    </filter>
+                                    <linearGradient id="paint0_linear_129_535" x1="108.696" y1="-8.5619e-07"
+                                        x2="108.553" y2="50.0026" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#20294D" />
+                                        <stop offset="1" stop-color="#0D101F" />
+                                    </linearGradient>
+                                    <radialGradient id="paint1_radial_129_535" cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse"
+                                        gradientTransform="translate(256.211 2.65052e-06) rotate(88.5836) scale(32.8225 234.572)">
+                                        <stop stop-color="white" stop-opacity="0.2" />
+                                        <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                    </radialGradient>
+                                    <radialGradient id="paint2_radial_129_535" cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse"
+                                        gradientTransform="translate(231.884 16.7308) rotate(150.721) scale(232.032 47.9547)">
+                                        <stop stop-color="white" />
+                                        <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                    </radialGradient>
+                                    <clipPath id="clip0_129_535">
+                                        <rect width="500" height="50" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+
+                            <div class="c-mt-50 c-pos-relative">
+                                <p class="fs-24">Отправить</p>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="d-md-none">
+                        <button class="svg-button-contact submit-btn empty-send-btn">
+                            <svg class="svg" width="180" height="36" viewBox="0 0 130 36" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g filter="url(#filter0_b_210_3318)">
+                                    <rect width="130" height="36" rx="5" fill="url(#paint0_linear_210_3318)" />
+                                    <rect width="130" height="36" rx="5" fill="url(#paint1_radial_210_3318)"
+                                        fill-opacity="0.2" />
+                                    <rect x="0.5" y="0.5" width="129" height="35" rx="4.5"
+                                        stroke="url(#paint2_radial_210_3318)" />
+                                </g>
+                                <defs>
+                                    <filter id="filter0_b_210_3318" x="-20" y="-20" width="170" height="76"
+                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                        <feGaussianBlur in="BackgroundImageFix" stdDeviation="10" />
+                                        <feComposite in2="SourceAlpha" operator="in"
+                                            result="effect1_backgroundBlur_210_3318" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_210_3318"
+                                            result="shape" />
+                                    </filter>
+                                    <linearGradient id="paint0_linear_210_3318" x1="28.2609" y1="-6.16457e-07"
+                                        x2="27.976" y2="35.9999" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#20294D" />
+                                        <stop offset="1" stop-color="#0D101F" />
+                                    </linearGradient>
+                                    <radialGradient id="paint1_radial_210_3318" cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse"
+                                        gradientTransform="translate(66.6149 1.90837e-06) rotate(89.4884) scale(23.6259 61.005)">
+                                        <stop stop-color="white" stop-opacity="0.2" />
+                                        <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                    </radialGradient>
+                                    <radialGradient id="paint2_radial_210_3318" cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse"
+                                        gradientTransform="translate(60.2899 12.0462) rotate(122.784) scale(97.1829 21.4336)">
+                                        <stop stop-color="white" />
+                                        <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                    </radialGradient>
+                                </defs>
+                            </svg>
+
+                            <div class="ar-icon button-text submit-aling">
+                                <p>Отправить</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-c-3">
+        <img loading="lazy" data-src="image.webm" class="line">
+        <div class="row mt-c-4 about-us align-items-center">
+            <div class="col">
+                <img loading="lazy" src="./img/лого_для_белого фона.webp" class="line">
+            </div>
+            <div class="col mb-c-3">
+                <h5 class="mb-c-3 c-ft-32">О нас</h5>
+                <h6 class="mb-c-3">АРТ ВИЖН ТЕХ — <span class="fw-100 text-sh-color">мы молодая и энергичная
+                        компания, которая
+                        создает программное обеспечение,
+                        призванное помогать автоматизировать задачи и улучшать работу бизнеса.
+                        Мы работаем с малым и средним бизнесом, а также со стартапами. Если вам нужно
+                        улучшить
+                        работу вашего бизнеса, создать удобный сайт, приложение или автоматизировать рутинные
+                        процессы!</span>
+                </h6>
+                <div class="d-md-none">
+                    <img loading="lazy" src="./img/Line 1 (1).webp" class="line mt-3">
+                </div>
+                <h5 class="mb-c-3">Мы можем помочь!</h5>
+                <h6 class="mb-c-3"><span class="fw-100 text-sh-color">
+                        Предлагаем вам полный цикл услуг: от разработки и внедрения программ до их сопровождения в
+                        дальнейшем. Если у вас был негативный опыт работы с другими IT-компаниями, которые не
+                        выполняли
+                        работу в срок или не предоставляли нужного уровня поддержки, мы готовы предложить вам лучшее
+                        обслуживание и более короткие сроки выполнения работы.
+                    </span>
+                </h6>
+                <h5 class="mb-c-3">Свяжитесь с нами:</h5>
+                <div class="d-flex">
+                    <div class="col">
+                        <span class="fw-100 text-sh-color about-h1">
+                            <p class="mb-0">Email: <a class="text" href="mailto:info@art-vision-tech.ru">
+                                    info@art-vision-tech.ru</a>
+                            </p>
+                            <p class="mb-0">Москва: <a class="text" href="tel:+79612244666">+7 (961) 224-46-66</a></p>
+                            <p class="mb-0">Астана: <a class="text" href="tel:+77764086666">+7 (776) 408-66-66</a></p>
+                        </span>
+                    </div>
+                    <div class="col text-end">
+                        <div class="send-button-container">
+                            <a href="https://wa.me/+79612244666" target="_blank" class="mb-c-3 soc-icon-btn">
+                                <svg class="svg" width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g id="icon">
+                                        <rect x="0.644531" y="0.364258" width="62.7097" height="63.115" rx="5"
+                                            fill="#1E2D4A" />
+                                        <g id="Whatsaph_icon">
+                                            <path id="Vector"
+                                                d="M31.999 10.8833C20.4732 10.8833 11.0958 20.3213 11.0958 31.9216C11.0958 35.5439 12.0256 39.1058 13.7887 42.2487L11.1295 51.7983C11.0422 52.112 11.1267 52.4486 11.3521 52.6819C11.5257 52.8621 11.762 52.96 12.0047 52.96C12.0774 52.96 12.151 52.9508 12.2228 52.9334L22.1254 50.4646C25.1491 52.0983 28.5545 52.96 31.999 52.96C43.5248 52.96 52.9022 43.522 52.9022 31.9216C52.9022 20.3213 43.5248 10.8833 31.999 10.8833ZM42.5142 39.3454C42.067 40.5913 39.9222 41.7282 38.8916 41.881C37.9664 42.0173 36.7958 42.0758 35.5107 41.6697C34.7319 41.4227 33.7321 41.0953 32.4516 40.5455C27.0686 38.235 23.5532 32.8482 23.2842 32.4924C23.0161 32.1366 21.093 29.601 21.093 26.9767C21.093 24.3524 22.479 23.0618 22.9716 22.5276C23.4641 21.9934 24.0449 21.8598 24.403 21.8598C24.7611 21.8598 25.1182 21.8644 25.4318 21.879C25.7617 21.8955 26.2043 21.7537 26.6396 22.7947C27.0868 23.863 28.1601 26.4873 28.2928 26.7554C28.4273 27.0224 28.5163 27.3344 28.3382 27.6902C28.1601 28.046 28.071 28.2683 27.802 28.5802C27.533 28.8921 27.2385 29.2754 26.9968 29.515C26.7278 29.7812 26.4488 30.0693 26.7614 30.6035C27.074 31.1377 28.151 32.8839 29.7469 34.298C31.7963 36.1147 33.5258 36.6781 34.062 36.9452C34.5983 37.2123 34.9118 37.1675 35.2244 36.8117C35.5371 36.4549 36.5659 35.2539 36.9231 34.7206C37.2802 34.1874 37.6383 34.2752 38.1309 34.4536C38.6235 34.631 41.2618 35.9207 41.798 36.1878C42.3342 36.4549 42.6923 36.5885 42.8268 36.8108C42.9613 37.0321 42.9613 38.1005 42.5142 39.3454Z"
+                                                fill="white" />
+                                        </g>
+                                    </g>
+                                </svg>
+                            </a>
+                            <a href="https://t.me/+79612244666" target="_blank" class="mb-c-3 soc-icon-btn">
+                                <svg class="svg" width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="0.644531" y="0.84375" width="62.7097" height="60.7921" rx="5"
+                                        fill="#1E2D4A" />
+                                    <path
+                                        d="M52.6157 14.9428C52.1948 13.9998 51.3122 13.4668 50.1308 13.4668C49.2754 13.4668 48.515 13.7401 48.4199 13.7811C48.1619 13.8768 23.1774 23.4979 12.9256 27.7208C12.0294 28.0898 11.4455 28.6091 11.2011 29.2787C10.8209 30.3037 11.5406 31.356 12.2195 31.6567C14.7723 32.791 20.0679 34.3489 21.7245 34.8272C22.2677 36.6585 24.1822 43.0407 25.0784 45.7876C25.3092 46.4983 26.0017 46.9219 26.9115 46.9219C27.0473 46.9219 27.1288 46.9219 27.1288 46.9219C27.3732 46.8946 27.5904 46.7716 27.7398 46.5939C27.8756 46.4436 27.9571 46.2523 27.9706 46.0473L28.5002 38.3258C29.505 39.0775 30.9579 40.1844 32.5738 41.4007C35.7647 43.806 39.5667 46.6486 41.685 48.1929C42.4454 48.7395 43.165 49.0129 43.8575 49.0129C45.3919 49.0129 46.2745 47.6872 46.5732 46.5529C48.3385 39.6514 50.9184 26.6138 52.4663 18.824L52.8058 17.1157C53.0231 16.0361 52.833 15.4211 52.6293 14.9564L52.6157 14.9428ZM26.7214 36.4399L26.2462 43.2867C25.092 39.5695 23.3811 33.8433 23.3675 33.7749C23.3675 33.7613 23.3404 33.7476 23.3404 33.7203V33.6793L42.8799 20.8739C42.8799 20.8739 44.2106 19.9583 44.713 19.849C45.3919 19.6986 45.5549 19.972 45.4326 20.136C44.9574 20.7783 42.7169 22.7189 42.7169 22.7189L27.1423 35.7019C26.8979 35.8659 26.735 36.1392 26.7214 36.4262V36.4399Z"
+                                        fill="white" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <img loading="lazy" src="./img/Line 1 (1).webp" class="line mt-4">
+    <footer class="footer mt-auto py-4 background-footer-color container-fluid">
+        <div class="container">
+            <div class="row row-footer">
+                <a href="#" class="col footer-btn">
+                    <img loading="lazy" src="./img/Art vision tech long white.webp" class="c-logo-w">
+                </a>
+                <div class="col">
+                    <div class="no-wrap-footer-menu">
+                        <span><a class="text" href="#">Главная</a></span>
+                        <span>|</span>
+                        <span><a class="text" href="#about">О продукте</a></span>
+                        <span>|</span>
+                        <span><a class="text" href="#plans">Тарифы</a></span>
+                        <span>|</span>
+                        <span><a class="text" href="#contact">Контакты</a></span>
+                    </div>
+                </div>
+                <div class="col company-color">
+                    <span>© <span id="year"></span> ООО "АРТ ВИЖН ТЕХ"</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+    <script>
+        const cssUpdatableClasses = [
+            {
+                selector: '.dynamic-column',
+                positive: el => el.classList.replace('col-md-4', 'col-md-5'),
+                negative: el => el.classList.replace('col-md-5', 'col-md-4'),
+                condition: () => window.innerWidth <= 1400
+            },
+            {
+                selector: '.row-footer',
+                positive: el => el.classList.add('row'),
+                negative: el => el.classList.remove('row'),
+                condition: () => window.innerWidth > 767
+            },
+            {
+                selector: '.con-price',
+                positive: el => el.classList.replace('container-fluid', 'container'),
+                negative: el => el.classList.replace('container', 'container-fluid'),
+                condition: () => window.innerWidth > 767
+            },
+            {
+                selector: '.about-us',
+                positive: el => el.classList.add('row'),
+                negative: el => el.classList.replace('row', 'container-fluid'),
+                condition: () => window.innerWidth > 767
+            }
+        ];
+
+        function updateClasses() {
+            cssUpdatableClasses.forEach(({ selector, condition, positive, negative }) => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    condition() ? positive(element) : negative(element);
+                }
+            });
+        }
+
+        function updateContainerHeight() {
+            const colElement = document.querySelector('.col-md-6');
+            const imgContainer = document.querySelector('.main-img');
+            const navbarHeight = document.querySelector(".navbar").offsetHeight;
+            if (colElement && imgContainer) {
+                imgContainer.style.minHeight = `${colElement.clientHeight}px`;
+            }
+        }
+
+        function updateMarginTop() {
+            const nav = document.querySelector('nav');
+            const tops = document.querySelector('.tops');
+            if (nav && tops) {
+                tops.style.marginTop = `${nav.offsetHeight - 1}px`;
+            }
+        }
+
+        function scrollToIfNeeded(target, navbarHeight, timeout = 0) {
+            let targetElement = document.querySelector(target);
+            if (targetElement) {
+                let targetPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: targetPosition - navbarHeight,
+                        behavior: "smooth"
+                    });
+                }, timeout);
+            }
+        }
+
+        function updateLinkListeners() {
+            const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+            const footerLinks = document.querySelectorAll('.no-wrap-footer-menu .text');
+            const navbarHeight = document.querySelector(".navbar").offsetHeight;
+
+            let sendOrderBtns = [];
+            sendOrderBtns.push(document.querySelector(".send-order"))
+            sendOrderBtns.push(document.querySelector(".send-order-2"));
+            sendOrderBtns.forEach(x => x.addEventListener("click", (event) =>
+                scrollToIfNeeded('#contact', navbarHeight, 100)));
+
+            linkScrollToAddListener(document.querySelector(".navbar-brand"), navbarHeight);
+            linkScrollToAddListener(document.querySelector(".footer-btn"), navbarHeight);
+
+            navLinks.forEach(function (link) {
+                linkScrollToAddListener(link, navbarHeight);
+            });
+            footerLinks.forEach(function (link) {
+                linkScrollToAddListener(link, navbarHeight);
+            });
+        }
+
+        function linkScrollToAddListener(link, navbarHeight) {
+            const timeout = 100;
+            const navbarCollapse = document.querySelector(".navbar-collapse");
+            link.addEventListener("click", function (event) {
+                if (navbarCollapse.classList.contains("show")) {
+                    new bootstrap.Collapse(navbarCollapse, { toggle: true });
+                }
+
+                let target = this.getAttribute("href");
+
+                if (target?.startsWith("#")) {
+                    event.preventDefault();
+
+                    if (target === "#" || target.length === 1) {
+                        setTimeout(() => {
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                        }, timeout);
+
+                        return;
+                    }
+
+                    scrollToIfNeeded(target, navbarHeight, timeout);
+                }
+            });
+        }
+
+        function createBtnAndClickListen(classNameWithDot, action) {
+            const btns = document.querySelectorAll(classNameWithDot);
+            btns.forEach(btn => {
+                btn.addEventListener("click", function (event) {
+                    action();
+                });
+            });
+        }
+
+
+        window.addEventListener("load", function () {
+            // Добавляем класс loaded, чтобы скрыть лоадер
+            document.body.classList.add("loaded");
+
+            // Ролик подставляет index.bandle.js: адрес бакета живёт в конфигурации окружения.
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            createBtnAndClickListen('.wa-contact-us', () => {
+                window.open("https://wa.me/+79612244666", "_blank");
+            });
+            createBtnAndClickListen('.svg-button-ar', () => {
+                window.open("./demo.html", "_blank");
+            });
+            createBtnAndClickListen('.svg-button-xr', () => {
+                window.open("./xrviewer.html", "_blank");
+            });
+            createBtnAndClickListen('.go-arhive', () => {
+                window.open("./demo.html", "_blank");
+            });
+
+            new ResizeObserver(updateContainerHeight).observe(document.querySelector('.col-md-6'));
+            document.getElementById("year").textContent = new Date().getFullYear();
+            updateContainerHeight();
+            updateClasses();
+            updateMarginTop();
+            updateLinkListeners();
+
+            window.addEventListener('resize', () => {
+                updateClasses();
+                updateMarginTop();
+                updateLinkListeners();
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const contactModal = document.getElementById("contactModal");
+
+            contactModal.addEventListener("show.bs.modal", function (event) {
+                const button = event.relatedTarget;
+                const tariff = button.getAttribute("data-tariff");
+
+                // Находим select и устанавливаем значение
+                const tariffSelect = document.getElementById("modal-formGroupExampleInput3");
+                for (let option of tariffSelect.options) {
+                    if (option.textContent === tariff) {
+                        option.selected = true;
+                    }
+                }
+            });
+        });
+    </script>
+    <script src="./dist/index.bandle.js?v=1"></script>
+</body>
+
+</html>

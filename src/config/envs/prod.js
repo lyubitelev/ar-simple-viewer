@@ -4,9 +4,12 @@ const conf =
 {
     idsFolder: "prod",
     awsRegion: "ru-central1",
-    awsEndPoint: "https://storage.yandexcloud.kz",
-    awsAccessKeyId: "YCB2BzjHd8epgNyLs6eDfFnW4",
-    awsSecretAccessKey: "YCMVWV1P3UxcIG-YJEcCVyq74jw49_-23UP6UQdT",
-    smtpApiUrl: "https://titan-auto-barnaul.ru:5000"
+    awsEndPoint: "https://storage.yandexcloud.net",
+    awsAccessKeyId: "YCAJEVnmBMO0Q_qVm5co7-GiY",
+    awsSecretAccessKey: "YCNGaNsZH8KZHhNIGWdBBIWpXzjn_cFJrQT0z3qi",
+    // Публичный HTTPS-адрес BackgroundSupportApi. Пока backend не развёрнут — null,
+    // и формы заявок честно показывают ошибку. См. docs/deployment/lead-backend.md.
+    // Учётные данные SMTP-провайдера живут только на backend.
+    supportApiUrl: null
 }
 export default conf;

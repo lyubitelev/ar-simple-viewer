@@ -19,16 +19,18 @@ export async function getModels() {
     }
 }
 
-export async function updateModel(id, armessage, message) {
+/**
+ * Идентичность папки передаётся явно: публичная ссылка не обязана иметь локальную сессию создателя.
+ */
+export async function updateModel(mainId, id, armessage, message) {
     const body = {
         id: id,
         armessage: armessage,
         message: message
     }
-    const mainData = JSON.parse(localStorage.getItem('localId'));
     const command = new PutObjectCommand({
         Bucket: "avt-content",
-        Key: `${conf.idsFolder}/${mainData.id}/${body.id}.json`,
+        Key: `${conf.idsFolder}/${mainId}/${body.id}.json`,
         Body: JSON.stringify(body),
     });
 

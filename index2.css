@@ -1,0 +1,1262 @@
+body {
+    background-color: #DEDEDE !important;
+}
+
+.navbar-toggler {
+    border: none !important;
+    color: transparent !important;
+}
+
+.svg-button-ar {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    height: 66px;
+}
+
+.svg-button-xr {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    height: 66px;
+}
+
+.svg-button-contact {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    height: 66px;
+    width: 100%;
+}
+
+.svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin: 0;
+    position: relative;
+}
+
+.container-fluid {
+    --bs-gutter-x: 3.5rem !important;
+}
+
+.icon-img {
+    width: 30px;
+    height: auto;
+}
+
+.brand-logo {
+    height: 32px;
+    width: auto;
+}
+
+.container {
+    --bs-gutter-x: 0rem !important;
+}
+
+.main-img {
+    background-image: url(./img/главная-картинка---фон_десктоп.webp);
+    background-position: center bottom;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.main-img .row {
+    align-items: flex-end;
+}
+
+.c-pos-relative {
+    position: relative;
+}
+
+.custom-icon {
+    background-image: url('data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 30 30\'%3e%3cpath stroke=\'rgb(255, 255, 255)\' stroke-linecap=\'round\' stroke-miterlimit=\'10\' stroke-width=\'2\' d=\'M4 7h22M4 15h22M4 23h22\'/%3e%3c/svg%3e');
+}
+
+.container-777 {
+    position: relative;
+    display: inline-block;
+}
+
+.phone {
+    width: 100%;
+}
+
+.video-container {
+    position: absolute;
+    border-radius: 48px;
+    overflow: hidden;
+    height: 84.5%;
+    width: 46%;
+    top: 2.5%;
+    left: 32.8%;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ar-icon {
+    margin-top: -45px;
+    position: relative;
+}
+
+.nav-social {
+    min-width: 80px;
+    width: 0px;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.navbar-color {
+    background-color: rgb(13 39 65);
+}
+
+.navbar {
+    --bs-navbar-padding-y: 1.5rem !important;
+}
+
+.navbar-brand {
+    margin-left: 0;
+}
+
+.nav-link-list {
+    text-wrap: nowrap;
+    margin-left: auto;
+    margin-right: 36px;
+    font-size: 16px;
+}
+
+.collapse-top {
+    margin-top: 2px;
+}
+
+.navbar-toggler {
+    margin-right: 0;
+}
+
+.gamburger {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row-top {
+    margin-top: 34px;
+}
+
+.hand-img-top {
+    margin-top: 0 !important;
+    display: flex;
+    align-items: flex-end;
+}
+
+.dynamic-column {
+    margin-top: 60px !important;
+}
+
+.text-descr-width {
+    width: 85%;
+}
+
+.c-width-28 {
+    width: 28% !important;
+    flex: 0 0 auto !important;
+}
+
+.c-width-100 {
+    width: 100%
+}
+
+.c-mt-50 {
+    margin-top: -53px;
+}
+
+.text {
+    text-align: center;
+    text-decoration: none;
+}
+
+.svg-button-send p {
+    color: white;
+}
+
+.svg-button-send {
+    width: 60% !important;
+}
+
+.contact-us-container {
+    padding: 20px 50px 20px 50px;
+    background-color: white;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.connect-btn-head {
+    width: auto;
+    margin-top: 0% !important;
+}
+
+.mb-c-5 {
+    margin-bottom: 5%;
+}
+
+.mb-c-3 {
+    margin-bottom: 3%;
+}
+
+.header-text {
+    margin-top: 91px;
+    color: white;
+}
+
+.connect-btn {
+    color: black;
+    position: relative;
+    font-size: 24px;
+    margin-top: -43px;
+}
+
+.soc-icon-btn {
+    height: 35px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+.text-sh-color a {
+    color: #3d3131;
+}
+
+.text-sh-color {
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+.mb-c-2 {
+    margin-bottom: 2%;
+}
+
+.mt-c-4 {
+    margin-top: 4% !important;
+}
+
+.about-text {
+    font-size: clamp(14px, 1.2vw + 6px, 20px);
+    line-height: 1.4;
+    color: #4b4b4b;
+}
+
+.mt-c-3 {
+    margin-top: 3%;
+}
+
+.tarif-desktop-card-container {
+    justify-content: center !important;
+    margin-top: 50px !important;
+}
+
+.mr-r-15 {
+    margin-right: 15px !important;
+}
+
+.mr-l-15 {
+    margin-left: 15px !important;
+}
+
+.cus-bold {
+    font-weight: bold;
+}
+
+.cus-fs-69 {
+    font-size: 69%;
+}
+
+.tarif-border-radius-card {
+    background-image: url('./img/Frame\ 19.webp') !important;
+    width: 49% !important;
+}
+
+.tarif-border-radius-card .card-body {
+    color: white;
+    text-align: center;
+}
+
+.tarif-border-radius-card .card-body span {
+    font-weight: 100;
+}
+
+.gray {
+    background-color: #DFDFDF !important;
+}
+
+.button-text {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-100 {
+    font-weight: 100;
+}
+
+.about-row-start {
+    align-items: flex-start;
+}
+
+.fz-12 {}
+
+.fz-23 {}
+
+.ml-15 {
+    margin-left: 15px;
+}
+
+.ml-30 {
+    margin-left: 30px;
+}
+
+.ml-40 {
+    margin-left: 40px;
+    margin-top: 10px !important;
+}
+
+.mr-15 {
+    margin-right: 15px;
+}
+
+.about-icon-size {
+    height: 90px;
+}
+
+.border-none {
+    --bs-card-border-radius: none !important;
+    --bs-card-border-color: none !important;
+}
+
+.card-text {
+    color: #767676;
+}
+
+.mobile-card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+}
+
+/* Делаем колонки флексовыми, чтобы картинка могла занять 100% высоты */
+.mobile-card-container .col {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Картинка растягивается по высоте контейнера */
+.mobile-card-container img {
+    flex-grow: 1;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.desktop-card-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.row-footer {
+    align-items: center !important;
+}
+
+.button-text p {
+    color: white;
+    margin-left: 10px;
+}
+
+.about-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 50px !important;
+    margin-bottom: 50px;
+    margin-left: 0 !important;
+}
+
+.text-center h1 {
+    margin-top: 15px;
+}
+
+.about-h1 {
+    white-space: nowrap;
+}
+
+.about-row .col-2,
+.about-row .col-1 {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+}
+
+.about-row .ml-30,
+.about-row .ml-40 {
+    margin-left: 0 !important;
+}
+
+.about-row>.col:last-child {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+@media (min-width: 1024px) {
+    .navbar-brand {
+        margin-left: 40px;
+    }
+
+    .nav-social {
+        margin-bottom: 0em !important;
+    }
+}
+
+@media (min-width: 1920px) {
+    .brand-logo {
+        width: 50%;
+    }
+}
+
+.container-333 {}
+
+.no-wrap-footer-menu a {
+    color: white;
+}
+
+.no-wrap-footer-menu {
+    display: flex;
+    color: white;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 1400px) {
+    .border-radius-card {
+        width: 16rem !important;
+    }
+
+    .video-container {
+        border-radius: 40px;
+    }
+
+    .company-color {
+        margin-top: 5px;
+    }
+
+    .no-wrap-footer-menu {
+        font-size: 10px;
+    }
+}
+
+.background-footer-color {
+    background-color: rgb(13 39 65) !important
+}
+
+.test-now-btn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: default;
+    height: 66px;
+    width: 100%;
+}
+
+.border-radius-card-2 {
+    --bs-card-inner-border-radius: none !important;
+    --bs-card-border-radius: none !important
+}
+
+@media (max-width: 1300px) {
+    .d-none-when-1300 {
+        display: none;
+    }
+}
+
+
+@media (max-width: 1200px) {
+    .phone {
+        width: 116%;
+    }
+
+    @supports (-webkit-touch-callout: none) {
+
+        /* Применяем твой отрицательный отступ не к самой картинке, а к её контейнеру! 
+           Это подтянет фон секции, как ты и хотел, но НЕ сплющит сам контейнер изнутри,
+           поэтому проценты для видео останутся идеальными и щель снизу пропадет! */
+        .container-777 {
+            margin-bottom: -0.25lh;
+        }
+    }
+
+    .video-container {
+        border-radius: 38px;
+        /* ToDo разобратся с айпадом */
+        /* height: 85.7%; */
+        height: 84.5%;
+        width: 53.1%;
+        top: 2.5%;
+        left: 38%;
+    }
+
+    .d-none-when-1200 {
+        display: none;
+    }
+
+    .svg-height-90 {
+        margin-top: 5%;
+    }
+
+    .c-ft-32 {
+        font-size: 24px;
+    }
+
+    .c-ft-16 {
+        font-size: 15px;
+    }
+
+    .ml-30,
+    .ml-40 {
+        margin-left: 55px;
+    }
+
+    .c-le-50 {
+        margin-left: 50px;
+    }
+
+    .test-now-btn {
+        margin-top: -17px !important;
+    }
+
+    .border-radius-card {
+        width: 14rem !important;
+    }
+}
+
+.arhive-btn {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.svg-height-90 {
+    height: 90%;
+}
+
+.c-logo-w {
+    width: 60% !important;
+}
+
+@media (max-width: 992) {
+    .demo {
+        background-size: 84% 100% !important;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {
+    .svg-button-contact {
+        margin-top: 15px;
+    }
+}
+
+@media (min-width: 540px) and (min-height: 720px) {
+    .svg-button-top {
+        margin-bottom: 30px !important;
+    }
+}
+
+@media (max-width: 540px) {
+    /* Удален сломанный margin-left для .phone */
+
+
+    .svg-button-contact-top {
+        margin-top: 4vh;
+    }
+
+    .svg-button-contact {
+        height: 63px !important;
+    }
+
+    .svg-button-ar {}
+
+    .svg-button-xr {}
+
+    .row-gap {
+        --bs-gutter-x: -1.5rem !important;
+    }
+}
+
+.border-radius-card {
+    width: 19rem;
+    --bs-card-inner-border-radius: none !important;
+    --bs-card-border-radius: none !important
+}
+
+.phone-buttons {
+    margin-top: -55px;
+}
+
+.c-mt-div {
+    margin-top: 1.5rem;
+}
+
+.c-mt-p {
+    margin-top: 3rem;
+}
+
+.svg-button-top {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 575px) {
+    .svg-button-contact-top {}
+
+    .demo-ifr2 {
+        width: 70vw;
+        height: auto;
+        aspect-ratio: 234 / 470;
+    }
+}
+
+/* Универсальные стили теперь в .d-md-none .mobile-container */
+
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.93);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    z-index: 9999;
+}
+
+.loaded #loader {
+    display: none;
+}
+
+/* Удалено */
+
+/* Удалено */
+
+.demo-ifr2 {
+    margin-top: 7px;
+    width: 215px;
+    height: 468px;
+    border-radius: 34px;
+    margin-bottom: 8px;
+}
+
+.demo-ifr {
+    position: absolute;
+    top: var(--screen-top, 1.6%);
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--screen-width, 92%);
+    height: var(--screen-height, 96.7%);
+    border-radius: 45px;
+    border: none;
+    z-index: 2;
+}
+
+.demo {
+    /* Настройки экрана: подобраны с точностью до пикселя под картинку */
+    --screen-top: 1.6%;
+    --screen-width: 92.5%;
+    --screen-height: 96.7%;
+
+    background-image: url(./img/iPhone-16-Pro.webp);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 350px;
+    aspect-ratio: 927 / 1920;
+    height: auto;
+    margin: 0 auto;
+}
+
+.demo2 {
+    background-image: url(./img/iPhone-16-Pro.webp);
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* Автоматическое масштабирование */
+    background-position: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.is-invalid {
+    border-color: red !important;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+@media (max-width: 414px) {
+    .svg-button-contact-top {
+        margin-top: 1vh !important;
+    }
+
+    .svg-button-top {
+        margin-bottom: 7px;
+    }
+
+    .svg-button-top {
+        margin-bottom: 7px;
+    }
+}
+
+/* Все специфичные media удалены для использования универсального правила */
+
+.c-w-50 {
+    width: 50%;
+}
+
+.company-color {
+    color: hsl(0deg 0% 51.5%) !important;
+    white-space: nowrap;
+    text-align: end;
+}
+
+.fs-24 {
+    font-size: 24px;
+}
+
+@media (max-width: 991px) {
+    .about-icon-size {
+        height: 69px !important;
+    }
+
+    .video-container {
+        border-radius: 28px;
+    }
+
+
+    .c-logo-w {
+        width: 70% !important;
+    }
+
+    .c-mt-50 {
+        margin-top: -44.62px;
+    }
+
+    .c-mt-50 p {
+        font-size: 15px !important;
+    }
+
+    .svg-button-send {
+        width: 80% !important;
+    }
+
+    .c-le-50 {
+        margin-left: 25px;
+    }
+
+    .proccess-div p {
+        font-size: 23px !important;
+        margin-top: 8px !important;
+    }
+
+    .border-radius-card {
+        width: 10rem !important;
+    }
+
+    .company-color {
+        font-size: 55% !important;
+    }
+
+    .svg-button-size {
+        margin-top: 12px !important;
+        height: 59px !important;
+    }
+
+    .arhive-btn img {
+        margin-top: -10px !important;
+        width: 20% !important;
+    }
+
+    .arhive-btn p {
+        font-size: 16px !important;
+        margin-left: -15px !important;
+        margin-top: 7px !important;
+    }
+
+    .ml-30 {
+        margin-left: 80px !important;
+    }
+}
+
+.h-80 {
+    height: 80% !important;
+}
+
+.tarif-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1% !important;
+}
+
+.submit-btn {
+    margin-bottom: 30px !important;
+    margin-top: 5px !important;
+    height: 40px !important;
+    width: fit-content !important;
+}
+
+.img-fluid {}
+
+@media (min-width: 576px) and (max-height: 719px) {
+    .svg-button-contact {
+        margin-top: 0px !important;
+    }
+}
+
+.con-price {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 24px;
+    justify-content: space-between;
+}
+
+.c-mb-95 {
+    margin-bottom: -95px;
+}
+
+.send-order-title {
+    margin-top: -33px !important;
+    margin-left: -9px;
+}
+
+.send-order {
+    height: 40px !important;
+    width: fit-content;
+}
+
+.send-order-header {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+}
+
+body.modal-open {
+    padding-right: 0px !important;
+}
+
+@media (max-width: 991px) and (min-height: 1368px) {
+    .about-icon-size {
+        height: 69px !important;
+    }
+
+    .ml-30 {
+        margin-left: 82px !important
+    }
+}
+
+@media (min-width: 768px) {
+    .demo2 {
+        display: none !important;
+    }
+
+    .mobile-container {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .phone {
+        width: 85%;
+        margin: 0;
+        display: block;
+    }
+
+    .all-container {
+        display: none !important;
+    }
+
+    .demo {
+        display: none !important;
+    }
+
+    .video-container {
+        border-radius: 20px;
+        height: 51%;
+        width: 24.7%;
+        top: 4.5%;
+        left: 40.2%;
+    }
+
+    .card-text {
+        font-size: 14px !important;
+    }
+
+    .company-color {
+        text-align: start;
+    }
+
+    .row-footer .col {
+        text-align: none;
+    }
+
+    .no-wrap-footer-menu {
+        display: block;
+    }
+
+    .c-logo-w {
+        width: 50% !important;
+    }
+
+    .about-us h5 {
+        text-align: center;
+        margin-top: 25px;
+    }
+
+    .con-price {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: space-between;
+        align-items: center;
+    }
+
+    .tarif-border-radius-card {
+        width: auto !important;
+    }
+
+    .contact-us-container {
+        width: 100% !important;
+        margin-top: 6% !important;
+        padding: 20px 25px 20px 25px !important;
+    }
+
+    .container-333 {
+        width: 90% !important;
+    }
+
+    .phone-buttons {
+        margin-top: -160px !important;
+        width: 93% !important;
+        margin-left: 13px !important;
+    }
+
+    .svg-button-contact-top {
+        margin-top: 3vh;
+    }
+
+    .svg-button-contact {}
+
+    .row-gap {
+        --bs-gutter-x: -1.5rem !important;
+    }
+}
+
+@media (max-width: 1401px) {
+    .dynamic-column {
+        margin-top: 0px !important;
+    }
+
+    .c-mt-div {
+        margin-top: 2rem !important;
+    }
+
+    .c-mt-p {
+        margin-top: 1rem !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .svg-button-contact {
+        margin-top: -20px;
+    }
+
+    .card-body {
+        padding: 5px !important;
+    }
+
+    .c-width-40-perc {
+        width: 40% !important;
+    }
+
+    .row-top {
+        margin-top: -20px;
+    }
+
+    .fz-12 {
+        font-size: 12px;
+    }
+
+    .fz-23 {
+        font-size: 23px;
+    }
+}
+
+.contact-us-form {
+    align-items: center !important;
+    display: flex !important;
+}
+
+.contact-us-form label {
+    margin-left: 10px !important;
+}
+
+.main img.line {
+    margin-top: -27px;
+}
+
+.line {
+    width: 100%;
+}
+
+.scaled-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+.card-body-2 h5 {
+    font-size: 16px;
+}
+
+.card-body-2 {
+    margin-left: 8px;
+    word-wrap: normal !important;
+    padding: 5px;
+}
+
+.arhive-row .c-mt-60 {
+    margin-top: -60px;
+}
+
+.arhive-row .c-width-100 {
+    margin-bottom: -85px;
+}
+
+.arhive-row {
+    margin-top: 45px;
+    align-items: center;
+}
+
+.c-mb-40 {
+    margin-bottom: -40px !important;
+}
+
+.arhive-btn img {
+    margin-top: -16px;
+    width: 16%;
+}
+
+.arhive-btn p {
+    color: #4285F4;
+    font-size: 20px;
+    margin-left: -10px;
+}
+
+.card-title {
+    word-wrap: normal !important;
+}
+
+.fz-32 {
+    font-size: 32px;
+}
+
+.proccess-div button {
+    cursor: default !important;
+}
+
+.proccess-div p {
+    color: black;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.proccess-div {
+    margin-left: 50px;
+}
+
+@media (max-width: 430px) {
+    .card-body-2 {
+        font-size: 13px;
+        line-height: 1;
+        margin-left: 0px;
+    }
+}
+
+@media (max-width: 375px) {
+    .card-body-2 h5 p {
+        font-size: 13px !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    .brand-logo {
+        width: 100%
+    }
+
+    .gamburger {
+        margin-right: 0%;
+    }
+
+    .nav-link-list {
+        font-size: 15px;
+    }
+
+    .nav-social {
+        margin-bottom: 0em !important;
+    }
+
+    .main-img {
+        background-image: url('./img/главная-картинка---фон_десктоп.webp');
+        background-size: cover;
+        background-position: center bottom;
+    }
+}
+
+@media (max-width: 767px) {
+    .d-md-none .container-777 {
+        position: relative;
+        display: inline-block;
+        margin-left: -33%;
+        margin-top: 17px;
+    }
+
+    .d-md-none .phone {
+        width: 85%;
+        margin: 0;
+        display: block;
+    }
+
+    .d-md-none .mobile-container {
+        overflow: hidden !important;
+        background: #000;
+        /* Идеальное закругление через двойные проценты (ширина / высота) */
+        border-radius: 16% / 7.8% !important;
+        height: 58.7% !important;
+        width: 28.3% !important;
+        top: 1.5% !important;
+        left: 48.03% !important;
+    }
+
+    .d-md-none .mobile-container video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.04);
+        transform-origin: center;
+    }
+}
+
+.submit-aling {
+    margin-top: -33px !important;
+    margin-left: -9px;
+}
+
+.send-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.navbar-toggler {
+    border: none;
+    outline: none;
+    top: 15px;
+    right: 15px;
+    z-index: 9999;
+}
+
+.navbar-toggler-icon {
+    width: 30px;
+    height: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23D9D9D9' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+    background-image: none !important;
+    position: relative;
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before,
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.55);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}

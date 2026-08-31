@@ -40,6 +40,7 @@
 
 .ar-main {
     width: 100%;
+    touch-action: none;
 }
 
 .session-buttons {
@@ -59,6 +60,7 @@
     flex-direction: column;
     height: 550px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .session-button {
@@ -191,7 +193,8 @@
 
 
 .toolbar {
-    bottom: 150px;
+    top: 90px;
+    bottom: 100px;
     right: 10px;
     position: absolute;
     width: 70px;
@@ -201,10 +204,12 @@
 }
 
 .toolbar__buttons {
-    height: 1000px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
 }
 
 .toolbar_button__place {
@@ -320,4 +325,79 @@ input[type=range][orient=vertical] {
     /* Centered within container */
     left: 85px;
     /* Centered within container */
+}
+.room-panel {
+    width: 90%;
+    margin-top: 16px;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: left;
+}
+
+.room-panel__hint {
+    margin-top: 4px;
+    color: #666666;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.room-panel__active {
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+.room-panel__list {
+    display: flex;
+    flex-direction: column;
+    max-height: 180px;
+    overflow-y: auto;
+    margin-top: 8px;
+}
+
+.room-panel__room {
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    background: #ffffff;
+    font-size: 16px;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.room-panel__room__selected {
+    border-color: #57ca67;
+    background: #f0fff2;
+}
+
+.room-panel__button {
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #13151d;
+    color: #ffffff;
+    font-size: 16px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.room-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    max-width: 55%;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    font-size: 14px;
+    font-family: Roboto Regular, Helvetica Neue, sans-serif;
+    z-index: 1000;
 }

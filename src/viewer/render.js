@@ -7,8 +7,8 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import osDetector from "../common/osDetector"
 import * as TWEEN from "three/addons/libs/tween.module.js";
-import conf from "../config/config.js"
-
+import modelUtils from "../common/utils/modelUtils.js"
+import modelIdentity from "../common/utils/modelIdentity.js"
 
 const container = document.getElementById('container');
 let mv = document.getElementById("model-viewer");
@@ -27,40 +27,17 @@ window.loaderShow();
 
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams?.get('id');
+const mainDataId = urlParams?.get('mainDataId');
 
-let mainData = JSON.parse(localStorage.getItem('localId'));
-let searchModel = mainData.mainCollection.data.filter(x => x.id === id)[0];
-
-var modelParameters = null;
-try {
-    var modelParameters = await (await fetch(`${conf.awsEndPoint}/avt-content/${conf.idsFolder}/${mainData.id}/${searchModel.id}.json?response-content-type=json`)).json();
-}
-catch (err) {
-    console.log(err)
-}
-
-if (modelParameters == null) {
-    armessage = base64ToJson(searchModel.armessage);
-    message = base64ToJson(searchModel.message);
-    armessage['src'] = armessage['src'].replace('models', `${conf.awsEndPoint}/avt-models`);
-    armessage['ios-src'] = armessage['ios-src'].replace('models', `${conf.awsEndPoint}/avt-models`);
-}
-else {
-    armessage = base64ToJson(modelParameters.armessage);
-    message = base64ToJson(modelParameters.message);
-}
+// Публичная ссылка/QR несут id + mainDataId и должны открываться без локальной сессии создателя.
+const resolved = await modelIdentity.resolveModel(id, mainDataId);
+const folderId = resolved.folderId;
+armessage = resolved.armessage;
+message = resolved.message;
 
 console.log(armessage, message);
 
 let signedUrl = null;
-
-function base64ToJson(encoded) {
-    if (encoded == 'undefined' || encoded == null || encoded == '')
-        return null;
-
-    var actual = JSON.parse(atob(encoded))
-    return actual;
-}
 
 var addAttribute = (name, value) => {
     mv.setAttribute(name, value)
@@ -79,6 +56,12 @@ function ApplyARSettings() {
 
 let android = armessage?.src ?? urlParams.get('src');
 let name = armessage?.name ?? urlParams.get('name');
+
+if (!android) {
+    modelIdentity.showModelLoadError();
+    throw new Error(`Модель не найдена: id=${id}, mainDataId=${mainDataId}`);
+}
+
 document.title = name;
 
 if (message?.titleIcon) {
@@ -133,7 +116,45 @@ const onProgress = (event) => {
 };
 
 mv.addEventListener('progress', onProgress);
-mv.setAttribute("src", armessage['src']);
+mv.setAttribute("src", android);
+
+// Единый lifecycle индикатора загрузки: и прямая загрузка через GLTFLoader,
+// и путь с кэшем (fetch -> cache -> blob URL) показывают один и тот же бокс.
+let progressBox = null;
+
+function showProgress() {
+    if (progressBox)
+        return progressBox;
+
+    progressBox = document.createElement('div');
+    progressBox.className = 'viewer-progress';
+    progressBox.innerText = 'Загрузка модели…';
+    document.body.appendChild(progressBox);
+
+    return progressBox;
+}
+
+function updateProgress(loaded, total) {
+    // Размер известен не всегда, поэтому без Content-Length показываем честные мегабайты.
+    showProgress().innerText = total
+        ? `Загрузка модели: ${Math.round(loaded / total * 100)}%`
+        : `Загрузка модели: ${(loaded / (1024 * 1024)).toFixed(1)} МБ`;
+}
+
+function hideProgress() {
+    progressBox?.remove();
+    progressBox = null;
+}
+
+/**
+ * Единственная точка обработки сбоя загрузки модели: гасит прогресс и показывает
+ * честную ошибку, которая через showModelLoadError гасит и старый спиннер страницы.
+ */
+function failModelLoad(err) {
+    console.error('Не удалось загрузить модель.', err);
+    hideProgress();
+    modelIdentity.showModelLoadError();
+}
 
 let cachedModels = [];
 if ('caches' in window && message?.cacheModels == true) {
@@ -178,9 +199,17 @@ var generateQR = async (link) => {
 
 }
 
-function openArViewer() {
+function jsonToBase64(object) {
+    const json = JSON.stringify(object);
+    return btoa(json);
+}
+
+async function openArViewer() {
     var baseUrl = window.location.origin;
-    let link = baseUrl + `/viewer.html?id=${id}`;
+    let link = baseUrl + `/viewer.html?id=${id}&mainDataId=${folderId}`;
+
+    if (folderId)
+        await modelUtils.updateModel(folderId, id, jsonToBase64(armessage), jsonToBase64(message));
     if (arWorks) {
         document.getElementById("ar-button").click();
     } else {
@@ -188,8 +217,8 @@ function openArViewer() {
     }
 }
 
-window.aRShow = () => {
-    openArViewer();
+window.aRShow = async () => {
+    await openArViewer();
 }
 
 window.backOnClick = () => {
@@ -200,32 +229,107 @@ window.backOnClick = () => {
 
 }
 
-function UpdateAndroidScr(response) {
-    response.arrayBuffer()
-        .then((data) => {
-            const glbBlob = new Blob([data], { type: 'model/glb-binary' });
-            android = window.URL.createObjectURL(glbBlob);
-            init();
-        });
+/**
+ * Читает тело ответа потоком: сетевое скачивание — самая долгая часть загрузки,
+ * и пользователь должен видеть её прогресс, а не пустой спиннер.
+ */
+async function readModelBlob(response) {
+    const total = Number(response.headers.get('Content-Length')) || 0;
+    const reader = response.body.getReader();
+    const chunks = [];
+    let loaded = 0;
+
+    updateProgress(loaded, total);
+
+    while (true) {
+        const { done, value } = await reader.read();
+
+        if (done)
+            break;
+
+        chunks.push(value);
+        loaded += value.length;
+        updateProgress(loaded, total);
+    }
+
+    return new Blob(chunks, { type: 'model/glb-binary' });
 }
 
-function cacheModel() {
-    if (cachedModels.indexOf(android) >= 0) {
-        newCache.match(android).then((response) => {
-            console.log(response);
-            UpdateAndroidScr(response);
-        })
+/**
+ * Кэш — только оптимизация. Прежние версии клали в `models-cache` любой ответ с телом,
+ * поэтому у существующего пользователя там может лежать 404/500. Такой entry нужно
+ * отбросить и всё равно сходить в сеть, а не залипать на нём навсегда.
+ */
+async function readCachedModel() {
+    if (cachedModels.indexOf(android) < 0)
+        return null;
 
-    } else
-        fetch(android)
-            .then((response) => {
-                if (response.body) {
-                    newCache.put(android, response.clone());
-                    UpdateAndroidScr(response);
-                } else {
-                    throw Error('Unable to Download Model');
-                }
-            });
+    let response;
+
+    try {
+        response = await newCache.match(android);
+    }
+    catch (err) {
+        console.warn('Не удалось прочитать модель из кэша.', err);
+        return null;
+    }
+
+    if (!response)
+        return null;
+
+    if (response.ok && response.body)
+        return response;
+
+    console.warn(`Кэшированный ответ непригоден (HTTP ${response.status}), перезагружаем модель из сети.`);
+
+    try {
+        await newCache.delete(android);
+    }
+    catch (err) {
+        // Удаление — best effort: его сбой не должен отменять попытку загрузки из сети.
+        console.warn('Не удалось удалить непригодный ответ из кэша.', err);
+    }
+
+    return null;
+}
+
+/**
+ * Загрузка с кэшем: cache -> fetch -> cache -> blob URL -> init(). Сбой сети и не-2xx ответ
+ * не должны выглядеть как успешная загрузка и не должны оставлять вечный лоадер.
+ */
+async function cacheModel() {
+    showProgress();
+
+    let glbBlob;
+
+    try {
+        let response = await readCachedModel();
+
+        if (!response) {
+            response = await fetch(android);
+
+            // fetch резолвится и на 403/404/500 — это не успешная загрузка.
+            if (!response.ok)
+                throw new Error(`Модель недоступна: HTTP ${response.status}`);
+
+            if (!response.body)
+                throw new Error('Модель недоступна: пустой ответ.');
+
+            newCache.put(android, response.clone())
+                .catch((err) => console.warn('Не удалось сохранить модель в кэше.', err));
+        }
+
+        glbBlob = await readModelBlob(response);
+    }
+    catch (err) {
+        // Дальше по цепочке ошибку обрабатывать некому: сеть/кэш — это её граница.
+        failModelLoad(err);
+        return;
+    }
+
+    // Ошибки самой сцены остаются на GLTFLoader.onError, чтобы cleanup был в одном месте.
+    android = window.URL.createObjectURL(glbBlob);
+    init();
 }
 
 function tween(inout) { // in - true, out - false
@@ -325,13 +429,20 @@ function init() {
     gltfLoader.setDRACOLoader(dracoLoader)
         .setMeshoptDecoder(MeshoptDecoder);
 
+    // Модель едет по сети десятки секунд, поэтому нужен видимый прогресс.
+    // Без onError сбой загрузки не гасил лоадер: спиннер крутился бы вечно.
+    showProgress();
+
     gltfLoader.load(android, async (gltf) => {
+        hideProgress();
         scene.add(gltf.scene);
         console.log(gltf.scene);
         model = gltf.scene;
         setUpAnimation(model);
         window.loaderHide();
-    })
+    }, (event) => {
+        updateProgress(event.loaded, event.total);
+    }, failModelLoad)
 
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);

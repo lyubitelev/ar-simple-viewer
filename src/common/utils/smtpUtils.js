@@ -1,24 +1,52 @@
 import conf from "../../config/config.js"
 
-async function send(userInput, subj, value) {
-    return fetch(`${conf.smtpApiUrl}/api/Smtp/SendMessage`, {
+/**
+ * Тип заявки. Значения должны совпадать с BackgroundSupportApi SubjectType.
+ */
+const SUBJECT = {
+    landingLead: 'LandingLead',
+    demoLead: 'DemoLead',
+    callBack: 'CallBack'
+};
+
+/**
+ * Отправляет заявку через собственный backend (BackgroundSupportApi).
+ * Учётные данные SMTP-провайдера остаются на backend и в browser bundle не попадают.
+ *
+ * @param {{subject: string, contact: string, name?: string, tariff?: string, otherText?: string}} lead
+ * @returns {Promise<{success: boolean, error?: string}>} успешный ответ backend
+ * @throws {Error} если backend вернул не 2xx или сообщил об ошибке отправки
+ */
+async function send(lead) {
+    if (!conf.supportApiUrl)
+        throw new Error('Адрес сервиса заявок не настроен для этого окружения.');
+
+    const response = await fetch(`${conf.supportApiUrl}/api/Smtp/SendMessage`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ 
-            email: userInput,
-            subject: subj,
-            otherText: value
+        body: JSON.stringify({
+            subject: lead.subject,
+            name: lead.name ?? null,
+            contact: lead.contact,
+            tariff: lead.tariff ?? null,
+            otherText: lead.otherText ?? null
         })
-    })
-    .then(response => response.json())
-    .then(_ => _)
-    .catch(error => {
-        throw error;
     });
+
+    if (!response.ok)
+        throw new Error(`Сервис отправки заявок вернул статус ${response.status}`);
+
+    const result = await response.json().catch(() => null);
+
+    if (result && result.success === false)
+        throw new Error(result.error ?? 'Не удалось отправить заявку.');
+
+    return result;
 }
 
 export default {
     send,
+    SUBJECT
 };

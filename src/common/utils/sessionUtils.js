@@ -1,6 +1,6 @@
 import { GUID } from "../guid.js"
 import modelUtils from "./modelUtils.js"
-import conf from "../../config/config.js"
+import storagePaths from "./storagePaths.js"
 
 const key = 'localId';
 let typesInfo = [];
@@ -25,7 +25,7 @@ export async function init() {
 
 async function enrichModels(models) {
     for (var i = 0; i < models.length; i++) {
-      const imglink = models[i].preview.replace('models', `${conf.awsEndPoint}/avt-models`);
+      const imglink = models[i].preview.replace('models', storagePaths.getModelsBaseUrl());
       let strWitOutArMessageId = models[i].previewLink.replace('viewer.html?armessage=', '');
       let parts = (strWitOutArMessageId[0] === '/' ? strWitOutArMessageId.replace('/', '') : strWitOutArMessageId).split('&message=')
       const armessage = parts[0];

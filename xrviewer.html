@@ -5,7 +5,7 @@
     <script src="https://launchar.app/sdk/v1?key=D1ZaHR8HW0yrah9liileJN2UT4qdpk2X"></script>
     <title>Art Vision Tech</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, touch-action=none">
     <link type="text/css" href="./styles/styles.css" rel="stylesheet" />
     <link type="text/css" href="./styles/loading.css" rel="stylesheet" />
     <link type="text/css" href="./styles/xr.css" rel="stylesheet" />
@@ -56,13 +56,29 @@
             добавлять и удалять модели в пространстве, используя кнопки в правой части экрана
         </div>
 
+        <div id="roomPanel" class="room-panel">
+            <b>Комната</b>
+            <div class="room-panel__hint">
+                Расстановка сохраняется отдельно для каждой комнаты. Выберите комнату, в которой находитесь,
+                или создайте новую — иначе сохранение будет недоступно.
+            </div>
+            <div id="roomActive" class="room-panel__active">Комната не выбрана</div>
+            <div id="roomList" class="room-panel__list"></div>
+            <button id="roomCreate" type="button" class="room-panel__button">Новая комната</button>
+        </div>
+
         
 
 
     </div>
 
+    <div id="calibrationUI" class="calibration-ui hidden" style="position: absolute; top: 15%; width: 100%; text-align: center; color: white; background: rgba(0,0,0,0.6); padding: 15px; box-sizing: border-box; z-index: 1000; font-family: 'Open Sans', sans-serif;">
+        <h3 id="calibrationText" style="margin: 0; font-size: 18px;">Шаг 1: Наведите прицел (кружок) на левый угол стены и коснитесь экрана</h3>
+    </div>
+
     <div id="ar-main" class="ar-main hidden">
         <span class="log" id="log"></span>
+        <div id="roomBadge" class="room-badge hidden"></div>
         <div id="toolbar" class="toolbar ">
             <div id="toolbarSlider" class="toolbar__model-slider hidden">
                 <div class="slider-container">
@@ -71,11 +87,14 @@
                 </div>
             </div>
             
-            <button onclick="transformDone()" class="toolbar_button">
+            <button id="transformDoneBtn" onclick="transformDone()" class="toolbar_button hidden">
                 <i class="fa fa-check" aria-hidden="true"></i>
             </button>
 
             <div id="toolbarButtons" class="toolbar__buttons">
+                <button onclick="saveArRoom()" class="toolbar_button toolbar_button__selected hidden" title="Сохранить комнату">
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                </button>
                 <button onclick="unselect()" class="toolbar_button toolbar_button__selected hidden">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>

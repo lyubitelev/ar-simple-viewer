@@ -7,7 +7,8 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import osDetector from "../common/osDetector"
 import modelUtils from "../common/utils/modelUtils.js"
-import conf from "../config/config.js"
+import roomStorage from "./roomStorage.js"
+import storagePaths from "../common/utils/storagePaths.js"
 
 
 var mode = "work";
@@ -125,15 +126,17 @@ const sceneLoader =
 
 async function fetchModels() {
   try {
+    window.gltfLoader = gltfLoader; // Expose for scene.js
     let responce = await modelUtils.getModels();
     modelsList = responce.data;
+    window.modelsList = modelsList; // Expose for scene.js
     typesList = responce.types;
     for (let i = 0; i < modelsList.length; i++) {
-      modelsList[i].glb = modelsList[i].glb.replace('models', `${conf.awsEndPoint}/avt-models`);
-      modelsList[i].preview = modelsList[i].preview.replace('models', `${conf.awsEndPoint}/avt-models`);
+      modelsList[i].glb = modelsList[i].glb.replace('models', storagePaths.getModelsBaseUrl());
+      modelsList[i].preview = modelsList[i].preview.replace('models', storagePaths.getModelsBaseUrl());
     }
     for (let i = 0; i < typesList.length; i++) {
-      typesList[i].preview = typesList[i].preview.replace('models', `${conf.awsEndPoint}/avt-models`);
+      typesList[i].preview = typesList[i].preview.replace('models', storagePaths.getModelsBaseUrl());
     }
   } catch (err) {
     console.error('Ошибка загрузки моделей:', err);
@@ -147,6 +150,83 @@ function AddLogs(logs) {
 function insertLogs(logs) {
   document.getElementById("log").innerText = logs + "\n";
 }
+
+/**
+ * Панель выбора комнаты на стартовом экране.
+ *
+ * Комнату выбирают явно: в другой физической комнате открывается тот же
+ * `xrviewer.html`, и молчаливое переиспользование прошлой комнаты подставило бы
+ * туда чужую расстановку. `?roomId=` остаётся прямой ссылкой на конкретную комнату.
+ */
+function renderRoomPanel() {
+  const activeRoom = roomStorage.getActiveRoom();
+  const activeLabel = document.getElementById("roomActive");
+  const roomList = document.getElementById("roomList");
+  const roomBadge = document.getElementById("roomBadge");
+
+  if (activeLabel)
+    activeLabel.innerText = activeRoom
+      ? `Активная комната: ${activeRoom.name}`
+      : "Комната не выбрана";
+
+  if (roomBadge) {
+    roomBadge.innerText = activeRoom ? activeRoom.name : "";
+    roomBadge.classList.toggle("hidden", activeRoom === null);
+  }
+
+  if (!roomList)
+    return;
+
+  roomList.innerHTML = "";
+
+  for (const room of roomStorage.listRooms()) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.classList.add("room-panel__room");
+
+    if (activeRoom && room.roomId === activeRoom.roomId)
+      button.classList.add("room-panel__room__selected");
+
+    button.innerText = room.name;
+    button.addEventListener("click", () => {
+      try {
+        roomStorage.setActiveRoom(room.roomId);
+      } catch (err) {
+        console.error("Не удалось открыть комнату.", err);
+        return;
+      }
+      renderRoomPanel();
+    });
+
+    roomList.appendChild(button);
+  }
+}
+
+function initRoomPanel() {
+  if (!document.getElementById("roomPanel"))
+    return;
+
+  try {
+    roomStorage.resolveRoomIdFromUrl();
+  } catch (err) {
+    console.error("Не удалось открыть комнату из ссылки.", err);
+  }
+
+  document.getElementById("roomCreate")?.addEventListener("click", () => {
+    try {
+      roomStorage.createRoom();
+    } catch (err) {
+      console.error("Не удалось создать комнату.", err);
+      alert("Не удалось создать комнату: локальное хранилище недоступно.");
+      return;
+    }
+    renderRoomPanel();
+  });
+
+  renderRoomPanel();
+}
+
+initRoomPanel();
 
 function initializeXRApp() {
   const { devicePixelRatio, innerHeight, innerWidth } = window;
@@ -194,9 +274,13 @@ function initializeXRApp() {
 
 function hitTestReady() {
   if (firstHittest) {
-    showArOptions();
     firstHittest = false;
+    scene.startCalibration();
   }
+}
+
+window.saveArRoom = () => {
+    if(scene) scene.saveRoom();
 }
 
 function showArOptions() {
@@ -329,6 +413,7 @@ function openSlider() {
   try {
     scene.startTransform();
     document.getElementById("toolbarButtons").classList.add("hidden");
+    document.getElementById("transformDoneBtn").classList.remove("hidden");
     showJoystick();
     showPut();
   } catch (ex) { alert(ex); }
@@ -336,6 +421,7 @@ function openSlider() {
 
 function closeSlider() {
   document.getElementById("toolbarButtons").classList.remove("hidden");
+  document.getElementById("transformDoneBtn").classList.add("hidden");
   hideJoystick();
   hidePut();
 
