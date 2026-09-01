@@ -198,6 +198,7 @@
     }
 
     .main-img {
+        /* Reserve space at the bottom of the hero background below the CTA. */
         padding-bottom: clamp(18px, 4vw, 24px);
     }
 
@@ -228,49 +229,84 @@
         transform-origin: center;
     }
 
-    /* --- Responsive CTA block ------------------------------------------------ */
+    /* --- Mobile hero stage ---------------------------------------------------
+       .hero-mobile-stage is the coordinate owner for both the phone artwork and
+       the CTA block. The artwork flows naturally; the CTA is anchored to the
+       stage bottom so that changes in artwork height (different screen widths,
+       font-scaling) do not shift the CTA position.
+
+       The stage reserves enough height for the artwork via min-height so that
+       the absolutely-positioned CTA has physical space to sit in. */
     .hero-mobile-row {
         --bs-gutter-x: 0;
         margin-inline: 0;
     }
 
-    .hero-mobile-actions {
-        display: flex;
-        flex-direction: column;
+    .hero-mobile-stage {
+        position: relative;
         width: 100%;
-        max-width: clamp(280px, 92%, 460px);
-        margin-inline: auto;
-        margin-top: clamp(8px, 2.5vw, 16px);
-        padding-inline: 8px;
-        gap: clamp(10px, 2.5vw, 12px);
+        /* Reserve vertical space = approx bottom of phone artwork so CTA
+           has room. The artwork is 85% wide, aspect-ratio ~2.1:1 at 85vw;
+           ~40vw tall. The CTA needs ~(aspect-ratio * 36/130 * 92vw / 2 * 2 + gap)
+           ≈ 90px + 10px gap + 10px gap + 56px = roughly 175px.
+           Use min-height to always guarantee the stage is taller than the
+           artwork so the absolutely-placed CTA fits inside hero background. */
+        min-height: calc(40vw + clamp(120px, 28vw, 160px));
+        /* Bottom padding keeps the CTA overlay from touching the stage edge. */
+        padding-bottom: clamp(18px, 4vw, 24px);
         box-sizing: border-box;
     }
 
+    /* CTA is pinned to the bottom of the stage, centred horizontally. */
+    .hero-mobile-actions {
+        position: absolute;
+        bottom: clamp(18px, 4vw, 24px);
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        width: clamp(280px, 92%, 460px);
+        gap: clamp(10px, 2.5vw, 12px);
+        box-sizing: border-box;
+        /* Prevent the CTA from extending beyond the viewport horizontally. */
+        max-width: calc(100vw - 16px);
+    }
+
+    /* --- AR / XR demo buttons ----------------------------------------------- */
     .hero-mobile-demo-actions {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: clamp(8px, 2vw, 12px);
         width: 100%;
-        margin-bottom: 0;
     }
 
+    /* Buttons size by SVG aspect ratio (130 × 36) so the painted face always
+       fills the full grid cell without letterboxing. */
     .hero-mobile-actions .svg-button-ar,
     .hero-mobile-actions .svg-button-xr {
         width: 100%;
-        height: clamp(38px, 9vw, 50px);
+        height: auto;
+        aspect-ratio: 130 / 36;
         position: relative;
         display: block;
         margin: 0;
     }
 
+    /* --- Contact button ------------------------------------------------------ */
+    /* Matches the full width of the demo row; sized by its own SVG ratio (490 × 67). */
     .hero-mobile-actions .hero-contact-button {
         width: 100%;
-        height: clamp(44px, 10.5vw, 56px);
+        height: auto;
+        aspect-ratio: 490 / 67;
         position: relative;
         display: block;
         margin-top: 0;
     }
 
+    /* --- Label overlays inside mobile CTA ------------------------------------ */
+    /* The SVG face fills 100 % of the button box (preserveAspectRatio="none").
+       The label is layered on top via absolute positioning, centred in the same
+       box. The global .ar-icon { margin-top: -45px } rule is overridden here. */
     .hero-mobile-actions .ar-icon {
         position: absolute;
         inset: 0;
@@ -284,26 +320,26 @@
     }
 
     .hero-mobile-actions .ar-icon img {
-        height: clamp(15px, 3.8vw, 20px);
+        height: clamp(14px, 3.5vw, 20px);
         width: auto;
         flex-shrink: 0;
     }
 
     .hero-mobile-actions .hero-contact-button .ar-icon img {
-        height: clamp(18px, 4.2vw, 24px);
+        height: clamp(16px, 4vw, 22px);
         width: auto;
         flex-shrink: 0;
     }
 
     .hero-mobile-actions .button-text p {
         margin: 0;
-        font-size: clamp(12px, 3.2vw, 15px);
+        font-size: clamp(11px, 2.8vw, 15px);
         white-space: nowrap;
         color: white;
         line-height: 1;
     }
 
     .hero-mobile-actions .hero-contact-button .button-text p {
-        font-size: clamp(14px, 3.6vw, 17px);
+        font-size: clamp(13px, 3.4vw, 17px);
     }
 }
