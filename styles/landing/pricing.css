@@ -10,22 +10,36 @@
 
 .con-price {
     display: flex;
-    flex-wrap: wrap;
-    row-gap: 24px;
-    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.con-price::-webkit-scrollbar {
+    display: none;
 }
 
 .pricing-card {
     background-image: url("../../img/Frame 19.webp");
-    width: 49%;
+    flex: 0 0 calc(50% - 12px);
     /* over the Bootstrap .card radius variables */
     --bs-card-inner-border-radius: none !important;
     --bs-card-border-radius: none !important;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
 }
 
 .pricing-card .card-body {
     color: white;
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .pricing-card .card-body span {
@@ -37,19 +51,191 @@
     width: 50%;
 }
 
+/* Carousel wrapper and viewport */
+.pricing-carousel-wrapper {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    position: relative;
+    padding: 0 4px;
+}
+
+.pricing-carousel-viewport {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 0;
+    /* Contain scrolling context */
+    contain: layout style paint;
+}
+
+.pricing-carousel-track {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    /* Hide scrollbar but keep scrolling functional */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pricing-carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+/* Navigation buttons */
+.pricing-carousel-prev,
+.pricing-carousel-next {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    min-width: 44px;
+    min-height: 44px;
+    flex-shrink: 0;
+}
+
+.pricing-carousel-prev:hover:not(:disabled),
+.pricing-carousel-next:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.pricing-carousel-prev:focus,
+.pricing-carousel-next:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+.pricing-carousel-prev:disabled,
+.pricing-carousel-next:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.pricing-carousel-prev svg,
+.pricing-carousel-next svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Carousel indicator */
+.pricing-carousel-indicator {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pricing-carousel-indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pricing-carousel-indicator-dot.active {
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 24px;
+    border-radius: 4px;
+}
+
+.pricing-carousel-indicator-dot:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
 /* ============================================================================
    Responsive
    ========================================================================== */
 
+/* Tablet: 768px - 1199px */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .pricing-card {
+        flex: 0 0 calc(100% - 24px);
+    }
+}
+
+/* Desktop: 1200px and up */
+@media (min-width: 1200px) {
+    .pricing-card {
+        flex: 0 0 calc(50% - 12px);
+    }
+}
+
+/* Small screens: below 768px */
 @media (max-width: 767px) {
-    .con-price {
-        flex-direction: column;
-        justify-content: space-between;
-        align-content: space-between;
-        align-items: center;
+    .pricing-carousel-wrapper {
+        gap: 8px;
+        padding: 0 2px;
+    }
+
+    .pricing-carousel-prev,
+    .pricing-carousel-next {
+        padding: 6px 8px;
+        min-width: 40px;
+        min-height: 40px;
+    }
+
+    .pricing-carousel-prev svg,
+    .pricing-carousel-next svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .pricing-carousel-track {
+        gap: 16px;
     }
 
     .pricing-card {
-        width: auto;
+        flex: 0 0 calc(85% - 8px);
+    }
+
+    .pricing-carousel-indicator-dot {
+        width: 6px;
+        height: 6px;
+    }
+
+    .pricing-carousel-indicator-dot.active {
+        width: 18px;
+    }
+}
+
+/* Extra small screens: below 576px */
+@media (max-width: 575px) {
+    .pricing-carousel-wrapper {
+        gap: 6px;
+    }
+
+    .pricing-carousel-track {
+        gap: 12px;
+    }
+
+    .pricing-card {
+        flex: 0 0 calc(90% - 6px);
+    }
+
+    .pricing-carousel-prev,
+    .pricing-carousel-next {
+        padding: 4px 6px;
+        min-width: 36px;
+        min-height: 36px;
+    }
+
+    .pricing-carousel-prev svg,
+    .pricing-carousel-next svg {
+        width: 16px;
+        height: 16px;
     }
 }

@@ -919,8 +919,15 @@
     <div class="container mt-c-4">
         <img loading="lazy" data-src="image.webm" class="line">
         <h1 id="plans" class="c-ft-32 mt-c-4 text-center">Тарифы</h1>
-        <div class="mt-c-4 con-price container-fluid">
-            <div class="card pricing-card">
+        <div class="mt-c-4 pricing-carousel-wrapper">
+            <button class="pricing-carousel-prev" aria-label="Предыдущий тариф">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <div class="pricing-carousel-viewport">
+                <div class="pricing-carousel-track con-price">
+                    <div class="card pricing-card">
                 <div class="card-body">
                     <h5 class="card-title mb-c-3 mt-3">Start</h5>
                     <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 pricing-divider">
@@ -1200,7 +1207,15 @@
                     </button>
                 </div>
             </div>
+                </div>
+            </div>
+            <button class="pricing-carousel-next" aria-label="Следующий тариф">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
         </div>
+        <div class="pricing-carousel-indicator"></div>
         <div class="mt-c-3 container-fluid">
             <h5 class="card-text c-ft-16 text-center">Без подписки — оплата по факту: 0,15 ₽ за оплачиваемый
                 3D/AR-просмотр. Помесячный расход ограничен предсказуемым лимитом.</h5>
@@ -1575,6 +1590,80 @@
             });
         }
 
+        function initPricingCarousel() {
+            const viewport = document.querySelector('.pricing-carousel-viewport');
+            const track = document.querySelector('.pricing-carousel-track');
+            const prevBtn = document.querySelector('.pricing-carousel-prev');
+            const nextBtn = document.querySelector('.pricing-carousel-next');
+            const indicatorContainer = document.querySelector('.pricing-carousel-indicator');
+            const cards = document.querySelectorAll('.pricing-card');
+
+            if (!track || !prevBtn || !nextBtn || !cards.length) return;
+
+            // Create indicator dots
+            const dots = [];
+            cards.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.className = 'pricing-carousel-indicator-dot';
+                if (index === 0) dot.classList.add('active');
+                dot.setAttribute('aria-label', `Тариф ${index + 1}`);
+                dot.addEventListener('click', () => scrollToCard(index));
+                dots.push(dot);
+                indicatorContainer.appendChild(dot);
+            });
+
+            function updateCarouselState() {
+                const scrollLeft = track.scrollLeft;
+                const trackWidth = track.scrollWidth;
+                const viewportWidth = viewport.clientWidth;
+
+                // Disable/enable buttons
+                prevBtn.disabled = scrollLeft <= 0;
+                nextBtn.disabled = scrollLeft >= trackWidth - viewportWidth - 5; // 5px tolerance
+
+                // Update active dot
+                const cardWidth = cards[0]?.offsetWidth || 0;
+                const currentCardIndex = Math.round(scrollLeft / (cardWidth + 24)); // 24px is gap
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentCardIndex);
+                });
+            }
+
+            function scrollToCard(index) {
+                const card = cards[index];
+                if (!card) return;
+                
+                track.scrollTo({
+                    left: card.offsetLeft - (viewport.clientWidth - card.offsetWidth) / 2,
+                    behavior: 'smooth'
+                });
+            }
+
+            function scrollByAmount(direction) {
+                const cardWidth = cards[0]?.offsetWidth || 0;
+                const gap = 24;
+                const scrollAmount = cardWidth + gap;
+                
+                track.scrollBy({
+                    left: direction === 'next' ? scrollAmount : -scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+
+            // Event listeners
+            prevBtn.addEventListener('click', () => scrollByAmount('prev'));
+            nextBtn.addEventListener('click', () => scrollByAmount('next'));
+            track.addEventListener('scroll', updateCarouselState);
+
+            // Handle resize
+            window.addEventListener('resize', () => {
+                updateCarouselState();
+            });
+
+            // Initial state
+            updateCarouselState();
+        }
+
         function createBtnAndClickListen(classNameWithDot, action) {
             const btns = document.querySelectorAll(classNameWithDot);
             btns.forEach(btn => {
@@ -1619,6 +1708,7 @@
             updateClasses();
             updateMarginTop();
             updateLinkListeners();
+            initPricingCarousel();
 
             window.addEventListener('resize', () => {
                 updateClasses();
