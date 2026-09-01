@@ -1,0 +1,55 @@
+/* ============================================================================
+   Landing / pricing
+   ----------------------------------------------------------------------------
+   Owns the tariff card grid only. The "Подключить" button itself is a variant
+   of the shared SVG button and lives in buttons.css.
+
+   JS contract (do not rename): .con-price is re-flagged between .container
+   and .container-fluid by the inline script.
+   ========================================================================== */
+
+.con-price {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 24px;
+    justify-content: space-between;
+}
+
+.pricing-card {
+    background-image: url("../../img/Frame 19.webp");
+    width: 49%;
+    /* over the Bootstrap .card radius variables */
+    --bs-card-inner-border-radius: none !important;
+    --bs-card-border-radius: none !important;
+}
+
+.pricing-card .card-body {
+    color: white;
+    text-align: center;
+}
+
+.pricing-card .card-body span {
+    font-weight: 100;
+}
+
+/* Hairline separator between the rows of a tariff card. */
+.pricing-divider {
+    width: 50%;
+}
+
+/* ============================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 767px) {
+    .con-price {
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: space-between;
+        align-items: center;
+    }
+
+    .pricing-card {
+        width: auto;
+    }
+}

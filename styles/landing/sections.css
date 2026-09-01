@@ -1,0 +1,237 @@
+/* ============================================================================
+   Landing / sections
+   ----------------------------------------------------------------------------
+   Owns the mid-page content blocks: "О продукте" + its feature cards, the
+   "Развивайте свой бизнес" block with the 3D preview phone, and "Процесс"
+   with the archive teaser.
+
+   JS contract (do not rename): .demo-ifr / .demo-ifr2 carry the .ar-preview
+   iframe that src/index/index.js points at ./viewer.html.
+   ========================================================================== */
+
+/* --- "О продукте" --------------------------------------------------------- */
+
+.about-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 12px;
+    /* over the Bootstrap .row gutter margins on the same element */
+    margin-top: 50px !important;
+    margin-left: 0 !important;
+    margin-bottom: 50px;
+}
+
+.about-row > .col:last-child {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.about-text {
+    font-size: clamp(14px, 1.2vw + 6px, 20px);
+    line-height: 1.4;
+    color: #4b4b4b;
+}
+
+.about-icon-size {
+    height: 90px;
+}
+
+.about-mobile h1 {
+    margin-top: 15px;
+}
+
+/* --- Feature cards -------------------------------------------------------- */
+
+.desktop-card-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.feature-card {
+    width: 19rem;
+    /* over the Bootstrap .card radius variables */
+    --bs-card-inner-border-radius: none !important;
+    --bs-card-border-radius: none !important;
+}
+
+.mobile-card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+}
+
+/* Flex columns so the image can fill the card height. */
+.mobile-card-container .col {
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-card-container img {
+    flex-grow: 1;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.feature-card-body {
+    margin-left: 8px;
+    word-wrap: normal;
+    padding: 5px;
+}
+
+.feature-card-body h5 {
+    font-size: 16px;
+}
+
+/* --- "Развивайте свой бизнес" + 3D preview -------------------------------- */
+
+.text-descr-width {
+    width: 85%;
+}
+
+.send-order-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* GEOMETRY: the iframe is positioned inside the screen of a phone photo, so
+   the offsets are expressed as percentages of the artwork and exposed as
+   custom properties. */
+.preview-phone {
+    --screen-top: 1.6%;
+    --screen-width: 92.5%;
+    --screen-height: 96.7%;
+
+    background-image: url("../../img/iPhone-16-Pro.webp");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 350px;
+    aspect-ratio: 927 / 1920;
+    height: auto;
+    margin: 0 auto;
+}
+
+.demo-ifr {
+    position: absolute;
+    top: var(--screen-top, 1.6%);
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--screen-width, 92%);
+    height: var(--screen-height, 96.7%);
+    border-radius: 45px;
+    border: none;
+    z-index: 2;
+}
+
+.preview-phone-mobile {
+    background-image: url("../../img/iPhone-16-Pro.webp");
+    background-repeat: no-repeat;
+    /* Scales the artwork instead of stretching it. */
+    background-size: contain;
+    background-position: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.demo-ifr2 {
+    margin-top: 7px;
+    width: 215px;
+    height: 468px;
+    border-radius: 34px;
+    margin-bottom: 8px;
+}
+
+/* --- "Процесс" + archive teaser ------------------------------------------- */
+
+.process-row {
+    align-items: center;
+}
+
+.process-content {
+    margin-left: 50px;
+}
+
+.process-content p {
+    color: black;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* GEOMETRY: the archive button is meant to overlap the teaser image. */
+.process-archive-image {
+    width: 100%;
+    margin-bottom: -85px;
+}
+
+/* ============================================================================
+   Responsive - widest breakpoint first
+   ========================================================================== */
+
+@media (max-width: 1400px) {
+    .feature-card {
+        width: 16rem;
+    }
+}
+
+@media (max-width: 1300px) {
+    .d-none-when-1300 {
+        display: none;
+    }
+}
+
+@media (max-width: 1200px) {
+    .feature-card {
+        width: 14rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .about-icon-size {
+        height: 69px;
+    }
+
+    .feature-card {
+        width: 10rem;
+    }
+
+    .process-content p {
+        font-size: 23px;
+        margin-top: 8px;
+    }
+}
+
+@media (min-width: 768px) {
+    .preview-phone-mobile {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .preview-phone {
+        display: none;
+    }
+
+    .process-archive-image {
+        margin-bottom: -95px;
+    }
+}
+
+@media (max-width: 430px) {
+    .feature-card-body {
+        font-size: 13px;
+        line-height: 1;
+        margin-left: 0px;
+    }
+}

@@ -1,0 +1,77 @@
+/* ============================================================================
+   Landing / footer
+   ----------------------------------------------------------------------------
+   Owns the dark footer bar: logo, inline menu and the company line.
+
+   JS contract (do not rename): .row-footer gets .row added/removed and
+   .no-wrap-footer-menu .text are the smooth-scroll link hooks.
+   ========================================================================== */
+
+.site-footer {
+    background-color: rgb(13 39 65);
+}
+
+.row-footer {
+    align-items: center;
+}
+
+.no-wrap-footer-menu {
+    display: flex;
+    color: white;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.no-wrap-footer-menu a {
+    color: white;
+}
+
+.site-footer-logo {
+    width: 60%;
+}
+
+.site-footer-company {
+    color: hsl(0deg 0% 51.5%);
+    white-space: nowrap;
+    text-align: end;
+}
+
+/* ============================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 1400px) {
+    .no-wrap-footer-menu {
+        font-size: 10px;
+    }
+
+    .site-footer-company {
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 991px) {
+    .site-footer-logo {
+        width: 70%;
+    }
+
+    .site-footer-company {
+        font-size: 55%;
+    }
+}
+
+@media (max-width: 767px) {
+    .no-wrap-footer-menu {
+        display: block;
+    }
+
+    .site-footer-logo {
+        width: 50%;
+    }
+
+    .site-footer-company {
+        text-align: start;
+    }
+}

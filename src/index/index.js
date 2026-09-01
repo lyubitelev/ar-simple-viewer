@@ -25,7 +25,7 @@ if (document.readyState === 'loading') {
 /**
  * Подставляет ролик в макет телефона. Адрес ролика принадлежит storagePaths —
  * тому же владельцу путей хранилища, что и адреса моделей.
- * Узлы .all-container/.mobile-container есть только в index2.html.
+ * Узлы .all-container/.mobile-container есть только на лендинге index.html.
  */
 function initHeroVideo() {
     try {
@@ -77,10 +77,7 @@ function initHeroVideo() {
 
 function findPreviewFrame() {
     const wideScreen = window.innerWidth > 767;
-    const preview = document.querySelector(wideScreen ? '.ar-preview.demo-ifr' : '.ar-preview.demo-ifr2');
-
-    // Старый index.html не использует класс ar-preview: там превью адресуется по id.
-    return preview ?? document.getElementById('demo-ifr2');
+    return document.querySelector(wideScreen ? '.ar-preview.demo-ifr' : '.ar-preview.demo-ifr2');
 }
 
 async function initDemoPreview() {

@@ -1,0 +1,217 @@
+/* ============================================================================
+   Landing / hero
+   ----------------------------------------------------------------------------
+   Owns the first screen: the photo band, the phone mockup with the promo
+   video, the hero copy and the AR / XR / contact call-to-action rows.
+
+   Two variants of the same hero live in the markup - a desktop one inside
+   .d-none.d-md-block and a mobile one inside .d-md-none - so the mobile
+   pieces carry their own classes instead of being addressed through the
+   Bootstrap display helpers.
+
+   JS contract (do not rename): .tops and .main-img are measured by the inline
+   script; .video-container + .all-container / .mobile-container are how
+   src/index/index.js finds the promo video element.
+   ========================================================================== */
+
+.hero {
+    /* Fallback until the inline script swaps in the live navbar height. */
+    margin-top: 91px;
+    color: white;
+}
+
+.hero img.line {
+    margin-top: -27px;
+}
+
+.main-img {
+    background-image: url("../../img/главная-картинка---фон_десктоп.webp");
+    background-position: center bottom;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.main-img .row {
+    align-items: flex-end;
+}
+
+/* --- Phone mockup -------------------------------------------------------- */
+/* GEOMETRY: the percentages below place the video inside the screen cut-out
+   of the photographed phone. They are calibrated against the artwork and are
+   expected to change per breakpoint when the artwork is re-cropped. */
+
+.hero-phone-col {
+    /* over the Bootstrap .row > * gutter margin */
+    margin-top: 0 !important;
+    display: flex;
+    align-items: flex-end;
+}
+
+.hero-phone {
+    position: relative;
+    display: inline-block;
+}
+
+.hero-phone-img {
+    width: 100%;
+}
+
+.video-container {
+    position: absolute;
+    overflow: hidden;
+    border-radius: 48px;
+    height: 84.5%;
+    width: 46%;
+    top: 2.5%;
+    left: 32.8%;
+}
+
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- Copy and actions ----------------------------------------------------- */
+
+.hero-content {
+    /* over the Bootstrap .row > * gutter margin; .dynamic-column keeps only
+       its JS role (the col-md-4 / col-md-5 swap). */
+    margin-top: 60px !important;
+}
+
+.hero-copy-lead {
+    margin-top: 3rem;
+}
+
+.hero-demo-actions {
+    margin-top: 34px;
+}
+
+.hero-mobile-demo-actions {
+    margin-bottom: 10px;
+}
+
+/* ============================================================================
+   Responsive - widest breakpoint first, viewport-height rules last
+   ========================================================================== */
+
+@media (max-width: 1400px) {
+    .video-container {
+        border-radius: 40px;
+    }
+
+    .hero-content {
+        margin-top: 2rem !important;
+    }
+
+    .hero-copy-lead {
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .hero-phone-img {
+        width: 116%;
+    }
+
+    .video-container {
+        border-radius: 38px;
+        height: 84.5%;
+        width: 53.1%;
+        top: 2.5%;
+        left: 38%;
+    }
+
+    /* iOS Safari leaves a gap under the artwork. Pull the wrapper, not the
+       image, so the screen percentages above stay correct. */
+    @supports (-webkit-touch-callout: none) {
+        .hero-phone {
+            margin-bottom: -0.25lh;
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .hero-copy {
+        font-size: 12px;
+    }
+
+    .hero-title {
+        font-size: 23px;
+    }
+
+    .hero-demo-actions {
+        margin-top: -20px;
+    }
+
+    .video-container {
+        border-radius: 28px;
+    }
+}
+
+@media (min-width: 768px) {
+    .mobile-container {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .all-container {
+        display: none;
+    }
+
+    .hero-phone-img {
+        width: 85%;
+        margin: 0;
+        display: block;
+    }
+
+    .hero-phone-mobile {
+        margin-left: -33%;
+        margin-top: 17px;
+    }
+
+    /* GEOMETRY: screen cut-out of the mobile artwork. The split border-radius
+       keeps the corners round on a non-square box. */
+    .mobile-container {
+        background: #000;
+        border-radius: 16% / 7.8%;
+        height: 58.7%;
+        width: 28.3%;
+        top: 1.5%;
+        left: 48.03%;
+    }
+
+    .mobile-container video {
+        transform: scale(1.04);
+        transform-origin: center;
+    }
+
+    .hero-mobile-actions {
+        /* over the Bootstrap .row > * width and gutter margin */
+        margin-top: -160px !important;
+        width: 93% !important;
+        margin-left: 13px;
+    }
+
+    .hero-mobile-row {
+        --bs-gutter-x: -1.5rem !important;
+    }
+}
+
+/* Taller phones get more air between the demo buttons and the contact CTA. */
+@media (min-width: 540px) and (min-height: 720px) {
+    .hero-mobile-demo-actions {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 414px) {
+    .hero-mobile-demo-actions {
+        margin-bottom: 7px;
+    }
+}

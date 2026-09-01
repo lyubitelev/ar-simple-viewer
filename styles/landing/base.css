@@ -1,0 +1,161 @@
+/* ============================================================================
+   Landing / base
+   ----------------------------------------------------------------------------
+   Owns: page background, Bootstrap container/card overrides and the few text /
+   spacing helpers that more than one section reuses.
+   Anything that belongs to a single section lives in that section's file.
+   ========================================================================== */
+
+/* Bootstrap paints <body> from --bs-body-bg. */
+body {
+    background-color: #DEDEDE !important;
+}
+
+/* Bootstrap's modal writes an inline padding-right on <body>; only !important
+   can beat an inline style. */
+body.modal-open {
+    padding-right: 0px !important;
+}
+
+/* --- Bootstrap grid gutters ---------------------------------------------- */
+
+.container {
+    --bs-gutter-x: 0rem !important;
+}
+
+.container-fluid {
+    --bs-gutter-x: 3.5rem !important;
+}
+
+/* --- Shared text helpers -------------------------------------------------- */
+
+.text {
+    text-align: center;
+    text-decoration: none;
+}
+
+.line {
+    width: 100%;
+}
+
+.text-sh-color {
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+.text-sh-color a {
+    color: #3d3131;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-100 {
+    font-weight: 100;
+}
+
+.fs-24 {
+    font-size: 24px;
+}
+
+/* --- Shared spacing helpers ---------------------------------------------- */
+
+.mt-c-3 {
+    margin-top: 3%;
+}
+
+/* Applied together with .row / heading margins, so it has to win. */
+.mt-c-4 {
+    margin-top: 4% !important;
+}
+
+.mb-c-2 {
+    margin-bottom: 2%;
+}
+
+.mb-c-3 {
+    margin-bottom: 3%;
+}
+
+.mb-c-5 {
+    margin-bottom: 5%;
+}
+
+.ml-15 {
+    margin-left: 15px;
+}
+
+.mr-15 {
+    margin-right: 15px;
+}
+
+/* --- Bootstrap card overrides shared by feature cards and pricing cards --- */
+
+.border-none {
+    --bs-card-border-radius: none !important;
+    --bs-card-border-color: none !important;
+}
+
+.card-text {
+    color: #767676;
+}
+
+.card-title {
+    word-wrap: normal;
+}
+
+/* --- Full page loader shown until window "load" --------------------------- */
+
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.93);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    z-index: 9999;
+}
+
+.loaded #loader {
+    display: none;
+}
+
+/* ============================================================================
+   Responsive — widest breakpoint first
+   ========================================================================== */
+
+/* .c-ft-32 / .c-ft-16 only exist below 1200px: above it the headings keep the
+   Bootstrap defaults. */
+@media (max-width: 1200px) {
+    .c-ft-32 {
+        font-size: 24px;
+    }
+
+    .c-ft-16 {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 991px) {
+    /* over Bootstrap .card-body padding */
+    .card-body {
+        padding: 5px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    /* over the Bootstrap .container width on the same element */
+    .section-narrow {
+        width: 90% !important;
+    }
+
+    /* card copy stays 14px even where .c-ft-16 is applied to the same node */
+    .card-text {
+        font-size: 14px !important;
+    }
+}
