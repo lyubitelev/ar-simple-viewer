@@ -77,10 +77,18 @@
 
 /* --- Copy and actions ----------------------------------------------------- */
 
+/* The row bottom-aligns its columns so the hand artwork stays welded to the
+   bottom of the band; the copy column does not want that alignment, so it
+   opts out and centres itself against the band instead. Only the desktop
+   hero has this column (the whole subtree is .d-none.d-md-block), so the
+   rule needs no breakpoint of its own.
+
+   This replaces the hand-set margin-top the column used to carry - 60px, and
+   2rem below 1400 - which only ever pushed the stack around while leaving it
+   flush against the bottom edge. .dynamic-column keeps only its JS role (the
+   col-md-4 / col-md-5 swap). */
 .hero-content {
-    /* over the Bootstrap .row > * gutter margin; .dynamic-column keeps only
-       its JS role (the col-md-4 / col-md-5 swap). */
-    margin-top: 60px !important;
+    align-self: center;
 }
 
 /* The hero copy is set the way the original layout set it: upper case, the
@@ -132,10 +140,6 @@
 @media (max-width: 1400px) {
     .video-container {
         border-radius: 40px;
-    }
-
-    .hero-content {
-        margin-top: 2rem !important;
     }
 
     .hero-copy-lead {
