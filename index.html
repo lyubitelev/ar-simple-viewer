@@ -1599,17 +1599,21 @@
 
             if (!track || !prevBtn || !nextBtn || !cards.length) return;
 
+            // Scroll offset that puts a card at the start of the scroll viewport.
+            // offsetLeft is measured from the offset parent, not from the track, so
+            // the track's own offset has to come back out of it - otherwise every
+            // card carries the carousel's page position as a constant bias.
+            function cardScrollLeft(card) {
+                return card.offsetLeft - track.offsetLeft;
+            }
+
             function getCurrentCardIndex() {
                 // Find the card closest to the start of the scroll viewport
-                const trackRect = track.getBoundingClientRect();
-                const trackLeft = trackRect.left + track.scrollLeft;
-                
                 let closestIndex = 0;
                 let closestDistance = Infinity;
 
                 cards.forEach((card, index) => {
-                    const cardLeft = card.offsetLeft;
-                    const distance = Math.abs(cardLeft - track.scrollLeft);
+                    const distance = Math.abs(cardScrollLeft(card) - track.scrollLeft);
                     
                     if (distance < closestDistance) {
                         closestDistance = distance;
@@ -1622,12 +1626,16 @@
 
             function updateButtonStates() {
                 const currentIndex = getCurrentCardIndex();
+                // A wide viewport fits several cards, so the track runs out of
+                // scroll before the last card can reach the start edge. There the
+                // end of the scroll range is the last position, not the last index.
+                const atEnd = Math.ceil(track.scrollLeft) >= track.scrollWidth - track.clientWidth - 1;
                 
                 // Disable prev button if at start
                 prevBtn.disabled = currentIndex === 0;
                 
                 // Disable next button if at end
-                nextBtn.disabled = currentIndex === cards.length - 1;
+                nextBtn.disabled = currentIndex === cards.length - 1 || atEnd;
             }
 
             function scrollToCard(index) {
@@ -1635,7 +1643,7 @@
                 
                 const card = cards[index];
                 track.scrollTo({
-                    left: card.offsetLeft,
+                    left: cardScrollLeft(card),
                     behavior: 'smooth'
                 });
             }

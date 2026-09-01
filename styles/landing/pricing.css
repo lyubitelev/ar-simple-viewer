@@ -52,50 +52,63 @@
     margin-inline: auto;
 }
 
-/* Carousel controls - below viewport */
+/* --- Carousel controls ---------------------------------------------------- */
+/* The section sits on the #DEDEDE page background, so the buttons are painted
+   solid in the same navy .site-header uses; a translucent white button is
+   invisible here. Hover/press stay on that hue instead of adding a colour. */
+
 .pricing-carousel-controls {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 8px;
     padding: 0;
+    margin-left: 25px;
 }
 
 .pricing-carousel-prev,
 .pricing-carousel-next {
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgb(13 39 65);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 6px;
-    padding: 10px 14px;
+    padding: 0;
     cursor: pointer;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
-    min-width: 44px;
-    min-height: 44px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+    width: 44px;
+    height: 44px;
     flex-shrink: 0;
     font-size: 0;
 }
 
 .pricing-carousel-prev:hover:not(:disabled),
 .pricing-carousel-next:hover:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.5);
+    background-color: rgb(24 61 96);
+    border-color: rgba(255, 255, 255, 0.45);
 }
 
-.pricing-carousel-prev:focus,
-.pricing-carousel-next:focus {
-    outline: 2px solid rgba(255, 255, 255, 0.5);
+.pricing-carousel-prev:active:not(:disabled),
+.pricing-carousel-next:active:not(:disabled) {
+    background-color: rgb(9 28 47);
+    transform: translateY(1px);
+}
+
+/* Replaces the previous white :focus ring, which was invisible on this
+   background. Keyboard focus only - a pointer click leaves no ring. */
+.pricing-carousel-prev:focus-visible,
+.pricing-carousel-next:focus-visible {
+    outline: 2px solid rgb(13 39 65);
     outline-offset: 2px;
 }
 
+/* Stays visible: the user has to keep seeing that the carousel has navigation. */
 .pricing-carousel-prev:disabled,
 .pricing-carousel-next:disabled {
-    opacity: 0.35;
+    opacity: 0.4;
     cursor: not-allowed;
-    border-color: rgba(255, 255, 255, 0.15);
 }
 
 .pricing-carousel-prev svg,
@@ -132,49 +145,6 @@
 
 .pricing-carousel-track::-webkit-scrollbar {
     display: none;
-}
-
-/* Navigation buttons */
-.pricing-carousel-prev,
-.pricing-carousel-next {
-    background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
-    padding: 8px 12px;
-    cursor: pointer;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-    min-width: 44px;
-    min-height: 44px;
-    flex-shrink: 0;
-}
-
-.pricing-carousel-prev:hover:not(:disabled),
-.pricing-carousel-next:hover:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.6);
-}
-
-.pricing-carousel-prev:focus,
-.pricing-carousel-next:focus {
-    outline: 2px solid rgba(255, 255, 255, 0.5);
-    outline-offset: 2px;
-}
-
-.pricing-carousel-prev:disabled,
-.pricing-carousel-next:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    border-color: rgba(255, 255, 255, 0.1);
-}
-
-.pricing-carousel-prev svg,
-.pricing-carousel-next svg {
-    width: 20px;
-    height: 20px;
 }
 
 /* Carousel indicator */
@@ -233,15 +203,16 @@
         padding-left: 12px;
     }
 
+    /* Percentage of the track, so a slice of the next card stays visible at
+       every mobile width - that preview is the swipe affordance. */
     .pricing-card {
-        flex: 0 0 clamp(260px, 85vw, 400px);
+        flex: 0 0 clamp(240px, 83%, 440px);
     }
 
     .pricing-carousel-prev,
     .pricing-carousel-next {
-        padding: 8px 10px;
-        min-width: 40px;
-        min-height: 40px;
+        width: 40px;
+        height: 40px;
     }
 
     .pricing-carousel-prev svg,
@@ -258,20 +229,4 @@
         padding-left: 8px;
     }
 
-    .pricing-card {
-        flex: 0 0 clamp(240px, 90vw, 350px);
-    }
-
-    .pricing-carousel-prev,
-    .pricing-carousel-next {
-        padding: 8px 10px;
-        min-width: 38px;
-        min-height: 38px;
-    }
-
-    .pricing-carousel-prev svg,
-    .pricing-carousel-next svg {
-        width: 16px;
-        height: 16px;
-    }
 }
