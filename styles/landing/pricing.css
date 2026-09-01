@@ -25,7 +25,7 @@
 
 .pricing-card {
     background-image: url("../../img/Frame 19.webp");
-    flex: 0 0 calc(50% - 12px);
+    flex: 0 0 clamp(280px, calc(100% - 48px), 520px);
     /* over the Bootstrap .card radius variables */
     --bs-card-inner-border-radius: none !important;
     --bs-card-border-radius: none !important;
@@ -49,23 +49,71 @@
 /* Hairline separator between the rows of a tariff card. */
 .pricing-divider {
     width: 50%;
+    margin-inline: auto;
+}
+
+/* Carousel controls - below viewport */
+.pricing-carousel-controls {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+}
+
+.pricing-carousel-prev,
+.pricing-carousel-next {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    padding: 10px 14px;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    min-width: 44px;
+    min-height: 44px;
+    flex-shrink: 0;
+    font-size: 0;
+}
+
+.pricing-carousel-prev:hover:not(:disabled),
+.pricing-carousel-next:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.pricing-carousel-prev:focus,
+.pricing-carousel-next:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+.pricing-carousel-prev:disabled,
+.pricing-carousel-next:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.pricing-carousel-prev svg,
+.pricing-carousel-next svg {
+    width: 20px;
+    height: 20px;
 }
 
 /* Carousel wrapper and viewport */
 .pricing-carousel-wrapper {
-    display: flex;
-    align-items: stretch;
-    gap: 12px;
-    position: relative;
-    padding: 0 4px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0;
 }
 
 .pricing-carousel-viewport {
-    flex: 1;
+    width: 100%;
     overflow: hidden;
-    border-radius: 0;
-    /* Contain scrolling context */
-    contain: layout style paint;
 }
 
 .pricing-carousel-track {
@@ -160,30 +208,38 @@
    Responsive
    ========================================================================== */
 
-/* Tablet: 768px - 1199px */
-@media (min-width: 768px) and (max-width: 1199px) {
-    .pricing-card {
-        flex: 0 0 calc(100% - 24px);
-    }
-}
-
 /* Desktop: 1200px and up */
 @media (min-width: 1200px) {
     .pricing-card {
-        flex: 0 0 calc(50% - 12px);
+        flex: 0 0 clamp(320px, calc(50% - 12px), 520px);
+    }
+}
+
+/* Tablet: 768px - 1199px */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .pricing-card {
+        flex: 0 0 clamp(300px, calc(100% - 48px), 480px);
+    }
+    
+    .pricing-carousel-track {
+        gap: 20px;
     }
 }
 
 /* Small screens: below 768px */
 @media (max-width: 767px) {
-    .pricing-carousel-wrapper {
-        gap: 8px;
-        padding: 0 2px;
+    .pricing-carousel-track {
+        gap: 16px;
+        padding-left: 12px;
+    }
+
+    .pricing-card {
+        flex: 0 0 clamp(260px, 85vw, 400px);
     }
 
     .pricing-carousel-prev,
     .pricing-carousel-next {
-        padding: 6px 8px;
+        padding: 8px 10px;
         min-width: 40px;
         min-height: 40px;
     }
@@ -193,44 +249,24 @@
         width: 18px;
         height: 18px;
     }
-
-    .pricing-carousel-track {
-        gap: 16px;
-    }
-
-    .pricing-card {
-        flex: 0 0 calc(85% - 8px);
-    }
-
-    .pricing-carousel-indicator-dot {
-        width: 6px;
-        height: 6px;
-    }
-
-    .pricing-carousel-indicator-dot.active {
-        width: 18px;
-    }
 }
 
 /* Extra small screens: below 576px */
 @media (max-width: 575px) {
-    .pricing-carousel-wrapper {
-        gap: 6px;
-    }
-
     .pricing-carousel-track {
         gap: 12px;
+        padding-left: 8px;
     }
 
     .pricing-card {
-        flex: 0 0 calc(90% - 6px);
+        flex: 0 0 clamp(240px, 90vw, 350px);
     }
 
     .pricing-carousel-prev,
     .pricing-carousel-next {
-        padding: 4px 6px;
-        min-width: 36px;
-        min-height: 36px;
+        padding: 8px 10px;
+        min-width: 38px;
+        min-height: 38px;
     }
 
     .pricing-carousel-prev svg,

@@ -920,11 +920,6 @@
         <img loading="lazy" data-src="image.webm" class="line">
         <h1 id="plans" class="c-ft-32 mt-c-4 text-center">Тарифы</h1>
         <div class="mt-c-4 pricing-carousel-wrapper">
-            <button class="pricing-carousel-prev" aria-label="Предыдущий тариф">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
             <div class="pricing-carousel-viewport">
                 <div class="pricing-carousel-track con-price">
                     <div class="card pricing-card">
@@ -1209,13 +1204,19 @@
             </div>
                 </div>
             </div>
-            <button class="pricing-carousel-next" aria-label="Следующий тариф">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        </div>
+        <div class="pricing-carousel-controls mt-c-3">
+            <button class="pricing-carousel-prev" type="button" aria-label="Предыдущий тариф">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <button class="pricing-carousel-next" type="button" aria-label="Следующий тариф">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
         </div>
-        <div class="pricing-carousel-indicator"></div>
         <div class="mt-c-3 container-fluid">
             <h5 class="card-text c-ft-16 text-center">Без подписки — оплата по факту: 0,15 ₽ за оплачиваемый
                 3D/AR-просмотр. Помесячный расход ограничен предсказуемым лимитом.</h5>
@@ -1591,77 +1592,84 @@
         }
 
         function initPricingCarousel() {
-            const viewport = document.querySelector('.pricing-carousel-viewport');
             const track = document.querySelector('.pricing-carousel-track');
             const prevBtn = document.querySelector('.pricing-carousel-prev');
             const nextBtn = document.querySelector('.pricing-carousel-next');
-            const indicatorContainer = document.querySelector('.pricing-carousel-indicator');
             const cards = document.querySelectorAll('.pricing-card');
 
             if (!track || !prevBtn || !nextBtn || !cards.length) return;
 
-            // Create indicator dots
-            const dots = [];
-            cards.forEach((_, index) => {
-                const dot = document.createElement('button');
-                dot.className = 'pricing-carousel-indicator-dot';
-                if (index === 0) dot.classList.add('active');
-                dot.setAttribute('aria-label', `Тариф ${index + 1}`);
-                dot.addEventListener('click', () => scrollToCard(index));
-                dots.push(dot);
-                indicatorContainer.appendChild(dot);
-            });
+            function getCurrentCardIndex() {
+                // Find the card closest to the start of the scroll viewport
+                const trackRect = track.getBoundingClientRect();
+                const trackLeft = trackRect.left + track.scrollLeft;
+                
+                let closestIndex = 0;
+                let closestDistance = Infinity;
 
-            function updateCarouselState() {
-                const scrollLeft = track.scrollLeft;
-                const trackWidth = track.scrollWidth;
-                const viewportWidth = viewport.clientWidth;
-
-                // Disable/enable buttons
-                prevBtn.disabled = scrollLeft <= 0;
-                nextBtn.disabled = scrollLeft >= trackWidth - viewportWidth - 5; // 5px tolerance
-
-                // Update active dot
-                const cardWidth = cards[0]?.offsetWidth || 0;
-                const currentCardIndex = Math.round(scrollLeft / (cardWidth + 24)); // 24px is gap
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentCardIndex);
+                cards.forEach((card, index) => {
+                    const cardLeft = card.offsetLeft;
+                    const distance = Math.abs(cardLeft - track.scrollLeft);
+                    
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestIndex = index;
+                    }
                 });
+
+                return closestIndex;
+            }
+
+            function updateButtonStates() {
+                const currentIndex = getCurrentCardIndex();
+                
+                // Disable prev button if at start
+                prevBtn.disabled = currentIndex === 0;
+                
+                // Disable next button if at end
+                nextBtn.disabled = currentIndex === cards.length - 1;
             }
 
             function scrollToCard(index) {
-                const card = cards[index];
-                if (!card) return;
+                if (index < 0 || index >= cards.length) return;
                 
+                const card = cards[index];
                 track.scrollTo({
-                    left: card.offsetLeft - (viewport.clientWidth - card.offsetWidth) / 2,
+                    left: card.offsetLeft,
                     behavior: 'smooth'
                 });
             }
 
-            function scrollByAmount(direction) {
-                const cardWidth = cards[0]?.offsetWidth || 0;
-                const gap = 24;
-                const scrollAmount = cardWidth + gap;
+            function navigateByOne(direction) {
+                const currentIndex = getCurrentCardIndex();
+                const nextIndex = direction === 'next' 
+                    ? Math.min(currentIndex + 1, cards.length - 1)
+                    : Math.max(currentIndex - 1, 0);
                 
-                track.scrollBy({
-                    left: direction === 'next' ? scrollAmount : -scrollAmount,
-                    behavior: 'smooth'
-                });
+                if (nextIndex !== currentIndex) {
+                    scrollToCard(nextIndex);
+                }
             }
 
             // Event listeners
-            prevBtn.addEventListener('click', () => scrollByAmount('prev'));
-            nextBtn.addEventListener('click', () => scrollByAmount('next'));
-            track.addEventListener('scroll', updateCarouselState);
+            prevBtn.addEventListener('click', () => {
+                navigateByOne('prev');
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                navigateByOne('next');
+            });
 
-            // Handle resize
+            // Update button states during scroll (including swipe)
+            track.addEventListener('scroll', updateButtonStates, { passive: true });
+
+            // Update on window resize
             window.addEventListener('resize', () => {
-                updateCarouselState();
+                updateButtonStates();
             });
 
             // Initial state
-            updateCarouselState();
+            updateButtonStates();
         }
 
         function createBtnAndClickListen(classNameWithDot, action) {
