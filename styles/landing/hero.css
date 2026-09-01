@@ -83,6 +83,36 @@
     margin-top: 60px !important;
 }
 
+/* The hero copy is set the way the original layout set it: upper case, the
+   paragraphs running together as one block, and even line breaks. The old
+   markup got that with literal capitals and seven hand-placed <br>; doing it
+   in CSS keeps the wording untouched and survives a copy rewrite. */
+.hero-copy {
+    text-transform: uppercase;
+    /* the paragraphs read as one block, as they did when they were one <p> */
+    margin-bottom: 0;
+    text-wrap: pretty;
+}
+
+/* The eyebrow keeps its gap before the heading. */
+.hero-eyebrow {
+    margin-bottom: 1rem;
+}
+
+/* Evens out the line lengths — the modern equivalent of the hand-set <br>. */
+.hero-title {
+    text-wrap: balance;
+}
+
+/* Line measure. On desktop the grid column already caps it (~424px), so this
+   only bites on narrow screens, where the copy otherwise spans the whole
+   container. */
+.hero-title,
+.hero-copy {
+    max-width: 34rem;
+    margin-inline: auto;
+}
+
 .hero-copy-lead {
     margin-top: 3rem;
 }
@@ -136,16 +166,15 @@
 }
 
 @media (max-width: 991px) {
+    /* .hero-demo-actions here used to carry margin-top: -20px. With the hero copy
+       set in upper case that nudge drove the CTA row into the last line of the
+       copy on 768-991, so the row keeps the 34px rhythm it has everywhere else. */
     .hero-copy {
         font-size: 12px;
     }
 
     .hero-title {
         font-size: 23px;
-    }
-
-    .hero-demo-actions {
-        margin-top: -20px;
     }
 
     .video-container {
