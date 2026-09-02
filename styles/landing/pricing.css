@@ -222,6 +222,44 @@
         flex: 0 0 clamp(240px, 83%, 440px);
     }
 
+    .pricing-card .card-body {
+        padding: 14px 12px 12px !important;
+    }
+
+    .pricing-card .card-title {
+        font-size: clamp(19px, 5vw, 22px);
+        line-height: 1.2;
+        margin-top: 0 !important;
+        margin-bottom: 8px;
+    }
+
+    .pricing-card-feature {
+        font-size: clamp(15px, 4.1vw, 17px);
+        line-height: 1.35;
+        margin-bottom: 8px;
+    }
+
+    .pricing-card .pricing-divider,
+    .pricing-card-price {
+        margin-bottom: 8px;
+    }
+
+    .pricing-card-price {
+        line-height: 1.15;
+    }
+
+    .pricing-card-price .fs-24 {
+        font-size: clamp(16px, 4.5vw, 20px);
+    }
+
+    .pricing-card .card-body > br {
+        display: none;
+    }
+
+    .pricing-card-cta {
+        margin-top: 4px;
+    }
+
     .pricing-carousel-prev,
     .pricing-carousel-next {
         width: 40px;
