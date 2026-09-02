@@ -40,6 +40,8 @@
     text-align: center;
     display: flex;
     flex-direction: column;
+    flex: 1 1 auto;
+    height: 100%;
 }
 
 .pricing-card .card-body span {
@@ -50,6 +52,17 @@
 .pricing-divider {
     width: 50%;
     margin-inline: auto;
+}
+
+/* Feature copy may wrap differently between tariffs. Let that difference use
+   the flexible space above the shared footer so price and CTA stay anchored. */
+.pricing-card-price {
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+.pricing-card-cta {
+    flex-shrink: 0;
 }
 
 /* --- Carousel controls ---------------------------------------------------- */
