@@ -4,10 +4,10 @@
    Owns the first screen: the photo band, the phone mockup with the promo
    video, the hero copy and the AR / XR / contact call-to-action rows.
 
-   Two variants of the same hero live in the markup - a desktop one inside
-   .d-none.d-md-block and a mobile one inside .d-md-none - so the mobile
-   pieces carry their own classes instead of being addressed through the
-   Bootstrap display helpers.
+   The hero is one .hero-row for both breakpoints, so the copy - and with it
+   the page's only <h1> - exists once in the DOM. Its three columns (desktop
+   phone, copy + desktop CTA, mobile stage) are swapped by the Bootstrap
+   display helpers; the mobile-only pieces keep their own classes.
 
    JS contract (do not rename): .tops and .main-img are measured by the inline
    script; .video-container + .all-container / .mobile-container are how
@@ -79,9 +79,9 @@
 
 /* The row bottom-aligns its columns so the hand artwork stays welded to the
    bottom of the band; the copy column does not want that alignment, so it
-   opts out and centres itself against the band instead. Only the desktop
-   hero has this column (the whole subtree is .d-none.d-md-block), so the
-   rule needs no breakpoint of its own.
+   opts out and centres itself against the band instead. Below 768px the
+   column is alone on its flex line, so the rule needs no breakpoint of its
+   own.
 
    This replaces the hand-set margin-top the column used to carry - 60px, and
    2rem below 1400 - which only ever pushed the stack around while leaving it
@@ -229,6 +229,13 @@
         transform-origin: center;
     }
 
+    /* The mobile copy used to carry .mt-5 on the eyebrow. The copy block is
+       shared with the desktop hero now, so the offset belongs to the
+       breakpoint that wants it. */
+    .hero-eyebrow {
+        margin-top: 3rem;
+    }
+
     /* --- Mobile hero stage ---------------------------------------------------
        .hero-mobile-stage is the coordinate owner for both the phone artwork and
        the CTA block. The artwork flows naturally; the CTA is anchored to the
@@ -237,7 +244,7 @@
 
        The stage reserves enough height for the artwork via min-height so that
        the absolutely-positioned CTA has physical space to sit in. */
-    .hero-mobile-row {
+    .hero-row {
         --bs-gutter-x: 0;
         margin-inline: 0;
     }

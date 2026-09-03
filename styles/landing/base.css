@@ -54,6 +54,27 @@ body.modal-open {
     font-size: min(calc(1.375rem + 1.5vw), 2.5rem);
 }
 
+/* Keeps the <h5> type scale on the elements whose tag changed for the document
+   outline: the card and tariff titles, the headings now marked up at the level
+   their position calls for, and the paragraph that opened its block as an <h5>.
+   Declared ahead of the responsive block below, so .c-ft-32 / .c-ft-16 still
+   take over under 1200px exactly as the tag defaults did. */
+.card-title,
+.heading-sm,
+.section-copy-lead {
+    font-size: 1.25rem;
+}
+
+/* Narrative copy that was marked up as <h5>/<h6> only for its size. Bootstrap
+   headings are 500 / 1.2 / 0.5rem bottom margin where body text is 400 / 1.5 /
+   1rem, so a bare <p> would reflow every block this appears in. The .mb-c-*
+   helpers below still win wherever a block sets its own bottom spacing. */
+.section-copy {
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
 .fw-500 {
     font-weight: 500;
 }

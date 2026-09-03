@@ -79,12 +79,8 @@
     padding: 5px;
 }
 
-/* The card titles are <h3> for the outline; these keep the h5 type scale they
-   were drawn at. */
-.feature-card .card-title {
-    font-size: 1.25rem;
-}
-
+/* The card titles are <h3> for the outline. Their desktop size is the shared
+   .card-title rule in base.css; the mobile card is tighter. */
 .feature-card-body .card-title {
     font-size: 16px;
 }
@@ -99,6 +95,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+/* Mobile grouping label inside the "Покажите товар…" block: it puts a break
+   between the interactive preview with its CTA and the explanatory copy that
+   follows, which is what the removed "От простого к бесконечности" block used
+   to provide. Balanced wrapping instead of a hand-placed <br>. */
+.subsection-title {
+    text-wrap: balance;
 }
 
 /* GEOMETRY: the iframe is positioned inside the screen of a phone photo, so
@@ -165,12 +169,6 @@
     margin-left: 50px;
 }
 
-.process-content p {
-    color: black;
-    font-size: 32px;
-    font-weight: bold;
-}
-
 /* GEOMETRY: the archive button is meant to overlap the teaser image. */
 .process-archive-image {
     width: 100%;
@@ -206,14 +204,6 @@
 
     .feature-card {
         width: 10rem;
-    }
-
-    /* This is the free start CTA label. It sits on a fixed-height plate that
-       is only as wide as its column, so below ~400px a flat 23px wraps to two
-       lines; min() keeps it on one line down to the narrowest phone. */
-    .process-content p {
-        font-size: min(23px, 5.8vw);
-        margin-top: 8px;
     }
 }
 

@@ -54,11 +54,22 @@
     margin-inline: auto;
 }
 
+/* The feature rows and the price are card content, not headings, so they are
+   <p>. These two rules keep the type scale the <h5> tag used to give them; the
+   mobile block at the bottom of this file still overrides both. */
+.pricing-card-feature {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
 /* Feature copy may wrap differently between tariffs. Let that difference use
    the flexible space above the shared footer so price and CTA stay anchored. */
 .pricing-card-price {
     margin-top: auto;
     flex-shrink: 0;
+    font-weight: 500;
+    line-height: 1.2;
 }
 
 .pricing-card-cta {

@@ -100,10 +100,18 @@
     margin-left: -10px;
 }
 
-/* --- Variant: process caption plate --------------------------------------- */
+/* --- Variant: free start CTA plate ---------------------------------------- */
 
 .process-cta-label {
     margin-top: -60px;
+}
+
+/* Addressed through the plate rather than through the surrounding column: the
+   free start copy beside it is <p> as well. */
+.process-cta-label p {
+    color: black;
+    font-size: 32px;
+    font-weight: bold;
 }
 
 /* --- Variant: pricing connect button -------------------------------------- */
@@ -223,6 +231,14 @@
 
     .process-cta-label {
         margin-left: 25px;
+    }
+
+    /* The plate is only as wide as its column, so below ~400px a flat 23px
+       wraps to two lines; min() keeps the label on one line down to the
+       narrowest phone. */
+    .process-cta-label p {
+        font-size: min(23px, 5.8vw);
+        margin-top: 8px;
     }
 }
 
