@@ -8,8 +8,8 @@
    responsive nudges at the bottom wins.
 
    .svg-button-ar / .svg-button-xr / .wa-contact-us / .go-arhive /
-   .send-order / .send-order-2 / .empty-send-btn / .modal-btn are click hooks
-   read by the page scripts - do not rename them.
+   .test-now-btn / .send-order / .send-order-2 / .empty-send-btn / .modal-btn
+   are click hooks read by the page scripts - do not rename them.
    ========================================================================== */
 
 .svg-button,
@@ -24,14 +24,9 @@
 
 .svg-button,
 .svg-button-ar,
-.svg-button-xr {
-    cursor: pointer;
-}
-
-/* Not clickable: a caption plate in the process block that happens to be a
-   <button> in the markup. */
+.svg-button-xr,
 .test-now-btn {
-    cursor: default;
+    cursor: pointer;
 }
 
 .svg-button,

@@ -2,8 +2,8 @@
    Landing / sections
    ----------------------------------------------------------------------------
    Owns the mid-page content blocks: "О продукте" + its feature cards, the
-   "Развивайте свой бизнес" block with the 3D preview phone, and "Процесс"
-   with the archive teaser.
+   "Покажите товар в 3D, AR и XR" block with the 3D preview phone, and the free
+   start block with the archive teaser.
 
    JS contract (do not rename): .demo-ifr / .demo-ifr2 carry the .ar-preview
    iframe that src/index/index.js points at ./viewer.html.
@@ -35,10 +35,6 @@
 
 .about-icon-size {
     height: 90px;
-}
-
-.about-mobile h1 {
-    margin-top: 15px;
 }
 
 /* --- Feature cards -------------------------------------------------------- */
@@ -83,7 +79,13 @@
     padding: 5px;
 }
 
-.feature-card-body h5 {
+/* The card titles are <h3> for the outline; these keep the h5 type scale they
+   were drawn at. */
+.feature-card .card-title {
+    font-size: 1.25rem;
+}
+
+.feature-card-body .card-title {
     font-size: 16px;
 }
 
@@ -206,8 +208,11 @@
         width: 10rem;
     }
 
+    /* This is the free start CTA label. It sits on a fixed-height plate that
+       is only as wide as its column, so below ~400px a flat 23px wraps to two
+       lines; min() keeps it on one line down to the narrowest phone. */
     .process-content p {
-        font-size: 23px;
+        font-size: min(23px, 5.8vw);
         margin-top: 8px;
     }
 }
@@ -223,8 +228,51 @@
         display: none;
     }
 
+    /* One markup serves both breakpoints: the "О продукте" row stacks here. */
+    .about-row {
+        --bs-gutter-x: 0;
+        flex-direction: column;
+        /* over the Bootstrap .align-items-center utility on the same element */
+        align-items: stretch !important;
+        gap: 8px;
+        /* over the desktop .about-row margins */
+        margin-top: 15px !important;
+        margin-bottom: 16px;
+    }
+
+    .about-row > .col-auto,
+    .about-row > .col:last-child {
+        flex: 0 0 auto;
+        width: 100%;
+        /* over the Bootstrap .pe-4 utility */
+        padding-right: 0 !important;
+    }
+
+    /* keeps the paragraph at the size and colour it had in the mobile-only
+       markup this block replaced */
+    .about-text {
+        font-size: 16px;
+        color: var(--bs-body-color);
+    }
+
     .process-archive-image {
         margin-bottom: -95px;
+    }
+
+    /* Stacked here, so the .row negative gutter margins would push the block
+       past the viewport. Zero them and spend the gutter on the side inset the
+       .container-fluid blocks above this one already use. */
+    .process-row {
+        --bs-gutter-x: 3.5rem;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    /* the columns no longer sit side by side, so the desktop gutter between
+       them would only indent the copy */
+    .process-content {
+        margin-left: 0;
+        margin-top: 20px;
     }
 }
 

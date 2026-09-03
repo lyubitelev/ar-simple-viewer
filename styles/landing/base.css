@@ -46,6 +46,14 @@ body.modal-open {
     color: #3d3131;
 }
 
+/* Section headings below the hero are <h2> for the document outline. This keeps
+   the type scale the page had while they were <h1>: min() reproduces Bootstrap's
+   h1 ramp, which caps at 2.5rem exactly at a 1200px viewport. .c-ft-32 still
+   takes over below 1200px - it is declared later in this file. */
+.section-title {
+    font-size: min(calc(1.375rem + 1.5vw), 2.5rem);
+}
+
 .fw-500 {
     font-weight: 500;
 }
