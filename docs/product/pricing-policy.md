@@ -29,8 +29,8 @@ The intended commercial product ladder is:
 - **AR** — place/view one product in the customer's real space without installing an app.
 - **XR Room** — work with multiple products in one spatial scene: place, remove, move, rotate and scale products; save the room state in the platform; reopen the same room from a link/QR on another device while remaining in the same physical room; build a product composition from the merchant's catalog.
 - **Configurator** — change materials, colors, dimensions, visible parts and supported product variants.
-- **Commerce** — configuration-aware price, lead/order/cart handoff and commercial analytics.
-- **Enterprise** — API, bulk catalog workflows, PIM/ERP/CRM integration, white-label, SLA and custom deployment requirements.
+- **Commerce** — standard handoff of selected products/configuration into the merchant's shopping flow plus commercial analytics.
+- **Enterprise** — API, bulk catalog workflows, PIM/ERP/CRM integration, advanced white-label, SLA and custom deployment requirements.
 
 XR room persistence does **not** currently promise that a spatial room can be sent to a person in another physical location and be reconstructed there with the same real-world alignment. Cross-device continuation is intended for the same physical room/spatial context.
 
@@ -77,19 +77,20 @@ Business answers:
 
 > What happens after AR/XR and how does spatial interaction influence shopping behaviour and sales?
 
-Planned Business analytics includes Pro analytics plus, where the required ecommerce integration exists:
+Business analytics includes Pro analytics plus, where the required ecommerce events can be observed reliably:
 
 - traffic source / referrer / UTM attribution;
 - device/browser/channel breakdowns where useful;
-- funnel steps such as product → 3D → AR/XR → cart → checkout → purchase;
+- funnel steps such as product → 3D → AR/XR → selected products → cart → checkout → purchase;
 - cart, checkout and purchase events;
 - conversion by SKU;
+- revenue / order-value attribution when the merchant provides reliable purchase data;
 - AR/XR-assisted conversion versus non-AR/XR journeys when the comparison can be measured correctly;
-- products commonly placed together in one XR room;
+- products commonly placed together in one XR room / product affinity;
 - products placed and then removed from a room;
 - configurator selections such as materials, colors, options and variants;
 - configuration-to-cart / configuration-to-order behaviour;
-- export of commercial analytics data.
+- CSV export of commercial analytics data.
 
 Commerce metrics must not be claimed when there is no reliable integration that can observe the corresponding cart/order/purchase event.
 
@@ -188,7 +189,7 @@ This is not merely a traffic-discount version of Start. A merchant may rationall
 
 - **990 ₽ / month**;
 - up to **10,000 billable AR/XR sessions per month included**;
-- working overage: **0.10 ₽ per billable AR/XR session above the included allowance**;
+- overage: **0.10 ₽ per billable AR/XR session above the included allowance**;
 - usage must still have a predictable cap / upgrade path rather than an unlimited surprise bill.
 
 #### Includes
@@ -207,7 +208,7 @@ Everything in Start plus:
 - Pro engagement analytics defined in section 3;
 - standard support.
 
-The selected product/SKU list is deliberately part of Pro because it completes the room-planning experience. Actual merchant cart, checkout, purchase handoff and revenue attribution remain Business/Commerce concerns unless explicitly implemented as a separately quoted integration.
+The selected product/SKU list is deliberately part of Pro because it completes the room-planning experience. Actual merchant cart, checkout, purchase handoff and revenue attribution remain Business concerns.
 
 #### Pro analytics value
 
@@ -249,22 +250,87 @@ Public tariff message should emphasize:
 
 `Pro` is the approved working tariff name. Do not call this tariff `AR Commerce` unless it actually includes commerce/cart/order functionality.
 
-### Business — 2,990 ₽ / month (working, not yet fully approved)
+### Business — 2,990 ₽ / month
 
-For stores and catalogs that need to connect spatial product interaction with commercial behaviour.
+For merchants that want to connect the spatial product experience directly to the shopping flow and understand how AR/XR contributes to commercial outcomes.
 
-Current conceptual boundary:
+The core value of Business is:
 
-- includes Pro functionality;
-- includes commerce analytics defined in section 3;
-- higher usage allowance (working value: up to **50,000 billable AR/XR sessions per month**);
-- white-label / reduced platform branding where technically supported;
-- priority support;
-- business-oriented embedding/integration options as they become available.
+> **XR → selected products → cart + commerce analytics.**
 
-Business pricing, final traffic allowance, overage and exact feature list must be approved separately before being treated as final.
+Business is not merely Pro with a larger traffic allowance. It adds the standard commerce handoff and the analytics needed to understand what happens after spatial interaction.
 
-### Enterprise — custom
+#### Pricing
+
+- **2,990 ₽ / month**;
+- up to **50,000 billable AR/XR sessions per month included**;
+- overage: **0.05 ₽ per billable AR/XR session above the included allowance**;
+- usage still requires a predictable cap / Enterprise upgrade path rather than an unlimited surprise bill.
+
+#### Includes
+
+Everything in Pro plus:
+
+- standard **precheck → merchant cart** flow;
+- standard JS/API contract for handing selected SKU/variant/configuration data to the merchant's storefront;
+- standard callbacks/events needed to observe cart/checkout/purchase steps when the merchant can provide them;
+- Business commerce analytics defined in section 3;
+- traffic source/referrer/UTM attribution;
+- commerce funnel reporting;
+- conversion by SKU;
+- revenue attribution when reliable purchase/order-value data is available;
+- product-affinity / products commonly placed together in XR;
+- configurator analytics where the configurator exposes the required events;
+- CSV export of commercial analytics;
+- reduced/neutral platform branding where technically supported;
+- priority support.
+
+The **standard JS/API commerce contract is part of the Business subscription**. A merchant can integrate against that documented contract without paying a separate platform fee for the contract itself.
+
+If the merchant needs Art Vision Tech to manually adapt or implement the integration for a specific storefront, CMS, legacy system or custom checkout, that engineering work is quoted separately.
+
+#### Business analytics value
+
+The merchant should be able to answer questions such as:
+
+- which traffic sources lead to AR/XR interaction;
+- which products move from XR into the selected list/cart;
+- where customers leave the funnel;
+- which SKU and configurations convert best;
+- which products are commonly combined in the same room;
+- how much observed revenue is associated with AR/XR-assisted journeys;
+- how commerce performance changes over time.
+
+Business may show revenue or purchase conversion only when the merchant integration provides reliable corresponding events. The platform must not invent attribution from incomplete data.
+
+#### Why customers upgrade from Pro
+
+There are two independent upgrade reasons:
+
+1. **Economics:** around higher traffic volumes, Business becomes preferable to accumulating Pro overage.
+2. **Commercial value:** the merchant wants the XR composition to continue into cart/checkout and wants to measure commercial outcomes rather than engagement alone.
+
+#### Explicit Business boundaries
+
+Business includes the standard commerce integration contract, but does **not** include unlimited custom engineering.
+
+Quoted separately or moved to Enterprise when appropriate:
+
+- manual/custom integration for a specific ecommerce implementation;
+- custom adapters for legacy storefronts/CMS/checkout logic;
+- PIM / ERP / CRM integration;
+- bespoke APIs designed around one customer's internal systems;
+- custom domain / advanced white-label requirements;
+- private or dedicated deployment;
+- dedicated SLA;
+- bespoke security/infrastructure requirements;
+- non-standard XR/commerce behavior outside the supported platform contract.
+
+Public tariff message should emphasize:
+
+> **Business — превратите XR в измеримый путь к продаже.** Передавайте выбранные товары в корзину и смотрите, какие AR/XR-сценарии, товары и комбинации реально доходят до покупки.
+
+## 5. Enterprise — custom
 
 For requirements that should not distort self-service SaaS pricing.
 
@@ -272,7 +338,7 @@ Typical scope:
 
 - very high traffic;
 - dedicated SLA/support;
-- API access;
+- bespoke API/integration requirements beyond the standard Business commerce contract;
 - bulk catalog operations;
 - PIM / ERP / CRM integration;
 - custom domains and advanced white-label;
@@ -281,7 +347,7 @@ Typical scope:
 
 Enterprise pricing is quoted individually.
 
-## 5. Start usage billing rules
+## 6. Start usage billing rules
 
 Start is the platform's usage-based entry tariff. A separate generic pay-as-you-go tariff is not needed at launch.
 
@@ -301,7 +367,7 @@ Rules:
 
 The original **7 ₽ per view** pricing is retired.
 
-## 6. 3D content services
+## 7. 3D content services
 
 3D production is **not included implicitly in SaaS subscription pricing**.
 
@@ -330,7 +396,7 @@ Working price: **from 3,000 ₽ per model**.
 
 The final price depends on complexity and source material. Complex products must be quoted separately rather than forced into the minimum price.
 
-## 7. Configurator services
+## 8. Configurator services
 
 A product configurator is a separate commercial value layer, not a free side effect of hosting a model.
 
@@ -350,29 +416,32 @@ This is a minimum entry price, not a promise that every configurator can be buil
 
 Reusable generic configurator capabilities may later become part of higher SaaS plans.
 
-## 8. Integration and custom development
+## 9. Integration and custom development
 
-The following work is quoted separately:
+Business includes a **standard documented commerce handoff contract** for selected products/configurations and standard commerce events. Using that supported contract is part of the tariff.
 
-- ecommerce integration;
-- catalog synchronization;
-- Bitrix / WooCommerce / Shopify / OpenCart / custom storefront integration;
+The following engineering work is quoted separately:
+
+- manual ecommerce integration performed by Art Vision Tech;
+- custom storefront/CMS/checkout adapters;
+- catalog synchronization outside the standard supported path;
+- Bitrix / WooCommerce / Shopify / OpenCart / custom storefront work when custom implementation is required;
 - PIM / ERP / CRM integration;
-- custom APIs;
+- bespoke APIs;
 - bespoke XR behavior outside the standard product;
 - non-standard configurators;
 - special deployment/security requirements.
 
 Do not hide software-development work inside a low monthly subscription.
 
-## 9. Public pricing presentation
+## 10. Public pricing presentation
 
 The landing page should communicate the product hierarchy clearly:
 
 1. **3D Viewer is available on every tariff.**
 2. **Start:** 0 ₽/month, individual-product AR, pay for actual AR usage.
 3. **Pro:** 990 ₽/month, multi-product XR Room + room persistence/continuation + engagement analytics + included usage.
-4. **Business:** commerce analytics and business integration value; exact final package still requires approval.
+4. **Business:** 2,990 ₽/month, standard XR-to-cart handoff + commerce analytics + higher included usage.
 5. **Already have a 3D model?** Use it without a model creation fee.
 6. **No model?** We can create one from **3,000 ₽**.
 7. **Model needs preparation?** Optimization from **1,000 ₽**.
@@ -386,11 +455,12 @@ Avoid selling vague "XR innovation". Sell concrete outcomes:
 - combine several catalog products in the customer's room with Pro/XR;
 - save and continue the same room on another device in the same physical space;
 - understand product engagement with Pro analytics;
+- pass selected products into the merchant's shopping flow with Business;
 - understand commercial impact with Business analytics;
 - embed the experience into a product page;
 - customize the product when required.
 
-## 10. Pricing constraints
+## 11. Pricing constraints
 
 - Do not reintroduce uncapped 7 ₽/view billing.
 - Do not bill Start for ordinary 3D Viewer preview as if it were an AR session.
@@ -398,28 +468,31 @@ Avoid selling vague "XR innovation". Sell concrete outcomes:
 - Do not expose engagement analytics on Start beyond the information needed for billing transparency.
 - Do not present XR room sharing between unrelated physical locations as a supported Pro capability.
 - Do not claim commerce conversion/revenue analytics without the integration required to observe those events reliably.
+- Do not charge an extra platform fee merely to expose the standard Business JS/API commerce handoff contract.
+- Do not include arbitrary custom ecommerce engineering in the Business subscription.
 - Do not bundle manual 3D production into every subscription by default.
 - Do not promise unlimited custom development inside Business/Enterprise subscriptions.
 - Do not add arbitrary plan differences only to make a pricing table look larger.
 - Plan boundaries should correspond to real customer value or real operating cost.
 - Pricing numbers are commercial configuration, not domain constants: when implementation begins, they must not be duplicated as unexplained hardcoded values across the frontend/backend.
 
-## 11. Open questions before public launch
+## 12. Open questions before public launch
 
 These values are intentionally left for validation rather than invented now:
 
 - exact definition and duration of a billable AR session on Start;
-- exact definition/deduplication of billable AR/XR sessions on Pro;
+- exact definition/deduplication of billable AR/XR sessions on Pro/Business;
 - final Start usage cap and automatic upgrade mechanics;
 - final Pro overage/cap mechanics;
+- final Business cap / Enterprise upgrade threshold;
 - XR room persistence format, retention period and cross-device resume mechanics;
-- final Business traffic allowance, price and overage;
 - exact analytics event schema and retention policy;
+- exact standard Business JS/API commerce contract and event acknowledgement semantics;
 - maximum supported model size per plan;
 - model/catalog limits, if any;
 - annual-payment discount;
 - VAT/tax presentation;
-- exact white-label/domain limits;
+- exact reduced-branding versus Enterprise white-label/domain boundary;
 - whether Start's **0 ₽ monthly fee** remains permanent after validation.
 
 These questions should be resolved using actual infrastructure measurements and first-customer feedback rather than competitor imitation alone.
