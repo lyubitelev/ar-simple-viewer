@@ -262,7 +262,22 @@
        them would only indent the copy */
     .process-content {
         margin-left: 0;
-        margin-top: 20px;
+        /* Air between the teaser and the copy. This is not the gap you see:
+           the negative margin-bottom above pulls the button up over the
+           artwork, so the column ends at the button while the image itself
+           hangs 9-15px lower. The painted edge of the image is what the copy
+           sits under, so the margin has to cover that overhang too - 52px
+           here reads as ~40px of air at 375px and stays inside 32-48px from
+           323px up to the 767px breakpoint. */
+        margin-top: 52px;
+    }
+
+    /* .mb-c-5 is a percentage of the container width, so the gap under the
+       heading collapses exactly where the copy is tightest - 19px at 430px
+       down to 13px at 323px. Pin it to the block instead; the paragraphs
+       below keep the shared helper and their own rhythm. */
+    .process-content .section-title {
+        margin-bottom: 26px;
     }
 }
 
