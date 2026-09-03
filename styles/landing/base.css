@@ -187,4 +187,15 @@ body.modal-open {
     .card-text {
         font-size: 14px !important;
     }
+
+    /* Stacked, every section heading gets the full column width, so they should
+       all read the same way. Four of them carry the Bootstrap .text-center
+       utility and two ("О продукте", "Попробуйте 3D и AR ...") never did, which
+       left the page alternating between centred and flush-left titles. Centre
+       them here rather than adding the utility to the two stragglers: on the
+       desktop layout those two sit beside their artwork and are meant to stay
+       left, so the alignment belongs to the breakpoint, not to the markup. */
+    .section-title {
+        text-align: center;
+    }
 }

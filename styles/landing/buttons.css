@@ -242,34 +242,41 @@
     }
 }
 
-/* --- Free start CTA: no face below the stacking breakpoint ---------------- */
-/* The triangle is left over from the old "Процесс" composition and reads as
-   "back" beside this CTA. It stays on the desktop layout it was drawn for;
-   once the block stacks at 767px the button is the label alone.
-
-   With no face to lie on top of, the button becomes an ordinary flex
-   container and the label drops the three offsets that only ever existed to
-   position it over the svg: the -60px pull-back, the margin-left that cleared
-   the triangle, and the 8px nudge inside the overlay. */
+/* --- Free start CTA below the stacking breakpoint ------------------------- */
+/* Stacked, the block would show two buttons that both open demo.html. The
+   teaser button takes over the CTA wording (swapped in the markup by the same
+   d-md-none / d-none.d-md-block pair the artwork above already uses) and the
+   standalone CTA goes. That also retires its decorative triangle here - a
+   left-over from the old "Процесс" composition that read as "back". The
+   desktop layout keeps both buttons and the face they were drawn for. */
 @media (max-width: 767px) {
-    .test-now-btn .svg {
+    .test-now-btn {
         display: none;
     }
 
-    .test-now-btn {
-        display: flex;
-        align-items: center;
+    /* The plate is an <svg> with the default preserveAspectRatio, so it keeps
+       its 291:70 ratio and paints only ~220px of the 319px button - centred,
+       which means plate and button share a centre line. The label row spans the
+       whole button, so space-evenly was laying the wording out against the
+       button rather than the plate: the short "Загрузить модель" happened to
+       fit, the longer CTA wording ran past the painted edge. Centring the row
+       lands it on that shared centre line, inside the plate, at any width.
+
+       The icon then needs a size of its own - a percentage of a row it no
+       longer fills is meaningless - and a real gap, which is what the negative
+       margin below was standing in for while the label was short enough. */
+    .archive-button-label {
         justify-content: center;
+        gap: 8px;
     }
 
-    .process-cta-label {
-        margin-top: 0;
+    .archive-button-label img {
+        width: 24px;
+    }
+
+    .archive-button-label p {
+        font-size: 14px;
         margin-left: 0;
-    }
-
-    /* Bootstrap's paragraph margin would push the text back off centre. */
-    .process-cta-label p {
-        margin: 0;
     }
 }
 
