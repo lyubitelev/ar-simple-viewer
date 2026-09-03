@@ -242,6 +242,37 @@
     }
 }
 
+/* --- Free start CTA: no face below the stacking breakpoint ---------------- */
+/* The triangle is left over from the old "Процесс" composition and reads as
+   "back" beside this CTA. It stays on the desktop layout it was drawn for;
+   once the block stacks at 767px the button is the label alone.
+
+   With no face to lie on top of, the button becomes an ordinary flex
+   container and the label drops the three offsets that only ever existed to
+   position it over the svg: the -60px pull-back, the margin-left that cleared
+   the triangle, and the 8px nudge inside the overlay. */
+@media (max-width: 767px) {
+    .test-now-btn .svg {
+        display: none;
+    }
+
+    .test-now-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .process-cta-label {
+        margin-top: 0;
+        margin-left: 0;
+    }
+
+    /* Bootstrap's paragraph margin would push the text back off centre. */
+    .process-cta-label p {
+        margin: 0;
+    }
+}
+
 /* Short viewports (landscape phones, short desktop windows): the buttons sit
    flush. This has to beat every per-variant nudge above and the Bootstrap
    .mt-4 utility on the mobile lead button, so it stays !important and last. */
