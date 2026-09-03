@@ -1,669 +1,1823 @@
-<!DOCTYPE html>
-<html class="no-js" lang="en">
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
 
 <head>
     <meta charset="utf-8">
-    <title>Art Vision Tech</title>
-    <meta name="description" content="&lt;model-viewer&gt; template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>АРТ ВИЖН ТЕХ</title>
 
-    <link rel="stylesheet" href="./styles/index/base.css">
-    <link rel="stylesheet" href="./styles/index/vendor.css">
-    <link rel="stylesheet" href="./styles/index/main.css">
-
-    <script src="./styles/index/js/modernizr.js"></script>
-    <script src="./styles/index/js/pace.min.js"></script>
-
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="./styles/landing/base.css" rel="stylesheet">
+    <link href="./styles/landing/buttons.css" rel="stylesheet">
+    <link href="./styles/landing/header.css" rel="stylesheet">
+    <link href="./styles/landing/hero.css" rel="stylesheet">
+    <link href="./styles/landing/sections.css" rel="stylesheet">
+    <link href="./styles/landing/pricing.css" rel="stylesheet">
+    <link href="./styles/landing/contact.css" rel="stylesheet">
+    <link href="./styles/landing/footer.css" rel="stylesheet">
 </head>
 
-<body id="top">
-    <!-- dialog window -->
-    <div id="dialog-container" class="dialog-container hidden">
-        <div class="dialog">
-            <div class="dialog-header">
-                <h2 id="dialog-title">Заголовок Диалога</h2>
-                <span id="close-dialog" class="close-btn">&times;</span>
-            </div>
-            <div id="email-form" class="dialog-body">
-                <p id="dialog-text"></p>
-                <div>
-                    <input id="dialog-input" class="full-width" type="email" placeholder="Адрес эл. почты">
+<body>
+    <!-- Модальное окно -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel">Заявка на подключение</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                 </div>
-            </div>
-            <div class="dialog-footer">
-                <button class="button large" id="cancel-dialog">Отмена</button>
-                <button class="button button-primary large" id="confirm-dialog">Отправить запрос</button>
+                <div class="modal-body">
+                    <div class="mt-c-3 container-fluid">
+                        <div class="modal-container mt-c-4">
+                            <div class="mb-3">
+                                <label for="modal-formGroupExampleInput"
+                                    class="form-label contact-form-label">Имя*</label>
+                                <input type="text" class="form-control contact-input" id="modal-formGroupExampleInput">
+                            </div>
+                            <div class="mb-3">
+                                <label for="modal-formGroupExampleInput2" class="form-label contact-form-label">Телефон
+                                    или
+                                    email*</label>
+                                <input type="text" class="form-control contact-input" id="modal-formGroupExampleInput2">
+                            </div>
+                            <div class="mb-3">
+                                <label for="modal-formGroupExampleInput3"
+                                    class="form-label contact-form-label">Тариф</label>
+                                <select class="form-control contact-input" id="modal-formGroupExampleInput3">
+                                    <option value="" disabled selected>Выберите тариф</option>
+                                    <option value="Start">Start</option>
+                                    <option value="Pro">Pro</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Enterprise">Enterprise</option>
+                                </select>
+                            </div>
+                            <div class="form-check contact-consent">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-flexCheckDefault1">
+                                <label class="form-check-label" for="modal-flexCheckDefault1">
+                                    Согласие на получение рассылки рекламных/информационных сообщений и материалов
+                                </label>
+                            </div>
+                            <div class="modal-form-check form-check contact-consent">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-flexCheckChecked2"
+                                    checked>
+                                <label class="form-check-label" for="modal-flexCheckChecked2">
+                                    Cогласие на обработку персональных данных
+                                </label>
+                            </div>
+                            <div class="text-center contact-submit-row">
+                                <button class="svg-button submit-btn modal-btn">
+                                    <svg class="svg" width="180" height="36" viewBox="0 0 130 36" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g filter="url(#filter0_b_210_33182)">
+                                            <rect width="130" height="36" rx="5" fill="url(#paint0_linear_210_33182)" />
+                                            <rect width="130" height="36" rx="5" fill="url(#paint1_radial_210_33182)"
+                                                fill-opacity="0.2" />
+                                            <rect x="0.5" y="0.5" width="129" height="35" rx="4.5"
+                                                stroke="url(#paint2_radial_210_33182)" />
+                                        </g>
+                                        <defs>
+                                            <filter id="filter0_b_210_33182" x="-20" y="-20" width="170" height="76"
+                                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                <feGaussianBlur in="BackgroundImageFix" stdDeviation="10" />
+                                                <feComposite in2="SourceAlpha" operator="in"
+                                                    result="effect1_backgroundBlur_210_33182" />
+                                                <feBlend mode="normal" in="SourceGraphic"
+                                                    in2="effect1_backgroundBlur_210_33182" result="shape" />
+                                            </filter>
+                                            <linearGradient id="paint0_linear_210_33182" x1="28.2609" y1="-6.16457e-07"
+                                                x2="27.976" y2="35.9999" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#20294D" />
+                                                <stop offset="1" stop-color="#0D101F" />
+                                            </linearGradient>
+                                            <radialGradient id="paint1_radial_210_33182" cx="0" cy="0" r="1"
+                                                gradientUnits="userSpaceOnUse"
+                                                gradientTransform="translate(66.6149 1.90837e-06) rotate(89.4884) scale(23.6259 61.005)">
+                                                <stop stop-color="white" stop-opacity="0.2" />
+                                                <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                            </radialGradient>
+                                            <radialGradient id="paint2_radial_210_33182" cx="0" cy="0" r="1"
+                                                gradientUnits="userSpaceOnUse"
+                                                gradientTransform="translate(60.2899 12.0462) rotate(122.784) scale(97.1829 21.4336)">
+                                                <stop stop-color="white" />
+                                                <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                            </radialGradient>
+                                        </defs>
+                                    </svg>
+
+                                    <div class="ar-icon button-text svg-button-label-sm">
+                                        <p>Отправить</p>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- header 
-   ================================================== -->
-    <header id="header" class="row">
-
-        <a class="smoothscroll" href="#top" style="display: flex;">
-            <img src="./img/OIG4.SBIYumRjrXp6y3acTNXU.jpg" class="awd">
-            <p class="for-p">Art Vision Tech</p>
-        </a>
-
-        <nav id="header-nav-wrap">
-            <div class="flex-av">
-                <a class="smoothscroll" href="#top" style="display: flex; margin-top: -125px; margin-left: -10px;">
-                    <img src="./img/OIG4.SBIYumRjrXp6y3acTNXU.jpg" class="awd">
-                    <p class="for-p">Art Vision Tech</p>
+    <!-- Один диалог на все тарифы: содержимое подставляет src/index/pricingDetails.js
+         по data-tariff нажатой кнопки «Подробнее». Разметку тарифов здесь не дублируем. -->
+    <div class="modal fade pricing-details-modal" id="pricingDetailsModal" tabindex="-1"
+        aria-labelledby="pricingDetailsTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="pricing-details-heading">
+                        <!-- Same level as the plan name on the card: the dialog describes one plan,
+                             so it must not add a section-level heading to the page outline. -->
+                        <h3 class="modal-title pricing-details-title" id="pricingDetailsTitle">Тариф</h3>
+                        <p class="pricing-details-price" data-pricing-details="price"></p>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="pricing-details-summary" data-pricing-details="summary"></p>
+                    <div class="pricing-details-sections" data-pricing-details="sections"></div>
+                    <p class="pricing-details-note" data-pricing-details="note"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="pricing-details-connect" data-bs-toggle="modal"
+                        data-bs-target="#contactModal" data-tariff="">Подключить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loader">Загрузка...</div>
+    <nav class="site-header container navbar navbar-expand-md navbar-dark fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-bar">
+                <a class="navbar-brand" href="#">
+                    <div class="d-flex align-items-center gap-2">
+                        <p class="mb-0 fw-bold" style="font-size: 18px; letter-spacing: 1px;">АРТ ВИЖН ТЕХ</p>
+                        <img loading="lazy" class="brand-logo" src="./img/Group 7.webp" />
+                    </div>
                 </a>
-
-                <ul class="header-main-nav">
-                    <li class="current"><a class="smoothscroll" href="#top" title="home">Главная</a></li>
-                    <li><a class="smoothscroll" href="#about" title="about">О продукте</a></li>
-                    <li><a class="smoothscroll" href="#pricing" title="pricing">Тарифы</a></li>
-                    <li><a class="smoothscroll" href="#testimonials" title="testimonials">Контакты</a></li>
-                </ul>
-
-                <div class="in-nav-val">
-                    <a href="https://wa.me/77764086666">
-                        <svg class="bi" viewBox="0 0 50 50" width="24" height="24">
-                            <path fill="white"
-                                d="M25,2C12.318,2,2,12.318,2,25c0,3.96,1.023,7.854,2.963,11.29L2.037,46.73c-0.096,0.343-0.003,0.711,0.245,0.966 C2.473,47.893,2.733,48,3,48c0.08,0,0.161-0.01,0.24-0.029l10.896-2.699C17.463,47.058,21.21,48,25,48c12.682,0,23-10.318,23-23 S37.682,2,25,2z M36.57,33.116c-0.492,1.362-2.852,2.605-3.986,2.772c-1.018,0.149-2.306,0.213-3.72-0.231 c-0.857-0.27-1.957-0.628-3.366-1.229c-5.923-2.526-9.791-8.415-10.087-8.804C15.116,25.235,13,22.463,13,19.594 s1.525-4.28,2.067-4.864c0.542-0.584,1.181-0.73,1.575-0.73s0.787,0.005,1.132,0.021c0.363,0.018,0.85-0.137,1.329,1.001 c0.492,1.168,1.673,4.037,1.819,4.33c0.148,0.292,0.246,0.633,0.05,1.022c-0.196,0.389-0.294,0.632-0.59,0.973 s-0.62,0.76-0.886,1.022c-0.296,0.291-0.603,0.606-0.259,1.19c0.344,0.584,1.529,2.493,3.285,4.039 c2.255,1.986,4.158,2.602,4.748,2.894c0.59,0.292,0.935,0.243,1.279-0.146c0.344-0.39,1.476-1.703,1.869-2.286 s0.787-0.487,1.329-0.292c0.542,0.194,3.445,1.604,4.035,1.896c0.59,0.292,0.984,0.438,1.132,0.681 C37.062,30.587,37.062,31.755,36.57,33.116z" />
-                        </svg>
-                    </a>
-                    <a class="cta" href="https://t.me/shmaps">
-                        <svg class="bi" viewBox="0 0 50 50" width="24" height="24">
-                            <path fill="white"
-                                d="M46.137,6.552c-0.75-0.636-1.928-0.727-3.146-0.238l-0.002,0C41.708,6.828,6.728,21.832,5.304,22.445 c-0.259,0.09-2.521,0.934-2.288,2.814c0.208,1.695,2.026,2.397,2.248,2.478l8.893,3.045c0.59,1.964,2.765,9.21,3.246,10.758 c0.3,0.965,0.789,2.233,1.646,2.494c0.752,0.29,1.5,0.025,1.984-0.355l5.437-5.043l8.777,6.845l0.209,0.125 c0.596,0.264,1.167,0.396,1.712,0.396c0.421,0,0.825-0.079,1.211-0.237c1.315-0.54,1.841-1.793,1.896-1.935l6.556-34.077 C47.231,7.933,46.675,7.007,46.137,6.552z M22,32l-3,8l-3-10l23-17L22,32z" />
-                        </svg>
-                    </a>
-                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </div>
 
-
-
-        </nav>
-
-        <a class="header-menu-toggle" href="#"><span>Меню</span></a>
-
-    </header> <!-- /header -->
-
-
-    <!-- home
-   ================================================== -->
-    <section id="home" style="background-color: rgba(0, 0, 0, 0.2);" data-parallax="scroll"
-        data-image-src="./img/64a3b9a460c7f457627145.jpg" data-natural-width=3000 data-natural-height=1000>
-
-        <div class="overlay"></div>
-        <div class="home-content">
-
-            <div class="row contents" style="top: 7%;">
-                <div class="home-content-left">
-                    <div data-aos="fade-up" class="video-container paused" id="videoContainer">
-                        <video controls preload="metadata" id="myVideo" style="border-radius: 20px;">
-                            <source src="https://storage.yandexcloud.net/avt-models/video/promo_video.mp4" type="video/mp4">
-                            Ваш браузер не поддерживает тег видео.
-                        </video>
-                    </div>
-                </div>
-
-                <div class="home-image-right">
-                    <div class="demo">
-                        <h3 data-aos="fade-up" style="color: whitesmoke;">AR-примерка + 360° обзор</h3>
-
-                        <h1 id="H1" data-aos="fade-up" style="font-size: 41px;">
-                            Позвольте увидеть товары в реальном времени!
-                        </h1>
-
-                        <h3 data-aos="fade-up">Подарите больше информации Вашим клиентам для совершения покупки применяя
-                            передовые технологии AR и 360° обзора, тем самым повышая их лояльность и увиличевая
-                            конверсию
-                            продаж</h3>
-
-                        <div class="buttons style-button">
-
-                            <a href="./demo.html" class="button stroke">
-                                <div class="png-container everley-2">
-                                    <img style="width: 25px;
-                                margin-right: 5px;" src="./img/ar_icon (1).png">
-                                    <p style="margin-bottom: 0px;">Демо AR</p>
-                                </div>
-                            </a>
-                            <a href="./xrviewer.html" class="button stroke">
-                                <div class="png-container everley-2">
-                                    <img style="width: 25px;
-                                margin-right: 5px;" src="./img/ar_icon (1).png">
-                                    <p style="margin-bottom: 0px;">Пробовать XR</p>
-                                </div>
-                            </a>
-                            <a href="https://wa.me/77764086666" class="button stroke awd2">
-                                <div class="png-container everley-2">
-                                    <img style="width: 25px;
-                                margin-right: 5px;" src="./img/pngWA.png">
-                                    <p style="margin-bottom: 0px;">Связатся</p>
-                                </div>
-
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div> <!-- end home-content -->
-
-        <div class="home-scrolldown">
-            <a href="#about" class="scroll-icon smoothscroll">
-                <span>о продукте</span>
-                <i class="icon-arrow-right" aria-hidden="true"></i>
-            </a>
-        </div>
-
-    </section> <!-- end home -->
-
-
-    <!-- about
-    ================================================== -->
-    <section id="about">
-
-        <div class="row about-intro">
-
-            <div class="col-four">
-                <h1 class="intro-header" data-aos="fade-up">О продукте</h1>
-            </div>
-            <div class="col-eight">
-                <p class="lead" data-aos="fade-up">
-                    Наш продукт сочетает многолетний опыт работы с новыми технологиями, которые делают покупки в
-                    интернете более интересными и интерактивными.
-                </p>
-            </div>
-            <div class="row about-features">
-
-                <div class="features-list block-1-4 block-m-1-2 block-mob-full group">
-
-                    <div class="bgrid feature" data-aos="fade-up">
-
-                        <span class="icon"><i class="icon-window"></i></span>
-
-                        <div class="service-content">
-
-                            <h3>Интерактивная примерка</h3>
-
-                            <p>Покупатели могут в реальном времени примерить товары и убедиться, что они подходят именно
-                                для
-                                них.</p>
-
-                        </div>
-
-                    </div> <!-- /bgrid -->
-
-                    <div class="bgrid feature" data-aos="fade-up">
-
-                        <span class="icon"><i class="icon-image"></i></span>
-
-                        <div class="service-content">
-                            <h3>Полная детализация</h3>
-
-                            <p>Благодаря 360° обзору, клиенты могут рассмотреть каждую деталь товара, прежде чем сделать
-                                покупку.</p>
-
-
-                        </div>
-
-                    </div> <!-- /bgrid -->
-
-                    <div class="bgrid feature" data-aos="fade-up">
-
-                        <span class="icon"><i class="icon-file"></i></span>
-
-                        <div class="service-content">
-                            <h3>Увеличение конверсии</h3>
-
-                            <p>Увеличьте уверенность покупателей и снизьте количество возвратов благодаря более точному
-                                представлению о продукте.</p>
-
-                        </div>
-
-                    </div> <!-- /bgrid -->
-
-                    <div class="bgrid feature" data-aos="fade-up">
-
-                        <span class="icon"><i class="icon-sliders"></i></span>
-
-                        <div class="service-content">
-                            <h3>Простота использования</h3>
-
-                            <p>Наше решение легко интегрируется в ваш веб-сайт или приложение и позволяет моментально
-                                повысить его
-                                привлекательность для клиентов.</p>
-                        </div>
-
-                    </div> <!-- /bgrid -->
-
-                </div> <!-- end features-list -->
-
-            </div> <!-- end about-features -->
-            <div>
-                <div class="row half-bottom">
-
-                    <div class="col-six tab-full">
-                        <p class="lead" data-aos="fade-up">
-                            Продукт предлагает функции, которые используют самые крупные компании.
-                            Например, можно показать товар в формате дополненной реальности (AR). Это значит, что
-                            покупатель, не выходя из дома, сможет посмотреть, как вещь будет выглядеть в реальной жизни
-                            через камеру своего телефона. Представьте, как будто вы наводите камеру на комнату, и
-                            видите, как новая мебель уже стоит в вашем доме.
-                        </p>
-                        <p class="lead" data-aos="fade-up">
-                            Старшие тарифы открывают доступ к более продвинутым технологиям. Мы предлагаем не
-                            просто интернет-магазин, а целый виртуальный мир, где вы можете показать свой товар
-                            покупателю так, как будто он уже находится в этом мире. Покупатель может не только увидеть и
-                            примерить товар, но и взаимодействовать с ним в виртуальном пространстве. Например,
-                            представьте себе шоурум, где можно осмотреть и "примерить" товары, как в реальной жизни, но
-                            без ограничений по месту или количеству товаров. Вы можете создать такое пространство, где
-                            покупатели смогут общаться между собой и делиться мнениями о продукции.
-                        </p>
-                    </div>
-                    <div class="col-six tab-full">
-                        <div style="display: flex; justify-content: center;">
-                            <div data-aos="fade-up" class="demo2">
-                                <iframe id="demo-ifr2" class="demo-ifr2"
-                                    src="./viewer.html?id=d235b352-afff-4fc5-9650-fbe5286d51fd" frameborder="0" title=""
-                                    alt="">
-                                </iframe>
-                            </div>
-                        </div>
-
-                        <div class="icon-350-container">
-                            <img style="width: 25px; margin-right: 5px;" src="./img/free-icon-rotation-15810896.png">
-                        </div>
-                    </div>
-
-                </div> <!-- end row -->
-                <div class="tech-lead">
-                    <p class="lead" data-aos="fade-up">
-                        Технологии, которые мы используем, создают настоящий "вау-эффект". Покупатели будут
-                        впечатлены, а вы, как наш клиент, получите больше информации о том, что им нравится, и
-                        сможете лучше понимать их потребности.
-                    </p>
-                </div>
-
-                <div class="row half-bottom">
-                    <div class="col-full tab-full" style="text-align: center;">
-                        <p class="lead" data-aos="fade-up">
-                            <br>
-                            Развивайте свой бизнес с новыми технологиями и вдохновляйтесь новыми возможностями!
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        </div>
-
-        </div>
-
-
-
-        <div class="row about-how">
-
-            <h1 class="intro-header" data-aos="fade-up">Заинтересованы</h1>
-
-            <div class="about-how-content" data-aos="fade-up">
-                <div class="about-how-steps block-1-2 block-tab-full group">
-
-                    <div class="bgrid step" data-item="1">
-                        <h3>Оставьте заявку</h3>
-                        <p>Любым удобным способом оставьте контактные данные. В течении часа с Вами свяжется наш
-                            менеджер.</p>
-                    </div>
-
-                    <div class="bgrid step" data-item="2">
-                        <h3>Обсудите детали</h3>
-                        <p>Расскажите все пожелания персональному менеджеру, после чего будет сформирована заявка
-                            на доступ к продукту.
-                        </p>
-                    </div>
-
-                    <div class="bgrid step" data-item="3">
-                        <h3>Получите доступ</h3>
-                        <p>Получите доступ к продукту в соответствии с выбранным тарифом.
-                        </p>
-                    </div>
-
-                    <div class="bgrid step" data-item="4">
-                        <h3>Используйте для визуализации</h3>
-                        <p>Внедрите наши передовые инструменты виртуальной примерки и 360° обзора на базе XR в свой
-                            бизнес.
-                            Позвольте клиентам получить новый опыта взаимодействия с Вашим товаром в XR.
-                        </p>
-                    </div>
-
-                </div>
-            </div> <!-- end about-how-content -->
-
-        </div> <!-- end about-how -->
-
-        <div class="row about-bottom-image">
-
-            <img src="./img/index/app-screens-2800.png" srcset="./img/index/app-screens-2800.png 600w, 
-            ./img/index/app-screens-2800.png 1200w, 
-            ./img/index/app-screens-2800.png 2800w" sizes="(max-width: 2800px) 100vw, 2800px" alt="App Screenshots"
-                data-aos="fade-up">
-
-        </div> <!-- end about-bottom-image -->
-
-    </section> <!-- end about -->
-
-
-    <!-- pricing
-    ================================================== -->
-    <section id="pricing">
-        <div class="row pricing-content">
-
-            <h1 class="intro-header" data-aos="fade-up">Тарифы</h1>
-
-            <div class="col-full pricing-table">
-                <div class="row">
-
-                    <div class="col-six plan-wrap">
-                        <div class="plan-block" data-aos="fade-up">
-
-                            <div class="plan-top-part">
-                                <h3 class="plan-block-title">Start</h3>
-                                <p class="plan-block-price">0<sup>₽</sup></p>
-                                <p class="plan-block-per">в месяц</p>
-                            </div>
-
-                            <div class="plan-bottom-part">
-                                <ul class="plan-block-features">
-                                    <li class="index-li-price">
-                                        <p class="index-p-price">Публичная ссылка, QR и embed</p>
-                                        <span class="icon"><i class="icon-yes"></i></span>
-                                    </li>
-                                    <li class="index-li-price">
-                                        <p class="index-p-price">Свои 3D-модели и настройка сцены</p>
-                                        <span class="icon"><i class="icon-yes"></i></span>
-                                    </li>
-                                    <li class="index-li-price">
-                                        <p class="index-p-price">3D-просмотрщик и AR «в вашем пространстве»</p>
-                                        <span class="icon"><i class="icon-yes"></i></span>
-                                    </li>
-                                    <li class="index-li-price">
-                                        <p class="index-p-price">Оплачиваемые просмотры</p>
-                                        <span>до 500 в месяц</span>
-                                    </li>
-                                </ul>
-
-                                <button class="button button-primary large open-dialog" data-tariff="Start">Подключить</button>
-                            </div>
-
-                        </div>
-                    </div> <!-- end plan-wrap -->
-
-                    <div class="col-six plan-wrap">
-                        <div class="plan-block primary" data-aos="fade-up">
-
-                            <div class="plan-top-part">
-                                <h3 class="plan-block-title">AR Commerce</h3>
-                                <p class="plan-block-price">990<sup>₽</sup></p>
-                                <p class="plan-block-per">в месяц</p>
-                            </div>
-
-                            <div class="plan-bottom-part">
-                                <ul class="plan-block-features">
-                                    <li class="index-li-price">
-                                        <p class="index-p-price">Всё из тарифа Start</p>
-                                        <span class="icon"><i class="icon-yes"></i></span>
-                                    </li>
-                                    <li class="index-li-price">
-                                        <p class="index-p-price">Полная настройка вьюера и сцены</p>
-                                        <span class="icon"><i class="icon-yes"></i></span>
-                                    </li>
-                                    <li class="index-li-price">
-                                        <p class="index-p-price">Стандартная поддержка</p>
-                                        <span class="icon"><i class="icon-yes"></i></span>
-                                    </li>
-                                    <li class="index-li-price">
-                                        <p class="index-p-price">Оплачиваемые просмотры</p>
-                                        <span>до 10 000 в месяц</span>
-                                    </li>
-                                </ul>
-
-                                <button class="button button-primary large open-dialog" data-tariff="AR Commerce">Подключить</button>
-                            </div>
-
-                        </div>
-                    </div> <!-- end plan-wrap -->
-
-                </div>
-                <div class="row">
-
-                    <div class="col-six plan-wrap">
-                        <div class="plan-block" data-aos="fade-up">
-
-                            <div class="plan-top-part">
-                                <h3 class="plan-block-title">Business</h3>
-                                <p class="plan-block-price">2 990<sup>₽</sup></p>
-                                <p class="plan-block-per">в месяц</p>
-                            </div>
-
-                            <div class="plan-bottom-part">
-                                <ul class="plan-block-features">
-                                    <li class="index-li-price">
-                                        <p class="index-p-price">Всё из тарифа AR Commerce</p>
-                                        <span class="icon"><i class="icon-yes"></i></span>
-                                    </li>
-                                    <li class="index-li-price">
-                                        <p class="index-p-price">White-label и уменьшенный брендинг</p>
-                                        <span class="icon"><i class="icon-yes"></i></span>
-                                    </li>
-                                    <li class="index-li-price">
-                                        <p class="index-p-price">Приоритетная поддержка</p>
-                                        <span class="icon"><i class="icon-yes"></i></span>
-                                    </li>
-                                    <li class="index-li-price">
-                                        <p class="index-p-price">Оплачиваемые просмотры</p>
-                                        <span>до 50 000 в месяц</span>
-                                    </li>
-                                </ul>
-
-                                <button class="button button-primary large open-dialog" data-tariff="Business">Подключить</button>
-                            </div>
-
-                        </div>
-                    </div> <!-- end plan-wrap -->
-
-                    <div class="col-six plan-wrap">
-                        <div class="plan-block" data-aos="fade-up">
-
-                            <div class="plan-top-part">
-                                <h3 class="plan-block-title">Enterprise</h3>
-                                <p class="plan-block-price">По запросу</p>
-                                <p class="plan-block-per">индивидуальный расчёт</p>
-                            </div>
-
-                            <div class="plan-bottom-part">
-                                <ul class="plan-block-features">
-                                    <li class="index-li-price">
-                                        <p class="index-p-price">API и массовые операции с каталогом</p>
-                                        <span class="icon"><i class="icon-yes"></i></span>
-                                    </li>
-                                    <li class="index-li-price">
-                                        <p class="index-p-price">Интеграция PIM / ERP / CRM</p>
-                                        <span class="icon"><i class="icon-yes"></i></span>
-                                    </li>
-                                    <li class="index-li-price">
-                                        <p class="index-p-price">Свои домены и приватное развёртывание</p>
-                                        <span class="icon"><i class="icon-yes"></i></span>
-                                    </li>
-                                    <li class="index-li-price">
-                                        <p class="index-p-price">Выделенный SLA</p>
-                                        <span class="icon"><i class="icon-yes"></i></span>
-                                    </li>
-                                </ul>
-
-                                <button class="button button-primary large open-dialog" data-tariff="Enterprise">Подключить</button>
-                            </div>
-
-                        </div>
-                    </div> <!-- end plan-wrap -->
-
-                </div>
-            </div> <!-- end pricing-table -->
-
-            <div class="col-full">
-                <p class="lead" data-aos="fade-up">
-                    Без подписки — оплата по факту: 0,15 ₽ за оплачиваемый 3D/AR-просмотр с предсказуемым месячным
-                    лимитом расходов.
-                </p>
-                <p class="lead" data-aos="fade-up">
-                    Тариф оплачивает работу платформы. Подготовка модели — от 1 000 ₽ за модель, создание 3D-модели —
-                    от 3 000 ₽ за модель, конфигуратор — от 15 000 ₽ за проект. Интеграция и заказная разработка
-                    рассчитываются отдельно.
-                </p>
-            </div>
-
-        </div> <!-- end pricing-content -->
-    </section> <!-- end pricing -->
-
-
-    <!-- Testimonials Section
-    ================================================== -->
-    <section id="testimonials">
-
-        <div data-aos="fade-up" class="row">
-
-            <h1 class="intro-header" data-aos="fade-up">Контакты</h1>
-
-            <div class="col-six tab-full">
-
-                <h3>
-                    О нас
-                </h3>
-
-                <p style="text-align: start;"><b class="b-ul-price-dot">Art Vision Tech</b> — это молодая и энергичная
-                    компания, которая создает программное обеспечение (ПО). Проще говоря, программное обеспечение — это
-                    программы и приложения, которые работают на компьютерах, телефонах и других устройствах, помогая
-                    автоматизировать задачи и улучшать работу бизнеса.</p>
-
-                <p style="text-align: start;">Мы работаем с малыми и средними бизнесами, а также с новыми стартапами.
-                    Если вам нужно улучшить работу вашего бизнеса, создать удобный сайт или приложение, автоматизировать
-                    рутинные процессы — мы можем помочь. Например, мы можем разработать программу, которая упростит
-                    управление продажами, учет клиентов или взаимодействие с поставщиками.</p>
-
-                <p style="text-align: start;">Предлагаем вам полный цикл услуг: от разработки и внедрения программ до их
-                    поддержки. То есть, мы не только создаем программы, но и помогаем внедрить их в вашу работу и
-                    следим, чтобы всё работало без сбоев. Если у вас был негативный опыт работы с другими IT-компаниями,
-                    которые не выполняли работу в срок или не предоставляли нужного уровня поддержки, мы готовы
-                    предложить вам лучшее обслуживание и более короткие сроки выполнения работы.</p>
-
-                <p style="text-align: start; margin-bottom: 0rem;"><b class="b-ul-price-dot">Свяжитесь с нами</b>:</p>
-
-                <p style="text-align: start;">
-                    <b class="b-ul-price-dot">Email</b>: info@art-vision-tech.ru <br>
-                    <b class="b-ul-price-dot">Москва</b>: +7 (953) 000-00-00 <br>
-                    <b class="b-ul-price-dot">Астана</b>: +7 (777) 000-00-00
-                </p>
-
-            </div>
-
-            <div class="col-six tab-full">
-                <h3>Обратная связь</h3>
-
-                <form id="email-form2">
-                    <div>
-                        <input class="full-width" type="email" placeholder="Адрес эл. почты" id="dialog-input2">
-                    </div>
-                    <div>
-                        <div class="ss-custom-select">
-                            <select class="full-width" id="sampleRecipientInput">
-                                <option value="Option 1">Вопрос</option>
-                                <option value="Option 2">Обращение</option>
-                                <option value="Option 3">Прочее</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <textarea class="full-width" placeholder="Ваше обращение"></textarea>
-
-                    <button id="confirm-dialog2" class="button-primary" type="button">Отправить</button>
-
-                </form>
-
-            </div>
-
-        </div> <!-- end row -->
-
-    </section> <!-- end testimonials -->
-
-    <!-- footer
-    ================================================== -->
-    <footer>
-
-        <div class="footer-bottom">
-
-            <div style="width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-content: center;
-            flex-wrap: wrap;" class="col-three md-1-3 tab-full footer-info">
-
-                <a class="smoothscroll" href="#top" style="display: flex;">
-                    <img src="./img/OIG4.SBIYumRjrXp6y3acTNXU.jpg" class="awd" style="margin-left: 0px !important;">
-                    <p class="for-p" style="font-size: larger; margin-top: 29px;">Art Vision Tech</p>
-                </a>
-
-                <ul class="footer-social-list">
-                    <li>
-                        <a href="https://wa.me/77764086666">
-                            <svg class="bi" viewBox="0 0 50 50" width="24" height="24">
-                                <path fill="white"
-                                    d="M25,2C12.318,2,2,12.318,2,25c0,3.96,1.023,7.854,2.963,11.29L2.037,46.73c-0.096,0.343-0.003,0.711,0.245,0.966 C2.473,47.893,2.733,48,3,48c0.08,0,0.161-0.01,0.24-0.029l10.896-2.699C17.463,47.058,21.21,48,25,48c12.682,0,23-10.318,23-23 S37.682,2,25,2z M36.57,33.116c-0.492,1.362-2.852,2.605-3.986,2.772c-1.018,0.149-2.306,0.213-3.72-0.231 c-0.857-0.27-1.957-0.628-3.366-1.229c-5.923-2.526-9.791-8.415-10.087-8.804C15.116,25.235,13,22.463,13,19.594 s1.525-4.28,2.067-4.864c0.542-0.584,1.181-0.73,1.575-0.73s0.787,0.005,1.132,0.021c0.363,0.018,0.85-0.137,1.329,1.001 c0.492,1.168,1.673,4.037,1.819,4.33c0.148,0.292,0.246,0.633,0.05,1.022c-0.196,0.389-0.294,0.632-0.59,0.973 s-0.62,0.76-0.886,1.022c-0.296,0.291-0.603,0.606-0.259,1.19c0.344,0.584,1.529,2.493,3.285,4.039 c2.255,1.986,4.158,2.602,4.748,2.894c0.59,0.292,0.935,0.243,1.279-0.146c0.344-0.39,1.476-1.703,1.869-2.286 s0.787-0.487,1.329-0.292c0.542,0.194,3.445,1.604,4.035,1.896c0.59,0.292,0.984,0.438,1.132,0.681 C37.062,30.587,37.062,31.755,36.57,33.116z" />
-                            </svg>
-                        </a>
+            <div class="collapse navbar-collapse-offset navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-menu navbar-nav mb-2 mb-md-0 d-flex">
+                    <li class="nav-item me-3">
+                        <a class="nav-link active" href="#">Главная</a>
                     </li>
-                    <li>
-                        <a href="https://t.me/shmaps">
-                            <svg class="bi" viewBox="0 0 50 50" width="24" height="24">
-                                <path fill="white"
-                                    d="M46.137,6.552c-0.75-0.636-1.928-0.727-3.146-0.238l-0.002,0C41.708,6.828,6.728,21.832,5.304,22.445 c-0.259,0.09-2.521,0.934-2.288,2.814c0.208,1.695,2.026,2.397,2.248,2.478l8.893,3.045c0.59,1.964,2.765,9.21,3.246,10.758 c0.3,0.965,0.789,2.233,1.646,2.494c0.752,0.29,1.5,0.025,1.984-0.355l5.437-5.043l8.777,6.845l0.209,0.125 c0.596,0.264,1.167,0.396,1.712,0.396c0.421,0,0.825-0.079,1.211-0.237c1.315-0.54,1.841-1.793,1.896-1.935l6.556-34.077 C47.231,7.933,46.675,7.007,46.137,6.552z M22,32l-3,8l-3-10l23-17L22,32z" />
-                            </svg>
-                        </a>
+                    <li class="nav-item me-3">
+                        <a class="nav-link active" href="#about">О продукте</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link active" href="#plans">Тарифы</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link active" href="#contact">Контакты</a>
                     </li>
                 </ul>
 
-                <div class="copyright">
-                    <span id="copyright">&copy;
-                        <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>
-                        Art Vision Tech
+                <div class="d-flex navbar-social">
+                    <a href="https://wa.me/+79612244666" target="_blank" class="c-header-message-icon">
+                        <img loading="lazy" class="icon-img" src="./img/Whatsaph_icon.webp" />
+                    </a>
+                    <a href="https://t.me/+79612244666" target="_blank" class="c-header-message-icon">
+                        <img loading="lazy" class="icon-img" src="./img/telegramm.webp" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container tops hero">
+        <div class="main-img">
+            <div class="row hero-row">
+                <div class="col-md-6 hero-phone-col d-none d-md-flex">
+                    <div class="hero-phone">
+                        <img loading="lazy" src="./img/главная-картинка-рука с телефон-моб-версия 2.webp"
+                            alt="Phone in Hand" class="hero-phone-img">
+                        <div class="video-container all-container">
+                            <video autoplay loop muted playsinline webkit-playsinline>
+                                <source type="video/webm">
+                                <source type="video/mp4">
+                                Ваш браузер не поддерживает видео.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5 dynamic-column hero-content">
+                    <div class="col-12">
+                        <p class="text hero-copy hero-eyebrow">3D-ПРОСМОТР + AR БЕЗ ПРИЛОЖЕНИЯ</p>
+                        <h1 class="text hero-title">Дайте покупателю увидеть товар до покупки</h1>
+                        <p class="text hero-copy hero-copy-lead">Покажите товар со всех сторон и позвольте сразу
+                            примерить его в реальном окружении — в помещении или на улице, прямо через ваш сайт.</p>
+                        <p class="text hero-copy">Покупатель сможет оценить размер, внешний вид и то, насколько
+                            товар подходит ему ещё до оформления заказа.</p>
+                        <p class="text hero-copy">Без установки приложения. С телефона или компьютера.</p>
+                    </div>
+                    <div class="row hero-demo-actions d-none d-md-flex">
+                        <div class="col-4 col-md-6">
+                            <button class="svg-button-ar">
+                                <svg class="svg" width="180" height="36" viewBox="0 0 130 36" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g filter="url(#filter0_b_210_332)">
+                                        <rect width="130" height="36" rx="5" fill="url(#paint0_linear_210_332)" />
+                                        <rect width="130" height="36" rx="5" fill="url(#paint1_radial_210_332)"
+                                            fill-opacity="0.2" />
+                                        <rect x="0.5" y="0.5" width="129" height="35" rx="4.5"
+                                            stroke="url(#paint2_radial_210_332)" />
+                                    </g>
+                                    <defs>
+                                        <filter id="filter0_b_210_332" x="-20" y="-20" width="170" height="76"
+                                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feGaussianBlur in="BackgroundImageFix" stdDeviation="10" />
+                                            <feComposite in2="SourceAlpha" operator="in"
+                                                result="effect1_backgroundBlur_210_332" />
+                                            <feBlend mode="normal" in="SourceGraphic"
+                                                in2="effect1_backgroundBlur_210_332" result="shape" />
+                                        </filter>
+                                        <linearGradient id="paint0_linear_210_332" x1="28.2609" y1="-6.16457e-07"
+                                            x2="27.976" y2="35.9999" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#20294D" />
+                                            <stop offset="1" stop-color="#0D101F" />
+                                        </linearGradient>
+                                        <radialGradient id="paint1_radial_210_332" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(66.6149 1.90837e-06) rotate(89.4884) scale(23.6259 61.005)">
+                                            <stop stop-color="white" stop-opacity="0.2" />
+                                            <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                        </radialGradient>
+                                        <radialGradient id="paint2_radial_210_332" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(60.2899 12.0462) rotate(122.784) scale(97.1829 21.4336)">
+                                            <stop stop-color="white" />
+                                            <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+                                <div class="ar-icon button-text">
+                                    <img loading="lazy" src="./img/AR_icon (2).png">
+                                    <p>AR - Демо</p>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="col-4 col-md-6">
+                            <button class="svg-button-xr">
+                                <svg class="svg" width="180" height="36" viewBox="0 0 130 36" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g filter="url(#filter0_b_1)">
+                                        <rect width="130" height="36" rx="5" fill="url(#paint0_linear_1)" />
+                                        <rect width="130" height="36" rx="5" fill="url(#paint1_radial_1)"
+                                            fill-opacity="0.2" />
+                                        <rect x="0.5" y="0.5" width="129" height="35" rx="4.5"
+                                            stroke="url(#paint2_radial_1)" />
+                                    </g>
+                                    <defs>
+                                        <filter id="filter0_b_1" x="-20" y="-20" width="170" height="76"
+                                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feGaussianBlur in="BackgroundImageFix" stdDeviation="10" />
+                                            <feComposite in2="SourceAlpha" operator="in"
+                                                result="effect1_backgroundBlur_1" />
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_1"
+                                                result="shape" />
+                                        </filter>
+                                        <linearGradient id="paint0_linear_1" x1="28.2609" y1="0" x2="27.976" y2="36"
+                                            gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#20294D" />
+                                            <stop offset="1" stop-color="#0D101F" />
+                                        </linearGradient>
+                                        <radialGradient id="paint1_radial_1" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(66.6149 0) rotate(89.4884) scale(23.6259 61.005)">
+                                            <stop stop-color="white" stop-opacity="0.2" />
+                                            <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                        </radialGradient>
+                                        <radialGradient id="paint2_radial_1" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(60.2899 12.0462) rotate(122.784) scale(97.1829 21.4336)">
+                                            <stop stop-color="white" />
+                                            <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+                                <div class="ar-icon button-text">
+                                    <img loading="lazy" src="./img/XR_icon (1).png">
+                                    <p>XR - Демо</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-12 d-none d-md-block">
+                        <button class="svg-button hero-contact-button wa-contact-us">
+                            <svg class="svg" width="490" height="67" viewBox="0 0 490 67" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g filter="url(#filter0_i_1)">
+                                    <rect y="0.5" width="490" height="66.5" rx="10" fill="url(#paint0_linear_1)" />
+                                    <rect y="0.5" width="490" height="66.5" rx="10" fill="url(#paint1_radial_1)"
+                                        fill-opacity="0.2" />
+                                    <rect x="0.5" y="1" width="489" height="65.5" rx="9.5"
+                                        stroke="url(#paint2_radial_1)" />
+                                </g>
+                                <defs>
+                                    <filter id="filter0_i_1" x="0" y="0.5" width="490" height="71.5"
+                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix"
+                                            result="shape" />
+                                        <feColorMatrix in="SourceAlpha" type="matrix"
+                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                        <feOffset dy="5" />
+                                        <feGaussianBlur stdDeviation="10" />
+                                        <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+                                        <feColorMatrix type="matrix"
+                                            values="0 0 0 0 0.12549 0 0 0 0 0.160784 0 0 0 0 0.301961 0 0 0 0.25 0" />
+                                        <feBlend mode="normal" in2="shape" result="effect1_innerShadow_1" />
+                                    </filter>
+                                    <linearGradient id="paint0_linear_1" x1="106.522" y1="0.499999" x2="106.264"
+                                        y2="67.0029" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#20294D" />
+                                        <stop offset="1" stop-color="#0D101F" />
+                                    </linearGradient>
+                                    <radialGradient id="paint1_radial_1" cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse"
+                                        gradientTransform="translate(251.087 0.500004) rotate(88.9563) scale(43.6479 229.913)">
+                                        <stop stop-color="white" stop-opacity="0.2" />
+                                        <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                    </radialGradient>
+                                    <radialGradient id="paint2_radial_1" cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse"
+                                        gradientTransform="translate(227.246 22.7519) rotate(142.731) scale(249.235 58.19)">
+                                        <stop stop-color="white" />
+                                        <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                    </radialGradient>
+                                </defs>
+                            </svg>
+                            <div class="ar-icon button-text">
+                                <img loading="lazy" src="./img/Whatsaph_icon (3).png">
+                                <p>Связаться</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-12 d-md-none">
+                    <div class="hero-mobile-stage">
+                        <div class="hero-phone-mobile-col">
+                            <div class="hero-phone hero-phone-mobile">
+                                <img loading="lazy" src="./img/Рука-телефон.webp" alt="Phone in Hand"
+                                    class="hero-phone-img">
+                                <div class="video-container mobile-container">
+                                    <video autoplay loop muted playsinline webkit-playsinline>
+                                        <source type="video/webm">
+                                        <source type="video/mp4">
+                                        Ваш браузер не поддерживает видео.
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-mobile-actions">
+                            <div class="hero-mobile-demo-actions">
+                                <button class="svg-button-ar">
+                                    <svg class="svg" preserveAspectRatio="none" viewBox="0 0 130 36" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g filter="url(#filter0_b_ar_1)">
+                                            <rect width="130" height="36" rx="5" fill="url(#paint0_linear_ar_1)" />
+                                            <rect width="130" height="36" rx="5" fill="url(#paint1_radial_ar_1)"
+                                                fill-opacity="0.2" />
+                                            <rect x="0.5" y="0.5" width="129" height="35" rx="4.5"
+                                                stroke="url(#paint2_radial_ar_1)" />
+                                        </g>
+                                        <defs>
+                                            <filter id="filter0_b_ar_1" x="-20" y="-20" width="170" height="76"
+                                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                <feGaussianBlur in="BackgroundImageFix" stdDeviation="10" />
+                                                <feComposite in2="SourceAlpha" operator="in"
+                                                    result="effect1_backgroundBlur_ar_1" />
+                                                <feBlend mode="normal" in="SourceGraphic"
+                                                    in2="effect1_backgroundBlur_ar_1" result="shape" />
+                                            </filter>
+                                            <linearGradient id="paint0_linear_ar_1" x1="28.2609" y1="0" x2="27.976"
+                                                y2="36" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#20294D" />
+                                                <stop offset="1" stop-color="#0D101F" />
+                                            </linearGradient>
+                                            <radialGradient id="paint1_radial_ar_1" cx="0" cy="0" r="1"
+                                                gradientUnits="userSpaceOnUse"
+                                                gradientTransform="translate(66.6149 0) rotate(89.4884) scale(23.6259 61.005)">
+                                                <stop stop-color="white" stop-opacity="0.2" />
+                                                <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                            </radialGradient>
+                                            <radialGradient id="paint2_radial_ar_1" cx="0" cy="0" r="1"
+                                                gradientUnits="userSpaceOnUse"
+                                                gradientTransform="translate(60.2899 12.0462) rotate(122.784) scale(97.1829 21.4336)">
+                                                <stop stop-color="white" />
+                                                <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                            </radialGradient>
+                                        </defs>
+                                    </svg>
+                                    <div class="ar-icon button-text">
+                                        <img loading="lazy" src="./img/AR_icon (2).png">
+                                        <p>AR - Демо</p>
+                                    </div>
+                                </button>
+                                <button class="svg-button-xr">
+                                    <svg class="svg" preserveAspectRatio="none" viewBox="0 0 130 36" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g filter="url(#filter0_b_2)">
+                                            <rect width="130" height="36" rx="5" fill="url(#paint0_linear_2)" />
+                                            <rect width="130" height="36" rx="5" fill="url(#paint1_radial_2)"
+                                                fill-opacity="0.2" />
+                                            <rect x="0.5" y="0.5" width="129" height="35" rx="4.5"
+                                                stroke="url(#paint2_radial_2)" />
+                                        </g>
+                                        <defs>
+                                            <filter id="filter0_b_2" x="-20" y="-20" width="170" height="76"
+                                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                <feGaussianBlur in="BackgroundImageFix" stdDeviation="10" />
+                                                <feComposite in2="SourceAlpha" operator="in"
+                                                    result="effect1_backgroundBlur_2" />
+                                                <feBlend mode="normal" in="SourceGraphic"
+                                                    in2="effect1_backgroundBlur_2" result="shape" />
+                                            </filter>
+                                            <linearGradient id="paint0_linear_2" x1="28.2609" y1="0" x2="27.976"
+                                                y2="36" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#20294D" />
+                                                <stop offset="1" stop-color="#0D101F" />
+                                            </linearGradient>
+                                            <radialGradient id="paint1_radial_2" cx="0" cy="0" r="1"
+                                                gradientUnits="userSpaceOnUse"
+                                                gradientTransform="translate(66.6149 0) rotate(89.4884) scale(23.6259 61.005)">
+                                                <stop stop-color="white" stop-opacity="0.2" />
+                                                <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                            </radialGradient>
+                                            <radialGradient id="paint2_radial_2" cx="0" cy="0" r="1"
+                                                gradientUnits="userSpaceOnUse"
+                                                gradientTransform="translate(60.2899 12.0462) rotate(122.784) scale(97.1829 21.4336)">
+                                                <stop stop-color="white" />
+                                                <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                            </radialGradient>
+                                        </defs>
+                                    </svg>
+                                    <div class="ar-icon button-text">
+                                        <img loading="lazy" src="./img/XR_icon (1).png">
+                                        <p>XR - Демо</p>
+                                    </div>
+                                </button>
+                            </div>
+                            <button class="svg-button hero-contact-button wa-contact-us">
+                                <svg class="svg" viewBox="0 0 490 67" preserveAspectRatio="none" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g filter="url(#filter0_i_129_274)">
+                                        <rect y="0.5" width="490" height="66.5" rx="10"
+                                            fill="url(#paint0_linear_129_274)" />
+                                        <rect y="0.5" width="490" height="66.5" rx="10"
+                                            fill="url(#paint1_radial_129_274)" fill-opacity="0.2" />
+                                        <rect x="0.5" y="1" width="489" height="65.5" rx="9.5"
+                                            stroke="url(#paint2_radial_129_274)" />
+                                    </g>
+                                    <defs>
+                                        <filter id="filter0_i_129_274" x="0" y="0.5" width="490" height="71.5"
+                                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix"
+                                                result="shape" />
+                                            <feColorMatrix in="SourceAlpha" type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                                result="hardAlpha" />
+                                            <feOffset dy="5" />
+                                            <feGaussianBlur stdDeviation="10" />
+                                            <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+                                            <feColorMatrix type="matrix"
+                                                values="0 0 0 0 0.12549 0 0 0 0 0.160784 0 0 0 0 0.301961 0 0 0 0.25 0" />
+                                            <feBlend mode="normal" in2="shape"
+                                                result="effect1_innerShadow_129_274" />
+                                        </filter>
+                                        <linearGradient id="paint0_linear_129_274" x1="106.522" y1="0.499999"
+                                            x2="106.264" y2="67.0029" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#20294D" />
+                                            <stop offset="1" stop-color="#0D101F" />
+                                        </linearGradient>
+                                        <radialGradient id="paint1_radial_129_274" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(251.087 0.500004) rotate(88.9563) scale(43.6479 229.913)">
+                                            <stop stop-color="white" stop-opacity="0.2" />
+                                            <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                        </radialGradient>
+                                        <radialGradient id="paint2_radial_129_274" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(227.246 22.7519) rotate(142.731) scale(249.235 58.19)">
+                                            <stop stop-color="white" />
+                                            <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+                                <div class="ar-icon button-text">
+                                    <img loading="lazy" src="./img/Whatsaph_icon (3).png">
+                                    <p>Связаться</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img loading="lazy" data-src="image.webm" class="line">
+    </div>
+    <div id="about" class="container section-narrow">
+        <div class="row about-row align-items-center flex-nowrap">
+            <div class="col-auto pe-4">
+                <h2 class="text-nowrap mb-0 section-title">О продукте</h2>
+            </div>
+            <div class="col-auto pe-4 d-none d-md-block">
+                <div class="d-flex align-items-center">
+                    <img loading="lazy" class="mr-15 about-icon-size" src="./img/Line 1.webp">
+                    <img loading="lazy" class="about-icon-size" src="./img/Group 7.webp">
+                    <img loading="lazy" class="ml-15 about-icon-size" src="./img/Line 1.webp">
+                </div>
+            </div>
+            <div class="col">
+                <p class="about-text mb-0">Покажите товар в интерактивном 3D на компьютере, телефоне или планшете. В
+                    AR покупатель может разместить один выбранный товар в реальном окружении, а в XR — собрать
+                    пространство из нескольких моделей и посмотреть, как они сочетаются вместе.
+                    Всё работает через веб без обязательной установки отдельного приложения — на устройствах и в
+                    браузерах, которые поддерживают соответствующий режим.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container section-narrow">
+        <div class="mb-3">
+            <div class="d-none d-md-block">
+                <div class="desktop-card-container">
+                    <div class="card feature-card">
+                        <img loading="lazy" src="./img/Интерактивная-примерка.webp" class="card-img-top">
+                        <div class="card-body">
+                            <h3 class="card-title">Интерактивная примерка</h3>
+                            <p class="card-text">Покупатель может разместить товар в реальном окружении и заранее
+                                оценить его размер и внешний вид. В XR можно добавить несколько моделей и собрать
+                                собственную расстановку.</p>
+                        </div>
+                    </div>
+                    <div class="card feature-card">
+                        <img loading="lazy" src="./img/полная-детализация.webp" class="card-img-top">
+                        <div class="card-body">
+                            <h3 class="card-title">Полная детализация</h3>
+                            <p class="card-text">Интерактивную 3D-модель можно вращать, приближать и рассматривать со
+                                всех сторон, чтобы увидеть форму, материалы и детали товара до покупки.</p>
+                        </div>
+                    </div>
+                    <div class="card feature-card">
+                        <img loading="lazy" src="./img/Увеличение_конверсии_2.webp" class="card-img-top">
+                        <div class="card-body">
+                            <h3 class="card-title">Уверенность перед покупкой</h3>
+                            <p class="card-text">3D, AR и XR помогают покупателю лучше понять товар до оформления
+                                заказа: оценить его внешний вид, размер и то, как он будет смотреться в реальном
+                                пространстве.</p>
+                        </div>
+                    </div>
+                    <div class="card feature-card">
+                        <img loading="lazy" src="./img/простота в использовании_2.webp" class="card-img-top">
+                        <div class="card-body">
+                            <h3 class="card-title">Простота использования</h3>
+                            <p class="card-text">3D-просмотр работает прямо через веб: по ссылке, QR-коду или внутри
+                                сайта. Отдельное приложение не требуется, а AR и XR доступны на совместимых устройствах
+                                и в поддерживаемых браузерах.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-md-none">
+                <div class="card mb-3 border-none">
+                    <div class="g-0 mobile-card-container">
+                        <div class="col col-6">
+                            <img loading="lazy" src="./img/Интерактивная-примерка.webp" class="img-fluid">
+                        </div>
+                        <div class="col col-6">
+                            <div class="feature-card-body">
+                                <h3 class="card-title">Интерактивная примерка</h3>
+                                <p class="card-text">Покупатель может разместить товар в реальном окружении и заранее
+                                    оценить его размер и внешний вид. В XR можно добавить несколько моделей и собрать
+                                    собственную расстановку.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3 border-none">
+                    <div class="g-0 mobile-card-container">
+                        <div class="col col-6">
+                            <img loading="lazy" src="./img/полная-детализация.webp" class="img-fluid">
+                        </div>
+                        <div class="col col-6">
+                            <div class="feature-card-body">
+                                <h3 class="card-title">Полная детализация</h3>
+                                <p class="card-text">Интерактивную 3D-модель можно вращать, приближать и рассматривать
+                                    со всех сторон, чтобы увидеть форму, материалы и детали товара до покупки.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3 border-none">
+                    <div class="g-0 mobile-card-container">
+                        <div class="col col-6">
+                            <img loading="lazy" src="./img/Увеличение_конверсии_2.webp" class="img-fluid">
+                        </div>
+                        <div class="col col-6">
+                            <div class="feature-card-body">
+                                <h3 class="card-title">Уверенность перед покупкой</h3>
+                                <p class="card-text">3D, AR и XR помогают покупателю лучше понять товар до оформления
+                                    заказа: оценить его внешний вид, размер и то, как он будет смотреться в реальном
+                                    пространстве.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3 border-none">
+                    <div class="g-0 mobile-card-container">
+                        <div class="col col-6">
+                            <img loading="lazy" src="./img/простота в использовании_2.webp" class="img-fluid">
+                        </div>
+                        <div class="col col-6">
+                            <div class="feature-card-body">
+                                <h3 class="card-title">Простота использования</h3>
+                                <p class="card-text">3D-просмотр работает прямо через веб: по ссылке, QR-коду или внутри
+                                    сайта. Отдельное приложение не требуется, а AR и XR доступны на совместимых
+                                    устройствах и в поддерживаемых браузерах.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-c-3">
+        <img loading="lazy" data-src="image.webm" class="line">
+        <div class="d-none d-md-block">
+            <div class="row about-row flex-nowrap">
+                <div class="col col-7">
+                    <div class="text-descr-width">
+                        <h2 class="mb-c-5 c-ft-32 section-title">Покажите товар в 3D, AR и XR прямо в браузере</h2>
+                        <p class="fw-500 mb-c-5 c-ft-16 section-copy section-copy-lead">
+                            Покупатель может открыть интерактивную 3D-модель на компьютере, телефоне или планшете,
+                            рассмотреть товар со всех сторон и перейти к пространственному просмотру на поддерживаемом
+                            устройстве.
+                        </p>
+                        <p class="card-text fw-500 mb-c-5 c-ft-16 section-copy">
+                            В AR можно разместить один выбранный товар в реальном окружении — например, поставить мебель
+                            в комнате, оборудование на площадке или предмет интерьера в нужном месте и заранее оценить
+                            его размер и внешний вид.
+                        </p>
+                        <p class="card-text fw-500 mb-c-5 c-ft-16 section-copy">
+                            В XR можно работать сразу с несколькими 3D-моделями: добавлять товары в одну сцену,
+                            перемещать и масштабировать их, собирать расстановку и сохранять пространство для дальнейшей
+                            работы.
+                        </p>
+                        <p class="card-text fw-500 c-ft-16 section-copy">Всё открывается через веб — по ссылке, QR-коду или со
+                            страницы сайта. Отдельное приложение
+                            устанавливать не требуется.
+                        </p>
+                        <button class="svg-button send-order-2">
+                            <svg class="svg" width="718" height="50" viewBox="0 0 718 50" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g filter="url(#filter0_d_129_618)">
+                                    <rect width="717.5" height="50" rx="5" fill="url(#paint0_linear_129_618)"
+                                        shape-rendering="crispEdges" />
+                                    <rect width="717.5" height="50" rx="5" fill="url(#paint1_radial_129_618)"
+                                        fill-opacity="0.2" shape-rendering="crispEdges" />
+                                    <rect x="0.5" y="0.5" width="716.5" height="49" rx="4.5"
+                                        stroke="url(#paint2_radial_129_618)" shape-rendering="crispEdges" />
+                                </g>
+                                <defs>
+                                    <filter id="filter0_d_129_618" x="-20" y="-15" width="757.5" height="90"
+                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                        <feColorMatrix in="SourceAlpha" type="matrix"
+                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                        <feOffset dy="5" />
+                                        <feGaussianBlur stdDeviation="10" />
+                                        <feComposite in2="hardAlpha" operator="out" />
+                                        <feColorMatrix type="matrix"
+                                            values="0 0 0 0 0.12549 0 0 0 0 0.160784 0 0 0 0 0.301961 0 0 0 0.25 0" />
+                                        <feBlend mode="normal" in2="BackgroundImageFix"
+                                            result="effect1_dropShadow_129_618" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_129_618"
+                                            result="shape" />
+                                    </filter>
+                                    <linearGradient id="paint0_linear_129_618" x1="155.978" y1="-8.5619e-07"
+                                        x2="155.879" y2="50.0028" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#20294D" />
+                                        <stop offset="1" stop-color="#0D101F" />
+                                    </linearGradient>
+                                    <radialGradient id="paint1_radial_129_618" cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse"
+                                        gradientTransform="translate(367.663 2.65052e-06) rotate(87.9679) scale(32.8331 336.502)">
+                                        <stop stop-color="white" stop-opacity="0.2" />
+                                        <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                    </radialGradient>
+                                    <radialGradient id="paint2_radial_129_618" cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse"
+                                        gradientTransform="translate(332.754 16.7308) rotate(158.658) scale(311.811 51.2081)">
+                                        <stop stop-color="white" />
+                                        <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                    </radialGradient>
+                                </defs>
+                            </svg>
+
+                            <div class="ar-icon button-text">
+                                <p>Оставить заявку</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="preview-phone col-5 col">
+                    <iframe class="demo-ifr ar-preview" frameborder="0" title="" alt="">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+        <div class="d-md-none">
+            <div class="send-order-header" style="margin-bottom: 4%;">
+                <h2 class="text-center mt-2 container-fluid section-title">Покажите товар в 3D, AR и XR прямо в браузере</h2>
+                <div class="preview-phone-mobile">
+                    <iframe class="demo-ifr2 ar-preview" frameborder="0" title="" alt="">
+                    </iframe>
+                </div>
+                <button class="svg-button mt-4 send-order">
+                    <svg class="svg" width="180" height="36" viewBox="0 0 130 36" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_b_210_3313)">
+                            <rect width="130" height="36" rx="5" fill="url(#paint0_linear_210_3313)" />
+                            <rect width="130" height="36" rx="5" fill="url(#paint1_radial_210_3313)"
+                                fill-opacity="0.2" />
+                            <rect x="0.5" y="0.5" width="129" height="35" rx="4.5"
+                                stroke="url(#paint2_radial_210_3313)" />
+                        </g>
+                        <defs>
+                            <filter id="filter0_b_210_3313" x="-20" y="-20" width="170" height="76"
+                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                <feGaussianBlur in="BackgroundImageFix" stdDeviation="10" />
+                                <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_210_3313" />
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_210_3313"
+                                    result="shape" />
+                            </filter>
+                            <linearGradient id="paint0_linear_210_3313" x1="28.2609" y1="-6.16457e-07" x2="27.976"
+                                y2="35.9999" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#20294D" />
+                                <stop offset="1" stop-color="#0D101F" />
+                            </linearGradient>
+                            <radialGradient id="paint1_radial_210_3313" cx="0" cy="0" r="1"
+                                gradientUnits="userSpaceOnUse"
+                                gradientTransform="translate(66.6149 1.90837e-06) rotate(89.4884) scale(23.6259 61.005)">
+                                <stop stop-color="white" stop-opacity="0.2" />
+                                <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                            </radialGradient>
+                            <radialGradient id="paint2_radial_210_3313" cx="0" cy="0" r="1"
+                                gradientUnits="userSpaceOnUse"
+                                gradientTransform="translate(60.2899 12.0462) rotate(122.784) scale(97.1829 21.4336)">
+                                <stop stop-color="white" />
+                                <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                            </radialGradient>
+                        </defs>
+                    </svg>
+
+                    <div class="ar-icon button-text svg-button-label-sm">
+                        <p>Оставить заявку</p>
+                    </div>
+                </button>
+                <img loading="lazy" src="./img/Line 1 (1).webp" class="line mt-4" alt="">
+                <h3 class="text-center mt-3 subsection-title">От 3D-просмотра к пространственной сцене</h3>
+                <p class="mt-2 container-fluid card-text fw-500">
+                    Покупатель может открыть интерактивную 3D-модель на компьютере, телефоне или планшете,
+                    рассмотреть товар со всех сторон и перейти к пространственному просмотру на поддерживаемом
+                    устройстве.
+                </p>
+                <p class="container-fluid card-text fw-500">
+                    В AR можно разместить один выбранный товар в реальном окружении — например, поставить мебель
+                    в комнате, оборудование на площадке или предмет интерьера в нужном месте и заранее оценить
+                    его размер и внешний вид.
+                </p>
+                <p class="container-fluid card-text fw-500">
+                    В XR можно работать сразу с несколькими 3D-моделями: добавлять товары в одну сцену,
+                    перемещать и масштабировать их, собирать расстановку и сохранять пространство для дальнейшей
+                    работы.
+                </p>
+                <p class="container-fluid card-text fw-500">
+                    Всё открывается через веб — по ссылке, QR-коду или со страницы сайта. Отдельное приложение
+                    устанавливать не требуется.
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <div class="container mb-c-2">
+        <img loading="lazy" data-src="image.webm" class="line">
+        <div class="row process-row mt-c-4">
+            <div class="col-12 col-md">
+                <img loading="lazy" src="./img/Slide.webp" class="process-archive-image d-none d-md-inline">
+                <img loading="lazy" src="./img/Архив.webp" class="process-archive-image d-md-none">
+                <button class="svg-button archive-button go-arhive">
+                    <svg class="svg" width="291" height="70" viewBox="0 0 291 70" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g id="&#208;&#191;&#208;&#187;&#208;&#176;&#209;&#136;&#208;&#186;&#208;&#176;">
+                            <rect x="0.5" y="0.5" width="290" height="69" rx="7.5" fill="white" />
+                            <rect x="0.5" y="0.5" width="290" height="69" rx="7.5"
+                                stroke="url(#paint0_diamond_129_625)" />
+                        </g>
+                        <defs>
+                            <radialGradient id="paint0_diamond_129_625" cx="0" cy="0" r="1"
+                                gradientUnits="userSpaceOnUse"
+                                gradientTransform="translate(145.5 35) rotate(39.1335) scale(156.837 282.406)">
+                                <stop offset="0.351" stop-opacity="0" />
+                                <stop offset="1" stop-color="#666666" />
+                            </radialGradient>
+                        </defs>
+                    </svg>
+                    <div class="ar-icon button-text">
+                        <div class="archive-button-label">
+                            <img loading="lazy" src="./img/Frame 9.png">
+                            <!-- Stacked, this button is the block's only call to action - the
+                                 standalone CTA below is hidden - so it carries that label
+                                 instead. Both open demo.html, so only the wording changes. -->
+                            <p class="d-none d-md-block">Загрузить модель</p>
+                            <p class="d-md-none">Попробовать бесплатно</p>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="col-12 col-md-7 process-content">
+                <h2 class="mb-c-5 c-ft-32 section-title">Попробуйте 3D и AR со своей моделью бесплатно</h2>
+                <p class="card-text mb-c-5 c-ft-16 section-copy section-copy-lead">
+                    Зарегистрируйтесь, загрузите свою 3D-модель
+                    и настройте её отображение прямо в браузере.
+                </p>
+                <p class="card-text mb-c-5 c-ft-16 section-copy section-copy-lead">
+                    Получите ссылку, QR-код и код для встраивания
+                    на сайт. На совместимом устройстве откройте
+                    модель в AR, а в XR используйте несколько
+                    моделей в одной сцене.
+                </p>
+                <p class="card-text mb-c-5 c-ft-16 section-copy section-copy-lead">
+                    Start — 0 ₽ в месяц: 3D-просмотр не тарифицируется,
+                    оплачиваются только AR-сессии.
+                </p>
+                <button class="test-now-btn">
+                    <svg class="svg" width="687" height="60" viewBox="0 0 687 60" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g id="Frame 56">
+                            <path id="Union"
+                                d="M6.37323 33.4511C3.73646 31.9059 3.73646 28.0942 6.37322 26.549L44.8005 4.02934C47.4671 2.46664 50.823 4.38965 50.823 7.48039V52.5197C50.823 55.6104 47.4671 57.5334 44.8005 55.9707L6.37323 33.4511Z"
+                                fill="#13151D" />
+                        </g>
+                    </svg>
+                    <div class="process-cta-label">
+                        <p class="c-ft-32">Попробовать бесплатно</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-c-4">
+        <img loading="lazy" data-src="image.webm" class="line">
+        <h2 id="plans" class="c-ft-32 mt-c-4 text-center section-title">Тарифы</h2>
+        <div class="mt-c-3 container-fluid">
+        </div>
+        <div class="mt-c-4 pricing-carousel-wrapper">
+            <div class="pricing-carousel-viewport">
+                <div class="pricing-carousel-track con-price">
+                    <div class="card pricing-card">
+                        <div class="card-body">
+                            <h3 class="card-title mb-c-3 mt-3">Start</h3>
+                            <p class="mb-c-3 pricing-card-price">0 ₽ <br>
+                                <span class="fs-24">в месяц</span>
+                            </p>
+                            <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 pricing-divider">
+                            <div class="pricing-card-features">
+                                <p class="mb-c-3 pricing-card-feature"><span>3D Viewer + AR одного товара</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Ссылка, QR и embed</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Свои 3D-модели</span></p>
+                            </div>
+                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                            <div class="pricing-card-usage">
+                                <p class="pricing-card-usage-value">0,30 ₽ за оплачиваемую AR-сессию</p>
+                                <p class="pricing-card-usage-note">3D-просмотр не тарифицируется</p>
+                            </div>
+                            <button class="svg-button pricing-connect-button pricing-card-cta">
+                                <svg class="svg" width="176" height="50" viewBox="0 0 176 50" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g id="Button" filter="url(#filter0_d_210_1001)">
+                                        <rect x="0.5" width="175" height="50" rx="5" fill="url(#paint0_linear_210_1001)"
+                                            shape-rendering="crispEdges" />
+                                        <rect x="0.5" width="175" height="50" rx="5" fill="url(#paint1_radial_210_1001)"
+                                            fill-opacity="0.2" shape-rendering="crispEdges" />
+                                        <rect x="1" y="0.5" width="174" height="49" rx="4.5"
+                                            stroke="url(#paint2_radial_210_1001)" shape-rendering="crispEdges" />
+                                    </g>
+                                    <defs>
+                                        <filter id="filter0_d_210_1001" x="-19.5" y="-15" width="215" height="90"
+                                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feColorMatrix in="SourceAlpha" type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                            <feOffset dy="5" />
+                                            <feGaussianBlur stdDeviation="10" />
+                                            <feComposite in2="hardAlpha" operator="out" />
+                                            <feColorMatrix type="matrix"
+                                                values="0 0 0 0 0.12549 0 0 0 0 0.160784 0 0 0 0 0.301961 0 0 0 0.25 0" />
+                                            <feBlend mode="normal" in2="BackgroundImageFix"
+                                                result="effect1_dropShadow_210_1001" />
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_210_1001"
+                                                result="shape" />
+                                        </filter>
+                                        <linearGradient id="paint0_linear_210_1001" x1="38.5435" y1="-8.55945e-07"
+                                            x2="38.5152" y2="62.5" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="white" />
+                                            <stop offset="1" stop-color="#646A81" />
+                                        </linearGradient>
+                                        <radialGradient id="paint1_radial_210_1001" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(90.1739 2.65052e-06) rotate(89.5042) scale(32.8137 82.1223)">
+                                            <stop stop-color="white" stop-opacity="0.2" />
+                                            <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                        </radialGradient>
+                                        <radialGradient id="paint2_radial_210_1001" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(81.6594 16.7308) rotate(128.214) scale(161.663 78.2616)">
+                                            <stop stop-color="#0D101F" />
+                                            <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+                                <div class="pricing-connect-label" data-bs-toggle="modal" data-bs-target="#contactModal"
+                                    data-tariff="Start">
+                                    <p>Подключить</p>
+                                </div>
+                            </button>
+                            <button type="button" class="pricing-details-button" data-bs-toggle="modal"
+                                data-bs-target="#pricingDetailsModal" data-tariff="Start" aria-haspopup="dialog"
+                                aria-label="Подробнее о тарифе Start">Подробнее</button>
+                        </div>
+                    </div>
+                    <div class="card pricing-card">
+                        <div class="card-body">
+                            <h3 class="card-title mb-c-3 mt-3">Pro</h3>
+                            <p class="mb-c-3 pricing-card-price">2 490 ₽ <br>
+                                <span class="fs-24">в месяц</span>
+                            </p>
+                            <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 pricing-divider">
+                            <div class="pricing-card-features">
+                                <p class="mb-c-3 pricing-card-feature"><span>XR Room</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Несколько товаров + сохранение комнаты</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Аналитика взаимодействия</span></p>
+                            </div>
+                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                            <div class="pricing-card-usage">
+                                <p class="pricing-card-usage-value">10 000 AR/XR-сессий включено</p>
+                                <p class="pricing-card-usage-note">сверх лимита — 0,20 ₽ за сессию</p>
+                            </div>
+                            <button class="svg-button pricing-connect-button pricing-card-cta">
+                                <svg class="svg" width="176" height="50" viewBox="0 0 176 50" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g id="Button" filter="url(#filter0_d_210_1002)">
+                                        <rect x="0.5" width="175" height="50" rx="5" fill="url(#paint0_linear_210_1002)"
+                                            shape-rendering="crispEdges" />
+                                        <rect x="0.5" width="175" height="50" rx="5" fill="url(#paint1_radial_210_1002)"
+                                            fill-opacity="0.2" shape-rendering="crispEdges" />
+                                        <rect x="1" y="0.5" width="174" height="49" rx="4.5"
+                                            stroke="url(#paint2_radial_210_1002)" shape-rendering="crispEdges" />
+                                    </g>
+                                    <defs>
+                                        <filter id="filter0_d_210_1002" x="-19.5" y="-15" width="215" height="90"
+                                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feColorMatrix in="SourceAlpha" type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                            <feOffset dy="5" />
+                                            <feGaussianBlur stdDeviation="10" />
+                                            <feComposite in2="hardAlpha" operator="out" />
+                                            <feColorMatrix type="matrix"
+                                                values="0 0 0 0 0.12549 0 0 0 0 0.160784 0 0 0 0 0.301961 0 0 0 0.25 0" />
+                                            <feBlend mode="normal" in2="BackgroundImageFix"
+                                                result="effect1_dropShadow_210_1002" />
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_210_1002"
+                                                result="shape" />
+                                        </filter>
+                                        <linearGradient id="paint0_linear_210_1002" x1="38.5435" y1="-8.55945e-07"
+                                            x2="38.5152" y2="62.5" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="white" />
+                                            <stop offset="1" stop-color="#646A81" />
+                                        </linearGradient>
+                                        <radialGradient id="paint1_radial_210_1002" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(90.1739 2.65052e-06) rotate(89.5042) scale(32.8137 82.1223)">
+                                            <stop stop-color="white" stop-opacity="0.2" />
+                                            <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                        </radialGradient>
+                                        <radialGradient id="paint2_radial_210_1002" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(81.6594 16.7308) rotate(128.214) scale(161.663 78.2616)">
+                                            <stop stop-color="#0D101F" />
+                                            <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+                                <div class="pricing-connect-label" data-bs-toggle="modal" data-bs-target="#contactModal"
+                                    data-tariff="Pro">
+                                    <p>Подключить</p>
+                                </div>
+                            </button>
+                            <button type="button" class="pricing-details-button" data-bs-toggle="modal"
+                                data-bs-target="#pricingDetailsModal" data-tariff="Pro" aria-haspopup="dialog"
+                                aria-label="Подробнее о тарифе Pro">Подробнее</button>
+                        </div>
+                    </div>
+                    <div class="card pricing-card">
+                        <div class="card-body">
+                            <h3 class="card-title mb-c-3 mt-3">Business</h3>
+                            <p class="mb-c-3 pricing-card-price">9 990 ₽ <br>
+                                <span class="fs-24">в месяц</span>
+                            </p>
+                            <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 pricing-divider">
+                            <div class="pricing-card-features">
+                                <p class="mb-c-3 pricing-card-feature"><span>XR → корзина</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Commerce-аналитика</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Воронка и атрибуция</span></p>
+                            </div>
+                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                            <div class="pricing-card-usage">
+                                <p class="pricing-card-usage-value">50 000 AR/XR-сессий включено</p>
+                                <p class="pricing-card-usage-note">сверх лимита — 0,20 ₽ за сессию</p>
+                            </div>
+                            <button class="svg-button pricing-connect-button pricing-card-cta">
+                                <svg class="svg" width="176" height="50" viewBox="0 0 176 50" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g id="Button" filter="url(#filter0_d_210_1003)">
+                                        <rect x="0.5" width="175" height="50" rx="5" fill="url(#paint0_linear_210_1003)"
+                                            shape-rendering="crispEdges" />
+                                        <rect x="0.5" width="175" height="50" rx="5" fill="url(#paint1_radial_210_1003)"
+                                            fill-opacity="0.2" shape-rendering="crispEdges" />
+                                        <rect x="1" y="0.5" width="174" height="49" rx="4.5"
+                                            stroke="url(#paint2_radial_210_1003)" shape-rendering="crispEdges" />
+                                    </g>
+                                    <defs>
+                                        <filter id="filter0_d_210_1003" x="-19.5" y="-15" width="215" height="90"
+                                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feColorMatrix in="SourceAlpha" type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                            <feOffset dy="5" />
+                                            <feGaussianBlur stdDeviation="10" />
+                                            <feComposite in2="hardAlpha" operator="out" />
+                                            <feColorMatrix type="matrix"
+                                                values="0 0 0 0 0.12549 0 0 0 0 0.160784 0 0 0 0 0.301961 0 0 0 0.25 0" />
+                                            <feBlend mode="normal" in2="BackgroundImageFix"
+                                                result="effect1_dropShadow_210_1003" />
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_210_1003"
+                                                result="shape" />
+                                        </filter>
+                                        <linearGradient id="paint0_linear_210_1003" x1="38.5435" y1="-8.55945e-07"
+                                            x2="38.5152" y2="62.5" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="white" />
+                                            <stop offset="1" stop-color="#646A81" />
+                                        </linearGradient>
+                                        <radialGradient id="paint1_radial_210_1003" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(90.1739 2.65052e-06) rotate(89.5042) scale(32.8137 82.1223)">
+                                            <stop stop-color="white" stop-opacity="0.2" />
+                                            <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                        </radialGradient>
+                                        <radialGradient id="paint2_radial_210_1003" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(81.6594 16.7308) rotate(128.214) scale(161.663 78.2616)">
+                                            <stop stop-color="#0D101F" />
+                                            <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+                                <div class="pricing-connect-label" data-bs-toggle="modal" data-bs-target="#contactModal"
+                                    data-tariff="Business">
+                                    <p>Подключить</p>
+                                </div>
+                            </button>
+                            <button type="button" class="pricing-details-button" data-bs-toggle="modal"
+                                data-bs-target="#pricingDetailsModal" data-tariff="Business" aria-haspopup="dialog"
+                                aria-label="Подробнее о тарифе Business">Подробнее</button>
+                        </div>
+                    </div>
+                    <div class="card pricing-card">
+                        <div class="card-body">
+                            <h3 class="card-title mb-c-3 mt-3">Enterprise</h3>
+                            <p class="mb-c-3 pricing-card-price">По запросу <br>
+                                <span class="fs-24">индивидуальный расчёт</span>
+                            </p>
+                            <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 pricing-divider">
+                            <div class="pricing-card-features">
+                                <p class="mb-c-3 pricing-card-feature"><span>Высокий трафик и SLA</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>API / PIM / ERP / CRM</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Private deployment и расширенный white-label</span></p>
+                            </div>
+                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                            <div class="pricing-card-usage">
+                                <p class="pricing-card-usage-value">Индивидуальный объём и условия</p>
+                                <p class="pricing-card-usage-note">рассчитываем под ваш сценарий</p>
+                            </div>
+                            <button class="svg-button pricing-connect-button pricing-card-cta">
+                                <svg class="svg" width="176" height="50" viewBox="0 0 176 50" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g id="Button" filter="url(#filter0_d_210_1004)">
+                                        <rect x="0.5" width="175" height="50" rx="5" fill="url(#paint0_linear_210_1004)"
+                                            shape-rendering="crispEdges" />
+                                        <rect x="0.5" width="175" height="50" rx="5" fill="url(#paint1_radial_210_1004)"
+                                            fill-opacity="0.2" shape-rendering="crispEdges" />
+                                        <rect x="1" y="0.5" width="174" height="49" rx="4.5"
+                                            stroke="url(#paint2_radial_210_1004)" shape-rendering="crispEdges" />
+                                    </g>
+                                    <defs>
+                                        <filter id="filter0_d_210_1004" x="-19.5" y="-15" width="215" height="90"
+                                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feColorMatrix in="SourceAlpha" type="matrix"
+                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                            <feOffset dy="5" />
+                                            <feGaussianBlur stdDeviation="10" />
+                                            <feComposite in2="hardAlpha" operator="out" />
+                                            <feColorMatrix type="matrix"
+                                                values="0 0 0 0 0.12549 0 0 0 0 0.160784 0 0 0 0 0.301961 0 0 0 0.25 0" />
+                                            <feBlend mode="normal" in2="BackgroundImageFix"
+                                                result="effect1_dropShadow_210_1004" />
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_210_1004"
+                                                result="shape" />
+                                        </filter>
+                                        <linearGradient id="paint0_linear_210_1004" x1="38.5435" y1="-8.55945e-07"
+                                            x2="38.5152" y2="62.5" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="white" />
+                                            <stop offset="1" stop-color="#646A81" />
+                                        </linearGradient>
+                                        <radialGradient id="paint1_radial_210_1004" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(90.1739 2.65052e-06) rotate(89.5042) scale(32.8137 82.1223)">
+                                            <stop stop-color="white" stop-opacity="0.2" />
+                                            <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                        </radialGradient>
+                                        <radialGradient id="paint2_radial_210_1004" cx="0" cy="0" r="1"
+                                            gradientUnits="userSpaceOnUse"
+                                            gradientTransform="translate(81.6594 16.7308) rotate(128.214) scale(161.663 78.2616)">
+                                            <stop stop-color="#0D101F" />
+                                            <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+                                <div class="pricing-connect-label" data-bs-toggle="modal" data-bs-target="#contactModal"
+                                    data-tariff="Enterprise">
+                                    <p>Связаться</p>
+                                </div>
+                            </button>
+                            <button type="button" class="pricing-details-button" data-bs-toggle="modal"
+                                data-bs-target="#pricingDetailsModal" data-tariff="Enterprise" aria-haspopup="dialog"
+                                aria-label="Подробнее о тарифе Enterprise">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pricing-carousel-controls mt-c-3">
+            <button class="pricing-carousel-prev" type="button" aria-label="Предыдущий тариф">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+            <button class="pricing-carousel-next" type="button" aria-label="Следующий тариф">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+        <div class="mt-c-3 container-fluid">
+            <p class="card-text c-ft-16 text-center section-copy section-copy-lead">Тарифы оплачивают
+                использование платформы. Ручная работа с 3D-контентом и заказная разработка
+                рассчитываются отдельно.</p>
+        </div>          
+    </div>
+    <div class="container mt-c-4">
+        <img loading="lazy" data-src="image.webm" class="line">
+        <!-- Keeps the #services anchor: the block still answers what is billed outside the
+             tariff, now as an accordion instead of a column of grey paragraphs. Prices come
+             from docs/product/pricing-policy.md. -->
+        <h2 id="services" class="c-ft-32 mt-c-4 text-center section-title">Что может оплачиваться отдельно?</h2>
+        <div class="mt-c-4 container-fluid">
+            <div class="accordion pricing-faq" id="pricingFaq">
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="faqHeading1">
+                        <button class="accordion-button collapsed" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#faqAnswer1"
+                            aria-expanded="false" aria-controls="faqAnswer1">
+                            У меня уже есть готовая 3D-модель. Нужно платить за её создание?
+                        </button>
+                    </h3>
+                    <div id="faqAnswer1" class="accordion-collapse collapse"
+                        aria-labelledby="faqHeading1" data-bs-parent="#pricingFaq">
+                        <div class="accordion-body">
+                            <p class="faq-answer-text">Нет. Если модель проходит техническую проверку и не требует ручной доработки, отдельной платы за создание модели нет. Техническая проверка — 0 ₽.</p>
+                            <p class="faq-answer-text">Автоматическая оптимизация и конвертация, которую платформа выполняет без участия человека, входит в использование платформы.</p>
+                            <p class="faq-answer-text">Если модель требует ручного ремонта или подготовки, эта работа рассчитывается отдельно.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="faqHeading2">
+                        <button class="accordion-button collapsed" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#faqAnswer2"
+                            aria-expanded="false" aria-controls="faqAnswer2">
+                            Что если модель требует ручной доработки?
+                        </button>
+                    </h3>
+                    <div id="faqAnswer2" class="accordion-collapse collapse"
+                        aria-labelledby="faqHeading2" data-bs-parent="#pricingFaq">
+                        <div class="accordion-body">
+                            <p class="faq-answer-text">Ручной ремонт и оптимизация модели — от 5 000 ₽ за модель.</p>
+                            <p class="faq-answer-text">Если есть CAD / STEP / FBX / 3ds Max или другие подходящие исходные материалы, подготовка production-ready модели для веба, AR и XR — от 7 500 ₽.</p>
+                            <p class="faq-answer-text">Итоговая стоимость зависит от сложности исходников и объёма ручной работы.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="faqHeading3">
+                        <button class="accordion-button collapsed" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#faqAnswer3"
+                            aria-expanded="false" aria-controls="faqAnswer3">
+                            Что если 3D-модели нет?
+                        </button>
+                    </h3>
+                    <div id="faqAnswer3" class="accordion-collapse collapse"
+                        aria-labelledby="faqHeading3" data-bs-parent="#pricingFaq">
+                        <div class="accordion-body">
+                            <p class="faq-answer-text">Создание новой 3D-модели — от 10 000 ₽.</p>
+                            <p class="faq-answer-text">Финальная стоимость зависит от сложности товара, материалов, качества исходных фото и чертежей и требований к вебу, AR и XR.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="faqHeading4">
+                        <button class="accordion-button collapsed" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#faqAnswer4"
+                            aria-expanded="false" aria-controls="faqAnswer4">
+                            Сколько стоит конфигуратор?
+                        </button>
+                    </h3>
+                    <div id="faqAnswer4" class="accordion-collapse collapse"
+                        aria-labelledby="faqHeading4" data-bs-parent="#pricingFaq">
+                        <div class="accordion-body">
+                            <p class="faq-answer-text">Настройка стандартных поддерживаемых материалов, цветов, вариантов и SKU — от 15 000 ₽.</p>
+                            <p class="faq-answer-text">Если требуется новая логика, нестандартный интерфейс, расчёты, правила совместимости или новая функциональность конфигуратора — заказной конфигуратор от 50 000 ₽.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="faqHeading5">
+                        <button class="accordion-button collapsed" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#faqAnswer5"
+                            aria-expanded="false" aria-controls="faqAnswer5">
+                            Интеграция с интернет-магазином оплачивается отдельно?
+                        </button>
+                    </h3>
+                    <div id="faqAnswer5" class="accordion-collapse collapse"
+                        aria-labelledby="faqHeading5" data-bs-parent="#pricingFaq">
+                        <div class="accordion-body">
+                            <p class="faq-answer-text">Стандартный JS/API-контракт передачи выбранных товаров и конфигурации входит в тариф Business. Если вы интегрируете его самостоятельно, отдельной платы за сам контракт нет.</p>
+                            <p class="faq-answer-text">Если интеграцию под конкретный сайт, CMS или checkout выполняет АРТ ВИЖН ТЕХ — работа от 15 000 ₽.</p>
+                            <p class="faq-answer-text">PIM / ERP / CRM / 1С, устаревший checkout и нестандартные интеграции рассчитываются отдельно.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-c-3">
+        <img loading="lazy" data-src="image.webm" class="line">
+        <div class="mt-c-3 container-fluid">
+            <h2 id="contact" class="c-ft-32 text-center section-title">Связаться с нами </h2>
+            <div class="contact-form mt-c-4">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label contact-form-label">Имя*</label>
+                    <input type="text" class="form-control contact-input" id="formGroupExampleInput">
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label contact-form-label">Телефон или email*</label>
+                    <input type="text" class="form-control contact-input" id="formGroupExampleInput2">
+                </div>
+                <div class="form-check contact-consent">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+                    <label class="form-check-label" for="flexCheckDefault1">
+                        Согласие на получение рассылки рекламных/информационных сообщений и материалов
+                    </label>
+                </div>
+                <div class="form-check all-form-check contact-consent">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" checked>
+                    <label class="form-check-label" for="flexCheckChecked2">
+                        Cогласие на обработку персональных данных
+                    </label>
+                </div>
+                <div class="text-center contact-submit-row">
+                    <div class="d-none d-md-block">
+                        <button class="mb-c-3 svg-button contact-send-button empty-send-btn">
+                            <svg class="svg" width="500" height="50" viewBox="0 0 500 50" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g id="Frame 40" clip-path="url(#clip0_129_535)">
+                                    <g id="Button" filter="url(#filter0_d_129_535)">
+                                        <rect width="500" height="50" rx="5" fill="url(#paint0_linear_129_535)"
+                                            shape-rendering="crispEdges" />
+                                        <rect width="500" height="50" rx="5" fill="url(#paint1_radial_129_535)"
+                                            fill-opacity="0.2" shape-rendering="crispEdges" />
+                                        <rect x="0.5" y="0.5" width="499" height="49" rx="4.5"
+                                            stroke="url(#paint2_radial_129_535)" shape-rendering="crispEdges" />
+                                    </g>
+                                </g>
+                                <defs>
+                                    <filter id="filter0_d_129_535" x="-20" y="-15" width="540" height="90"
+                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                        <feColorMatrix in="SourceAlpha" type="matrix"
+                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                        <feOffset dy="5" />
+                                        <feGaussianBlur stdDeviation="10" />
+                                        <feComposite in2="hardAlpha" operator="out" />
+                                        <feColorMatrix type="matrix"
+                                            values="0 0 0 0 0.12549 0 0 0 0 0.160784 0 0 0 0 0.301961 0 0 0 0.25 0" />
+                                        <feBlend mode="normal" in2="BackgroundImageFix"
+                                            result="effect1_dropShadow_129_535" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_129_535"
+                                            result="shape" />
+                                    </filter>
+                                    <linearGradient id="paint0_linear_129_535" x1="108.696" y1="-8.5619e-07"
+                                        x2="108.553" y2="50.0026" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#20294D" />
+                                        <stop offset="1" stop-color="#0D101F" />
+                                    </linearGradient>
+                                    <radialGradient id="paint1_radial_129_535" cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse"
+                                        gradientTransform="translate(256.211 2.65052e-06) rotate(88.5836) scale(32.8225 234.572)">
+                                        <stop stop-color="white" stop-opacity="0.2" />
+                                        <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                    </radialGradient>
+                                    <radialGradient id="paint2_radial_129_535" cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse"
+                                        gradientTransform="translate(231.884 16.7308) rotate(150.721) scale(232.032 47.9547)">
+                                        <stop stop-color="white" />
+                                        <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                    </radialGradient>
+                                    <clipPath id="clip0_129_535">
+                                        <rect width="500" height="50" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+
+                            <div class="contact-send-label">
+                                <p class="fs-24">Отправить</p>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="d-md-none">
+                        <button class="svg-button submit-btn empty-send-btn">
+                            <svg class="svg" width="180" height="36" viewBox="0 0 130 36" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g filter="url(#filter0_b_210_3318)">
+                                    <rect width="130" height="36" rx="5" fill="url(#paint0_linear_210_3318)" />
+                                    <rect width="130" height="36" rx="5" fill="url(#paint1_radial_210_3318)"
+                                        fill-opacity="0.2" />
+                                    <rect x="0.5" y="0.5" width="129" height="35" rx="4.5"
+                                        stroke="url(#paint2_radial_210_3318)" />
+                                </g>
+                                <defs>
+                                    <filter id="filter0_b_210_3318" x="-20" y="-20" width="170" height="76"
+                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                        <feGaussianBlur in="BackgroundImageFix" stdDeviation="10" />
+                                        <feComposite in2="SourceAlpha" operator="in"
+                                            result="effect1_backgroundBlur_210_3318" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_210_3318"
+                                            result="shape" />
+                                    </filter>
+                                    <linearGradient id="paint0_linear_210_3318" x1="28.2609" y1="-6.16457e-07"
+                                        x2="27.976" y2="35.9999" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#20294D" />
+                                        <stop offset="1" stop-color="#0D101F" />
+                                    </linearGradient>
+                                    <radialGradient id="paint1_radial_210_3318" cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse"
+                                        gradientTransform="translate(66.6149 1.90837e-06) rotate(89.4884) scale(23.6259 61.005)">
+                                        <stop stop-color="white" stop-opacity="0.2" />
+                                        <stop offset="1" stop-color="#13151D" stop-opacity="0" />
+                                    </radialGradient>
+                                    <radialGradient id="paint2_radial_210_3318" cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse"
+                                        gradientTransform="translate(60.2899 12.0462) rotate(122.784) scale(97.1829 21.4336)">
+                                        <stop stop-color="white" />
+                                        <stop offset="1" stop-color="#999999" stop-opacity="0" />
+                                    </radialGradient>
+                                </defs>
+                            </svg>
+
+                            <div class="ar-icon button-text svg-button-label-sm">
+                                <p>Отправить</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-c-3">
+        <img loading="lazy" data-src="image.webm" class="line">
+        <div class="row mt-c-4 about-us align-items-center">
+            <div class="col">
+                <img loading="lazy" src="./img/лого_для_белого фона.webp" class="line">
+            </div>
+            <div class="col mb-c-3">
+                <h2 class="mb-c-3 c-ft-32 heading-sm">О нас</h2>
+                <p class="mb-c-3 section-copy">АРТ ВИЖН ТЕХ — <span class="fw-100 text-sh-color">мы молодая и энергичная
+                        компания, которая
+                        создает программное обеспечение,
+                        призванное помогать автоматизировать задачи и улучшать работу бизнеса.
+                        Мы работаем с малым и средним бизнесом, а также со стартапами. Если вам нужно
+                        улучшить
+                        работу вашего бизнеса, создать удобный сайт, приложение или автоматизировать рутинные
+                        процессы!</span>
+                </p>
+                <div class="d-md-none">
+                    <img loading="lazy" src="./img/Line 1 (1).webp" class="line mt-3">
+                </div>
+                <h3 class="mb-c-3 heading-sm">Мы можем помочь!</h3>
+                <p class="mb-c-3 section-copy"><span class="fw-100 text-sh-color">
+                        Предлагаем вам полный цикл услуг: от разработки и внедрения программ до их сопровождения в
+                        дальнейшем. Если у вас был негативный опыт работы с другими IT-компаниями, которые не
+                        выполняли
+                        работу в срок или не предоставляли нужного уровня поддержки, мы готовы предложить вам лучшее
+                        обслуживание и более короткие сроки выполнения работы.
                     </span>
-
-                </div>
-
-            </div> <!-- end footer-info -->
-
-            <div class="col-twelve">
-
-
-                <div id="go-top">
-                    <a class="smoothscroll" title="Back to Top" href="#top"><i class="icon-arrow-up"></i></a>
+                </p>
+                <h3 class="mb-c-3 heading-sm">Свяжитесь с нами:</h3>
+                <div class="d-flex">
+                    <div class="col">
+                        <span class="fw-100 text-sh-color text-nowrap">
+                            <p class="mb-0">Email: <a class="text" href="mailto:info@art-vision-tech.ru">
+                                    info@art-vision-tech.ru</a>
+                            </p>
+                            <p class="mb-0">Москва: <a class="text" href="tel:+79612244666">+7 (961) 224-46-66</a></p>
+                            <p class="mb-0">Астана: <a class="text" href="tel:+77764086666">+7 (776) 408-66-66</a></p>
+                        </span>
+                    </div>
+                    <div class="col text-end">
+                        <div class="send-button-container">
+                            <a href="https://wa.me/+79612244666" target="_blank" class="mb-c-3 soc-icon-btn">
+                                <svg class="svg" width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g id="icon">
+                                        <rect x="0.644531" y="0.364258" width="62.7097" height="63.115" rx="5"
+                                            fill="#1E2D4A" />
+                                        <g id="Whatsaph_icon">
+                                            <path id="Vector"
+                                                d="M31.999 10.8833C20.4732 10.8833 11.0958 20.3213 11.0958 31.9216C11.0958 35.5439 12.0256 39.1058 13.7887 42.2487L11.1295 51.7983C11.0422 52.112 11.1267 52.4486 11.3521 52.6819C11.5257 52.8621 11.762 52.96 12.0047 52.96C12.0774 52.96 12.151 52.9508 12.2228 52.9334L22.1254 50.4646C25.1491 52.0983 28.5545 52.96 31.999 52.96C43.5248 52.96 52.9022 43.522 52.9022 31.9216C52.9022 20.3213 43.5248 10.8833 31.999 10.8833ZM42.5142 39.3454C42.067 40.5913 39.9222 41.7282 38.8916 41.881C37.9664 42.0173 36.7958 42.0758 35.5107 41.6697C34.7319 41.4227 33.7321 41.0953 32.4516 40.5455C27.0686 38.235 23.5532 32.8482 23.2842 32.4924C23.0161 32.1366 21.093 29.601 21.093 26.9767C21.093 24.3524 22.479 23.0618 22.9716 22.5276C23.4641 21.9934 24.0449 21.8598 24.403 21.8598C24.7611 21.8598 25.1182 21.8644 25.4318 21.879C25.7617 21.8955 26.2043 21.7537 26.6396 22.7947C27.0868 23.863 28.1601 26.4873 28.2928 26.7554C28.4273 27.0224 28.5163 27.3344 28.3382 27.6902C28.1601 28.046 28.071 28.2683 27.802 28.5802C27.533 28.8921 27.2385 29.2754 26.9968 29.515C26.7278 29.7812 26.4488 30.0693 26.7614 30.6035C27.074 31.1377 28.151 32.8839 29.7469 34.298C31.7963 36.1147 33.5258 36.6781 34.062 36.9452C34.5983 37.2123 34.9118 37.1675 35.2244 36.8117C35.5371 36.4549 36.5659 35.2539 36.9231 34.7206C37.2802 34.1874 37.6383 34.2752 38.1309 34.4536C38.6235 34.631 41.2618 35.9207 41.798 36.1878C42.3342 36.4549 42.6923 36.5885 42.8268 36.8108C42.9613 37.0321 42.9613 38.1005 42.5142 39.3454Z"
+                                                fill="white" />
+                                        </g>
+                                    </g>
+                                </svg>
+                            </a>
+                            <a href="https://t.me/+79612244666" target="_blank" class="mb-c-3 soc-icon-btn">
+                                <svg class="svg" width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="0.644531" y="0.84375" width="62.7097" height="60.7921" rx="5"
+                                        fill="#1E2D4A" />
+                                    <path
+                                        d="M52.6157 14.9428C52.1948 13.9998 51.3122 13.4668 50.1308 13.4668C49.2754 13.4668 48.515 13.7401 48.4199 13.7811C48.1619 13.8768 23.1774 23.4979 12.9256 27.7208C12.0294 28.0898 11.4455 28.6091 11.2011 29.2787C10.8209 30.3037 11.5406 31.356 12.2195 31.6567C14.7723 32.791 20.0679 34.3489 21.7245 34.8272C22.2677 36.6585 24.1822 43.0407 25.0784 45.7876C25.3092 46.4983 26.0017 46.9219 26.9115 46.9219C27.0473 46.9219 27.1288 46.9219 27.1288 46.9219C27.3732 46.8946 27.5904 46.7716 27.7398 46.5939C27.8756 46.4436 27.9571 46.2523 27.9706 46.0473L28.5002 38.3258C29.505 39.0775 30.9579 40.1844 32.5738 41.4007C35.7647 43.806 39.5667 46.6486 41.685 48.1929C42.4454 48.7395 43.165 49.0129 43.8575 49.0129C45.3919 49.0129 46.2745 47.6872 46.5732 46.5529C48.3385 39.6514 50.9184 26.6138 52.4663 18.824L52.8058 17.1157C53.0231 16.0361 52.833 15.4211 52.6293 14.9564L52.6157 14.9428ZM26.7214 36.4399L26.2462 43.2867C25.092 39.5695 23.3811 33.8433 23.3675 33.7749C23.3675 33.7613 23.3404 33.7476 23.3404 33.7203V33.6793L42.8799 20.8739C42.8799 20.8739 44.2106 19.9583 44.713 19.849C45.3919 19.6986 45.5549 19.972 45.4326 20.136C44.9574 20.7783 42.7169 22.7189 42.7169 22.7189L27.1423 35.7019C26.8979 35.8659 26.735 36.1392 26.7214 36.4262V36.4399Z"
+                                        fill="white" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
-
+    </div>
+    <img loading="lazy" src="./img/Line 1 (1).webp" class="line mt-4">
+    <footer class="footer mt-auto py-4 site-footer container-fluid">
+        <div class="container">
+            <div class="row row-footer">
+                <a href="#" class="col footer-btn">
+                    <img loading="lazy" src="./img/Art vision tech long white.webp" class="site-footer-logo">
+                </a>
+                <div class="col">
+                    <div class="no-wrap-footer-menu">
+                        <span><a class="text" href="#">Главная</a></span>
+                        <span>|</span>
+                        <span><a class="text" href="#about">О продукте</a></span>
+                        <span>|</span>
+                        <span><a class="text" href="#plans">Тарифы</a></span>
+                        <span>|</span>
+                        <span><a class="text" href="#contact">Контакты</a></span>
+                    </div>
+                </div>
+                <div class="col site-footer-company">
+                    <span>© <span id="year"></span> ООО "АРТ ВИЖН ТЕХ"</span>
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <div id="preloader">
-        <div id="loader"></div>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+    <script>
+        const cssUpdatableClasses = [
+            {
+                selector: '.dynamic-column',
+                positive: el => el.classList.replace('col-md-4', 'col-md-5'),
+                negative: el => el.classList.replace('col-md-5', 'col-md-4'),
+                condition: () => window.innerWidth <= 1400
+            },
+            {
+                selector: '.row-footer',
+                positive: el => el.classList.add('row'),
+                negative: el => el.classList.remove('row'),
+                condition: () => window.innerWidth > 767
+            },
+            {
+                selector: '.con-price',
+                positive: el => el.classList.replace('container-fluid', 'container'),
+                negative: el => el.classList.replace('container', 'container-fluid'),
+                condition: () => window.innerWidth > 767
+            },
+            {
+                selector: '.about-us',
+                positive: el => el.classList.add('row'),
+                negative: el => el.classList.replace('row', 'container-fluid'),
+                condition: () => window.innerWidth > 767
+            }
+        ];
 
-    <!-- Java Script
-    ================================================== -->
-    <script src="./styles/index/js/jquery-2.1.3.min.js"></script>
-    <script src="./styles/index/js/plugins.js"></script>
-    <script src="./styles/index/js/main.js"></script>
+        function updateClasses() {
+            cssUpdatableClasses.forEach(({ selector, condition, positive, negative }) => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    condition() ? positive(element) : negative(element);
+                }
+            });
+        }
+
+        function updateContainerHeight() {
+            const colElement = document.querySelector('.col-md-6');
+            const imgContainer = document.querySelector('.main-img');
+            const navbarHeight = document.querySelector(".navbar").offsetHeight;
+            if (colElement && imgContainer) {
+                imgContainer.style.minHeight = `${colElement.clientHeight}px`;
+            }
+        }
+
+        function updateMarginTop() {
+            const nav = document.querySelector('nav');
+            const tops = document.querySelector('.tops');
+            if (nav && tops) {
+                tops.style.marginTop = `${nav.offsetHeight - 1}px`;
+            }
+        }
+
+        function scrollToIfNeeded(target, navbarHeight, timeout = 0) {
+            let targetElement = document.querySelector(target);
+            if (targetElement) {
+                let targetPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: targetPosition - navbarHeight,
+                        behavior: "smooth"
+                    });
+                }, timeout);
+            }
+        }
+
+        function updateLinkListeners() {
+            const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+            const footerLinks = document.querySelectorAll('.no-wrap-footer-menu .text');
+            const navbarHeight = document.querySelector(".navbar").offsetHeight;
+
+            let sendOrderBtns = [];
+            sendOrderBtns.push(document.querySelector(".send-order"))
+            sendOrderBtns.push(document.querySelector(".send-order-2"));
+            sendOrderBtns.forEach(x => x.addEventListener("click", (event) =>
+                scrollToIfNeeded('#contact', navbarHeight, 100)));
+
+            linkScrollToAddListener(document.querySelector(".navbar-brand"), navbarHeight);
+            linkScrollToAddListener(document.querySelector(".footer-btn"), navbarHeight);
+
+            navLinks.forEach(function (link) {
+                linkScrollToAddListener(link, navbarHeight);
+            });
+            footerLinks.forEach(function (link) {
+                linkScrollToAddListener(link, navbarHeight);
+            });
+        }
+
+        function linkScrollToAddListener(link, navbarHeight) {
+            const timeout = 100;
+            const navbarCollapse = document.querySelector(".navbar-collapse");
+            link.addEventListener("click", function (event) {
+                if (navbarCollapse.classList.contains("show")) {
+                    new bootstrap.Collapse(navbarCollapse, { toggle: true });
+                }
+
+                let target = this.getAttribute("href");
+
+                if (target?.startsWith("#")) {
+                    event.preventDefault();
+
+                    if (target === "#" || target.length === 1) {
+                        setTimeout(() => {
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                        }, timeout);
+
+                        return;
+                    }
+
+                    scrollToIfNeeded(target, navbarHeight, timeout);
+                }
+            });
+        }
+
+        function initPricingCarousel() {
+            const track = document.querySelector('.pricing-carousel-track');
+            const prevBtn = document.querySelector('.pricing-carousel-prev');
+            const nextBtn = document.querySelector('.pricing-carousel-next');
+            const cards = document.querySelectorAll('.pricing-card');
+
+            if (!track || !prevBtn || !nextBtn || !cards.length) return;
+
+            // Scroll offset that puts a card at the start of the scroll viewport.
+            // offsetLeft is measured from the offset parent, not from the track, so
+            // the track's own offset has to come back out of it - otherwise every
+            // card carries the carousel's page position as a constant bias.
+            function cardScrollLeft(card) {
+                return card.offsetLeft - track.offsetLeft;
+            }
+
+            function getCurrentCardIndex() {
+                // Find the card closest to the start of the scroll viewport
+                let closestIndex = 0;
+                let closestDistance = Infinity;
+
+                cards.forEach((card, index) => {
+                    const distance = Math.abs(cardScrollLeft(card) - track.scrollLeft);
+
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestIndex = index;
+                    }
+                });
+
+                return closestIndex;
+            }
+
+            function updateButtonStates() {
+                const currentIndex = getCurrentCardIndex();
+                // A wide viewport fits several cards, so the track runs out of
+                // scroll before the last card can reach the start edge. There the
+                // end of the scroll range is the last position, not the last index.
+                const atEnd = Math.ceil(track.scrollLeft) >= track.scrollWidth - track.clientWidth - 1;
+
+                // Disable prev button if at start
+                prevBtn.disabled = currentIndex === 0;
+
+                // Disable next button if at end
+                nextBtn.disabled = currentIndex === cards.length - 1 || atEnd;
+            }
+
+            function scrollToCard(index) {
+                if (index < 0 || index >= cards.length) return;
+
+                const card = cards[index];
+                track.scrollTo({
+                    left: cardScrollLeft(card),
+                    behavior: 'smooth'
+                });
+            }
+
+            function navigateByOne(direction) {
+                const currentIndex = getCurrentCardIndex();
+                const nextIndex = direction === 'next'
+                    ? Math.min(currentIndex + 1, cards.length - 1)
+                    : Math.max(currentIndex - 1, 0);
+
+                if (nextIndex !== currentIndex) {
+                    scrollToCard(nextIndex);
+                }
+            }
+
+            // Event listeners
+            prevBtn.addEventListener('click', () => {
+                navigateByOne('prev');
+            });
+
+            nextBtn.addEventListener('click', () => {
+                navigateByOne('next');
+            });
+
+            // Update button states during scroll (including swipe)
+            track.addEventListener('scroll', updateButtonStates, { passive: true });
+
+            // Update on window resize
+            window.addEventListener('resize', () => {
+                updateButtonStates();
+            });
+
+            // Initial state
+            updateButtonStates();
+        }
+
+        function createBtnAndClickListen(classNameWithDot, action) {
+            const btns = document.querySelectorAll(classNameWithDot);
+            btns.forEach(btn => {
+                btn.addEventListener("click", function (event) {
+                    action();
+                });
+            });
+        }
+
+
+        function revealPage() {
+            // Класс loaded скрывает оверлей #loader.
+            document.body.classList.add("loaded");
+        }
+
+        // Снимаем оверлей, как только готовы разметка и стили. Ждать window "load"
+        // нельзя: это событие задерживают промо-ролик, iframe превью и CDN, и на
+        // мобильной сети страница остаётся под «Загрузка...» неограниченно долго.
+        // Ролик подставляет index.bandle.js: адрес бакета живёт в конфигурации окружения.
+        if (document.readyState === "loading")
+            document.addEventListener("DOMContentLoaded", revealPage);
+        else
+            revealPage();
+
+        document.addEventListener("DOMContentLoaded", function () {
+            createBtnAndClickListen('.wa-contact-us', () => {
+                window.open("https://wa.me/+79612244666", "_blank");
+            });
+            createBtnAndClickListen('.svg-button-ar', () => {
+                window.open("./demo.html", "_blank");
+            });
+            createBtnAndClickListen('.svg-button-xr', () => {
+                window.open("./xrviewer.html", "_blank");
+            });
+            createBtnAndClickListen('.go-arhive, .test-now-btn', () => {
+                window.open("./demo.html", "_blank");
+            });
+
+            new ResizeObserver(updateContainerHeight).observe(document.querySelector('.col-md-6'));
+            document.getElementById("year").textContent = new Date().getFullYear();
+            updateContainerHeight();
+            updateClasses();
+            updateMarginTop();
+            updateLinkListeners();
+            initPricingCarousel();
+
+            window.addEventListener('resize', () => {
+                updateClasses();
+                updateMarginTop();
+                updateLinkListeners();
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const contactModal = document.getElementById("contactModal");
+
+            contactModal.addEventListener("show.bs.modal", function (event) {
+                const button = event.relatedTarget;
+                const tariff = button.getAttribute("data-tariff");
+
+                // Находим select и устанавливаем значение
+                const tariffSelect = document.getElementById("modal-formGroupExampleInput3");
+                for (let option of tariffSelect.options) {
+                    if (option.textContent === tariff) {
+                        option.selected = true;
+                    }
+                }
+            });
+        });
+    </script>
     <script src="./dist/index.bandle.js?v=1"></script>
-    <script type="module" src="./styles/index/js/dialog.js"></script>
-
 </body>
 
 </html>

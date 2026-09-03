@@ -1,0 +1,201 @@
+/* ============================================================================
+   Landing / base
+   ----------------------------------------------------------------------------
+   Owns: page background, Bootstrap container/card overrides and the few text /
+   spacing helpers that more than one section reuses.
+   Anything that belongs to a single section lives in that section's file.
+   ========================================================================== */
+
+/* Bootstrap paints <body> from --bs-body-bg. */
+body {
+    background-color: #DEDEDE !important;
+}
+
+/* Bootstrap's modal writes an inline padding-right on <body>; only !important
+   can beat an inline style. */
+body.modal-open {
+    padding-right: 0px !important;
+}
+
+/* --- Bootstrap grid gutters ---------------------------------------------- */
+
+.container {
+    --bs-gutter-x: 0rem !important;
+}
+
+.container-fluid {
+    --bs-gutter-x: 3.5rem !important;
+}
+
+/* --- Shared text helpers -------------------------------------------------- */
+
+.text {
+    text-align: center;
+    text-decoration: none;
+}
+
+.line {
+    width: 100%;
+}
+
+.text-sh-color {
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+.text-sh-color a {
+    color: #3d3131;
+}
+
+/* Section headings below the hero are <h2> for the document outline. This keeps
+   the type scale the page had while they were <h1>: min() reproduces Bootstrap's
+   h1 ramp, which caps at 2.5rem exactly at a 1200px viewport. .c-ft-32 still
+   takes over below 1200px - it is declared later in this file. */
+.section-title {
+    font-size: min(calc(1.375rem + 1.5vw), 2.5rem);
+}
+
+/* Keeps the <h5> type scale on the elements whose tag changed for the document
+   outline: the card and tariff titles, the headings now marked up at the level
+   their position calls for, and the paragraph that opened its block as an <h5>.
+   Declared ahead of the responsive block below, so .c-ft-32 / .c-ft-16 still
+   take over under 1200px exactly as the tag defaults did. */
+.card-title,
+.heading-sm,
+.section-copy-lead {
+    font-size: 1.25rem;
+}
+
+/* Narrative copy that was marked up as <h5>/<h6> only for its size. Bootstrap
+   headings are 500 / 1.2 / 0.5rem bottom margin where body text is 400 / 1.5 /
+   1rem, so a bare <p> would reflow every block this appears in. The .mb-c-*
+   helpers below still win wherever a block sets its own bottom spacing. */
+.section-copy {
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-100 {
+    font-weight: 100;
+}
+
+.fs-24 {
+    font-size: 24px;
+}
+
+/* --- Shared spacing helpers ---------------------------------------------- */
+
+.mt-c-3 {
+    margin-top: 3%;
+}
+
+/* Applied together with .row / heading margins, so it has to win. */
+.mt-c-4 {
+    margin-top: 4% !important;
+}
+
+.mb-c-2 {
+    margin-bottom: 2%;
+}
+
+.mb-c-3 {
+    margin-bottom: 3%;
+}
+
+.mb-c-5 {
+    margin-bottom: 5%;
+}
+
+.ml-15 {
+    margin-left: 15px;
+}
+
+.mr-15 {
+    margin-right: 15px;
+}
+
+/* --- Bootstrap card overrides shared by feature cards and pricing cards --- */
+
+.border-none {
+    --bs-card-border-radius: none !important;
+    --bs-card-border-color: none !important;
+}
+
+.card-text {
+    color: #767676;
+}
+
+.card-title {
+    word-wrap: normal;
+}
+
+/* --- Full page loader shown until window "load" --------------------------- */
+
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.93);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    z-index: 9999;
+}
+
+.loaded #loader {
+    display: none;
+}
+
+/* ============================================================================
+   Responsive — widest breakpoint first
+   ========================================================================== */
+
+/* .c-ft-32 / .c-ft-16 only exist below 1200px: above it the headings keep the
+   Bootstrap defaults. */
+@media (max-width: 1200px) {
+    .c-ft-32 {
+        font-size: 24px;
+    }
+
+    .c-ft-16 {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 991px) {
+    /* over Bootstrap .card-body padding */
+    .card-body {
+        padding: 5px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    /* over the Bootstrap .container width on the same element */
+    .section-narrow {
+        width: 90% !important;
+    }
+
+    /* card copy stays 14px even where .c-ft-16 is applied to the same node */
+    .card-text {
+        font-size: 14px !important;
+    }
+
+    /* Stacked, every section heading gets the full column width, so they should
+       all read the same way. Four of them carry the Bootstrap .text-center
+       utility and two ("О продукте", "Попробуйте 3D и AR ...") never did, which
+       left the page alternating between centred and flush-left titles. Centre
+       them here rather than adding the utility to the two stragglers: on the
+       desktop layout those two sit beside their artwork and are meant to stay
+       left, so the alignment belongs to the breakpoint, not to the markup. */
+    .section-title {
+        text-align: center;
+    }
+}

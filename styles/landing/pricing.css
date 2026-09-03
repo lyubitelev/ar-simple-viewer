@@ -1,0 +1,573 @@
+/* ============================================================================
+   Landing / pricing
+   ----------------------------------------------------------------------------
+   Owns the tariff card grid only. The "Подключить" button itself is a variant
+   of the shared SVG button and lives in buttons.css.
+
+   JS contract (do not rename): .con-price is re-flagged between .container
+   and .container-fluid by the inline script.
+   ========================================================================== */
+
+.con-price {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.con-price::-webkit-scrollbar {
+    display: none;
+}
+
+.pricing-card {
+    background-image: url("../../img/Frame 19.webp");
+    flex: 0 0 clamp(280px, calc(100% - 48px), 520px);
+    /* over the Bootstrap .card radius variables */
+    --bs-card-inner-border-radius: none !important;
+    --bs-card-border-radius: none !important;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-card .card-body {
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    height: 100%;
+}
+
+.pricing-card .card-body span {
+    font-weight: 100;
+}
+
+/* Hairline separator between the rows of a tariff card. */
+.pricing-divider {
+    width: 50%;
+    margin-inline: auto;
+}
+
+/* The feature rows and the price are card content, not headings, so they are
+   <p>. These two rules keep the type scale the <h5> tag used to give them; the
+   mobile block at the bottom of this file still overrides both. */
+.pricing-card-feature {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+/* The price opens the card under the plan name, so a card is scanned as
+   name -> price -> capabilities -> included usage -> actions. */
+.pricing-card-price {
+    flex-shrink: 0;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+/* The card is a short summary for choosing a plan, not the whole policy: three
+   capability rows, and "Подробнее" carries the rest. The feature list no longer
+   grows. It used to absorb a whole tariff's worth of height difference - four
+   rows against Enterprise's five - which is what opened the empty band inside
+   Start and made every card read as a tall panel. */
+.pricing-card-features {
+    flex-shrink: 0;
+}
+
+/* Included usage / usage price: the number that actually decides between the
+   plans, so it is set apart from the capability rows but stays quieter than
+   the monthly price. */
+.pricing-card-usage {
+    flex-shrink: 0;
+    margin-bottom: 3%;
+}
+
+.pricing-card-usage-value {
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.25;
+    margin-bottom: 2px;
+}
+
+.pricing-card-usage-note {
+    font-size: 0.875rem;
+    line-height: 1.25;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0;
+}
+
+/* The footer keeps a shared baseline, but it is now cheap: with three capability
+   rows on every tariff the cards differ only by how their copy wraps, so the
+   space this absorbs measures 0-47px at 1440px instead of a whole tariff's worth
+   of empty card. If a future card needs materially more content than its
+   neighbours, drop this line rather than growing the hole. */
+.pricing-card-cta {
+    flex-shrink: 0;
+    margin-top: auto;
+}
+
+/* Secondary action opening the shared details dialog. Deliberately quieter
+   than the painted "Подключить" face: an outline on the card's own navy, no
+   new colour. inline-flex + min-height keep it a comfortable tap target. */
+.pricing-details-button {
+    flex-shrink: 0;
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 8px 18px;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.pricing-details-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: white;
+}
+
+.pricing-details-button:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+/* --- Carousel controls ---------------------------------------------------- */
+/* The section sits on the #DEDEDE page background, so the buttons are painted
+   solid in the same navy .site-header uses; a translucent white button is
+   invisible here. Hover/press stay on that hue instead of adding a colour. */
+
+.pricing-carousel-controls {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    margin-left: 25px;
+}
+
+.pricing-carousel-prev,
+.pricing-carousel-next {
+    background-color: rgb(13 39 65);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+    padding: 0;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    font-size: 0;
+}
+
+.pricing-carousel-prev:hover:not(:disabled),
+.pricing-carousel-next:hover:not(:disabled) {
+    background-color: rgb(24 61 96);
+    border-color: rgba(255, 255, 255, 0.45);
+}
+
+.pricing-carousel-prev:active:not(:disabled),
+.pricing-carousel-next:active:not(:disabled) {
+    background-color: rgb(9 28 47);
+    transform: translateY(1px);
+}
+
+/* Replaces the previous white :focus ring, which was invisible on this
+   background. Keyboard focus only - a pointer click leaves no ring. */
+.pricing-carousel-prev:focus-visible,
+.pricing-carousel-next:focus-visible {
+    outline: 2px solid rgb(13 39 65);
+    outline-offset: 2px;
+}
+
+/* Stays visible: the user has to keep seeing that the carousel has navigation. */
+.pricing-carousel-prev:disabled,
+.pricing-carousel-next:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pricing-carousel-prev svg,
+.pricing-carousel-next svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Carousel wrapper and viewport */
+.pricing-carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0;
+}
+
+.pricing-carousel-viewport {
+    width: 100%;
+    overflow: hidden;
+}
+
+.pricing-carousel-track {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    /* Hide scrollbar but keep scrolling functional */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pricing-carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+/* Carousel indicator */
+.pricing-carousel-indicator {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pricing-carousel-indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pricing-carousel-indicator-dot.active {
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 24px;
+    border-radius: 4px;
+}
+
+.pricing-carousel-indicator-dot:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================================================
+   Responsive
+   ========================================================================== */
+
+/* Desktop: 1200px and up */
+@media (min-width: 1200px) {
+    .pricing-card {
+        flex: 0 0 clamp(320px, calc(50% - 12px), 520px);
+    }
+}
+
+/* Wide desktop: the whole comparison at once.
+   Bootstrap gives .container 1320px from 1400px up, and that is exactly where
+   four cards still fit at a readable width - (1320 - 3 gaps of 24px) / 4 = 312px.
+   Below it the container drops to 1140px, where the same four would be 267px, so
+   1366/1200 deliberately keep the carousel. Same DOM and same track either way:
+   the cards simply stop overflowing, which also leaves the prev/next controls
+   nothing to scroll. */
+@media (min-width: 1400px) {
+    .pricing-card {
+        flex: 0 0 calc((100% - 72px) / 4);
+    }
+
+    .pricing-carousel-controls {
+        display: none;
+    }
+}
+
+/* Tablet: 768px - 1199px */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .pricing-card {
+        flex: 0 0 clamp(300px, calc(100% - 48px), 480px);
+    }
+    
+    .pricing-carousel-track {
+        gap: 20px;
+    }
+}
+
+/* Small screens: below 768px */
+@media (max-width: 767px) {
+    .pricing-carousel-track {
+        gap: 16px;
+        padding-left: 12px;
+    }
+
+    /* Percentage of the track, so a slice of the next card stays visible at
+       every mobile width - that preview is the swipe affordance. */
+    .pricing-card {
+        flex: 0 0 clamp(240px, 83%, 440px);
+    }
+
+    .pricing-card .card-body {
+        padding: 14px 12px 12px !important;
+    }
+
+    .pricing-card .card-title {
+        font-size: clamp(19px, 5vw, 22px);
+        line-height: 1.2;
+        margin-top: 0 !important;
+        margin-bottom: 8px;
+    }
+
+    .pricing-card-feature {
+        font-size: clamp(15px, 4.1vw, 17px);
+        line-height: 1.35;
+        margin-bottom: 8px;
+    }
+
+    .pricing-card .pricing-divider,
+    .pricing-card-price {
+        margin-bottom: 8px;
+    }
+
+    .pricing-card-price {
+        font-size: clamp(24px, 6.6vw, 30px);
+        line-height: 1.15;
+    }
+
+    .pricing-card-price .fs-24 {
+        font-size: clamp(16px, 4.5vw, 20px);
+    }
+
+    .pricing-card-usage-value {
+        font-size: clamp(15px, 4.1vw, 17px);
+    }
+
+    .pricing-card-usage-note {
+        font-size: clamp(12px, 3.4vw, 13px);
+    }
+
+    .pricing-card-cta {
+        margin-top: 4px;
+    }
+
+    .pricing-details-button {
+        font-size: clamp(13px, 3.7vw, 15px);
+        padding: 8px 14px;
+    }
+
+    .pricing-carousel-prev,
+    .pricing-carousel-next {
+        width: 40px;
+        height: 40px;
+    }
+
+    .pricing-carousel-prev svg,
+    .pricing-carousel-next svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* Extra small screens: below 576px */
+@media (max-width: 575px) {
+    .pricing-carousel-track {
+        gap: 12px;
+        padding-left: 8px;
+    }
+
+}
+
+/* ============================================================================
+   Tariff details dialog
+   ----------------------------------------------------------------------------
+   One Bootstrap modal serves all four tariffs; src/index/pricingDetails.js
+   fills it from the data-tariff of the "Подробнее" button that opened it, so
+   the tariff copy is not duplicated four times in the markup.
+
+   Desktop keeps a centred dialog. Below 768px the same dialog becomes a bottom
+   sheet: a small popover is unreadable on a phone, and Bootstrap already owns
+   the parts a sheet needs anyway - backdrop, Escape, body scroll lock and
+   focus return to the button that opened it.
+
+   JS contract (do not rename): #pricingDetailsModal, .pricing-details-title,
+   .pricing-details-connect and the [data-pricing-details] slots.
+   ========================================================================== */
+
+.pricing-details-modal .modal-content {
+    /* Same navy the pricing cards and the painted CTA faces already use. */
+    background: linear-gradient(180deg, #20294D 0%, #0D101F 100%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    color: white;
+}
+
+.pricing-details-modal .modal-header {
+    position: relative;
+    align-items: flex-start;
+    gap: 12px;
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.pricing-details-modal .modal-footer {
+    border-top-color: rgba(255, 255, 255, 0.15);
+    justify-content: center;
+}
+
+.pricing-details-heading {
+    min-width: 0;
+}
+
+.pricing-details-title {
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 6px;
+}
+
+.pricing-details-price {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 0;
+}
+
+.pricing-details-summary {
+    font-size: 16px;
+    line-height: 1.45;
+    margin-bottom: 20px;
+}
+
+.pricing-details-section-title {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.25;
+    margin-bottom: 8px;
+}
+
+.pricing-details-list {
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.pricing-details-list li {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.45;
+    margin-bottom: 6px;
+}
+
+/* Commercial boundary of the tariff - separated from the feature lists so it
+   is not read as another included capability. */
+.pricing-details-note {
+    font-size: 14px;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Reuses the white -> #646A81 face of the card CTA, so the dialog's primary
+   action reads the same as "Подключить" on the card. */
+.pricing-details-connect {
+    padding: 10px 26px;
+    background: linear-gradient(180deg, #FFFFFF 0%, #646A81 100%);
+    border: 1px solid rgba(13, 16, 31, 0.5);
+    border-radius: 5px;
+    color: black;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.2;
+    cursor: pointer;
+}
+
+.pricing-details-connect:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+/* --- Bottom sheet below 768px -------------------------------------------- */
+
+@media (max-width: 767px) {
+    /* height beats the calc() .modal-dialog-scrollable puts on the dialog, so
+       the sheet can be pinned to the bottom edge of the viewport. */
+    .pricing-details-modal .modal-dialog {
+        margin: 0;
+        max-width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    /* dvh keeps the sheet clear of the mobile browser chrome; the vh line
+       above it is the fallback for engines without dvh. */
+    .pricing-details-modal .modal-content {
+        max-height: 88vh;
+        max-height: 88dvh;
+        border-radius: 18px 18px 0 0;
+        border-bottom: none;
+    }
+
+    /* Slides up from the bottom edge instead of Bootstrap's drop-in. Same
+       specificity as .modal.fade .modal-dialog, and this file is loaded after
+       Bootstrap, so it wins. */
+    .pricing-details-modal.fade .modal-dialog {
+        transform: translateY(100%);
+    }
+
+    .pricing-details-modal.show .modal-dialog {
+        transform: none;
+    }
+
+    /* Grab handle: the affordance that says this panel is a sheet. */
+    .pricing-details-modal .modal-header {
+        padding-top: 22px;
+    }
+
+    .pricing-details-modal .modal-header::before {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 4px;
+        border-radius: 2px;
+        background-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .pricing-details-title {
+        font-size: 22px;
+    }
+
+    .pricing-details-price,
+    .pricing-details-summary {
+        font-size: 14px;
+    }
+
+    .pricing-details-section-title {
+        font-size: 16px;
+    }
+
+    .pricing-details-list li {
+        font-size: 14px;
+    }
+
+    .pricing-details-note {
+        font-size: 13px;
+    }
+}

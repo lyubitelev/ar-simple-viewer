@@ -1,0 +1,136 @@
+/* ============================================================================
+   Landing / header
+   ----------------------------------------------------------------------------
+   Owns the fixed navbar: brand, collapsed menu, social icons and the
+   hamburger / close toggler. Nothing here may reach outside the <nav>.
+   ========================================================================== */
+
+.site-header {
+    background-color: rgb(13 39 65);
+}
+
+/* over the Bootstrap .navbar variable */
+.navbar {
+    --bs-navbar-padding-y: 1.5rem !important;
+}
+
+.navbar-brand {
+    margin-left: 0;
+}
+
+/* Brand + toggler row, kept on one line while the menu is collapsed. */
+.navbar-bar {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-menu {
+    text-wrap: nowrap;
+    margin-left: auto;
+    margin-right: 36px;
+    font-size: 16px;
+}
+
+.navbar-social {
+    min-width: 80px;
+    width: 0px;
+    justify-content: space-between;
+    /* Was 1em plus two media queries that between them covered every width. */
+    margin-bottom: 0em;
+}
+
+.navbar-collapse-offset {
+    margin-top: 2px;
+}
+
+.brand-logo {
+    height: 32px;
+    width: auto;
+}
+
+.icon-img {
+    width: 30px;
+    height: auto;
+}
+
+/* --- Toggler -------------------------------------------------------------- */
+
+.navbar-toggler {
+    /* over the Bootstrap .navbar-toggler border/colour */
+    border: none !important;
+    color: transparent !important;
+    margin-right: 0;
+    outline: none;
+    top: 15px;
+    right: 15px;
+    z-index: 9999;
+}
+
+.navbar-toggler-icon {
+    width: 30px;
+    height: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23D9D9D9' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Open state: the burger becomes a cross drawn with two pseudo elements. */
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+    background-image: none;
+    position: relative;
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before,
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.55);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* ============================================================================
+   Responsive
+   ========================================================================== */
+
+@media (min-width: 1920px) {
+    .brand-logo {
+        width: 50%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .navbar-brand {
+        margin-left: 40px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .brand-logo {
+        width: 100%;
+    }
+
+    .navbar-bar {
+        margin-right: 0%;
+    }
+
+    .navbar-menu {
+        font-size: 15px;
+    }
+}

@@ -1,0 +1,297 @@
+/* ============================================================================
+   Landing / buttons
+   ----------------------------------------------------------------------------
+   Every CTA on the landing is an <svg> face plus a label div pulled back on
+   top of it. This file owns the primitive AND every one of its variants, so
+   the whole button cascade can be read in one place: a variant declared in a
+   section file would land after this file and silently change which of the
+   responsive nudges at the bottom wins.
+
+   .svg-button-ar / .svg-button-xr / .wa-contact-us / .go-arhive /
+   .test-now-btn / .send-order / .send-order-2 / .empty-send-btn / .modal-btn
+   are click hooks read by the page scripts - do not rename them.
+   ========================================================================== */
+
+.svg-button,
+.svg-button-ar,
+.svg-button-xr,
+.test-now-btn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    height: 66px;
+}
+
+.svg-button,
+.svg-button-ar,
+.svg-button-xr,
+.test-now-btn {
+    cursor: pointer;
+}
+
+.svg-button,
+.test-now-btn {
+    width: 100%;
+}
+
+/* The painted face fills the button box. */
+.svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin: 0;
+    position: relative;
+}
+
+/* --- Label overlays ------------------------------------------------------ */
+/* GEOMETRY: the label follows the <svg> in normal flow, so it is pulled back
+   over the face by roughly the face height. These offsets belong to the face
+   they sit on, not to page layout. */
+
+/* 66px face */
+.ar-icon {
+    margin-top: -45px;
+    position: relative;
+}
+
+.button-text {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.button-text p {
+    color: white;
+    margin-left: 10px;
+}
+
+/* 36px face - must follow .ar-icon, both classes sit on the same element. */
+.svg-button-label-sm {
+    margin-top: -33px;
+    margin-left: -9px;
+}
+
+/* --- Variant: archive button --------------------------------------------- */
+
+.archive-button .svg {
+    height: 90%;
+}
+
+.archive-button-label {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.archive-button-label img {
+    margin-top: -16px;
+    width: 16%;
+}
+
+/* Must follow .button-text p - same specificity, both match this element. */
+.archive-button-label p {
+    color: #4285F4;
+    font-size: 20px;
+    margin-left: -10px;
+}
+
+/* --- Variant: free start CTA plate ---------------------------------------- */
+
+.process-cta-label {
+    margin-top: -60px;
+}
+
+/* Addressed through the plate rather than through the surrounding column: the
+   free start copy beside it is <p> as well. */
+.process-cta-label p {
+    color: black;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* --- Variant: pricing connect button -------------------------------------- */
+
+.pricing-connect-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1%;
+}
+
+.pricing-connect-button .svg {
+    height: 80%;
+}
+
+.pricing-connect-label {
+    color: black;
+    position: relative;
+    font-size: 24px;
+    margin-top: -43px;
+}
+
+/* --- Variant: form submit / lead buttons ---------------------------------- */
+
+.submit-btn {
+    margin-bottom: 30px;
+    margin-top: 5px;
+    height: 40px;
+    width: fit-content;
+}
+
+.send-order {
+    height: 40px;
+    width: fit-content;
+}
+
+.contact-send-button {
+    width: 60%;
+}
+
+.contact-send-button p {
+    color: white;
+}
+
+/* 50px face */
+.contact-send-label {
+    position: relative;
+    margin-top: -53px;
+}
+
+/* ============================================================================
+   Responsive - widest breakpoint first, viewport-height rules last.
+
+   The two vertical nudges below used to sit on the shared button class and so
+   silently moved pricing, archive and submit buttons too. They are now listed
+   against exactly the buttons they were reaching before.
+   ========================================================================== */
+
+@media (min-width: 1200px) and (max-width: 1400px) {
+    .hero-contact-button,
+    .send-order-2,
+    .archive-button,
+    .contact-send-button {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .archive-button .svg {
+        margin-top: 5%;
+    }
+
+    .test-now-btn {
+        margin-top: -17px;
+    }
+
+    .process-cta-label {
+        margin-left: 50px;
+    }
+}
+
+@media (max-width: 991px) {
+    .hero-contact-button,
+    .send-order-2,
+    .contact-send-button {
+        margin-top: -20px;
+    }
+
+    .archive-button {
+        margin-top: 12px;
+        height: 59px;
+    }
+
+    .archive-button-label img {
+        margin-top: -10px;
+        width: 20%;
+    }
+
+    .archive-button-label p {
+        font-size: 16px;
+        margin-left: -15px;
+        margin-top: 7px;
+    }
+
+    .contact-send-button {
+        width: 80%;
+    }
+
+    .contact-send-label {
+        margin-top: -44.62px;
+    }
+
+    .contact-send-label p {
+        font-size: 15px;
+    }
+
+    .process-cta-label {
+        margin-left: 25px;
+    }
+
+    /* The plate is only as wide as its column, so below ~400px a flat 23px
+       wraps to two lines; min() keeps the label on one line down to the
+       narrowest phone. */
+    .process-cta-label p {
+        font-size: min(23px, 5.8vw);
+        margin-top: 8px;
+    }
+}
+
+/* --- Free start CTA below the stacking breakpoint ------------------------- */
+/* Stacked, the block would show two buttons that both open demo.html. The
+   teaser button takes over the CTA wording (swapped in the markup by the same
+   d-md-none / d-none.d-md-block pair the artwork above already uses) and the
+   standalone CTA goes. That also retires its decorative triangle here - a
+   left-over from the old "Процесс" composition that read as "back". The
+   desktop layout keeps both buttons and the face they were drawn for. */
+@media (max-width: 767px) {
+    .test-now-btn {
+        display: none;
+    }
+
+    /* The plate is an <svg> with the default preserveAspectRatio, so it keeps
+       its 291:70 ratio and paints only ~220px of the 319px button - centred,
+       which means plate and button share a centre line. The label row spans the
+       whole button, so space-evenly was laying the wording out against the
+       button rather than the plate: the short "Загрузить модель" happened to
+       fit, the longer CTA wording ran past the painted edge. Centring the row
+       lands it on that shared centre line, inside the plate, at any width.
+
+       The icon then needs a size of its own - a percentage of a row it no
+       longer fills is meaningless - and a real gap, which is what the negative
+       margin below was standing in for while the label was short enough. */
+    .archive-button-label {
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .archive-button-label img {
+        width: 24px;
+    }
+
+    .archive-button-label p {
+        font-size: 14px;
+        margin-left: 0;
+    }
+}
+
+/* Short viewports (landscape phones, short desktop windows): the buttons sit
+   flush. This has to beat every per-variant nudge above and the Bootstrap
+   .mt-4 utility on the mobile lead button, so it stays !important and last. */
+@media (min-width: 576px) and (max-height: 719px) {
+    .svg-button {
+        margin-top: 0px !important;
+    }
+}
+
+@media (max-width: 540px) {
+    .hero-contact-button,
+    .pricing-connect-button {
+        height: 63px;
+    }
+}

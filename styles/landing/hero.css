@@ -1,0 +1,374 @@
+/* ============================================================================
+   Landing / hero
+   ----------------------------------------------------------------------------
+   Owns the first screen: the photo band, the phone mockup with the promo
+   video, the hero copy and the AR / XR / contact call-to-action rows.
+
+   The hero is one .hero-row for both breakpoints, so the copy - and with it
+   the page's only <h1> - exists once in the DOM. Its three columns (desktop
+   phone, copy + desktop CTA, mobile stage) are swapped by the Bootstrap
+   display helpers; the mobile-only pieces keep their own classes.
+
+   JS contract (do not rename): .tops and .main-img are measured by the inline
+   script; .video-container + .all-container / .mobile-container are how
+   src/index/index.js finds the promo video element.
+   ========================================================================== */
+
+.hero {
+    /* Fallback until the inline script swaps in the live navbar height. */
+    margin-top: 91px;
+    color: white;
+}
+
+.hero img.line {
+    margin-top: -27px;
+}
+
+.main-img {
+    background-image: url("../../img/главная-картинка---фон_десктоп.webp");
+    background-position: center bottom;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.main-img .row {
+    align-items: flex-end;
+}
+
+/* --- Phone mockup -------------------------------------------------------- */
+/* GEOMETRY: the percentages below place the video inside the screen cut-out
+   of the photographed phone. They are calibrated against the artwork and are
+   expected to change per breakpoint when the artwork is re-cropped. */
+
+.hero-phone-col {
+    /* over the Bootstrap .row > * gutter margin */
+    margin-top: 0 !important;
+    display: flex;
+    align-items: flex-end;
+}
+
+.hero-phone {
+    position: relative;
+    display: inline-block;
+}
+
+.hero-phone-img {
+    width: 100%;
+}
+
+.video-container {
+    position: absolute;
+    overflow: hidden;
+    border-radius: 48px;
+    height: 84.5%;
+    width: 46%;
+    top: 2.5%;
+    left: 32.8%;
+}
+
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- Copy and actions ----------------------------------------------------- */
+
+/* The row bottom-aligns its columns so the hand artwork stays welded to the
+   bottom of the band; the copy column does not want that alignment, so it
+   opts out and centres itself against the band instead. Below 768px the
+   column is alone on its flex line, so the rule needs no breakpoint of its
+   own.
+
+   This replaces the hand-set margin-top the column used to carry - 60px, and
+   2rem below 1400 - which only ever pushed the stack around while leaving it
+   flush against the bottom edge. .dynamic-column keeps only its JS role (the
+   col-md-4 / col-md-5 swap). */
+.hero-content {
+    align-self: center;
+}
+
+/* The hero copy is set the way the original layout set it: upper case, the
+   paragraphs running together as one block, and even line breaks. The old
+   markup got that with literal capitals and seven hand-placed <br>; doing it
+   in CSS keeps the wording untouched and survives a copy rewrite. */
+.hero-copy {
+    text-transform: uppercase;
+    /* the paragraphs read as one block, as they did when they were one <p> */
+    margin-bottom: 0;
+    text-wrap: pretty;
+}
+
+/* The eyebrow keeps its gap before the heading. */
+.hero-eyebrow {
+    margin-bottom: 1rem;
+}
+
+/* Evens out the line lengths — the modern equivalent of the hand-set <br>. */
+.hero-title {
+    text-wrap: balance;
+}
+
+/* Line measure. On desktop the grid column already caps it (~424px), so this
+   only bites on narrow screens, where the copy otherwise spans the whole
+   container. */
+.hero-title,
+.hero-copy {
+    max-width: 34rem;
+    margin-inline: auto;
+}
+
+.hero-copy-lead {
+    margin-top: 3rem;
+}
+
+.hero-demo-actions {
+    margin-top: 34px;
+}
+
+.hero-mobile-demo-actions {
+    margin-bottom: 10px;
+}
+
+/* ============================================================================
+   Responsive - widest breakpoint first, viewport-height rules last
+   ========================================================================== */
+
+@media (max-width: 1400px) {
+    .video-container {
+        border-radius: 40px;
+    }
+
+    .hero-copy-lead {
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .hero-phone-img {
+        width: 116%;
+    }
+
+    .video-container {
+        border-radius: 38px;
+        height: 84.5%;
+        width: 53.1%;
+        top: 2.5%;
+        left: 38%;
+    }
+
+    /* iOS Safari leaves a gap under the artwork. Pull the wrapper, not the
+       image, so the screen percentages above stay correct. */
+    @supports (-webkit-touch-callout: none) {
+        .hero-phone {
+            margin-bottom: -0.25lh;
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    /* .hero-demo-actions here used to carry margin-top: -20px. With the hero copy
+       set in upper case that nudge drove the CTA row into the last line of the
+       copy on 768-991, so the row keeps the 34px rhythm it has everywhere else. */
+    .hero-copy {
+        font-size: 12px;
+    }
+
+    .hero-title {
+        font-size: 23px;
+    }
+
+    .video-container {
+        border-radius: 28px;
+    }
+}
+
+@media (min-width: 768px) {
+    .mobile-container {
+        display: none;
+    }
+
+    /* Breathing room under the fixed header.
+
+       The inline script sizes .main-img from the phone column's *layout*
+       height, so the band is exactly as tall as the artwork and the phone can
+       only ever sit flush against the header - no margin on the column can
+       open a gap, it just makes the band taller with it.
+
+       A transform is not part of that measurement, so scaling the whole
+       .hero-phone about its bottom edge leaves the band height, the hand's
+       contact with the bottom of the composition and the centred copy column
+       exactly where they are, and frees the difference as air below the
+       header. Artwork and video overlay scale as one box, so the screen
+       cut-out percentages above stay valid.
+
+       One factor, no per-width values: the gap is a share of the artwork, so
+       it follows the container - roughly 79px at a 1320px container, 68px at
+       1140px, 66px at 960px and 49px at 720px. */
+    .hero-phone-col .hero-phone {
+        transform: scale(0.89);
+        transform-origin: bottom left;
+    }
+}
+
+@media (max-width: 767px) {
+    .all-container {
+        display: none;
+    }
+
+    .main-img {
+        /* Reserve space at the bottom of the hero background below the CTA. */
+        padding-bottom: clamp(18px, 4vw, 24px);
+    }
+
+    .hero-phone-img {
+        width: 85%;
+        margin: 0;
+        display: block;
+    }
+
+    .hero-phone-mobile {
+        margin-left: -33%;
+        margin-top: 17px;
+    }
+
+    /* GEOMETRY: screen cut-out of the mobile artwork. The split border-radius
+       keeps the corners round on a non-square box. */
+    .mobile-container {
+        background: #000;
+        border-radius: 16% / 7.8%;
+        height: 58.7%;
+        width: 28.3%;
+        top: 1.5%;
+        left: 48.03%;
+    }
+
+    .mobile-container video {
+        transform: scale(1.04);
+        transform-origin: center;
+    }
+
+    /* The mobile copy used to carry .mt-5 on the eyebrow. The copy block is
+       shared with the desktop hero now, so the offset belongs to the
+       breakpoint that wants it. */
+    .hero-eyebrow {
+        margin-top: 3rem;
+    }
+
+    /* --- Mobile hero stage ---------------------------------------------------
+       .hero-mobile-stage is the coordinate owner for both the phone artwork and
+       the CTA block. The artwork flows naturally; the CTA is anchored to the
+       stage bottom so that changes in artwork height (different screen widths,
+       font-scaling) do not shift the CTA position.
+
+       The stage reserves enough height for the artwork via min-height so that
+       the absolutely-positioned CTA has physical space to sit in. */
+    .hero-row {
+        --bs-gutter-x: 0;
+        margin-inline: 0;
+    }
+
+    .hero-mobile-stage {
+        position: relative;
+        width: 100%;
+        /* Reserve vertical space = approx bottom of phone artwork so CTA
+           has room. The artwork is 85% wide, aspect-ratio ~2.1:1 at 85vw;
+           ~40vw tall. The CTA needs ~(aspect-ratio * 36/130 * 92vw / 2 * 2 + gap)
+           ≈ 90px + 10px gap + 10px gap + 56px = roughly 175px.
+           Use min-height to always guarantee the stage is taller than the
+           artwork so the absolutely-placed CTA fits inside hero background. */
+        min-height: calc(40vw + clamp(120px, 28vw, 160px));
+        /* Bottom padding keeps the CTA overlay from touching the stage edge. */
+        padding-bottom: clamp(18px, 4vw, 24px);
+        box-sizing: border-box;
+    }
+
+    /* CTA is pinned to the bottom of the stage, centred horizontally. */
+    .hero-mobile-actions {
+        position: absolute;
+        bottom: clamp(18px, 4vw, 24px);
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        width: clamp(280px, 92%, 460px);
+        gap: clamp(10px, 2.5vw, 12px);
+        box-sizing: border-box;
+        /* Prevent the CTA from extending beyond the viewport horizontally. */
+        max-width: calc(100vw - 16px);
+    }
+
+    /* --- AR / XR demo buttons ----------------------------------------------- */
+    .hero-mobile-demo-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(8px, 2vw, 12px);
+        width: 100%;
+    }
+
+    /* Buttons size by SVG aspect ratio (130 × 36) so the painted face always
+       fills the full grid cell without letterboxing. */
+    .hero-mobile-actions .svg-button-ar,
+    .hero-mobile-actions .svg-button-xr {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 130 / 36;
+        position: relative;
+        display: block;
+        margin: 0;
+    }
+
+    /* --- Contact button ------------------------------------------------------ */
+    /* Matches the full width of the demo row; sized by its own SVG ratio (490 × 67). */
+    .hero-mobile-actions .hero-contact-button {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 490 / 67;
+        position: relative;
+        display: block;
+        margin-top: 0;
+    }
+
+    /* --- Label overlays inside mobile CTA ------------------------------------ */
+    /* The SVG face fills 100 % of the button box (preserveAspectRatio="none").
+       The label is layered on top via absolute positioning, centred in the same
+       box. The global .ar-icon { margin-top: -45px } rule is overridden here. */
+    .hero-mobile-actions .ar-icon {
+        position: absolute;
+        inset: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(6px, 1.8vw, 10px);
+        pointer-events: none;
+    }
+
+    .hero-mobile-actions .ar-icon img {
+        height: clamp(14px, 3.5vw, 20px);
+        width: auto;
+        flex-shrink: 0;
+    }
+
+    .hero-mobile-actions .hero-contact-button .ar-icon img {
+        height: clamp(16px, 4vw, 22px);
+        width: auto;
+        flex-shrink: 0;
+    }
+
+    .hero-mobile-actions .button-text p {
+        margin: 0;
+        font-size: clamp(11px, 2.8vw, 15px);
+        white-space: nowrap;
+        color: white;
+        line-height: 1;
+    }
+
+    .hero-mobile-actions .hero-contact-button .button-text p {
+        font-size: clamp(13px, 3.4vw, 17px);
+    }
+}

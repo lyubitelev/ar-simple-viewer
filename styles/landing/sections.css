@@ -1,0 +1,351 @@
+/* ============================================================================
+   Landing / sections
+   ----------------------------------------------------------------------------
+   Owns the mid-page content blocks: "О продукте" + its feature cards, the
+   "Покажите товар в 3D, AR и XR" block with the 3D preview phone, the free
+   start block with the archive teaser, and the "Что может оплачиваться
+   отдельно?" FAQ that follows the tariff cards.
+
+   JS contract (do not rename): .demo-ifr / .demo-ifr2 carry the .ar-preview
+   iframe that src/index/index.js points at ./viewer.html.
+   ========================================================================== */
+
+/* --- "О продукте" --------------------------------------------------------- */
+
+.about-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 12px;
+    /* over the Bootstrap .row gutter margins on the same element */
+    margin-top: 50px !important;
+    margin-left: 0 !important;
+    margin-bottom: 50px;
+}
+
+.about-row > .col:last-child {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.about-text {
+    font-size: clamp(14px, 1.2vw + 6px, 20px);
+    line-height: 1.4;
+    color: #4b4b4b;
+}
+
+.about-icon-size {
+    height: 90px;
+}
+
+/* --- Feature cards -------------------------------------------------------- */
+
+.desktop-card-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.feature-card {
+    width: 19rem;
+    /* over the Bootstrap .card radius variables */
+    --bs-card-inner-border-radius: none !important;
+    --bs-card-border-radius: none !important;
+}
+
+.mobile-card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+}
+
+/* Flex columns so the image can fill the card height. */
+.mobile-card-container .col {
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-card-container img {
+    flex-grow: 1;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.feature-card-body {
+    margin-left: 8px;
+    word-wrap: normal;
+    padding: 5px;
+}
+
+/* The card titles are <h3> for the outline. Their desktop size is the shared
+   .card-title rule in base.css; the mobile card is tighter. */
+.feature-card-body .card-title {
+    font-size: 16px;
+}
+
+/* --- "Развивайте свой бизнес" + 3D preview -------------------------------- */
+
+.text-descr-width {
+    width: 85%;
+}
+
+.send-order-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Mobile grouping label inside the "Покажите товар…" block: it puts a break
+   between the interactive preview with its CTA and the explanatory copy that
+   follows, which is what the removed "От простого к бесконечности" block used
+   to provide. Balanced wrapping instead of a hand-placed <br>. */
+.subsection-title {
+    text-wrap: balance;
+}
+
+/* GEOMETRY: the iframe is positioned inside the screen of a phone photo, so
+   the offsets are expressed as percentages of the artwork and exposed as
+   custom properties. */
+.preview-phone {
+    --screen-top: 1.6%;
+    --screen-width: 92.5%;
+    --screen-height: 96.7%;
+
+    background-image: url("../../img/iPhone-16-Pro.webp");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 350px;
+    aspect-ratio: 927 / 1920;
+    height: auto;
+    margin: 0 auto;
+}
+
+.demo-ifr {
+    position: absolute;
+    top: var(--screen-top, 1.6%);
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--screen-width, 92%);
+    height: var(--screen-height, 96.7%);
+    border-radius: 45px;
+    border: none;
+    z-index: 2;
+}
+
+.preview-phone-mobile {
+    background-image: url("../../img/iPhone-16-Pro.webp");
+    background-repeat: no-repeat;
+    /* Scales the artwork instead of stretching it. */
+    background-size: contain;
+    background-position: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.demo-ifr2 {
+    margin-top: 7px;
+    width: 215px;
+    height: 468px;
+    border-radius: 34px;
+    margin-bottom: 8px;
+}
+
+/* --- "Процесс" + archive teaser ------------------------------------------- */
+
+.process-row {
+    align-items: center;
+}
+
+.process-content {
+    margin-left: 50px;
+}
+
+/* GEOMETRY: the archive button is meant to overlap the teaser image. */
+.process-archive-image {
+    width: 100%;
+    margin-bottom: -85px;
+}
+
+/* --- "Что может оплачиваться отдельно?" FAQ ------------------------------- */
+/* Bootstrap's own accordion, re-tinted through its custom properties: no second
+   accordion implementation and no JS of ours - Bootstrap already owns the
+   collapse, the button semantics and the keyboard behaviour. The block is
+   deliberately light. It follows four solid navy tariff cards and is meant to
+   make the page feel shorter, not add another dark slab. */
+
+.pricing-faq {
+    --bs-accordion-color: #4b4b4b;
+    --bs-accordion-bg: #ffffff;
+    --bs-accordion-border-color: rgba(13, 39, 65, 0.18);
+    --bs-accordion-border-radius: 8px;
+    --bs-accordion-btn-color: rgb(13 39 65);
+    --bs-accordion-btn-bg: #ffffff;
+    --bs-accordion-active-color: rgb(13 39 65);
+    --bs-accordion-active-bg: rgba(13, 39, 65, 0.06);
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 3px rgba(13, 39, 65, 0.25);
+    /* Bootstrap ships a #212529 chevron closed and a #052c65 one open. One navy
+       mark for both states; Bootstrap still owns the rotation. */
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%230d2741' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    --bs-accordion-btn-active-icon: var(--bs-accordion-btn-icon);
+}
+
+/* The question is the tap target, so it carries the weight the grey service
+   paragraphs used to have. */
+.pricing-faq .accordion-button {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.faq-answer-text {
+    font-size: 15px;
+    line-height: 1.5;
+    /* Long slash-separated lists (CAD / STEP / FBX) must not push the answer
+       wider than the accordion on a phone. */
+    overflow-wrap: break-word;
+    margin-bottom: 10px;
+}
+
+.faq-answer-text:last-child {
+    margin-bottom: 0;
+}
+
+/* ============================================================================
+   Responsive - widest breakpoint first
+   ========================================================================== */
+
+@media (max-width: 1400px) {
+    .feature-card {
+        width: 16rem;
+    }
+}
+
+@media (max-width: 1300px) {
+    .d-none-when-1300 {
+        display: none;
+    }
+}
+
+@media (max-width: 1200px) {
+    .feature-card {
+        width: 14rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .about-icon-size {
+        height: 69px;
+    }
+
+    .feature-card {
+        width: 10rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .preview-phone-mobile {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .preview-phone {
+        display: none;
+    }
+
+    /* One markup serves both breakpoints: the "О продукте" row stacks here. */
+    .about-row {
+        --bs-gutter-x: 0;
+        flex-direction: column;
+        /* over the Bootstrap .align-items-center utility on the same element */
+        align-items: stretch !important;
+        gap: 8px;
+        /* over the desktop .about-row margins */
+        margin-top: 15px !important;
+        margin-bottom: 16px;
+    }
+
+    .about-row > .col-auto,
+    .about-row > .col:last-child {
+        flex: 0 0 auto;
+        width: 100%;
+        /* over the Bootstrap .pe-4 utility */
+        padding-right: 0 !important;
+    }
+
+    /* keeps the paragraph at the size and colour it had in the mobile-only
+       markup this block replaced */
+    .about-text {
+        font-size: 16px;
+        color: var(--bs-body-color);
+    }
+
+    .process-archive-image {
+        margin-bottom: -95px;
+    }
+
+    /* Stacked here, so the .row negative gutter margins would push the block
+       past the viewport. Zero them and spend the gutter on the side inset the
+       .container-fluid blocks above this one already use. */
+    .process-row {
+        --bs-gutter-x: 3.5rem;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    /* the columns no longer sit side by side, so the desktop gutter between
+       them would only indent the copy */
+    .process-content {
+        margin-left: 0;
+        /* Air between the teaser and the copy. This is not the gap you see:
+           the negative margin-bottom above pulls the button up over the
+           artwork, so the column ends at the button while the image itself
+           hangs 9-15px lower. The painted edge of the image is what the copy
+           sits under, so the margin has to cover that overhang too - 52px
+           here reads as ~40px of air at 375px and stays inside 32-48px from
+           323px up to the 767px breakpoint. */
+        margin-top: 52px;
+    }
+
+    /* The .container-fluid gutter already spends 28px a side here, so the
+       default 1.25rem accordion inset would leave a question too little room
+       at 323px. The item still spans the full container width. */
+    .pricing-faq {
+        --bs-accordion-btn-padding-x: 14px;
+        --bs-accordion-body-padding-x: 14px;
+    }
+
+    .pricing-faq .accordion-button {
+        font-size: 15px;
+    }
+
+    .faq-answer-text {
+        font-size: 14px;
+    }
+
+    /* .mb-c-5 is a percentage of the container width, so the gap under the
+       heading collapses exactly where the copy is tightest - 19px at 430px
+       down to 13px at 323px. Pin it to the block instead; the paragraphs
+       below keep the shared helper and their own rhythm. */
+    .process-content .section-title {
+        margin-bottom: 26px;
+    }
+}
+
+@media (max-width: 430px) {
+    .feature-card-body {
+        font-size: 13px;
+        line-height: 1;
+        margin-left: 0px;
+    }
+}
