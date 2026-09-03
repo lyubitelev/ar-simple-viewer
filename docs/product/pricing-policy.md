@@ -29,7 +29,18 @@ Working internal rule:
 - when cloud prices, real traffic profiles or architecture change materially, recalculate tariff economics before changing public allowances;
 - partner discounts, grants, CDN discounts and free tiers are upside and must not be required for the basic tariff to avoid negative unit economics.
 
-This margin rule concerns infrastructure cost only. It does not mean human development, support, tax, acquiring, sales or 3D-production costs are free; those are separate business costs.
+This margin rule concerns infrastructure cost only. Human development, support, tax, acquiring, sales and 3D-production costs are separate business costs.
+
+### Human-work margin guardrail
+
+The platform should automate repeatable work and price manual work as a professional service, not as a low-cost side effect of a SaaS subscription.
+
+Working internal rule for outsourced/manual work:
+
+- customer price for manual production should normally be at least **2× direct contractor cost**;
+- target **2–2.5× direct contractor cost** where the platform carries coordination, QA, revisions and delivery risk;
+- do not sell manual 3D, integration or custom-development hours at near-cost merely to make the SaaS sale easier;
+- batch/catalog pricing may reduce per-item price only where real reuse and process efficiency reduce direct cost.
 
 The customer should also never accumulate an unexpectedly unlimited usage bill. Usage billing therefore needs a predictable monthly cap, upgrade path or explicit limit policy.
 
@@ -82,15 +93,21 @@ A submitted model should resolve to an explicit state such as:
 
 A model that would make normal sessions economically or technically unreasonable must not silently enter production simply because the upload technically succeeded.
 
-### Optimization
+### Automatic optimization
 
-The platform should use appropriate techniques where supported, including geometry compression/optimization, texture optimization, caching and lazy loading. Multi-product XR must avoid downloading every catalog model eagerly when only a subset is needed.
+Where the platform can safely perform deterministic preparation automatically, that work is a platform capability rather than a separately invoiced human service.
 
-Customer models requiring manual repair or optimization beyond the supported self-service path are a separate paid content service.
+Examples may include supported conversion, geometry compression/optimization, texture optimization, repacking and other repeatable transformations that require no manual asset work.
+
+Automatic validation is **free**. Automatic optimization that the supported pipeline can complete without human intervention is **included with platform use**.
+
+A model that requires artistic judgement, geometry repair, UV/material correction, hierarchy repair or other manual intervention moves to a paid content-service workflow.
+
+Multi-product XR must avoid downloading every catalog model eagerly when only a subset is needed. Caching and lazy loading are required delivery-economics concerns.
 
 ### Cost telemetry
 
-The platform should eventually track enough information to calculate actual unit economics by tenant and tariff, including metrics such as:
+The platform should eventually track enough information to calculate actual unit economics by tenant and tariff, including:
 
 - billable sessions;
 - bytes delivered per session;
@@ -230,9 +247,9 @@ Does **not** include:
 
 Not included and quoted separately:
 
-- model creation;
-- model repair/optimization beyond the supported self-service path;
-- product configurators;
+- manual model creation/repair;
+- manual model optimization beyond the supported automatic path;
+- custom product configurators;
 - custom ecommerce/catalog integrations;
 - bespoke development.
 
@@ -391,69 +408,137 @@ The original **7 ₽ per view** pricing is retired.
 
 ## 8. 3D content services
 
-3D production is **not included implicitly in SaaS subscription pricing**.
+3D content services exist to unblock customers whose assets cannot be accepted through the automatic platform path. They must not turn the product into a low-margin manual 3D studio.
 
 ### Customer already has a production-ready model
 
-No model creation fee, provided the model passes platform validation.
+**0 ₽ content fee** if the model passes platform validation and does not require manual work.
 
 The customer pays only for the platform according to the selected tariff / usage model.
 
-### Model preparation / optimization
+### Automatic validation and optimization
 
-Examples:
+- automatic technical validation: **0 ₽**;
+- automatic optimization/conversion completed entirely by the supported pipeline: **included with the platform**.
 
-- web optimization;
-- polygon reduction;
-- texture optimization;
-- conversion to supported formats;
-- preparation for mobile/AR/XR use;
-- fixing material or hierarchy issues needed by the viewer;
-- bringing an asset back inside the platform's supported technical/delivery budget.
+Do not invoice a customer merely because the platform ran a deterministic optimization job that exists primarily to make the platform reliable and economical.
 
-Working price: **from 1,000 ₽ per model**.
+### Manual model repair / optimization
+
+For assets that fail automatic preparation and require a person to repair geometry, UVs, materials, hierarchy, textures, scale or other production issues.
+
+Working public price: **from 5,000 ₽ per model**.
+
+Typical work may include:
+
+- polygon reduction requiring manual control;
+- UV/material repair;
+- texture recreation or manual correction;
+- hierarchy/pivot fixes;
+- geometry cleanup;
+- preparation to fit mobile/Web/AR/XR delivery constraints;
+- validation and final platform QA.
+
+The minimum price is not a promise that every broken model can be repaired for 5,000 ₽.
+
+### CAD / existing source preparation
+
+For customers that have usable engineering/source assets such as CAD, STEP, FBX, 3ds Max or similar material but do not yet have a production-ready Web/AR/XR asset.
+
+Working public price: **from 7,500 ₽ per product/model**.
+
+This is distinct from both trivial automatic conversion and full modeling from scratch. Complex CAD assemblies, large catalogs and unusual materials are quoted separately.
 
 ### 3D model creation
 
-Working price: **from 3,000 ₽ per model**.
+Working public entry price: **from 10,000 ₽ per model**.
 
-The final price depends on complexity and source material. Complex products must be quoted separately rather than forced into the minimum price.
+A normal commercial product model with appropriate materials/textures may commonly price above the minimum; a working reference range for non-trivial furniture/product work is **15,000–25,000 ₽**, subject to validation against real contractor cost and customer demand.
+
+Complex products, difficult materials, many configurable parts, poor source material or photogrammetry-heavy work must be quoted separately.
+
+### Catalog / batch production
+
+Large product lines should not be calculated mechanically as `item count × retail single-model price` when there is real reuse in materials, templates or production workflow.
+
+Catalog work is quoted individually based on:
+
+- number of genuinely unique geometries;
+- reusable materials/textures;
+- product-family similarity;
+- source quality;
+- automation potential;
+- contractor cost and QA load.
+
+Batch discounts must come from actual production efficiency, not from accepting unprofitable manual work.
 
 ## 9. Configurator services
 
-A product configurator is a separate commercial value layer, not a free side effect of hosting a model.
+A configurator is a separate commercial value layer, but standard reusable platform capabilities and bespoke development must be priced differently.
+
+### Standard configurator setup
+
+Where the platform already supports the required configuration behavior and the work is primarily customer-specific setup/data mapping rather than new product logic:
+
+Working public price: **from 15,000 ₽**.
+
+Examples:
+
+- loading supported material/color variants;
+- mapping supported options/SKUs;
+- configuring existing visibility/variant rules;
+- preparing supported configuration data for the standard engine.
+
+### Custom configurator
+
+Where the customer's product requires new business logic, geometry behavior, compatibility rules, pricing behavior or bespoke UI/code:
+
+Working public price: **from 50,000 ₽**.
 
 Possible capabilities include:
 
-- material replacement;
-- color/texture variants;
-- visibility of model parts;
+- complex material/texture logic;
 - geometry/variant selection;
 - dimensions/options;
-- product rules and compatible combinations;
-- configuration-aware pricing and order data.
+- modular product composition;
+- compatibility/dependency rules;
+- configuration-aware pricing;
+- configuration-aware cart/order payloads;
+- customer-specific UX or calculation logic.
 
-Working custom-project starting price: **from 15,000 ₽**.
+`50,000 ₽` is a starting point, not a fixed price for arbitrary custom configurator development.
 
-This is a minimum entry price, not a promise that every configurator can be built for 15,000 ₽.
-
-Reusable generic configurator capabilities may later become part of higher SaaS plans.
+Reusable generic configurator capabilities may later move into SaaS plans or paid add-ons when they no longer require customer-specific engineering.
 
 ## 10. Integration and custom development
 
 Business includes a **standard documented commerce handoff contract** for selected products/configurations and standard commerce events. Using that supported contract is part of the tariff.
 
-The following engineering work is quoted separately:
+There is **no additional platform fee** merely for exposing or using the standard Business JS/API commerce contract.
 
-- manual ecommerce integration performed by Art Vision Tech;
+### Merchant integrates the standard Business contract itself
+
+Included in Business. No separate integration charge from Art Vision Tech is required.
+
+### Art Vision Tech performs the integration
+
+Manual engineering and implementation are separate professional services.
+
+Working entry price for assistance/implementation against the standard supported Business contract: **from 15,000 ₽**.
+
+The following work is quoted separately and may cost materially more:
+
 - custom storefront/CMS/checkout adapters;
 - catalog synchronization outside the standard supported path;
 - Bitrix / WooCommerce / Shopify / OpenCart / custom storefront work when custom implementation is required;
-- PIM / ERP / CRM integration;
+- custom/legacy checkout behavior;
+- PIM / ERP / CRM / 1C integration;
 - bespoke APIs;
 - bespoke XR behavior outside the standard product;
 - non-standard configurators;
 - special deployment/security requirements.
+
+Existing reusable adapters may later receive standardized fixed setup prices, but such prices should only be introduced after the adapter exists and its support cost is known.
 
 Do not hide software-development work inside a low monthly subscription.
 
@@ -465,11 +550,14 @@ The landing page should communicate the hierarchy clearly:
 2. **Start:** 0 ₽/month + **0.30 ₽ per billable AR session**; individual-product AR.
 3. **Pro:** **2,490 ₽/month**; 10,000 AR/XR sessions included; multi-product XR Room + persistence + engagement analytics; **0.20 ₽ overage**.
 4. **Business:** **9,990 ₽/month**; 50,000 AR/XR sessions included; standard XR-to-cart handoff + commerce analytics; **0.20 ₽ overage**.
-5. **Already have a 3D model?** Use it without a model creation fee after technical validation.
-6. **No model?** We can create one from **3,000 ₽**.
-7. **Model needs preparation?** Optimization from **1,000 ₽**.
-8. **Need materials/variants/configuration?** Configurator from **15,000 ₽**.
-9. **Need custom integration or enterprise workflows?** Request a quote.
+5. **Already have a production-ready 3D model?** Validation is free; automatic platform optimization is included.
+6. **Model needs manual repair/optimization?** From **5,000 ₽**.
+7. **Have CAD/source assets?** Preparation for Web/AR/XR from **7,500 ₽**.
+8. **Need a new 3D model?** From **10,000 ₽**.
+9. **Need standard configurator setup?** From **15,000 ₽**.
+10. **Need a custom configurator?** From **50,000 ₽**.
+11. **Business commerce API/handoff:** included in Business; manual implementation by Art Vision Tech from **15,000 ₽**.
+12. **Need custom integration or enterprise workflows?** Request a quote.
 
 Avoid selling vague "XR innovation". Sell concrete outcomes:
 
@@ -487,6 +575,9 @@ Avoid selling vague "XR innovation". Sell concrete outcomes:
 - Target at least the current **50–60% infrastructure gross-margin guardrail** under the supported heavy-session planning profile unless pricing is deliberately re-approved.
 - Do not use partner discounts, free tiers or temporary cloud promotions as the only reason a tariff remains profitable.
 - Do not accept arbitrary heavy models into production without validation/optimization controls.
+- Do not charge separately for automatic validation or deterministic automatic optimization that is part of the supported platform pipeline.
+- Do not price manual human work as though it were an automated platform operation.
+- Do not accept outsourced/manual work below the human-work margin guardrail without an explicit strategic exception.
 - Do not reintroduce uncapped 7 ₽/view billing.
 - Do not bill Start for ordinary 3D Viewer preview as if it were an AR session.
 - Do not put XR Room into Start: XR is a deliberate Pro value boundary.
@@ -517,10 +608,13 @@ These values still require validation from implementation measurements and first
 - XR room persistence format, retention period and cross-device resume mechanics;
 - exact analytics event schema and retention policy;
 - exact standard Business JS/API commerce contract and event acknowledgement semantics;
+- final service price bands after measuring real contractor time/cost for manual optimization, CAD preparation and model creation;
+- whether standard configurator setup should later become a SaaS add-on instead of a one-time service;
+- reusable CMS/storefront adapters and their future standard setup prices;
 - maximum catalog/model counts where operationally necessary;
 - annual-payment discount;
 - VAT/tax presentation;
 - exact reduced-branding versus Enterprise white-label/domain boundary;
 - whether Start's **0 ₽ monthly fee** remains permanent after validation.
 
-These questions should be resolved using real telemetry and provider economics rather than competitor imitation or optimistic assumptions.
+These questions should be resolved using real telemetry, real contractor economics and provider pricing rather than competitor imitation or optimistic assumptions.
