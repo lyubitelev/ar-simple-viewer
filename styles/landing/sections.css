@@ -2,8 +2,9 @@
    Landing / sections
    ----------------------------------------------------------------------------
    Owns the mid-page content blocks: "О продукте" + its feature cards, the
-   "Покажите товар в 3D, AR и XR" block with the 3D preview phone, and the free
-   start block with the archive teaser.
+   "Покажите товар в 3D, AR и XR" block with the 3D preview phone, the free
+   start block with the archive teaser, and the "Что может оплачиваться
+   отдельно?" FAQ that follows the tariff cards.
 
    JS contract (do not rename): .demo-ifr / .demo-ifr2 carry the .ar-preview
    iframe that src/index/index.js points at ./viewer.html.
@@ -175,6 +176,50 @@
     margin-bottom: -85px;
 }
 
+/* --- "Что может оплачиваться отдельно?" FAQ ------------------------------- */
+/* Bootstrap's own accordion, re-tinted through its custom properties: no second
+   accordion implementation and no JS of ours - Bootstrap already owns the
+   collapse, the button semantics and the keyboard behaviour. The block is
+   deliberately light. It follows four solid navy tariff cards and is meant to
+   make the page feel shorter, not add another dark slab. */
+
+.pricing-faq {
+    --bs-accordion-color: #4b4b4b;
+    --bs-accordion-bg: #ffffff;
+    --bs-accordion-border-color: rgba(13, 39, 65, 0.18);
+    --bs-accordion-border-radius: 8px;
+    --bs-accordion-btn-color: rgb(13 39 65);
+    --bs-accordion-btn-bg: #ffffff;
+    --bs-accordion-active-color: rgb(13 39 65);
+    --bs-accordion-active-bg: rgba(13, 39, 65, 0.06);
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 3px rgba(13, 39, 65, 0.25);
+    /* Bootstrap ships a #212529 chevron closed and a #052c65 one open. One navy
+       mark for both states; Bootstrap still owns the rotation. */
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%230d2741' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    --bs-accordion-btn-active-icon: var(--bs-accordion-btn-icon);
+}
+
+/* The question is the tap target, so it carries the weight the grey service
+   paragraphs used to have. */
+.pricing-faq .accordion-button {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.faq-answer-text {
+    font-size: 15px;
+    line-height: 1.5;
+    /* Long slash-separated lists (CAD / STEP / FBX) must not push the answer
+       wider than the accordion on a phone. */
+    overflow-wrap: break-word;
+    margin-bottom: 10px;
+}
+
+.faq-answer-text:last-child {
+    margin-bottom: 0;
+}
+
 /* ============================================================================
    Responsive - widest breakpoint first
    ========================================================================== */
@@ -270,6 +315,22 @@
            here reads as ~40px of air at 375px and stays inside 32-48px from
            323px up to the 767px breakpoint. */
         margin-top: 52px;
+    }
+
+    /* The .container-fluid gutter already spends 28px a side here, so the
+       default 1.25rem accordion inset would leave a question too little room
+       at 323px. The item still spans the full container width. */
+    .pricing-faq {
+        --bs-accordion-btn-padding-x: 14px;
+        --bs-accordion-body-padding-x: 14px;
+    }
+
+    .pricing-faq .accordion-button {
+        font-size: 15px;
+    }
+
+    .faq-answer-text {
+        font-size: 14px;
     }
 
     /* .mb-c-5 is a percentage of the container width, so the gap under the

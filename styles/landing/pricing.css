@@ -63,10 +63,8 @@
     line-height: 1.2;
 }
 
-/* The price now opens the card under the plan name, so a card is scanned as
-   name -> price -> capabilities -> included usage -> actions. The flexible
-   space moved down to the feature list, which is what keeps the footer of all
-   four cards on one baseline without per-tariff margins. */
+/* The price opens the card under the plan name, so a card is scanned as
+   name -> price -> capabilities -> included usage -> actions. */
 .pricing-card-price {
     flex-shrink: 0;
     font-size: 32px;
@@ -74,10 +72,13 @@
     line-height: 1.2;
 }
 
-/* Feature copy may wrap differently between tariffs and Enterprise carries one
-   row more. That difference is absorbed here, above the shared footer. */
+/* The card is a short summary for choosing a plan, not the whole policy: three
+   capability rows, and "Подробнее" carries the rest. The feature list no longer
+   grows. It used to absorb a whole tariff's worth of height difference - four
+   rows against Enterprise's five - which is what opened the empty band inside
+   Start and made every card read as a tall panel. */
 .pricing-card-features {
-    flex: 1 1 auto;
+    flex-shrink: 0;
 }
 
 /* Included usage / usage price: the number that actually decides between the
@@ -102,8 +103,14 @@
     margin-bottom: 0;
 }
 
+/* The footer keeps a shared baseline, but it is now cheap: with three capability
+   rows on every tariff the cards differ only by how their copy wraps, so the
+   space this absorbs measures 0-47px at 1440px instead of a whole tariff's worth
+   of empty card. If a future card needs materially more content than its
+   neighbours, drop this line rather than growing the hole. */
 .pricing-card-cta {
     flex-shrink: 0;
+    margin-top: auto;
 }
 
 /* Secondary action opening the shared details dialog. Deliberately quieter
@@ -269,6 +276,23 @@
 @media (min-width: 1200px) {
     .pricing-card {
         flex: 0 0 clamp(320px, calc(50% - 12px), 520px);
+    }
+}
+
+/* Wide desktop: the whole comparison at once.
+   Bootstrap gives .container 1320px from 1400px up, and that is exactly where
+   four cards still fit at a readable width - (1320 - 3 gaps of 24px) / 4 = 312px.
+   Below it the container drops to 1140px, where the same four would be 267px, so
+   1366/1200 deliberately keep the carousel. Same DOM and same track either way:
+   the cards simply stop overflowing, which also leaves the prev/next controls
+   nothing to scroll. */
+@media (min-width: 1400px) {
+    .pricing-card {
+        flex: 0 0 calc((100% - 72px) / 4);
+    }
+
+    .pricing-carousel-controls {
+        display: none;
     }
 }
 
