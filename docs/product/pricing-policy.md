@@ -33,9 +33,24 @@ Not every level needs to exist as a separate public tariff immediately. This lad
 
 ## 3. Launch tariffs
 
-### Start — 0 ₽ / month
+### Start — 0 ₽ / month + usage
 
-For trying the product with minimal commitment.
+For companies that already have supported 3D models and want to start using 3D/AR with no subscription and no fixed monthly commitment.
+
+Commercial purpose:
+
+- make the first adoption decision almost risk-free for the customer;
+- provide a low-friction migration path for companies already paying another 3D/AR provider;
+- monetize actual usage from the first meaningful customer session;
+- create a natural upgrade path to higher plans when usage grows.
+
+Pricing:
+
+- **0 ₽ monthly subscription fee**;
+- **0.15 ₽ per billable 3D/AR session**;
+- no free 500-view allowance;
+- no usage means no platform charge;
+- usage billing must have a predictable monthly cap so a customer cannot accumulate an unexpectedly unlimited bill.
 
 Includes:
 
@@ -46,9 +61,19 @@ Includes:
 - iframe/embed;
 - customer's own supported 3D models;
 - basic scene configuration;
-- up to **500 billable views per month**.
+- standard platform branding.
 
-The purpose of Start is activation and product validation, not monetization.
+Not included in Start and quoted separately:
+
+- model creation;
+- model repair/optimization beyond the supported self-service path;
+- product configurators;
+- custom ecommerce/catalog integrations;
+- bespoke development.
+
+Start is both an acquisition and monetization tariff: small customers generate usage revenue without a subscription, while customers with growing traffic should eventually find a higher fixed-price plan economically preferable.
+
+A billable session is not the same as a raw HTTP request or page reload. The product must avoid charging for failed model loads, bots, obvious technical retries and duplicate activity inside the same customer session. The exact session window and deduplication rules are implementation details still to be validated.
 
 ### AR Commerce — 990 ₽ / month
 
@@ -89,20 +114,22 @@ Typical scope:
 
 Enterprise pricing is quoted individually.
 
-## 4. Pay-as-you-go option
+## 4. Start usage billing rules
 
-A customer that does not want a subscription may use the platform on a usage basis.
+Start is the platform's usage-based entry tariff. A separate generic pay-as-you-go tariff is not needed at launch.
 
-Working launch price:
+Launch usage price:
 
-**0.15 ₽ per billable 3D/AR view**
+**0.15 ₽ per billable 3D/AR session**
 
 Rules:
 
+- billing starts from the first billable session;
+- there is no recurring subscription charge on Start;
 - usage billing must have a predictable monthly cap;
-- once usage reaches the economically appropriate subscription level, the customer should not continue accumulating an unlimited bill;
+- once usage reaches the economically appropriate fixed-plan level, the customer should be encouraged to move to the next tariff instead of continuing to accumulate an unlimited usage bill;
 - the exact automatic cap/upgrade mechanics may be implemented later, but the commercial principle is mandatory;
-- internal page reloads, failed model loads, bots and obvious technical retries must not be intentionally counted as meaningful customer views.
+- internal page reloads, failed model loads, bots, obvious technical retries and duplicate activity inside one session must not be intentionally counted as separate billable sessions.
 
 The original **7 ₽ per view** pricing is retired.
 
@@ -200,13 +227,14 @@ Avoid selling vague "XR innovation". Sell concrete outcomes:
 
 These values are intentionally left for validation rather than invented now:
 
-- exact definition of a billable view/session;
-- final traffic limits and overage/cap mechanics;
+- exact definition and duration of a billable 3D/AR session;
+- final Start usage cap and automatic upgrade mechanics;
+- final traffic limits and overage/cap mechanics for higher plans;
 - maximum supported model size per plan;
 - model/catalog limits, if any;
 - annual-payment discount;
 - VAT/tax presentation;
 - exact white-label/domain limits;
-- whether Start remains permanently free or becomes a time-limited trial after validation.
+- whether Start's **0 ₽ monthly fee** remains permanent after validation.
 
 These questions should be resolved using actual infrastructure measurements and first-customer feedback rather than competitor imitation alone.
