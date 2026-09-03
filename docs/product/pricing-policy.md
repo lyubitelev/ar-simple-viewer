@@ -27,10 +27,12 @@ The intended commercial product ladder is:
 
 - **3D Viewer** — interactive 3D product presentation and model preview. Baseline capability on all plans.
 - **AR** — place/view one product in the customer's real space without installing an app.
-- **XR Room** — work with multiple products in one spatial scene: place, move, rotate, scale, save a room and build a composition from the merchant's catalog.
+- **XR Room** — work with multiple products in one spatial scene: place, remove, move, rotate and scale products; save the room state in the platform; reopen the same room from a link/QR on another device while remaining in the same physical room; build a product composition from the merchant's catalog.
 - **Configurator** — change materials, colors, dimensions, visible parts and supported product variants.
 - **Commerce** — configuration-aware price, lead/order/cart handoff and commercial analytics.
 - **Enterprise** — API, bulk catalog workflows, PIM/ERP/CRM integration, white-label, SLA and custom deployment requirements.
+
+XR room persistence does **not** currently promise that a spatial room can be sent to a person in another physical location and be reconstructed there with the same real-world alignment. Cross-device continuation is intended for the same physical room/spatial context.
 
 Not every level needs to exist as a separate public tariff immediately. This ladder defines product evolution and upsell boundaries.
 
@@ -58,11 +60,12 @@ Planned Pro analytics:
 
 - AR sessions;
 - XR room sessions;
-- AR/XR conversion and adoption metrics where the denominator is technically well-defined;
+- AR → XR transition/adoption rate where the denominator is technically well-defined;
 - popular products / SKU by interaction;
 - top products by AR use;
-- top products by XR use;
+- top products by XR placement;
 - average interaction/session duration;
+- average number of products placed in an XR room/session;
 - activity dynamics by day/week and selected period;
 - successful and failed model loads / technical delivery quality.
 
@@ -109,6 +112,8 @@ Potential event vocabulary includes:
 - `model_rotated`;
 - `model_scaled`;
 - `model_removed`;
+- `room_saved`;
+- `room_reopened`;
 - `product_selected`;
 - `precheck_opened`;
 - `add_to_cart`;
@@ -171,40 +176,78 @@ A billable AR session is not the same as a raw HTTP request or page reload. The 
 
 ### Pro — 990 ₽ / month
 
-For merchants that have validated AR usage and want to turn individual product try-on into a richer room-planning and product-discovery experience.
+For merchants that want to go beyond trying one isolated product in AR and let customers **build a room from several products in the merchant's catalog**, while also understanding how buyers interact with that experience.
 
-The key functional reason to upgrade from Start is **XR Room**:
+The core value of Pro is:
 
-- the customer can place multiple products from the merchant's catalog in one spatial scene;
-- move, rotate and scale placed products;
-- save/reopen a room where supported;
-- build a composition instead of evaluating only one isolated item;
-- discover products together, creating a future foundation for cross-sell and room-level merchandising.
+> **XR Room + engagement analytics.**
 
-Includes everything in Start plus:
+This is not merely a traffic-discount version of Start. A merchant may rationally choose Pro even at low traffic because XR Room itself adds product value.
 
-- XR Room multi-product experience;
-- room/composition workflow available in the current product;
-- engagement analytics defined in section 3;
-- up to **10,000 billable AR/XR sessions per month**;
-- standard support.
+#### Pricing
 
-Working overage rule:
-
-- **0.10 ₽ per billable AR/XR session above the included allowance**;
+- **990 ₽ / month**;
+- up to **10,000 billable AR/XR sessions per month included**;
+- working overage: **0.10 ₽ per billable AR/XR session above the included allowance**;
 - usage must still have a predictable cap / upgrade path rather than an unlimited surprise bill.
 
-Commercial logic:
+#### Includes
 
-- Start remains cheaper for light AR usage;
-- at roughly the point where Start usage approaches the Pro subscription, Pro becomes the natural economic upgrade;
-- Pro additionally unlocks XR and engagement analytics, so the upgrade is based on product value as well as traffic volume.
+Everything in Start plus:
+
+- **XR Room multi-product experience**;
+- place several merchant products in one physical room/spatial scene;
+- add and remove products from the composition;
+- move, rotate and scale placed products;
+- save the XR room state in the platform;
+- reopen/continue the saved room through a generated link or QR on another device **in the same physical room/spatial context**;
+- build a composition from selected products;
+- convert the current composition into a selected product/SKU list suitable for a precheck/selection step;
+- standard 3D/AR/XR scene configuration supported by the product;
+- Pro engagement analytics defined in section 3;
+- standard support.
+
+The selected product/SKU list is deliberately part of Pro because it completes the room-planning experience. Actual merchant cart, checkout, purchase handoff and revenue attribution remain Business/Commerce concerns unless explicitly implemented as a separately quoted integration.
+
+#### Pro analytics value
+
+The merchant should be able to answer questions such as:
+
+- how many customers use AR versus XR Room;
+- how many AR users proceed into XR;
+- which products are viewed/placed most often;
+- how long customers spend interacting with AR/XR;
+- how many products customers place in a room on average;
+- whether model delivery/loading is succeeding reliably;
+- how engagement changes over time.
+
+Pro should **not** expose Business-only commercial conclusions such as purchase conversion, revenue attribution, UTM/source attribution or reliable "AR increased sales by X%" claims without the necessary commerce integration.
+
+#### Why customers upgrade from Start
+
+There are two independent upgrade reasons:
+
+1. **Economics:** as Start usage grows, the fixed Pro subscription becomes competitive with usage-only billing.
+2. **Product value:** Pro unlocks multi-product XR Room, room persistence/continuation and engagement analytics even when traffic alone would not justify the subscription.
+
+#### Explicit Pro boundaries
+
+Pro does **not** promise:
+
+- that a saved spatial room can be sent to another person in another location and reopen with the same real-world alignment;
+- cart/checkout/purchase integration by default;
+- revenue attribution or commerce funnel analytics;
+- deep configurator analytics;
+- analytics CSV/API export;
+- advanced white-label;
+- priority/SLA support;
+- bespoke scene/XR behavior beyond the standard product.
 
 Public tariff message should emphasize:
 
-> **Pro — AR becomes a room experience.** Let customers combine several products in their space and see which products and XR scenarios attract the most interest.
+> **Pro — соберите комнату, а не просто примерьте один товар.** Размещайте несколько товаров в пространстве, сохраняйте композицию и смотрите, что действительно интересно покупателям.
 
-The final name `Pro` is the current working name. Do not call this tariff `AR Commerce` unless it actually includes commerce/cart/order functionality.
+`Pro` is the approved working tariff name. Do not call this tariff `AR Commerce` unless it actually includes commerce/cart/order functionality.
 
 ### Business — 2,990 ₽ / month (working, not yet fully approved)
 
@@ -328,7 +371,7 @@ The landing page should communicate the product hierarchy clearly:
 
 1. **3D Viewer is available on every tariff.**
 2. **Start:** 0 ₽/month, individual-product AR, pay for actual AR usage.
-3. **Pro:** multi-product XR room experience + engagement analytics + included usage.
+3. **Pro:** 990 ₽/month, multi-product XR Room + room persistence/continuation + engagement analytics + included usage.
 4. **Business:** commerce analytics and business integration value; exact final package still requires approval.
 5. **Already have a 3D model?** Use it without a model creation fee.
 6. **No model?** We can create one from **3,000 ₽**.
@@ -341,6 +384,7 @@ Avoid selling vague "XR innovation". Sell concrete outcomes:
 - inspect a product in 3D;
 - place one product in the customer's space with AR;
 - combine several catalog products in the customer's room with Pro/XR;
+- save and continue the same room on another device in the same physical space;
 - understand product engagement with Pro analytics;
 - understand commercial impact with Business analytics;
 - embed the experience into a product page;
@@ -352,6 +396,7 @@ Avoid selling vague "XR innovation". Sell concrete outcomes:
 - Do not bill Start for ordinary 3D Viewer preview as if it were an AR session.
 - Do not put XR Room into Start: XR is a deliberate Pro value boundary.
 - Do not expose engagement analytics on Start beyond the information needed for billing transparency.
+- Do not present XR room sharing between unrelated physical locations as a supported Pro capability.
 - Do not claim commerce conversion/revenue analytics without the integration required to observe those events reliably.
 - Do not bundle manual 3D production into every subscription by default.
 - Do not promise unlimited custom development inside Business/Enterprise subscriptions.
@@ -367,6 +412,7 @@ These values are intentionally left for validation rather than invented now:
 - exact definition/deduplication of billable AR/XR sessions on Pro;
 - final Start usage cap and automatic upgrade mechanics;
 - final Pro overage/cap mechanics;
+- XR room persistence format, retention period and cross-device resume mechanics;
 - final Business traffic allowance, price and overage;
 - exact analytics event schema and retention policy;
 - maximum supported model size per plan;
