@@ -1,6 +1,7 @@
 import sessionUtils from "../common/utils/sessionUtils.js";
 import smtpUtils from "../common/utils/smtpUtils.js";
 import storagePaths from "../common/utils/storagePaths.js";
+import { initPricingDetails } from "./pricingDetails.js";
 
 const key = 'localId';
 
@@ -14,6 +15,7 @@ function initPage() {
     initHeroVideo();
     initDemoPreview();
     initContactForms();
+    initPricingDetails();
 }
 
 if (document.readyState === 'loading') {

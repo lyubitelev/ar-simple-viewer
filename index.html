@@ -48,7 +48,7 @@
                                 <select class="form-control contact-input" id="modal-formGroupExampleInput3">
                                     <option value="" disabled selected>Выберите тариф</option>
                                     <option value="Start">Start</option>
-                                    <option value="AR Commerce">AR Commerce</option>
+                                    <option value="Pro">Pro</option>
                                     <option value="Business">Business</option>
                                     <option value="Enterprise">Enterprise</option>
                                 </select>
@@ -114,6 +114,34 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Один диалог на все тарифы: содержимое подставляет src/index/pricingDetails.js
+         по data-tariff нажатой кнопки «Подробнее». Разметку тарифов здесь не дублируем. -->
+    <div class="modal fade pricing-details-modal" id="pricingDetailsModal" tabindex="-1"
+        aria-labelledby="pricingDetailsTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="pricing-details-heading">
+                        <!-- Same level as the plan name on the card: the dialog describes one plan,
+                             so it must not add a section-level heading to the page outline. -->
+                        <h3 class="modal-title pricing-details-title" id="pricingDetailsTitle">Тариф</h3>
+                        <p class="pricing-details-price" data-pricing-details="price"></p>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="pricing-details-summary" data-pricing-details="summary"></p>
+                    <div class="pricing-details-sections" data-pricing-details="sections"></div>
+                    <p class="pricing-details-note" data-pricing-details="note"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="pricing-details-connect" data-bs-toggle="modal"
+                        data-bs-target="#contactModal" data-tariff="">Подключить</button>
                 </div>
             </div>
         </div>
@@ -832,7 +860,8 @@
                     моделей в одной сцене.
                 </p>
                 <p class="card-text mb-c-5 c-ft-16 section-copy section-copy-lead">
-                    Start — 0 ₽ в месяц. До 500 оплачиваемых 3D/AR-просмотров.
+                    Start — 0 ₽ в месяц: 3D-просмотр не тарифицируется,
+                    оплачиваются только AR-сессии.
                 </p>
                 <button class="test-now-btn">
                     <svg class="svg" width="687" height="60" viewBox="0 0 687 60" fill="none"
@@ -853,29 +882,35 @@
     <div class="container mt-c-4">
         <img loading="lazy" data-src="image.webm" class="line">
         <h2 id="plans" class="c-ft-32 mt-c-4 text-center section-title">Тарифы</h2>
+        <div class="mt-c-3 container-fluid">
+            <p class="card-text c-ft-16 text-center section-copy section-copy-lead">Тарифы
+                оплачивают использование платформы. Создание и подготовка 3D-моделей, конфигуратор и заказная
+                разработка считаются отдельно.</p>
+        </div>
         <div class="mt-c-4 pricing-carousel-wrapper">
             <div class="pricing-carousel-viewport">
                 <div class="pricing-carousel-track con-price">
                     <div class="card pricing-card">
                         <div class="card-body">
                             <h3 class="card-title mb-c-3 mt-3">Start</h3>
-                            <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 pricing-divider">
-                            <p class="mb-c-3 pricing-card-feature"><span>3D-просмотрщик и AR «в вашем
-                                    пространстве»</span></p>
-                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <p class="mb-c-3 pricing-card-feature"><span>Публичная ссылка, QR-код и embed</span></p>
-                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <p class="mb-c-3 pricing-card-feature"><span>Свои 3D-модели и базовая настройка
-                                    сцены</span></p>
-                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <p class="mb-c-3 pricing-card-feature"><span>До 500 оплачиваемых просмотров в месяц</span>
-                            </p>
-                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <p class="mb-c-3 pricing-card-price" style="font-size: 32px;">0 ₽ <br>
+                            <p class="mb-c-3 pricing-card-price">0 ₽ <br>
                                 <span class="fs-24">в месяц</span>
                             </p>
+                            <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 pricing-divider">
+                            <div class="pricing-card-features">
+                                <p class="mb-c-3 pricing-card-feature"><span>3D-просмотрщик</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>AR одного товара</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Ссылка, QR-код и embed</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Свои 3D-модели</span></p>
+                            </div>
                             <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <br>
+                            <div class="pricing-card-usage">
+                                <p class="pricing-card-usage-value">0,15 ₽ за оплачиваемую AR-сессию</p>
+                                <p class="pricing-card-usage-note">3D-просмотр не тарифицируется</p>
+                            </div>
                             <button class="svg-button pricing-connect-button pricing-card-cta">
                                 <svg class="svg" width="176" height="50" viewBox="0 0 176 50" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -927,26 +962,32 @@
                                     <p>Подключить</p>
                                 </div>
                             </button>
+                            <button type="button" class="pricing-details-button" data-bs-toggle="modal"
+                                data-bs-target="#pricingDetailsModal" data-tariff="Start" aria-haspopup="dialog"
+                                aria-label="Подробнее о тарифе Start">Подробнее</button>
                         </div>
                     </div>
                     <div class="card pricing-card">
                         <div class="card-body">
-                            <h3 class="card-title mb-c-3 mt-3">AR Commerce</h3>
-                            <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 pricing-divider">
-                            <p class="mb-c-3 pricing-card-feature"><span>Всё из тарифа Start</span></p>
-                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <p class="mb-c-3 pricing-card-feature"><span>Полная настройка вьюера и сцены</span></p>
-                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <p class="mb-c-3 pricing-card-feature"><span>До 10 000 оплачиваемых просмотров в
-                                    месяц</span></p>
-                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <p class="mb-c-3 pricing-card-feature"><span>Стандартная поддержка</span></p>
-                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <p class="mb-c-3 pricing-card-price" style="font-size: 32px;">990 ₽ <br>
+                            <h3 class="card-title mb-c-3 mt-3">Pro</h3>
+                            <p class="mb-c-3 pricing-card-price">990 ₽ <br>
                                 <span class="fs-24">в месяц</span>
                             </p>
+                            <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 pricing-divider">
+                            <div class="pricing-card-features">
+                                <p class="mb-c-3 pricing-card-feature"><span>XR Room</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Несколько товаров в пространстве</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Сохранение композиции</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Аналитика взаимодействия</span></p>
+                            </div>
                             <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <br>
+                            <div class="pricing-card-usage">
+                                <p class="pricing-card-usage-value">10 000 AR/XR-сессий включено</p>
+                                <p class="pricing-card-usage-note">сверх лимита — 0,10 ₽ за сессию</p>
+                            </div>
                             <button class="svg-button pricing-connect-button pricing-card-cta">
                                 <svg class="svg" width="176" height="50" viewBox="0 0 176 50" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -994,31 +1035,37 @@
                                     </defs>
                                 </svg>
                                 <div class="pricing-connect-label" data-bs-toggle="modal" data-bs-target="#contactModal"
-                                    data-tariff="AR Commerce">
+                                    data-tariff="Pro">
                                     <p>Подключить</p>
                                 </div>
                             </button>
+                            <button type="button" class="pricing-details-button" data-bs-toggle="modal"
+                                data-bs-target="#pricingDetailsModal" data-tariff="Pro" aria-haspopup="dialog"
+                                aria-label="Подробнее о тарифе Pro">Подробнее</button>
                         </div>
                     </div>
                     <div class="card pricing-card">
                         <div class="card-body">
                             <h3 class="card-title mb-c-3 mt-3">Business</h3>
-                            <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 pricing-divider">
-                            <p class="mb-c-3 pricing-card-feature"><span>Всё из тарифа AR Commerce</span></p>
-                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <p class="mb-c-3 pricing-card-feature"><span>До 50 000 оплачиваемых просмотров в
-                                    месяц</span></p>
-                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <p class="mb-c-3 pricing-card-feature"><span>White-label и уменьшенный брендинг
-                                    платформы</span></p>
-                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <p class="mb-c-3 pricing-card-feature"><span>Приоритетная поддержка</span></p>
-                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <p class="mb-c-3 pricing-card-price" style="font-size: 32px;">2 990 ₽ <br>
+                            <p class="mb-c-3 pricing-card-price">2 990 ₽ <br>
                                 <span class="fs-24">в месяц</span>
                             </p>
+                            <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 pricing-divider">
+                            <div class="pricing-card-features">
+                                <p class="mb-c-3 pricing-card-feature"><span>Всё из тарифа Pro</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Передача выбранных товаров в
+                                        корзину</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Commerce-аналитика</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Конверсия и атрибуция</span></p>
+                            </div>
                             <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <br>
+                            <div class="pricing-card-usage">
+                                <p class="pricing-card-usage-value">50 000 AR/XR-сессий включено</p>
+                                <p class="pricing-card-usage-note">сверх лимита — 0,05 ₽ за сессию</p>
+                            </div>
                             <button class="svg-button pricing-connect-button pricing-card-cta">
                                 <svg class="svg" width="176" height="50" viewBox="0 0 176 50" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -1070,28 +1117,35 @@
                                     <p>Подключить</p>
                                 </div>
                             </button>
+                            <button type="button" class="pricing-details-button" data-bs-toggle="modal"
+                                data-bs-target="#pricingDetailsModal" data-tariff="Business" aria-haspopup="dialog"
+                                aria-label="Подробнее о тарифе Business">Подробнее</button>
                         </div>
                     </div>
                     <div class="card pricing-card">
                         <div class="card-body">
                             <h3 class="card-title mb-c-3 mt-3">Enterprise</h3>
-                            <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 pricing-divider">
-                            <p class="mb-c-3 pricing-card-feature"><span>Очень высокий трафик и выделенный SLA</span>
-                            </p>
-                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <p class="mb-c-3 pricing-card-feature"><span>API-доступ и массовые операции с
-                                    каталогом</span></p>
-                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <p class="mb-c-3 pricing-card-feature"><span>Интеграция PIM / ERP / CRM</span></p>
-                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <p class="mb-c-3 pricing-card-feature"><span>Свои домены и приватное развёртывание</span>
-                            </p>
-                            <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <p class="mb-c-3 pricing-card-price" style="font-size: 32px;">По запросу <br>
+                            <p class="mb-c-3 pricing-card-price">По запросу <br>
                                 <span class="fs-24">индивидуальный расчёт</span>
                             </p>
+                            <img loading="lazy" src="./img/Line 3.webp" class="mb-c-3 pricing-divider">
+                            <div class="pricing-card-features">
+                                <p class="mb-c-3 pricing-card-feature"><span>API и массовый каталог</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>PIM / ERP / CRM</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>SLA</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Приватное развёртывание</span></p>
+                                <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
+                                <p class="mb-c-3 pricing-card-feature"><span>Расширенный white-label и особые
+                                        требования</span></p>
+                            </div>
                             <img loading="lazy" class="mb-c-3 pricing-divider" src="./img/Line 3.webp">
-                            <br>
+                            <div class="pricing-card-usage">
+                                <p class="pricing-card-usage-value">Объём сессий и SLA — индивидуально</p>
+                                <p class="pricing-card-usage-note">рассчитываем под ваш сценарий</p>
+                            </div>
                             <button class="svg-button pricing-connect-button pricing-card-cta">
                                 <svg class="svg" width="176" height="50" viewBox="0 0 176 50" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -1140,9 +1194,12 @@
                                 </svg>
                                 <div class="pricing-connect-label" data-bs-toggle="modal" data-bs-target="#contactModal"
                                     data-tariff="Enterprise">
-                                    <p>Подключить</p>
+                                    <p>Связаться</p>
                                 </div>
                             </button>
+                            <button type="button" class="pricing-details-button" data-bs-toggle="modal"
+                                data-bs-target="#pricingDetailsModal" data-tariff="Enterprise" aria-haspopup="dialog"
+                                aria-label="Подробнее о тарифе Enterprise">Подробнее</button>
                         </div>
                     </div>
                 </div>
@@ -1163,8 +1220,9 @@
             </button>
         </div>
         <div class="mt-c-3 container-fluid">
-            <p class="card-text c-ft-16 text-center section-copy section-copy-lead">Без подписки — оплата по факту: 0,15 ₽ за оплачиваемый
-                3D/AR-просмотр. Помесячный расход ограничен предсказуемым лимитом.</p>
+            <p class="card-text c-ft-16 text-center section-copy section-copy-lead">3D-просмотр не тарифицируется ни
+                на одном тарифе. На Start оплачиваются только AR-сессии, а помесячный расход ограничен предсказуемым
+                лимитом. На Pro и Business сессии уже включены в подписку.</p>
         </div>
     </div>
     <div class="container mt-c-4">
@@ -1180,8 +1238,12 @@
             <p class="card-text mb-c-5 c-ft-16 section-copy section-copy-lead">Модели нет — создаём 3D-модель от 3 000 ₽ за модель.</p>
             <p class="card-text mb-c-5 c-ft-16 section-copy section-copy-lead">Нужны материалы, цвета и варианты — конфигуратор от 15 000 ₽ за
                 проект.</p>
-            <p class="card-text mb-c-5 c-ft-16 section-copy section-copy-lead">Нужна интеграция с сайтом, каталогом, PIM / ERP / CRM или
-                нестандартный XR-сценарий — рассчитываем отдельно.</p>
+            <p class="card-text mb-c-5 c-ft-16 section-copy section-copy-lead">Стандартный JS/API-контракт передачи
+                выбранных товаров и конфигураций в корзину магазина входит в тариф Business — отдельная плата за сам
+                контракт не берётся.</p>
+            <p class="card-text mb-c-5 c-ft-16 section-copy section-copy-lead">Ручная интеграция под конкретный сайт,
+                CMS или нестандартный checkout, синхронизация каталога, PIM / ERP / CRM и нестандартный XR-сценарий —
+                рассчитываем отдельно.</p>
         </div>
     </div>
     <div class="container mt-c-3">
