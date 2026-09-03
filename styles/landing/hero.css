@@ -190,6 +190,28 @@
     .mobile-container {
         display: none;
     }
+
+    /* Breathing room under the fixed header.
+
+       The inline script sizes .main-img from the phone column's *layout*
+       height, so the band is exactly as tall as the artwork and the phone can
+       only ever sit flush against the header - no margin on the column can
+       open a gap, it just makes the band taller with it.
+
+       A transform is not part of that measurement, so scaling the whole
+       .hero-phone about its bottom edge leaves the band height, the hand's
+       contact with the bottom of the composition and the centred copy column
+       exactly where they are, and frees the difference as air below the
+       header. Artwork and video overlay scale as one box, so the screen
+       cut-out percentages above stay valid.
+
+       One factor, no per-width values: the gap is a share of the artwork, so
+       it follows the container - roughly 79px at a 1320px container, 68px at
+       1140px, 66px at 960px and 49px at 720px. */
+    .hero-phone-col .hero-phone {
+        transform: scale(0.89);
+        transform-origin: bottom left;
+    }
 }
 
 @media (max-width: 767px) {
